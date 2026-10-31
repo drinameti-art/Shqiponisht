@@ -1,56 +1,72 @@
-# Welcome to your Expo app 👋
+# Shqiponisht
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Mëso japonisht në shqip** — a Japanese course for Albanian speakers, built with Expo (React Native) for iOS and Android.
 
-## Get started
+Every screen is in Albanian, and Japanese sounds are spelled the Albanian way, so learners read them correctly from day one:
 
-1. Install dependencies
+| Romaji | Shqip |
+| --- | --- |
+| chi | çi |
+| tsu | cu |
+| ji | xhi |
+| ya · yu · yo | ja · ju · jo |
+| wa | ua |
+| ō | oo (long vowels are doubled) |
 
-   ```bash
-   npm install
-   ```
+## What's in the app
 
-2. Start the app
+- **Mirësevini (welcome):** set your name and a daily XP goal.
+- **Sot (today):** greeting, streak, daily-goal bar and a 19-lesson path: hiragana and katakana row by row, plus greetings, numbers, family, food, animals, places and useful phrases.
+- **Lessons:** 10 multiple-choice questions per lesson, with an explanation in Albanian after every answer. Six correct answers pass the lesson and unlock the next one.
+- **Kana:** the full hiragana/katakana chart. Tap a kana for its Albanian reading, a pronunciation tip and example words. A red dot marks sounds Albanian spells differently from romaji.
+- **Fjalori (vocabulary):** every word from the lessons, searchable in Japanese, romaji or Albanian (search ignores ë and ç, so "nena" finds "nëna").
+- **Profili (profile):** XP, streak, lessons passed, daily-goal setting, and a progress reset.
 
-   ```bash
-   npx expo start
-   ```
+Progress is saved on the device; there's no account or server.
 
-In the output, you'll find options to open the app in a
+## Run it
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Requires Node 20+.
 
 ```bash
-npm run reset-project
+npm install
+npm start          # then scan the QR code with the Expo Go app on your phone
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+`npm run web` opens it in a browser.
 
-### Other setup steps
+## Checks
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```bash
+npm run typecheck
+npm run lint
+npm test           # unit tests for spelling rules, quiz building and progress/streak logic
+```
 
-## Learn more
+## Building for the App Store and Google Play
 
-To learn more about developing your project with Expo, look at the following resources:
+Builds use [EAS](https://docs.expo.dev/eas/). You need a free Expo account, plus an Apple Developer account ($99/year) for iOS and a Google Play developer account ($25 once) for Android.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx eas-cli@latest login
+npx eas-cli@latest build --profile preview --platform android   # installable APK for testing
+npx eas-cli@latest build --profile production --platform all    # store builds
+npx eas-cli@latest submit --platform all                         # upload to the stores
+```
 
-## Join the community
+The bundle id / package name is `com.shqiponisht.app` (in `app.json`); change it before the first store build if you want a different one.
 
-Join our community of developers creating universal apps.
+## Project layout
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+src/app/            screens (Expo Router: every file is a route)
+  (tabs)/           Sot, Kana, Fjalori, Profili
+  lesson/[id].tsx   the quiz
+  welcome.tsx       first-run setup
+src/data/           kana chart and lesson content
+src/lib/            Albanian spelling rules, quiz builder, progress logic, storage
+tests/              Vitest unit tests for src/lib
+assets/images/      logo, app icon, splash
+```
+
+To add words, edit `src/data/lessons.ts`: give the Japanese, the romaji and the Albanian meaning; the Albanian spelling is generated automatically.
