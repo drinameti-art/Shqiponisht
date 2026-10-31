@@ -49,6 +49,8 @@ npm start          # then scan the QR code with the Expo Go app on your phone
 
 ## Checks
 
+Every push and pull request runs typecheck, lint, the unit tests, a legal-pages freshness check and `expo-doctor` on GitHub Actions (`.github/workflows/ci.yml`). To run them locally:
+
 ```bash
 npm run typecheck
 npm run lint
