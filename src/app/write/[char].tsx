@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Platform, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Confetti } from '@/components/motion';
 import { Button } from '@/components/ui';
 import { Message, strokeMessage, useStrokeOrder, useWritingPad, type PadFeedback } from '@/components/writing';
 import { KANA } from '@/data/kana';
@@ -132,6 +133,7 @@ export default function WriteScreen() {
           </>
         )}
       </ScrollView>
+      {feedback.kind === 'done' && <Confetti />}
     </SafeAreaView>
   );
 }

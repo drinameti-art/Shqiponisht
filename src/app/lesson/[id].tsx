@@ -1,10 +1,12 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import * as Haptics from 'expo-haptics';
 import { Redirect, router, useLocalSearchParams } from 'expo-router';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import Animated, { FadeIn, FadeInDown, FadeInUp, SlideInRight, ZoomIn } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Confetti, CountUp, EASE_OUT, Feedback } from '@/components/motion';
 import { Button, ProgressBar } from '@/components/ui';
 import { lessonById } from '@/data/lessons';
 import { lessonXp, passes, PASS_RATIO } from '@/lib/progress';
@@ -32,6 +34,8 @@ export default function LessonScreen() {
   const [selected, setSelected] = useState<number | null>(null);
   const [checked, setChecked] = useState(false);
   const [correct, setCorrect] = useState(0);
+  /** Bumped on every select / check, to replay the option's feedback animation. */
+  const [bump, setBump] = useState(0);
   const [result, setResult] = useState<{ xp: number } | null>(null);
 
   const retry = () => {
@@ -66,20 +70,22 @@ export default function LessonScreen() {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
-          <View style={styles.medal}>
+          <Animated.View entering={ZoomIn.springify().damping(11)} style={styles.medal}>
             <Text style={styles.medalText}>{correct === total ? '満' : ok ? '良' : '頑'}</Text>
-          </View>
-          <Text style={styles.doneTitle}>
+          </Animated.View>
+          <Animated.Text entering={FadeInUp.delay(150).duration(300).easing(EASE_OUT)} style={styles.doneTitle}>
             {correct === total ? 'Pa asnjë gabim!' : ok ? 'Mësimi u kalua!' : 'Edhe pak!'}
-          </Text>
-          <Text style={[styles.doneSub, { textAlign: 'center' }]}>
+          </Animated.Text>
+          <Animated.Text
+            entering={FadeInUp.delay(220).duration(300).easing(EASE_OUT)}
+            style={[styles.doneSub, { textAlign: 'center' }]}>
             {ok ? lesson.title : `Të paktën ${needed} përgjigje të sakta hapin mësimin tjetër. がんばって!`}
-          </Text>
-          <View style={styles.stats}>
-            <Stat value={`+${result.xp}`} label="XP" />
+          </Animated.Text>
+          <Animated.View entering={FadeInUp.delay(320).duration(300).easing(EASE_OUT)} style={styles.stats}>
+            <Stat value={<CountUp value={result.xp} prefix="+" style={styles.statValue} />} label="XP" />
             <Stat value={`${correct}/${total}`} label="saktë" />
             <Stat value={`${Math.round((correct / total) * 100)}%`} label="saktësi" />
-          </View>
+          </Animated.View>
           <Button label={ok ? 'Vazhdo' : 'Provo përsëri'} onPress={ok ? close : retry} style={styles.wide} />
           <Button
             label={ok ? 'Përsërit mësimin' : 'Kthehu'}
@@ -88,6 +94,7 @@ export default function LessonScreen() {
             onPress={ok ? retry : close}
           />
         </View>
+        {ok && <Confetti />}
       </SafeAreaView>
     );
   }
@@ -99,6 +106,7 @@ export default function LessonScreen() {
     if (!checked) {
       if (selected === null) return;
       setChecked(true);
+      setBump((b) => b + 1);
       if (isRight) setCorrect((c) => c + 1);
       feel(isRight ? 'ok' : 'bad');
       sfx(isRight ? 'correct' : 'wrong');
@@ -129,43 +137,66 @@ export default function LessonScreen() {
       </View>
 
       <ScrollView contentContainerStyle={styles.body}>
-        <Text style={styles.instruction}>{q.instruction}</Text>
-        <Text style={[styles.prompt, q.promptIsJapanese && styles.promptJp]}>{q.prompt}</Text>
-        <View style={styles.options}>
-          {q.options.map((o, i) => {
-            const state = !checked
-              ? selected === i
-                ? 'selected'
-                : 'idle'
-              : i === q.answer
-                ? 'right'
-                : i === selected
-                  ? 'wrong'
-                  : 'idle';
-            return (
-              <Pressable
-                key={`${index}-${o.label}`}
-                disabled={checked}
-                onPress={() => setSelected(i)}
-                accessibilityRole="radio"
-                accessibilityState={{ selected: selected === i, disabled: checked }}
-                style={[styles.option, OPTION_STATES[state]]}>
-                <Text style={styles.optionLabel}>{o.label}</Text>
-                {o.hint ? <Text style={styles.optionHint}>{o.hint}</Text> : null}
-              </Pressable>
-            );
-          })}
-        </View>
+        <Animated.View
+          key={index}
+          entering={index === 0 ? FadeIn.duration(250) : SlideInRight.duration(260).easing(EASE_OUT)}>
+          <Text style={styles.instruction}>{q.instruction}</Text>
+          <Text style={[styles.prompt, q.promptIsJapanese && styles.promptJp]}>{q.prompt}</Text>
+          <View style={styles.options}>
+            {q.options.map((o, i) => {
+              const state = !checked
+                ? selected === i
+                  ? 'selected'
+                  : 'idle'
+                : i === q.answer
+                  ? 'right'
+                  : i === selected
+                    ? 'wrong'
+                    : 'idle';
+              const motion =
+                state === 'wrong'
+                  ? 'shake'
+                  : state === 'right' && i === selected
+                    ? 'pop'
+                    : state === 'selected'
+                      ? 'pop'
+                      : null;
+              return (
+                <Feedback
+                  key={`${index}-${o.label}`}
+                  kind={motion}
+                  trigger={motion ? bump : 0}
+                  style={styles.optionWrap}>
+                  <Pressable
+                    disabled={checked}
+                    onPress={() => {
+                      setSelected(i);
+                      setBump((b) => b + 1);
+                    }}
+                    accessibilityRole="radio"
+                    accessibilityState={{ selected: selected === i, disabled: checked }}
+                    style={[styles.option, OPTION_STATES[state]]}>
+                    <Text style={styles.optionLabel}>{o.label}</Text>
+                    {o.hint ? <Text style={styles.optionHint}>{o.hint}</Text> : null}
+                  </Pressable>
+                </Feedback>
+              );
+            })}
+          </View>
+        </Animated.View>
       </ScrollView>
 
       <View style={[styles.footer, checked && (isRight ? styles.footerOk : styles.footerBad)]}>
         {checked && (
-          <View style={styles.feedback} accessibilityLiveRegion="polite">
+          <Animated.View
+            entering={FadeInDown.duration(220).easing(EASE_OUT)}
+            style={styles.feedback}
+            accessibilityLiveRegion="polite">
             <Text style={[styles.feedbackTitle, { color: isRight ? C.greenDark : C.redDark }]}>
               {isRight ? PRAISE[index % PRAISE.length] : 'Nuk është saktë.'}
             </Text>
             <Text style={[styles.feedbackBody, { color: isRight ? C.greenDark : C.redDark }]}>{q.explanation}</Text>
-          </View>
+          </Animated.View>
         )}
         <Button
           label={!checked ? 'Kontrollo' : index < quiz.length - 1 ? 'Vazhdo' : 'Përfundo'}
@@ -178,7 +209,7 @@ export default function LessonScreen() {
   );
 }
 
-function Stat({ value, label }: { value: string; label: string }) {
+function Stat({ value, label }: { value: ReactNode; label: string }) {
   return (
     <View style={styles.stat}>
       <Text style={styles.statValue}>{value}</Text>
@@ -212,9 +243,9 @@ const styles = StyleSheet.create({
   prompt: { fontSize: 26, fontWeight: '800', color: C.ink, marginTop: S.md, marginBottom: S.xl, letterSpacing: -0.3 },
   promptJp: { fontSize: 56, fontWeight: '600', letterSpacing: 0, textAlign: 'center', marginVertical: S.xl },
   options: { flexDirection: 'row', flexWrap: 'wrap', gap: S.md },
+  optionWrap: { flexGrow: 1, flexBasis: '45%' },
   option: {
-    flexGrow: 1,
-    flexBasis: '45%',
+    flex: 1,
     minHeight: 84,
     justifyContent: 'center',
     backgroundColor: C.paper,

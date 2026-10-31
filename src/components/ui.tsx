@@ -1,7 +1,10 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
+import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { EASE_OUT } from './motion';
 
 import { C, R, S } from '@/theme';
 
@@ -58,12 +61,18 @@ export function ProgressBar({
   style?: StyleProp<ViewStyle>;
 }) {
   const pct = Math.max(0, Math.min(1, value)) * 100;
+  const reduced = useReducedMotion();
+  const width = useSharedValue(pct);
+  useEffect(() => {
+    width.value = reduced ? pct : withTiming(pct, { duration: 450, easing: EASE_OUT });
+  }, [pct, reduced, width]);
+  const fill = useAnimatedStyle(() => ({ width: `${width.value}%` }));
   return (
     <View
       accessibilityRole="progressbar"
       accessibilityValue={{ min: 0, max: 100, now: Math.round(pct) }}
       style={[styles.track, { height, borderRadius: height }, style]}>
-      <View style={{ width: `${pct}%`, height: '100%', backgroundColor: color, borderRadius: height }} />
+      <Animated.View style={[{ height: '100%', backgroundColor: color, borderRadius: height }, fill]} />
     </View>
   );
 }

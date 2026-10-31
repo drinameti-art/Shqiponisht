@@ -3,6 +3,7 @@ import { router } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Pulse } from '@/components/motion';
 import { Pill, ProgressBar, SectionTitle } from '@/components/ui';
 import { LESSONS } from '@/data/lessons';
 import { completedCount, currentStreak, lessonStatuses, xpToday, type LessonStatus } from '@/lib/progress';
@@ -134,15 +135,17 @@ function LessonRow(props: {
       accessibilityRole="button"
       accessibilityLabel={`${props.title}${status === 'premium' ? ', Plus' : locked ? ', e kyçur' : ''}`}
       style={({ pressed }) => [styles.row, status === 'current' && styles.rowCurrent, pressed && { opacity: 0.8 }]}>
-      <View style={[styles.node, status === 'done' && styles.nodeDone, status === 'current' && styles.nodeCurrent]}>
-        {status === 'premium' ? (
-          <Ionicons name="star" size={16} color={C.gold} />
-        ) : locked ? (
-          <Ionicons name="lock-closed" size={16} color={C.muted} />
-        ) : (
-          <Text style={[styles.nodeText, { color: C.white }]}>{props.badge}</Text>
-        )}
-      </View>
+      <Pulse active={status === 'current'}>
+        <View style={[styles.node, status === 'done' && styles.nodeDone, status === 'current' && styles.nodeCurrent]}>
+          {status === 'premium' ? (
+            <Ionicons name="star" size={16} color={C.gold} />
+          ) : locked ? (
+            <Ionicons name="lock-closed" size={16} color={C.muted} />
+          ) : (
+            <Text style={[styles.nodeText, { color: C.white }]}>{props.badge}</Text>
+          )}
+        </View>
+      </Pulse>
       <View style={{ flex: 1, opacity: locked ? 0.5 : 1 }}>
         <Text style={styles.rowTitle}>{props.title}</Text>
         <Text style={styles.rowSub} numberOfLines={1}>
