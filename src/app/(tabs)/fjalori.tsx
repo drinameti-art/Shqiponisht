@@ -13,7 +13,7 @@ function fold(text: string): string {
 
 function matches(w: Word, q: string): boolean {
   if (!q) return true;
-  return [w.jp, w.romaji, w.sq, w.meaning].some((field) => fold(field).includes(q));
+  return [w.jp, w.romaji, w.sq, w.meaning, w.kanji ?? ''].some((field) => fold(field).includes(q));
 }
 
 export default function Vocabulary() {
@@ -34,7 +34,7 @@ export default function Vocabulary() {
           <TextInput
             value={query}
             onChangeText={setQuery}
-            placeholder="Kërko: mace, ねこ, neko…"
+            placeholder="Kërko: mace, 猫, ねこ, neko…"
             placeholderTextColor={C.muted}
             style={styles.input}
             autoCorrect={false}
@@ -52,7 +52,10 @@ export default function Vocabulary() {
         renderItem={({ item }) => (
           <View style={styles.row}>
             <View style={{ flex: 1 }}>
-              <Text style={styles.jp}>{item.jp}</Text>
+              <Text style={styles.jp}>
+                {item.kanji ?? item.jp}
+                {item.kanji ? <Text style={styles.kana}>{`  ${item.jp}`}</Text> : null}
+              </Text>
               <Text style={styles.reading}>
                 {item.sq}
                 {item.sq !== item.romaji ? <Text style={styles.romaji}>{`  ·  ${item.romaji}`}</Text> : null}
@@ -105,6 +108,7 @@ const styles = StyleSheet.create({
     marginBottom: S.sm,
   },
   jp: { fontSize: 19, fontWeight: '600', color: C.ink },
+  kana: { fontSize: 14, fontWeight: '400', color: C.muted },
   reading: { fontSize: 13, color: C.red, fontWeight: '600', marginTop: 2 },
   romaji: { color: C.muted, fontWeight: '400', fontFamily: F.mono, fontSize: 12 },
   meaning: { fontSize: 14.5, color: C.ink, maxWidth: '45%', textAlign: 'right' },

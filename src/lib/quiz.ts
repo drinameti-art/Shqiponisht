@@ -1,4 +1,5 @@
 import { KANA, KANA_TIPS, type Kana } from '@/data/kana';
+import { KANJI, type Kanji, type KanjiExample } from '@/data/kanji';
 import { VOCAB_LESSONS, type Lesson, type Word } from '@/data/lessons';
 
 import { spellsDifferently } from './albanian';
@@ -129,9 +130,51 @@ function vocabQuestions(lesson: Extract<Lesson, { kind: 'vocab' }>, rng: Rng): Q
   });
 }
 
+function kanjiReadings(k: Kanji): string {
+  return `on: ${k.on.kana} (${k.on.sq}) · kun: ${k.kun.kana} (${k.kun.sq})`;
+}
+
+function kanjiQuestions(lesson: Extract<Lesson, { kind: 'kanji' }>, rng: Rng): Question[] {
+  const pool = [...lesson.kanji, ...shuffle(KANJI.filter((k) => !lesson.kanji.includes(k)), rng)];
+  const examplePool: KanjiExample[] = pool.flatMap((k) => k.examples);
+  return lesson.kanji.flatMap((k): Question[] => {
+    const about = `${k.char} = ${k.meaning}. ${kanjiReadings(k)}.`;
+    const questions: Question[] = [
+      {
+        instruction: 'Çfarë do të thotë ky kanji?',
+        prompt: k.char,
+        promptIsJapanese: true,
+        ...choose(k, pool, (x) => ({ label: x.meaning }), (x) => x.meaning, rng),
+        explanation: about,
+      },
+      {
+        instruction: `Cili kanji do të thotë „${k.meaning}“?`,
+        prompt: k.meaning,
+        promptIsJapanese: false,
+        ...choose(k, pool, (x) => ({ label: x.char }), (x) => x.meaning, rng),
+        explanation: about,
+      },
+    ];
+    const word = k.examples[Math.floor(rng() * k.examples.length)];
+    questions.push({
+      instruction: 'Si lexohet kjo fjalë?',
+      prompt: word.jp,
+      promptIsJapanese: true,
+      ...choose(word, examplePool, (x) => ({ label: x.sq, hint: x.kana }), (x) => x.sq, rng),
+      explanation: `${word.jp} lexohet ${word.kana} („${word.sq}“) dhe do të thotë „${word.meaning}“.`,
+    });
+    return questions;
+  });
+}
+
 export const QUESTIONS_PER_LESSON = 10;
 
 export function buildQuiz(lesson: Lesson, rng: Rng, count = QUESTIONS_PER_LESSON): Question[] {
-  const all = lesson.kind === 'kana' ? kanaQuestions(lesson, rng) : vocabQuestions(lesson, rng);
+  const all =
+    lesson.kind === 'kana'
+      ? kanaQuestions(lesson, rng)
+      : lesson.kind === 'kanji'
+        ? kanjiQuestions(lesson, rng)
+        : vocabQuestions(lesson, rng);
   return shuffle(all, rng).slice(0, count);
 }

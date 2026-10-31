@@ -1,6 +1,7 @@
 import { romajiToAlbanian } from '@/lib/albanian';
 
 import { kanaInRows, type Kana, type Script } from './kana';
+import { KANJI_GROUPS, kanjiInGroup, type Kanji, type KanjiGroupId } from './kanji';
 
 export type Word = {
   /** Written form (kana, or kana + kanji where common). */
@@ -11,16 +12,32 @@ export type Word = {
   meaning: string;
   /** Albanian respelling of the pronunciation, derived from romaji. */
   sq: string;
+  /** Usual kanji spelling, when the word is commonly written with kanji. */
+  kanji?: string;
 };
 
 type LessonBase = { id: string; title: string; subtitle: string; badge: string };
 
 export type KanaLesson = LessonBase & { kind: 'kana'; script: Script; kana: Kana[] };
 export type VocabLesson = LessonBase & { kind: 'vocab'; words: Word[] };
-export type Lesson = KanaLesson | VocabLesson;
+export type KanjiLesson = LessonBase & { kind: 'kanji'; kanji: Kanji[] };
+export type Lesson = KanaLesson | VocabLesson | KanjiLesson;
 
-function words(list: [jp: string, romaji: string, meaning: string][]): Word[] {
-  return list.map(([jp, romaji, meaning]) => ({ jp, romaji, meaning, sq: romajiToAlbanian(romaji) }));
+function words(list: [jp: string, romaji: string, meaning: string, kanji?: string][]): Word[] {
+  return list.map(([jp, romaji, meaning, kanji]) => ({ jp, romaji, meaning, sq: romajiToAlbanian(romaji), kanji }));
+}
+
+function kanjiLesson(group: KanjiGroupId): KanjiLesson {
+  const kanji = kanjiInGroup(group);
+  const title = KANJI_GROUPS.find((g) => g.id === group)!.title;
+  return {
+    id: `kanji-${group}`,
+    kind: 'kanji',
+    kanji,
+    title: `Kanji: ${title}`,
+    subtitle: kanji.map((k) => k.char).join(' '),
+    badge: kanji[0].char,
+  };
 }
 
 function kanaLesson(id: string, script: Script, rows: string[], title: string): KanaLesson {
@@ -64,16 +81,16 @@ const NUMBERS: VocabLesson = {
   subtitle: 'いち, に, さん…',
   badge: '一',
   words: words([
-    ['いち', 'ichi', '1 · një'],
-    ['に', 'ni', '2 · dy'],
-    ['さん', 'san', '3 · tre'],
-    ['よん', 'yon', '4 · katër'],
-    ['ご', 'go', '5 · pesë'],
-    ['ろく', 'roku', '6 · gjashtë'],
-    ['なな', 'nana', '7 · shtatë'],
-    ['はち', 'hachi', '8 · tetë'],
-    ['きゅう', 'kyū', '9 · nëntë'],
-    ['じゅう', 'jū', '10 · dhjetë'],
+    ['いち', 'ichi', '1 · një', '一'],
+    ['に', 'ni', '2 · dy', '二'],
+    ['さん', 'san', '3 · tre', '三'],
+    ['よん', 'yon', '4 · katër', '四'],
+    ['ご', 'go', '5 · pesë', '五'],
+    ['ろく', 'roku', '6 · gjashtë', '六'],
+    ['なな', 'nana', '7 · shtatë', '七'],
+    ['はち', 'hachi', '8 · tetë', '八'],
+    ['きゅう', 'kyū', '9 · nëntë', '九'],
+    ['じゅう', 'jū', '10 · dhjetë', '十'],
   ]),
 };
 
@@ -84,14 +101,14 @@ const FAMILY: VocabLesson = {
   subtitle: 'はは, ちち, ともだち…',
   badge: '家',
   words: words([
-    ['かぞく', 'kazoku', 'familja'],
-    ['はは', 'haha', 'nëna (ime)'],
-    ['ちち', 'chichi', 'babai (im)'],
-    ['あに', 'ani', 'vëllai i madh'],
-    ['あね', 'ane', 'motra e madhe'],
-    ['おとうと', 'otōto', 'vëllai i vogël'],
-    ['いもうと', 'imōto', 'motra e vogël'],
-    ['ともだち', 'tomodachi', 'shoku / shoqja'],
+    ['かぞく', 'kazoku', 'familja', '家族'],
+    ['はは', 'haha', 'nëna (ime)', '母'],
+    ['ちち', 'chichi', 'babai (im)', '父'],
+    ['あに', 'ani', 'vëllai i madh', '兄'],
+    ['あね', 'ane', 'motra e madhe', '姉'],
+    ['おとうと', 'otōto', 'vëllai i vogël', '弟'],
+    ['いもうと', 'imōto', 'motra e vogël', '妹'],
+    ['ともだち', 'tomodachi', 'shoku / shoqja', '友達'],
   ]),
 };
 
@@ -102,15 +119,15 @@ const FOOD: VocabLesson = {
   subtitle: 'みず, おちゃ, ごはん…',
   badge: '食',
   words: words([
-    ['みず', 'mizu', 'ujë'],
-    ['おちゃ', 'ocha', 'çaj jeshil'],
-    ['ごはん', 'gohan', 'oriz i zier; vakt'],
+    ['みず', 'mizu', 'ujë', '水'],
+    ['おちゃ', 'ocha', 'çaj jeshil', 'お茶'],
+    ['ごはん', 'gohan', 'oriz i zier; vakt', 'ご飯'],
     ['パン', 'pan', 'bukë'],
-    ['さかな', 'sakana', 'peshk'],
-    ['にく', 'niku', 'mish'],
+    ['さかな', 'sakana', 'peshk', '魚'],
+    ['にく', 'niku', 'mish', '肉'],
     ['りんご', 'ringo', 'mollë'],
     ['コーヒー', 'kōhī', 'kafe'],
-    ['ぎゅうにゅう', 'gyūnyū', 'qumësht'],
+    ['ぎゅうにゅう', 'gyūnyū', 'qumësht', '牛乳'],
   ]),
 };
 
@@ -121,13 +138,13 @@ const ANIMALS: VocabLesson = {
   subtitle: 'いぬ, ねこ, とり…',
   badge: '犬',
   words: words([
-    ['いぬ', 'inu', 'qen'],
-    ['ねこ', 'neko', 'mace'],
-    ['とり', 'tori', 'zog'],
-    ['うま', 'uma', 'kalë'],
-    ['うし', 'ushi', 'lopë'],
-    ['くま', 'kuma', 'ari'],
-    ['さる', 'saru', 'majmun'],
+    ['いぬ', 'inu', 'qen', '犬'],
+    ['ねこ', 'neko', 'mace', '猫'],
+    ['とり', 'tori', 'zog', '鳥'],
+    ['うま', 'uma', 'kalë', '馬'],
+    ['うし', 'ushi', 'lopë', '牛'],
+    ['くま', 'kuma', 'ari', '熊'],
+    ['さる', 'saru', 'majmun', '猿'],
   ]),
 };
 
@@ -138,16 +155,16 @@ const PLACES: VocabLesson = {
   subtitle: 'えき, がっこう, コソボ…',
   badge: '駅',
   words: words([
-    ['えき', 'eki', 'stacion treni'],
-    ['がっこう', 'gakkō', 'shkollë'],
-    ['いえ', 'ie', 'shtëpi'],
-    ['みせ', 'mise', 'dyqan'],
-    ['びょういん', 'byōin', 'spital'],
-    ['くうこう', 'kūkō', 'aeroport'],
+    ['えき', 'eki', 'stacion treni', '駅'],
+    ['がっこう', 'gakkō', 'shkollë', '学校'],
+    ['いえ', 'ie', 'shtëpi', '家'],
+    ['みせ', 'mise', 'dyqan', '店'],
+    ['びょういん', 'byōin', 'spital', '病院'],
+    ['くうこう', 'kūkō', 'aeroport', '空港'],
     ['ホテル', 'hoteru', 'hotel'],
     ['コソボ', 'kosobo', 'Kosova'],
     ['アルバニア', 'arubania', 'Shqipëria'],
-    ['にほん', 'nihon', 'Japonia'],
+    ['にほん', 'nihon', 'Japonia', '日本'],
   ]),
 };
 
@@ -177,20 +194,27 @@ export const LESSONS: Lesson[] = [
   kanaLesson('hira-sa', 'hiragana', ['sa'], 'Hiragana: S'),
   kanaLesson('hira-ta', 'hiragana', ['ta'], 'Hiragana: T'),
   NUMBERS,
+  kanjiLesson('numrat'),
   kanaLesson('hira-na', 'hiragana', ['na'], 'Hiragana: N'),
   kanaLesson('hira-ha', 'hiragana', ['ha'], 'Hiragana: H'),
   FAMILY,
   kanaLesson('hira-ma', 'hiragana', ['ma'], 'Hiragana: M'),
   kanaLesson('hira-yrw', 'hiragana', ['ya', 'ra', 'wa'], 'Hiragana: Y, R, W'),
   FOOD,
+  kanjiLesson('java'),
   kanaLesson('kata-1', 'katakana', ['a', 'ka'], 'Katakana: A, K'),
   kanaLesson('kata-2', 'katakana', ['sa', 'ta'], 'Katakana: S, T'),
   ANIMALS,
+  kanjiLesson('trupi'),
   kanaLesson('kata-3', 'katakana', ['na', 'ha', 'ma'], 'Katakana: N, H, M'),
   kanaLesson('kata-4', 'katakana', ['ya', 'ra', 'wa'], 'Katakana: Y, R, W'),
   PLACES,
+  kanjiLesson('natyra'),
   PHRASES,
+  kanjiLesson('shkolla'),
 ];
+
+export const KANJI_LESSONS = LESSONS.filter((l): l is KanjiLesson => l.kind === 'kanji');
 
 export const VOCAB_LESSONS = LESSONS.filter((l): l is VocabLesson => l.kind === 'vocab');
 

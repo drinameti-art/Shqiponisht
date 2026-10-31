@@ -31,6 +31,7 @@ export default function TabLayout() {
       }}>
       <Tabs.Screen name="index" options={{ title: 'Sot', tabBarIcon: icon('home-outline', 'home') }} />
       <Tabs.Screen name="kana" options={{ title: 'Kana', tabBarIcon: icon('grid-outline', 'grid') }} />
+      <Tabs.Screen name="kanji" options={{ title: 'Kanji', tabBarIcon: icon('language-outline', 'language') }} />
       <Tabs.Screen name="fjalori" options={{ title: 'Fjalori', tabBarIcon: icon('book-outline', 'book') }} />
       <Tabs.Screen name="profili" options={{ title: 'Profili', tabBarIcon: icon('person-outline', 'person') }} />
     </Tabs>

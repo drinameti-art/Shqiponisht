@@ -16,10 +16,11 @@ Every screen is in Albanian, and Japanese sounds are spelled the Albanian way, s
 ## What's in the app
 
 - **Mirësevini (welcome):** set your name and a daily XP goal.
-- **Sot (today):** greeting, streak, daily-goal bar and a 19-lesson path: hiragana and katakana row by row, plus greetings, numbers, family, food, animals, places and useful phrases.
+- **Sot (today):** greeting, streak, daily-goal bar and a 24-lesson path: hiragana and katakana row by row, five kanji lessons (36 kanji), plus greetings, numbers, family, food, animals, places and useful phrases.
 - **Lessons:** 10 multiple-choice questions per lesson, with an explanation in Albanian after every answer. Six correct answers pass the lesson and unlock the next one.
 - **Kana:** the full hiragana/katakana chart. Tap a kana for its Albanian reading, a pronunciation tip and example words. A red dot marks sounds Albanian spells differently from romaji.
-- **Fjalori (vocabulary):** every word from the lessons, searchable in Japanese, romaji or Albanian (search ignores ë and ç, so "nena" finds "nëna").
+- **Kanji:** all 36 kanji by theme (numbers, days of the week, the body, nature and size, school and life). Tap one for its Albanian meaning, on and kun readings (with Albanian spelling), stroke count and example words.
+- **Fjalori (vocabulary):** every word from the lessons, with its usual kanji spelling, searchable in kanji, kana, romaji or Albanian (search ignores ë and ç, so "nena" finds "nëna").
 - **Profili (profile):** XP, streak, lessons passed, daily-goal setting, and a progress reset.
 
 Progress is saved on the device; there's no account or server.
@@ -60,13 +61,13 @@ The bundle id / package name is `com.shqiponisht.app` (in `app.json`); change it
 
 ```
 src/app/            screens (Expo Router: every file is a route)
-  (tabs)/           Sot, Kana, Fjalori, Profili
+  (tabs)/           Sot, Kana, Kanji, Fjalori, Profili
   lesson/[id].tsx   the quiz
   welcome.tsx       first-run setup
-src/data/           kana chart and lesson content
+src/data/           kana chart, kanji and lesson content
 src/lib/            Albanian spelling rules, quiz builder, progress logic, storage
 tests/              Vitest unit tests for src/lib
 assets/images/      logo, app icon, splash
 ```
 
-To add words, edit `src/data/lessons.ts`: give the Japanese, the romaji and the Albanian meaning; the Albanian spelling is generated automatically.
+To add words, edit `src/data/lessons.ts`: give the Japanese, the romaji, the Albanian meaning and (optionally) the kanji spelling. To add kanji, edit `src/data/kanji.ts`. The Albanian spelling is generated automatically from the romaji.
