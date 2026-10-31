@@ -2,7 +2,7 @@
 
 Everything to paste into App Store Connect and Google Play Console. Every text has been checked against the store's length limit. Images are in [`store/`](store/).
 
-Numbers used below come from the app's content: **41 lessons** (24 free, 17 Plus), **138 kana** (hiragana + katakana), **89 kanji** (36 free), **147 words and phrases**, **337 pronunciation clips**.
+Numbers used below come from the app's content: **48 lessons** (26 free, 22 Plus), **138 kana** (hiragana + katakana) plus **66 combined sounds** (きゃ, しゅ…), **97 kanji** (36 free), **197 words and phrases**, **441 pronunciation clips**.
 
 > App Store Connect doesn't offer Albanian as a listing language, so the Apple listing is in English (the app itself is in Albanian, and the description says so). Google Play supports Albanian: use it as the default language and add the English translation.
 
@@ -35,9 +35,9 @@ Shqiponisht – Learn Japanese
 Japanese for Albanian speakers
 ```
 
-**Promotional text** (113/170)
+**Promotional text** (122/170)
 ```
-New: native-speaker pronunciation for every word, flashcards and a daily review that brings back what you forget.
+New: listening exercises, short grammar notes in Albanian, combined sounds like きゃ and っ, more Plus lessons and dark mode.
 ```
 
 **Keywords** (99/100)
@@ -50,13 +50,14 @@ japanese,hiragana,katakana,kanji,albanian,shqip,japonisht,kosovo,kana,flashcards
 Learn Japanese in Albanian. Shqiponisht is the first Japanese course made for Albanian speakers: every lesson, explanation and tip is in Albanian, and Japanese sounds are spelled the way you read them — ち = çi, つ = cu, じ = xhi.
 
 WHAT YOU LEARN
-• Hiragana and katakana: all 138 kana, row by row
-• 89 kanji with Albanian meanings, on/kun readings and example words
-• 147 words and phrases: greetings, numbers, family, food, places, shopping, the restaurant and more
-• Your first verbs and sentences
+• Hiragana and katakana: all 138 kana, row by row, plus combined sounds (きゃ, しゅ, っ, ー)
+• 97 kanji with Albanian meanings, on/kun readings and example words
+• 197 words and phrases: greetings, numbers, family, food, places, shopping, the restaurant, travel, weather and more
+• Your first verbs and sentences, with short grammar notes in Albanian before each new topic
 
 LEARN IT PROPERLY
 • Native pronunciation: every kana, word and sentence has real audio — a native Tokyo-accent speaker or a natural Japanese voice. Tap twice to hear it slower.
+• Listening exercises: hear a word, pick what it means.
 • Writing practice: watch the stroke order, then write each character with your finger. The app checks the order and direction of every stroke.
 • Daily review: what you get wrong comes back until you remember it, at the right intervals.
 • Flashcards: flip, swipe, and the hard words keep coming back.
@@ -65,12 +66,13 @@ STAY MOTIVATED
 • Short lessons, daily goal, XP and streaks
 • Daily reminder at the time you choose
 • Sounds, animations and confetti when you pass a lesson
+• Light and dark mode
 
 PRIVATE BY DESIGN
 No account, no ads, no tracking. Your progress stays on your phone, and you can move it to a new phone with a backup code.
 
 SHQIPONISHT PLUS
-The first 24 lessons are free. Shqiponisht Plus unlocks Level 2: 17 more lessons and 53 more kanji — verbs, time, sentences, numbers to 10,000, shopping, adjectives, colours, travel and the restaurant. Monthly or yearly, with a 7-day free trial on the yearly plan.
+The first 26 lessons are free. Shqiponisht Plus unlocks Level 2: 22 more lessons and 61 more kanji — verbs, time, sentences, numbers to 10,000, shopping, adjectives, colours, the restaurant, travel, weather and seasons, health and question words. Monthly or yearly, with a 7-day free trial on the yearly plan.
 
 Payment is charged to your Apple ID account at confirmation of purchase. The subscription renews automatically unless cancelled at least 24 hours before the end of the current period. You can manage and cancel it in your App Store account settings.
 
@@ -120,13 +122,14 @@ Japanese explained in Albanian: kana, kanji, words, pronunciation, writing.
 Mëso japonisht në shqip. Shqiponisht është kursi i parë i japonishtes i bërë për shqipfolës: çdo mësim, shpjegim dhe këshillë është në shqip, dhe tingujt japonezë shkruhen ashtu si i lexon ti — ち = çi, つ = cu, じ = xhi.
 
 ÇFARË MËSON
-• Hiragana dhe katakana: të 138 shkronjat kana, rresht pas rreshti
-• 89 kanji me kuptim në shqip, lexime on/kun dhe fjalë shembull
-• 147 fjalë dhe shprehje: përshëndetje, numra, familja, ushqimi, vendet, blerjet, restoranti e më shumë
-• Foljet dhe fjalitë e para
+• Hiragana dhe katakana: të 138 shkronjat kana, rresht pas rreshti, dhe tingujt e bashkuar (きゃ, しゅ, っ, ー)
+• 97 kanji me kuptim në shqip, lexime on/kun dhe fjalë shembull
+• 197 fjalë dhe shprehje: përshëndetje, numra, familja, ushqimi, vendet, blerjet, restoranti, udhëtimi, moti e më shumë
+• Foljet dhe fjalitë e para, me shpjegime të shkurtra gramatike në shqip
 
 MËSO SI DUHET
 • Shqiptim i vërtetë: çdo shkronjë, fjalë dhe fjali ka zë — një folës vendas me theks të Tokios ose një zë natyral japonez. Prek dy herë për ta dëgjuar më ngadalë.
+• Ushtrime dëgjimi: dëgjo një fjalë dhe zgjidh kuptimin.
 • Praktikë shkrimi: shiko rendin e vijave, pastaj shkruaj me gisht. Aplikacioni kontrollon rendin dhe drejtimin e çdo vije.
 • Përsëritja e ditës: ato që gabon kthehen derisa t’i mbash mend, në kohën e duhur.
 • Kartat e fjalëve: kthe kartën, rrëshqit, dhe fjalët e vështira kthehen sërish.
@@ -135,12 +138,13 @@ QËNDRO I MOTIVUAR
 • Mësime të shkurtra, qëllim ditor, XP dhe seri ditësh
 • Kujtesë ditore në orën që zgjedh ti
 • Tinguj, animacione dhe konfeti kur kalon një mësim
+• Pamje e çelët dhe e errët
 
 PRIVATËSI E PLOTË
 Pa llogari, pa reklama, pa gjurmim. Përparimi mbetet në telefonin tënd dhe mund ta kalosh në një telefon të ri me një kod rezervimi.
 
 SHQIPONISHT PLUS
-24 mësimet e para janë falas. Shqiponisht Plus hap Nivelin 2: 17 mësime dhe 53 kanji të tjera — folje, koha, fjali, numrat deri në 10 000, blerjet, mbiemrat, ngjyrat, udhëtimi dhe restoranti. Mujor ose vjetor, me 7 ditë provë falas te plani vjetor. Abonimi rinovohet automatikisht; mund ta anulosh kur të duash te Google Play.
+26 mësimet e para janë falas. Shqiponisht Plus hap Nivelin 2: 22 mësime dhe 61 kanji të tjera — folje, koha, fjali, numrat deri në 10 000, blerjet, mbiemrat, ngjyrat, restoranti, udhëtimi, moti dhe stinët, shëndeti dhe fjalët pyetëse. Mujor ose vjetor, me 7 ditë provë falas te plani vjetor. Abonimi rinovohet automatikisht; mund ta anulosh kur të duash te Google Play.
 
 Shqiptimi: regjistrime nga Tofugu dhe WaniKani (CC BY-SA 4.0) dhe VOICEVOX:玄野武宏. Rendi i vijave: KanjiVG (CC BY-SA 3.0).
 ```
