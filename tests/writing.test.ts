@@ -4,7 +4,10 @@ import { gradeStroke, pointsToPath, strokesFor, type Point } from '@/lib/writing
 
 /** A straight line from a to b, sampled like a finger drag. */
 function line(a: Point, b: Point, steps = 10): Point[] {
-  return Array.from({ length: steps + 1 }, (_, i) => [a[0] + ((b[0] - a[0]) * i) / steps, a[1] + ((b[1] - a[1]) * i) / steps]);
+  return Array.from({ length: steps + 1 }, (_, i) => [
+    a[0] + ((b[0] - a[0]) * i) / steps,
+    a[1] + ((b[1] - a[1]) * i) / steps,
+  ]);
 }
 
 describe('gradeStroke', () => {
@@ -39,6 +42,11 @@ describe('gradeStroke', () => {
 describe('pointsToPath', () => {
   it('draws a dot for a single tap and a polyline otherwise', () => {
     expect(pointsToPath([[5, 5]])).toBe('M5,5 l0.1,0.1');
-    expect(pointsToPath([[0, 0], [1, 2]])).toBe('M0,0 L1,2');
+    expect(
+      pointsToPath([
+        [0, 0],
+        [1, 2],
+      ]),
+    ).toBe('M0,0 L1,2');
   });
 });

@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import Purchases, { PACKAGE_TYPE, type CustomerInfo, type PurchasesPackage } from 'react-native-purchases';
 
-import { ENTITLEMENT, type Plan, type SubscriptionService } from './subscription-types';
+import { ENTITLEMENT, trialDays, type Plan, type SubscriptionService } from './subscription-types';
 
 /** Public RevenueCat SDK keys (safe to ship in the app). Set them in .env or EAS environment variables. */
 const API_KEY = Platform.select({
@@ -17,7 +17,15 @@ let started = false;
 function toPlan(p: PurchasesPackage): Plan {
   const period =
     p.packageType === PACKAGE_TYPE.MONTHLY ? 'monthly' : p.packageType === PACKAGE_TYPE.ANNUAL ? 'annual' : 'other';
-  return { id: p.identifier, period, price: p.product.priceString, title: p.product.title };
+  const trial = trialDays(p.product.introPrice);
+  return {
+    id: p.identifier,
+    period,
+    price: p.product.priceString,
+    amount: p.product.price,
+    title: p.product.title,
+    trialDays: trial || undefined,
+  };
 }
 
 export const subscription: SubscriptionService = {

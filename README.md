@@ -52,20 +52,14 @@ npm test           # unit tests for spelling rules, quiz building and progress/s
 
 ## Setting up the subscription
 
-Purchases go through [RevenueCat](https://www.revenuecat.com) (`react-native-purchases`), which handles App Store and Google Play billing and receipt validation. Until the keys below are set, the paywall says subscriptions are only available in the store apps and nothing can be bought.
+Plus runs on [RevenueCat](https://www.revenuecat.com) (`react-native-purchases`) with a **€4.99/month** and a **€29.99/year** plan (7-day free trial on yearly), under the entitlement **`plus`**. Until the RevenueCat keys are set, the paywall says subscriptions are only available in the store apps and nothing can be bought.
 
-1. In **App Store Connect** and **Google Play Console**, create two auto-renewing subscriptions in one subscription group, e.g. monthly and yearly. The prices are set there, not in the app.
-2. In **RevenueCat**, create a project with an iOS and an Android app, import those products, create an entitlement with the identifier **`plus`**, attach both products to it, and put them in the **current offering** as the *Monthly* and *Annual* packages.
-3. Put RevenueCat's public SDK keys in a `.env` file (or EAS environment variables):
+**Follow [STORE_SETUP.md](STORE_SETUP.md)**: the step-by-step checklist with every product ID, price and text to paste into App Store Connect, Google Play Console and RevenueCat, plus how to publish the privacy policy and terms.
 
-   ```
-   EXPO_PUBLIC_REVENUECAT_IOS_KEY=appl_...
-   EXPO_PUBLIC_REVENUECAT_ANDROID_KEY=goog_...
-   ```
-4. In-app purchases need native code, so they don't work in Expo Go. Test them with a development build (`npx eas-cli@latest build --profile development`) and store sandbox/test accounts.
-5. Before submitting, add links to your **privacy policy** and **terms of use** (App Store review requires them for subscriptions), both on the paywall and in the store listing.
-
-`EXPO_PUBLIC_DEMO_PLUS=1` shows a "Provo Plus (demo)" button on the paywall for reviewing the Plus lessons in a web preview. Never set it for store builds.
+- Privacy policy and terms (Albanian + English): `src/legal/*.json`, shown in the app from the Plus screen and Profili. Put your company name, country and email in `src/legal/publisher.json`.
+- `npm run legal` builds them as web pages in `docs/` for GitHub Pages; the stores need those URLs.
+- `npm run check:release` fails until the publisher details and RevenueCat keys are in place, and if the demo flag is on.
+- `EXPO_PUBLIC_DEMO_PLUS=1` shows a "Provo Plus (demo)" button for reviewing the Plus lessons in a web preview. Never set it for store builds.
 
 ## Building for the App Store and Google Play
 

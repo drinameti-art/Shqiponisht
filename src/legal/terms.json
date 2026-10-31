@@ -1,0 +1,126 @@
+{
+  "sq": {
+    "title": "Kushtet e përdorimit",
+    "sections": [
+      {
+        "heading": "Pranimi i kushteve",
+        "body": [
+          "Duke shkarkuar ose përdorur Shqiponisht („aplikacioni“), pranon këto kushte. Aplikacioni ofrohet nga {{COMPANY}}, {{COUNTRY}} („ne“)."
+        ]
+      },
+      {
+        "heading": "Përdorimi i aplikacionit",
+        "body": [
+          "Të japim një leje personale, jo-ekskluzive dhe të patransferueshme për ta përdorur aplikacionin për mësim personal. Nuk lejohet kopjimi, shitja ose shpërndarja e përmbajtjes së aplikacionit pa lejen tonë."
+        ]
+      },
+      {
+        "heading": "Shqiponisht Plus",
+        "body": [
+          "Shqiponisht Plus është një abonim me rinovim automatik që hap mësimet e Nivelit 2. Ofrohet si plan mujor ose vjetor. Çmimi shfaqet në aplikacion dhe në App Store / Google Play para blerjes.",
+          "Nëse plani ofron provë falas, pagesa e parë bëhet në fund të provës, përveç nëse e anulon të paktën 24 orë para se të mbarojë.",
+          "Abonimi rinovohet automatikisht për të njëjtën periudhë dhe me të njëjtin çmim, përveç nëse e anulon të paktën 24 orë para fundit të periudhës. Pagesa merret nga llogaria jote në App Store ose Google Play.",
+          "Abonimin mund ta menaxhosh dhe ta anulosh në çdo kohë te cilësimet e llogarisë sate në App Store ose Google Play. Anulimi hyn në fuqi në fund të periudhës së paguar; deri atëherë Plus mbetet aktiv."
+        ]
+      },
+      {
+        "heading": "Rimbursimet",
+        "body": [
+          "Pagesat përpunohen nga Apple ose Google, prandaj kërkesat për rimbursim trajtohen sipas politikave të tyre. Kjo nuk cenon të drejtat që të jep ligji për mbrojtjen e konsumatorit."
+        ]
+      },
+      {
+        "heading": "Përmbajtja mësimore",
+        "body": [
+          "Bëjmë çmos që përmbajtja të jetë e saktë, por nuk garantojmë që është pa gabime apo e plotë. Aplikacioni është mjet ndihmës mësimi dhe nuk zëvendëson një mësues apo një provim zyrtar."
+        ]
+      },
+      {
+        "heading": "Pronësia intelektuale",
+        "body": [
+          "Aplikacioni, logoja dhe përmbajtja janë pronë e {{COMPANY}}. Të dhënat e rendit të vijave vijnë nga KanjiVG © Ulrich Apel dhe përdoren sipas licencës Creative Commons BY-SA 3.0."
+        ]
+      },
+      {
+        "heading": "Kufizimi i përgjegjësisë",
+        "body": [
+          "Aplikacioni ofrohet „ashtu siç është“. Në masën që e lejon ligji, nuk mbajmë përgjegjësi për dëme indirekte që vijnë nga përdorimi i tij. Asgjë në këto kushte nuk kufizon përgjegjësinë që nuk mund të kufizohet me ligj."
+        ]
+      },
+      {
+        "heading": "Ndryshimet",
+        "body": [
+          "Mund t’i përditësojmë këto kushte. Data e përditësimit të fundit shfaqet në krye. Duke vazhduar ta përdorësh aplikacionin pas një ndryshimi, pranon kushtet e reja."
+        ]
+      },
+      {
+        "heading": "Ligji në fuqi dhe kontakti",
+        "body": [
+          "Këto kushte rregullohen nga legjislacioni i shtetit ku është regjistruar {{COMPANY}} ({{COUNTRY}}), pa cenuar të drejtat e detyrueshme të konsumatorit në vendin ku jeton. Për pyetje: {{EMAIL}}."
+        ]
+      }
+    ]
+  },
+  "en": {
+    "title": "Terms of Use",
+    "sections": [
+      {
+        "heading": "Accepting these terms",
+        "body": [
+          "By downloading or using Shqiponisht (“the app”), you agree to these terms. The app is provided by {{COMPANY}}, {{COUNTRY}} (“we”)."
+        ]
+      },
+      {
+        "heading": "Using the app",
+        "body": [
+          "We grant you a personal, non-exclusive, non-transferable licence to use the app for your own learning. You may not copy, sell or distribute the app’s content without our permission."
+        ]
+      },
+      {
+        "heading": "Shqiponisht Plus",
+        "body": [
+          "Shqiponisht Plus is an auto-renewing subscription that unlocks the Level 2 lessons. It is offered as a monthly or yearly plan. The price is shown in the app and in the App Store / Google Play before purchase.",
+          "If a plan includes a free trial, the first payment is taken when the trial ends unless you cancel at least 24 hours before it ends.",
+          "The subscription renews automatically for the same period and at the same price unless you cancel at least 24 hours before the end of the current period. Payment is charged to your App Store or Google Play account.",
+          "You can manage and cancel the subscription at any time in your App Store or Google Play account settings. Cancellation takes effect at the end of the paid period; Plus stays active until then."
+        ]
+      },
+      {
+        "heading": "Refunds",
+        "body": [
+          "Payments are processed by Apple or Google, so refund requests are handled under their policies. This does not affect your statutory consumer rights."
+        ]
+      },
+      {
+        "heading": "Learning content",
+        "body": [
+          "We do our best to keep the content accurate, but we do not guarantee that it is complete or free of errors. The app is a learning aid and does not replace a teacher or an official exam."
+        ]
+      },
+      {
+        "heading": "Intellectual property",
+        "body": [
+          "The app, logo and content are the property of {{COMPANY}}. Stroke-order data comes from KanjiVG © Ulrich Apel and is used under the Creative Commons BY-SA 3.0 licence."
+        ]
+      },
+      {
+        "heading": "Limitation of liability",
+        "body": [
+          "The app is provided “as is”. To the extent permitted by law, we are not liable for indirect damages arising from its use. Nothing in these terms limits liability that cannot be limited by law."
+        ]
+      },
+      {
+        "heading": "Changes",
+        "body": [
+          "We may update these terms. The date of the last update is shown at the top. By continuing to use the app after a change, you accept the new terms."
+        ]
+      },
+      {
+        "heading": "Governing law and contact",
+        "body": [
+          "These terms are governed by the laws of {{COUNTRY}}, without affecting the mandatory consumer rights of the country where you live. Questions: {{EMAIL}}."
+        ]
+      }
+    ]
+  }
+}

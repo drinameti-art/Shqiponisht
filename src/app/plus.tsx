@@ -10,7 +10,7 @@ import { KANJI, KANJI_GROUPS } from '@/data/kanji';
 import { LESSONS } from '@/data/lessons';
 import { useProgress } from '@/lib/progress-context';
 import { subscription } from '@/lib/subscription';
-import { DEMO_PLUS_ALLOWED, type Plan } from '@/lib/subscription-types';
+import { annualSavings, DEMO_PLUS_ALLOWED, type Plan } from '@/lib/subscription-types';
 import { C, R, S } from '@/theme';
 
 const PLUS_LESSONS = LESSONS.filter((l) => l.premium).length;
@@ -21,7 +21,7 @@ const BENEFITS: [icon: 'school' | 'language' | 'chatbubbles' | 'time', text: str
   ['school', `Niveli 2: ${PLUS_LESSONS} mësime të reja`],
   ['language', `${PLUS_KANJI} kanji të reja — foljet, koha, drejtimet, moti`],
   ['chatbubbles', 'Foljet e para dhe fjalitë e para në japonisht'],
-  ['time', 'Hiragana dhe katakana me ゛ dhe ゜ (が, ぱ…)'],
+  ['time', 'Hiragana dhe katakana të reja: が, ざ, ば, ぱ…'],
 ];
 
 const PERIOD_LABEL: Record<Plan['period'], string> = { annual: 'Vjetor', monthly: 'Mujor', other: '' };
@@ -75,6 +75,8 @@ export default function PlusScreen() {
   };
 
   const storeName = Platform.OS === 'ios' ? 'App Store' : 'Google Play';
+  const savings = annualSavings(plans ?? []);
+  const chosen = plans?.find((p) => p.id === selected);
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -122,16 +124,33 @@ export default function PlusScreen() {
                     accessibilityRole="radio"
                     accessibilityState={{ selected: on }}
                     style={[styles.plan, on && styles.planOn]}>
+                    {p.period === 'annual' && savings > 0 && (
+                      <View style={styles.saveBadge}>
+                        <Text style={styles.saveText}>Kurse {savings}%</Text>
+                      </View>
+                    )}
                     <Text style={styles.planName}>{PERIOD_LABEL[p.period] || p.title}</Text>
                     <Text style={styles.planPrice}>{p.price}</Text>
                     <Text style={styles.planPer}>
                       {p.period === 'annual' ? 'në vit' : p.period === 'monthly' ? 'në muaj' : ''}
                     </Text>
+                    {p.trialDays ? <Text style={styles.trial}>{p.trialDays} ditë falas</Text> : null}
                   </Pressable>
                 );
               })}
             </View>
-            <Button label={busy ? 'Duke u përpunuar…' : 'Abonohu'} onPress={buy} disabled={busy || !selected} />
+            <Button
+              label={
+                busy ? 'Duke u përpunuar…' : chosen?.trialDays ? `Fillo ${chosen.trialDays} ditë falas` : 'Abonohu'
+              }
+              onPress={buy}
+              disabled={busy || !selected}
+            />
+            {chosen?.trialDays ? (
+              <Text style={styles.trialNote}>
+                Pas provës: {chosen.price} {chosen.period === 'annual' ? 'në vit' : 'në muaj'}. Anulo kur të duash.
+              </Text>
+            ) : null}
           </>
         ) : (
           <View style={styles.unavailable}>
@@ -162,6 +181,18 @@ export default function PlusScreen() {
             {storeName}.
           </Text>
         )}
+
+        <View style={styles.links}>
+          <Text style={styles.link} onPress={() => router.push({ pathname: '/legal/[doc]', params: { doc: 'terms' } })}>
+            Kushtet e përdorimit
+          </Text>
+          <Text style={styles.legal}>·</Text>
+          <Text
+            style={styles.link}
+            onPress={() => router.push({ pathname: '/legal/[doc]', params: { doc: 'privacy' } })}>
+            Politika e privatësisë
+          </Text>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -221,4 +252,17 @@ const styles = StyleSheet.create({
   unavailableText: { fontSize: 14.5, lineHeight: 21, color: C.muted, textAlign: 'center' },
   message: { fontSize: 14, color: C.redDark, textAlign: 'center' },
   legal: { fontSize: 11.5, lineHeight: 16, color: C.muted, textAlign: 'center' },
+  links: { flexDirection: 'row', justifyContent: 'center', gap: S.sm, flexWrap: 'wrap' },
+  link: { fontSize: 12.5, color: C.ink, textDecorationLine: 'underline' },
+  saveBadge: {
+    position: 'absolute',
+    top: -11,
+    backgroundColor: C.green,
+    borderRadius: R.pill,
+    paddingVertical: 3,
+    paddingHorizontal: 8,
+  },
+  saveText: { color: C.white, fontSize: 11, fontWeight: '800' },
+  trial: { fontSize: 12, fontWeight: '700', color: C.green, marginTop: 4 },
+  trialNote: { fontSize: 12.5, color: C.muted, textAlign: 'center' },
 });

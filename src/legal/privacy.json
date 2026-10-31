@@ -1,0 +1,112 @@
+{
+  "sq": {
+    "title": "Politika e privatësisë",
+    "sections": [
+      {
+        "heading": "Kush jemi",
+        "body": [
+          "Aplikacioni Shqiponisht („aplikacioni“) publikohet nga {{COMPANY}}, {{COUNTRY}} („ne“). Për çdo pyetje rreth privatësisë na shkruani në {{EMAIL}}."
+        ]
+      },
+      {
+        "heading": "Çfarë ruhet në pajisjen tënde",
+        "body": [
+          "Aplikacioni nuk kërkon llogari. Emri që shkruan në fillim, përparimi në mësime, pikët XP, seria e ditëve dhe cilësimet ruhen vetëm në pajisjen tënde. Ato nuk dërgohen te ne dhe ne nuk kemi qasje në to.",
+          "Aplikacioni nuk përdor mikrofonin, kamerën, vendndodhjen apo kontaktet e tua."
+        ]
+      },
+      {
+        "heading": "Abonimi Shqiponisht Plus",
+        "body": [
+          "Pagesat për Shqiponisht Plus kryhen nga Apple (App Store) ose Google (Google Play). Ne nuk i shohim dhe nuk i ruajmë të dhënat e kartës sate.",
+          "Për të kontrolluar nëse abonimi yt është aktiv përdorim shërbimin RevenueCat, Inc. RevenueCat përpunon në emrin tonë një identifikues anonim të krijuar nga aplikacioni, të dhënat e blerjes (produkti, data, statusi i abonimit, vendi i dyqanit) dhe të dhëna teknike të pajisjes (p.sh. versioni i sistemit operativ). Ky identifikues nuk përmban emrin apo email-in tënd. Politika e privatësisë së RevenueCat: https://www.revenuecat.com/privacy"
+        ]
+      },
+      {
+        "heading": "Pa reklama dhe pa gjurmim",
+        "body": [
+          "Aplikacioni nuk shfaq reklama, nuk përdor shërbime analitike dhe nuk të gjurmon nëpër aplikacione apo faqe të tjera. Ne nuk i shesim të dhënat e askujt."
+        ]
+      },
+      {
+        "heading": "Sa kohë ruhen të dhënat",
+        "body": [
+          "Të dhënat në pajisje mbeten derisa ta fshish aplikacionin ose të zgjedhësh „Rinis përparimin“ te Profili. Të dhënat e blerjeve ruhen nga RevenueCat për aq kohë sa nevojitet për abonimin dhe për detyrimet ligjore e kontabël."
+        ]
+      },
+      {
+        "heading": "Të drejtat e tua",
+        "body": [
+          "Ke të drejtë të kërkosh qasje, korrigjim ose fshirje të të dhënave që lidhen me blerjet e tua, si dhe të kundërshtosh përpunimin e tyre. Na shkruaj në {{EMAIL}}. Ke gjithashtu të drejtë të ankohesh pranë autoritetit për mbrojtjen e të dhënave personale në vendin tënd."
+        ]
+      },
+      {
+        "heading": "Fëmijët",
+        "body": [
+          "Aplikacioni nuk mbledh me dashje të dhëna personale nga fëmijët. Blerjet brenda aplikacionit kontrollohen nga cilësimet e prindërve në App Store dhe Google Play. Nëse je prind dhe ke pyetje, na shkruaj në {{EMAIL}}."
+        ]
+      },
+      {
+        "heading": "Ndryshimet",
+        "body": [
+          "Mund ta përditësojmë këtë politikë. Data e përditësimit të fundit shfaqet në krye. Ndryshimet e rëndësishme do t’i njoftojmë në aplikacion."
+        ]
+      }
+    ]
+  },
+  "en": {
+    "title": "Privacy Policy",
+    "sections": [
+      {
+        "heading": "Who we are",
+        "body": [
+          "The Shqiponisht app (“the app”) is published by {{COMPANY}}, {{COUNTRY}} (“we”). For any privacy question, write to us at {{EMAIL}}."
+        ]
+      },
+      {
+        "heading": "What stays on your device",
+        "body": [
+          "The app does not require an account. The name you enter at the start, your lesson progress, XP, streak and settings are stored only on your device. They are not sent to us and we cannot access them.",
+          "The app does not use your microphone, camera, location or contacts."
+        ]
+      },
+      {
+        "heading": "The Shqiponisht Plus subscription",
+        "body": [
+          "Payments for Shqiponisht Plus are processed by Apple (App Store) or Google (Google Play). We never see or store your card details.",
+          "To check whether your subscription is active we use RevenueCat, Inc. On our behalf, RevenueCat processes an anonymous identifier created by the app, purchase data (product, date, subscription status, store country) and technical device data (e.g. operating-system version). This identifier does not contain your name or email. RevenueCat’s privacy policy: https://www.revenuecat.com/privacy"
+        ]
+      },
+      {
+        "heading": "No ads, no tracking",
+        "body": [
+          "The app shows no ads, uses no analytics services and does not track you across other apps or websites. We do not sell anyone’s data."
+        ]
+      },
+      {
+        "heading": "How long data is kept",
+        "body": [
+          "Data on your device remains until you delete the app or choose “Rinis përparimin” (Reset progress) in Profile. Purchase records are kept by RevenueCat for as long as needed for the subscription and for legal and accounting obligations."
+        ]
+      },
+      {
+        "heading": "Your rights",
+        "body": [
+          "You may request access to, correction or deletion of data relating to your purchases, and object to its processing. Write to us at {{EMAIL}}. You also have the right to complain to the data-protection authority in your country."
+        ]
+      },
+      {
+        "heading": "Children",
+        "body": [
+          "The app does not knowingly collect personal data from children. In-app purchases are controlled by parental settings in the App Store and Google Play. If you are a parent with questions, write to us at {{EMAIL}}."
+        ]
+      },
+      {
+        "heading": "Changes",
+        "body": [
+          "We may update this policy. The date of the last update is shown at the top. We will announce important changes in the app."
+        ]
+      }
+    ]
+  }
+}

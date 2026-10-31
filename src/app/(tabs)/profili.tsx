@@ -129,6 +129,19 @@ export default function Profile() {
           <Button label="Anulo" variant="ghost" onPress={() => setConfirmReset(false)} style={{ marginTop: S.sm }} />
         )}
 
+        <View style={styles.legalLinks}>
+          <Text
+            style={styles.legalLink}
+            onPress={() => router.push({ pathname: '/legal/[doc]', params: { doc: 'terms' } })}>
+            Kushtet e përdorimit
+          </Text>
+          <Text
+            style={styles.legalLink}
+            onPress={() => router.push({ pathname: '/legal/[doc]', params: { doc: 'privacy' } })}>
+            Politika e privatësisë
+          </Text>
+        </View>
+
         <Text style={styles.credits}>
           Rendi i vijave: KanjiVG © Ulrich Apel, licencë CC BY-SA 3.0 (kanjivg.tagaini.net).
         </Text>
@@ -195,5 +208,7 @@ const styles = StyleSheet.create({
   toggleOn: { backgroundColor: C.green },
   knob: { width: 22, height: 22, borderRadius: 11, backgroundColor: C.white },
   knobOn: { transform: [{ translateX: 20 }] },
+  legalLinks: { flexDirection: 'row', justifyContent: 'center', gap: S.lg, marginTop: S.xl },
+  legalLink: { fontSize: 13.5, color: C.ink, textDecorationLine: 'underline' },
   credits: { fontSize: 11.5, lineHeight: 16, color: C.muted, textAlign: 'center', marginTop: S.xl },
 });
