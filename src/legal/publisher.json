@@ -1,6 +1,9 @@
 {
-  "company": "[EMRI I KOMPANISË]",
+  "company": "Shqiponisht",
   "country": "[SHTETI]",
   "email": "[EMAIL]",
-  "updated": { "sq": "31 tetor 2026", "en": "31 October 2026" }
+  "updated": {
+    "sq": "31 tetor 2026",
+    "en": "31 October 2026"
+  }
 }

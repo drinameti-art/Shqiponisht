@@ -90,7 +90,7 @@ Pronunciation: recordings by Tofugu and WaniKani (CC BY-SA 4.0) and VOICEVOX:玄
 | Support URL | your hosted `docs/index.html` (GitHub Pages) |
 | Marketing URL | same, or leave empty |
 | Privacy Policy URL | your hosted `docs/privacy.html` |
-| Copyright | `2026 [EMRI I KOMPANISË]` |
+| Copyright | `2026 Shqiponisht` |
 | Age rating | **4+**: answer *None* to every content question; *No* to unrestricted web access, user-generated content, gambling, contests; the app has no ads and doesn't collect data from children |
 | App Privacy | as in `STORE_SETUP.md` → Step 3: only *Purchases → Purchase History*, for App Functionality, not used for tracking |
 | Sign-in required for review | No |
