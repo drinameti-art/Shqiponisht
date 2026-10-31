@@ -17,8 +17,11 @@ const publisher = json('src/legal/publisher.json');
 const docs = { privacy: json('src/legal/privacy.json'), terms: json('src/legal/terms.json') };
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const fill = (s) =>
-  s.replaceAll('{{COMPANY}}', publisher.company).replaceAll('{{COUNTRY}}', publisher.country).replaceAll('{{EMAIL}}', publisher.email);
+const fill = (s, lang = 'sq') =>
+  s
+    .replaceAll('{{COMPANY}}', publisher.company)
+    .replaceAll('{{COUNTRY}}', lang === 'en' ? (publisher.country_en ?? publisher.country) : publisher.country)
+    .replaceAll('{{EMAIL}}', publisher.email);
 const linkify = (s) =>
   esc(s)
     .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1">$1</a>')
@@ -35,7 +38,7 @@ function page(id) {
   const lang = (l) => {
     const d = doc[l];
     const sections = d.sections
-      .map((s) => `<h2>${esc(fill(s.heading))}</h2>\n${s.body.map((p) => `<p>${linkify(fill(p))}</p>`).join('\n')}`)
+      .map((s) => `<h2>${esc(fill(s.heading, l))}</h2>\n${s.body.map((p) => `<p>${linkify(fill(p, l))}</p>`).join('\n')}`)
       .join('\n');
     const updated = l === 'sq' ? 'Përditësuar më' : 'Last updated';
     return `<section lang="${l}" id="${l}"><h1>${esc(d.title)}</h1><p class="updated">${updated}: ${esc(publisher.updated[l])}</p>\n${sections}</section>`;

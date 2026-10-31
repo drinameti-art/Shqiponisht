@@ -36,6 +36,13 @@ describe('legal documents', () => {
     }
   });
 
+  it('uses the English country name in the English texts', () => {
+    const p = { ...filled, country: 'Kosovë', country_en: 'Kosovo' };
+    expect(JSON.stringify(legalDoc('terms', 'en', p))).toContain('(Kosovo)');
+    expect(JSON.stringify(legalDoc('terms', 'en', p))).not.toContain('Kosovë');
+    expect(JSON.stringify(legalDoc('terms', 'sq', p))).toContain('(Kosovë)');
+  });
+
   it('reports which publisher fields are still placeholders', () => {
     expect(publisherMissing(filled)).toEqual([]);
     expect(publisherMissing({ ...filled, email: '[EMAIL]' })).toEqual(['email']);
