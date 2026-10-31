@@ -12,6 +12,11 @@ export async function loadProgress(): Promise<Progress> {
   }
 }
 
+/** Saves progress; a storage failure (e.g. blocked browser storage) keeps the in-memory state. */
 export async function saveProgress(progress: Progress): Promise<void> {
-  await AsyncStorage.setItem(KEY, JSON.stringify(progress));
+  try {
+    await AsyncStorage.setItem(KEY, JSON.stringify(progress));
+  } catch {
+    // Progress stays in memory for this session.
+  }
 }
