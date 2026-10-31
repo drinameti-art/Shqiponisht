@@ -25,6 +25,7 @@ function RootStack() {
       <Stack.Screen name="write/[char]" options={{ presentation: 'modal' }} />
       <Stack.Screen name="plus" options={{ presentation: 'modal' }} />
       <Stack.Screen name="legal/[doc]" options={{ presentation: 'modal' }} />
+      <Stack.Screen name="flashcards" options={{ presentation: 'fullScreenModal', gestureEnabled: false }} />
     </Stack>
   );
 }

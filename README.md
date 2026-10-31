@@ -21,6 +21,7 @@ Every screen is in Albanian, and Japanese sounds are spelled the Albanian way, s
 - **Si shkruhet (how to write):** every kana and kanji card has a "Si shkruhet" button. *Shiko rendin* animates the strokes in order with numbers; *Provo vetë* is a practice pad where you write with your finger and each stroke is checked for position, order and direction.
 - **Kana:** the full hiragana/katakana chart, including the ゛/゜ rows (が, ぱ…). Tap a kana for its Albanian reading, a pronunciation tip and example words. A red dot marks sounds Albanian spells differently from romaji.
 - **Kanji:** all 36 kanji by theme (numbers, days of the week, the body, nature and size, school and life). Tap one for its Albanian meaning, on and kun readings (with Albanian spelling), stroke count and example words.
+- **Kartat (flashcards):** from Fjalori → *Kartat*. Decks: all your words, "Fjalët e vështira" (words you've missed), or any lesson; Japanese→Albanian or Albanian→Japanese. Tap to flip, then *E dija* / *Nuk e dija* or swipe right / left. Unknown cards come back until known; results feed the spaced review, XP and streak.
 - **Fjalori (vocabulary):** every word from the lessons, with its usual kanji spelling, searchable in kanji, kana, romaji or Albanian (search ignores ë and ç, so "nena" finds "nëna").
 - **Profili (profile):** XP, streak, lessons passed, daily-goal setting, and a progress reset.
 

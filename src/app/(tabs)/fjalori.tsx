@@ -1,6 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { SectionList, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, SectionList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { SpeakButton } from '@/components/ui';
@@ -29,7 +30,16 @@ export default function Vocabulary() {
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.head}>
-        <Text style={styles.title}>Fjalori</Text>
+        <View style={styles.titleRow}>
+          <Text style={styles.title}>Fjalori</Text>
+          <Pressable
+            onPress={() => router.push('/flashcards')}
+            accessibilityRole="button"
+            style={({ pressed }) => [styles.cardsBtn, pressed && { opacity: 0.85 }]}>
+            <Ionicons name="albums" size={17} color={C.white} />
+            <Text style={styles.cardsText}>Kartat</Text>
+          </Pressable>
+        </View>
         <View style={styles.search}>
           <Ionicons name="search" size={18} color={C.muted} />
           <TextInput
@@ -75,6 +85,17 @@ export default function Vocabulary() {
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: C.cream },
   head: { paddingHorizontal: S.xl, paddingTop: S.xl, maxWidth: 640, width: '100%', alignSelf: 'center' },
+  titleRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  cardsBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: C.red,
+    borderRadius: R.pill,
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+  },
+  cardsText: { color: C.white, fontSize: 14.5, fontWeight: '800' },
   title: { fontSize: 28, fontWeight: '800', color: C.ink, letterSpacing: -0.5 },
   search: {
     flexDirection: 'row',
