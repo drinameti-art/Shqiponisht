@@ -271,7 +271,8 @@ export default function Profile() {
         </View>
 
         <Text style={styles.credits}>
-          Rendi i vijave: KanjiVG © Ulrich Apel, licencë CC BY-SA 3.0 (kanjivg.tagaini.net).
+          Rendi i vijave: KanjiVG © Ulrich Apel, licencë CC BY-SA 3.0 (kanjivg.tagaini.net).{'\n'}Shqiptimi: regjistrime
+          nga Tofugu dhe WaniKani, CC BY-SA 4.0 (të shkurtuara dhe të niveluara); zëri i sintetizuar: VOICEVOX:玄野武宏.
         </Text>
       </ScrollView>
     </SafeAreaView>

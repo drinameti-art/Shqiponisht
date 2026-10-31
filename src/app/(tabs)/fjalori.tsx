@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { SpeakButton } from '@/components/ui';
 import { VOCAB_LESSONS, type Word } from '@/data/lessons';
+import { wordSay } from '@/lib/sayables';
 import { C, F, R, S } from '@/theme';
 
 /** Lowercases and strips Albanian diacritics so „ç“ matches „c“ and „ë“ matches „e“. */
@@ -73,7 +74,7 @@ export default function Vocabulary() {
               </Text>
             </View>
             <Text style={styles.meaning}>{item.meaning}</Text>
-            <SpeakButton text={item.jp} size={34} />
+            <SpeakButton text={wordSay(item)} size={34} />
           </View>
         )}
         ListEmptyComponent={<Text style={styles.empty}>Asnjë fjalë nuk përputhet me „{query}“.</Text>}

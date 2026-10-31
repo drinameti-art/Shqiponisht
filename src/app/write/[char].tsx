@@ -16,7 +16,7 @@ import { C, R, S } from '@/theme';
 
 /** What to pronounce for the character: the kana itself, or a kanji's first example word. */
 function sayable(char: string): string {
-  return KANJI.find((k) => k.char === char)?.examples[0].kana ?? char;
+  return KANJI.find((k) => k.char === char)?.examples[0].jp ?? char;
 }
 
 /** What to show under the character: its reading (kana) or meaning (kanji). */

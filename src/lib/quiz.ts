@@ -3,6 +3,7 @@ import { KANJI, type Kanji, type KanjiExample } from '@/data/kanji';
 import { VOCAB_LESSONS, type Lesson, type Word } from '@/data/lessons';
 
 import { spellsDifferently } from './albanian';
+import { wordSay } from './sayables';
 
 export type Option = { label: string; hint?: string };
 
@@ -128,7 +129,7 @@ function vocabItemQuestions(w: Word, pool: Word[], rng: Rng): Question[] {
   return [
     {
       item,
-      speak: w.jp,
+      speak: wordSay(w),
       instruction: 'Si thuhet në japonisht?',
       prompt: w.meaning,
       promptIsJapanese: false,
@@ -143,7 +144,7 @@ function vocabItemQuestions(w: Word, pool: Word[], rng: Rng): Question[] {
     },
     {
       item,
-      speak: w.jp,
+      speak: wordSay(w),
       instruction: 'Çfarë do të thotë?',
       prompt: w.jp,
       promptIsJapanese: true,
@@ -170,7 +171,7 @@ function kanjiItemQuestions(k: Kanji, pool: Kanji[], examplePool: KanjiExample[]
   return [
     {
       item,
-      speak: k.examples[0].kana,
+      speak: k.examples[0].jp,
       instruction: 'Çfarë do të thotë ky kanji?',
       prompt: k.char,
       promptIsJapanese: true,
@@ -185,7 +186,7 @@ function kanjiItemQuestions(k: Kanji, pool: Kanji[], examplePool: KanjiExample[]
     },
     {
       item,
-      speak: k.examples[0].kana,
+      speak: k.examples[0].jp,
       instruction: `Cili kanji do të thotë „${k.meaning}“?`,
       prompt: k.meaning,
       promptIsJapanese: false,
@@ -200,7 +201,7 @@ function kanjiItemQuestions(k: Kanji, pool: Kanji[], examplePool: KanjiExample[]
     },
     {
       item,
-      speak: word.kana,
+      speak: word.jp,
       instruction: 'Si lexohet kjo fjalë?',
       prompt: word.jp,
       promptIsJapanese: true,

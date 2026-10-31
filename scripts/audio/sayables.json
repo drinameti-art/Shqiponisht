@@ -1,0 +1,1527 @@
+[
+ {
+  "text": "あ",
+  "reading": "あ",
+  "kind": "kana"
+ },
+ {
+  "text": "い",
+  "reading": "い",
+  "kind": "kana"
+ },
+ {
+  "text": "う",
+  "reading": "う",
+  "kind": "kana"
+ },
+ {
+  "text": "え",
+  "reading": "え",
+  "kind": "kana"
+ },
+ {
+  "text": "お",
+  "reading": "お",
+  "kind": "kana"
+ },
+ {
+  "text": "か",
+  "reading": "か",
+  "kind": "kana"
+ },
+ {
+  "text": "き",
+  "reading": "き",
+  "kind": "kana"
+ },
+ {
+  "text": "く",
+  "reading": "く",
+  "kind": "kana"
+ },
+ {
+  "text": "け",
+  "reading": "け",
+  "kind": "kana"
+ },
+ {
+  "text": "こ",
+  "reading": "こ",
+  "kind": "kana"
+ },
+ {
+  "text": "さ",
+  "reading": "さ",
+  "kind": "kana"
+ },
+ {
+  "text": "し",
+  "reading": "し",
+  "kind": "kana"
+ },
+ {
+  "text": "す",
+  "reading": "す",
+  "kind": "kana"
+ },
+ {
+  "text": "せ",
+  "reading": "せ",
+  "kind": "kana"
+ },
+ {
+  "text": "そ",
+  "reading": "そ",
+  "kind": "kana"
+ },
+ {
+  "text": "た",
+  "reading": "た",
+  "kind": "kana"
+ },
+ {
+  "text": "ち",
+  "reading": "ち",
+  "kind": "kana"
+ },
+ {
+  "text": "つ",
+  "reading": "つ",
+  "kind": "kana"
+ },
+ {
+  "text": "て",
+  "reading": "て",
+  "kind": "kana"
+ },
+ {
+  "text": "と",
+  "reading": "と",
+  "kind": "kana"
+ },
+ {
+  "text": "な",
+  "reading": "な",
+  "kind": "kana"
+ },
+ {
+  "text": "に",
+  "reading": "に",
+  "kind": "kana"
+ },
+ {
+  "text": "ぬ",
+  "reading": "ぬ",
+  "kind": "kana"
+ },
+ {
+  "text": "ね",
+  "reading": "ね",
+  "kind": "kana"
+ },
+ {
+  "text": "の",
+  "reading": "の",
+  "kind": "kana"
+ },
+ {
+  "text": "は",
+  "reading": "は",
+  "kind": "kana"
+ },
+ {
+  "text": "ひ",
+  "reading": "ひ",
+  "kind": "kana"
+ },
+ {
+  "text": "ふ",
+  "reading": "ふ",
+  "kind": "kana"
+ },
+ {
+  "text": "へ",
+  "reading": "へ",
+  "kind": "kana"
+ },
+ {
+  "text": "ほ",
+  "reading": "ほ",
+  "kind": "kana"
+ },
+ {
+  "text": "ま",
+  "reading": "ま",
+  "kind": "kana"
+ },
+ {
+  "text": "み",
+  "reading": "み",
+  "kind": "kana"
+ },
+ {
+  "text": "む",
+  "reading": "む",
+  "kind": "kana"
+ },
+ {
+  "text": "め",
+  "reading": "め",
+  "kind": "kana"
+ },
+ {
+  "text": "も",
+  "reading": "も",
+  "kind": "kana"
+ },
+ {
+  "text": "や",
+  "reading": "や",
+  "kind": "kana"
+ },
+ {
+  "text": "ゆ",
+  "reading": "ゆ",
+  "kind": "kana"
+ },
+ {
+  "text": "よ",
+  "reading": "よ",
+  "kind": "kana"
+ },
+ {
+  "text": "ら",
+  "reading": "ら",
+  "kind": "kana"
+ },
+ {
+  "text": "り",
+  "reading": "り",
+  "kind": "kana"
+ },
+ {
+  "text": "る",
+  "reading": "る",
+  "kind": "kana"
+ },
+ {
+  "text": "れ",
+  "reading": "れ",
+  "kind": "kana"
+ },
+ {
+  "text": "ろ",
+  "reading": "ろ",
+  "kind": "kana"
+ },
+ {
+  "text": "わ",
+  "reading": "わ",
+  "kind": "kana"
+ },
+ {
+  "text": "を",
+  "reading": "を",
+  "kind": "kana"
+ },
+ {
+  "text": "ん",
+  "reading": "ん",
+  "kind": "kana"
+ },
+ {
+  "text": "が",
+  "reading": "が",
+  "kind": "kana"
+ },
+ {
+  "text": "ぎ",
+  "reading": "ぎ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぐ",
+  "reading": "ぐ",
+  "kind": "kana"
+ },
+ {
+  "text": "げ",
+  "reading": "げ",
+  "kind": "kana"
+ },
+ {
+  "text": "ご",
+  "reading": "ご",
+  "kind": "kana"
+ },
+ {
+  "text": "ざ",
+  "reading": "ざ",
+  "kind": "kana"
+ },
+ {
+  "text": "じ",
+  "reading": "じ",
+  "kind": "kana"
+ },
+ {
+  "text": "ず",
+  "reading": "ず",
+  "kind": "kana"
+ },
+ {
+  "text": "ぜ",
+  "reading": "ぜ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぞ",
+  "reading": "ぞ",
+  "kind": "kana"
+ },
+ {
+  "text": "だ",
+  "reading": "だ",
+  "kind": "kana"
+ },
+ {
+  "text": "で",
+  "reading": "で",
+  "kind": "kana"
+ },
+ {
+  "text": "ど",
+  "reading": "ど",
+  "kind": "kana"
+ },
+ {
+  "text": "ば",
+  "reading": "ば",
+  "kind": "kana"
+ },
+ {
+  "text": "び",
+  "reading": "び",
+  "kind": "kana"
+ },
+ {
+  "text": "ぶ",
+  "reading": "ぶ",
+  "kind": "kana"
+ },
+ {
+  "text": "べ",
+  "reading": "べ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぼ",
+  "reading": "ぼ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぱ",
+  "reading": "ぱ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぴ",
+  "reading": "ぴ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぷ",
+  "reading": "ぷ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぺ",
+  "reading": "ぺ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぽ",
+  "reading": "ぽ",
+  "kind": "kana"
+ },
+ {
+  "text": "おはようございます",
+  "reading": "おはようございます",
+  "kind": "word"
+ },
+ {
+  "text": "こんにちは",
+  "reading": "こんにちは",
+  "kind": "word"
+ },
+ {
+  "text": "こんばんは",
+  "reading": "こんばんは",
+  "kind": "word"
+ },
+ {
+  "text": "おやすみなさい",
+  "reading": "おやすみなさい",
+  "kind": "word"
+ },
+ {
+  "text": "さようなら",
+  "reading": "さようなら",
+  "kind": "word"
+ },
+ {
+  "text": "ありがとう",
+  "reading": "ありがとう",
+  "kind": "word"
+ },
+ {
+  "text": "すみません",
+  "reading": "すみません",
+  "kind": "word"
+ },
+ {
+  "text": "はい",
+  "reading": "はい",
+  "kind": "word"
+ },
+ {
+  "text": "いいえ",
+  "reading": "いいえ",
+  "kind": "word"
+ },
+ {
+  "text": "はじめまして",
+  "reading": "はじめまして",
+  "kind": "word"
+ },
+ {
+  "text": "一",
+  "reading": "いち",
+  "kind": "word"
+ },
+ {
+  "text": "二",
+  "reading": "に",
+  "kind": "word"
+ },
+ {
+  "text": "三",
+  "reading": "さん",
+  "kind": "word"
+ },
+ {
+  "text": "四",
+  "reading": "よん",
+  "kind": "word"
+ },
+ {
+  "text": "五",
+  "reading": "ご",
+  "kind": "word"
+ },
+ {
+  "text": "六",
+  "reading": "ろく",
+  "kind": "word"
+ },
+ {
+  "text": "七",
+  "reading": "なな",
+  "kind": "word"
+ },
+ {
+  "text": "八",
+  "reading": "はち",
+  "kind": "word"
+ },
+ {
+  "text": "九",
+  "reading": "きゅう",
+  "kind": "word"
+ },
+ {
+  "text": "十",
+  "reading": "じゅう",
+  "kind": "word"
+ },
+ {
+  "text": "家族",
+  "reading": "かぞく",
+  "kind": "word"
+ },
+ {
+  "text": "母",
+  "reading": "はは",
+  "kind": "word"
+ },
+ {
+  "text": "父",
+  "reading": "ちち",
+  "kind": "word"
+ },
+ {
+  "text": "兄",
+  "reading": "あに",
+  "kind": "word"
+ },
+ {
+  "text": "姉",
+  "reading": "あね",
+  "kind": "word"
+ },
+ {
+  "text": "弟",
+  "reading": "おとうと",
+  "kind": "word"
+ },
+ {
+  "text": "妹",
+  "reading": "いもうと",
+  "kind": "word"
+ },
+ {
+  "text": "友達",
+  "reading": "ともだち",
+  "kind": "word"
+ },
+ {
+  "text": "水",
+  "reading": "みず",
+  "kind": "word"
+ },
+ {
+  "text": "お茶",
+  "reading": "おちゃ",
+  "kind": "word"
+ },
+ {
+  "text": "ご飯",
+  "reading": "ごはん",
+  "kind": "word"
+ },
+ {
+  "text": "パン",
+  "reading": "パン",
+  "kind": "word"
+ },
+ {
+  "text": "魚",
+  "reading": "さかな",
+  "kind": "word"
+ },
+ {
+  "text": "肉",
+  "reading": "にく",
+  "kind": "word"
+ },
+ {
+  "text": "りんご",
+  "reading": "りんご",
+  "kind": "word"
+ },
+ {
+  "text": "コーヒー",
+  "reading": "コーヒー",
+  "kind": "word"
+ },
+ {
+  "text": "牛乳",
+  "reading": "ぎゅうにゅう",
+  "kind": "word"
+ },
+ {
+  "text": "犬",
+  "reading": "いぬ",
+  "kind": "word"
+ },
+ {
+  "text": "猫",
+  "reading": "ねこ",
+  "kind": "word"
+ },
+ {
+  "text": "鳥",
+  "reading": "とり",
+  "kind": "word"
+ },
+ {
+  "text": "馬",
+  "reading": "うま",
+  "kind": "word"
+ },
+ {
+  "text": "牛",
+  "reading": "うし",
+  "kind": "word"
+ },
+ {
+  "text": "熊",
+  "reading": "くま",
+  "kind": "word"
+ },
+ {
+  "text": "猿",
+  "reading": "さる",
+  "kind": "word"
+ },
+ {
+  "text": "駅",
+  "reading": "えき",
+  "kind": "word"
+ },
+ {
+  "text": "学校",
+  "reading": "がっこう",
+  "kind": "word"
+ },
+ {
+  "text": "家",
+  "reading": "いえ",
+  "kind": "word"
+ },
+ {
+  "text": "店",
+  "reading": "みせ",
+  "kind": "word"
+ },
+ {
+  "text": "病院",
+  "reading": "びょういん",
+  "kind": "word"
+ },
+ {
+  "text": "空港",
+  "reading": "くうこう",
+  "kind": "word"
+ },
+ {
+  "text": "ホテル",
+  "reading": "ホテル",
+  "kind": "word"
+ },
+ {
+  "text": "コソボ",
+  "reading": "コソボ",
+  "kind": "word"
+ },
+ {
+  "text": "アルバニア",
+  "reading": "アルバニア",
+  "kind": "word"
+ },
+ {
+  "text": "日本",
+  "reading": "にほん",
+  "kind": "word"
+ },
+ {
+  "text": "いくらですか",
+  "reading": "いくらですか",
+  "kind": "word"
+ },
+ {
+  "text": "わかりません",
+  "reading": "わかりません",
+  "kind": "word"
+ },
+ {
+  "text": "おねがいします",
+  "reading": "おねがいします",
+  "kind": "word"
+ },
+ {
+  "text": "だいじょうぶ",
+  "reading": "だいじょうぶ",
+  "kind": "word"
+ },
+ {
+  "text": "おいしい",
+  "reading": "おいしい",
+  "kind": "word"
+ },
+ {
+  "text": "トイレはどこですか",
+  "reading": "トイレはどこですか",
+  "kind": "word"
+ },
+ {
+  "text": "わたしはコソボじんです",
+  "reading": "わたしはコソボじんです",
+  "kind": "word"
+ },
+ {
+  "text": "わたしはアルバニアじんです",
+  "reading": "わたしはアルバニアじんです",
+  "kind": "word"
+ },
+ {
+  "text": "食べます",
+  "reading": "たべます",
+  "kind": "word"
+ },
+ {
+  "text": "飲みます",
+  "reading": "のみます",
+  "kind": "word"
+ },
+ {
+  "text": "行きます",
+  "reading": "いきます",
+  "kind": "word"
+ },
+ {
+  "text": "来ます",
+  "reading": "きます",
+  "kind": "word"
+ },
+ {
+  "text": "見ます",
+  "reading": "みます",
+  "kind": "word"
+ },
+ {
+  "text": "読みます",
+  "reading": "よみます",
+  "kind": "word"
+ },
+ {
+  "text": "書きます",
+  "reading": "かきます",
+  "kind": "word"
+ },
+ {
+  "text": "聞きます",
+  "reading": "ききます",
+  "kind": "word"
+ },
+ {
+  "text": "話します",
+  "reading": "はなします",
+  "kind": "word"
+ },
+ {
+  "text": "買います",
+  "reading": "かいます",
+  "kind": "word"
+ },
+ {
+  "text": "今",
+  "reading": "いま",
+  "kind": "word"
+ },
+ {
+  "text": "今日",
+  "reading": "きょう",
+  "kind": "word"
+ },
+ {
+  "text": "明日",
+  "reading": "あした",
+  "kind": "word"
+ },
+ {
+  "text": "昨日",
+  "reading": "きのう",
+  "kind": "word"
+ },
+ {
+  "text": "朝",
+  "reading": "あさ",
+  "kind": "word"
+ },
+ {
+  "text": "夜",
+  "reading": "よる",
+  "kind": "word"
+ },
+ {
+  "text": "毎日",
+  "reading": "まいにち",
+  "kind": "word"
+ },
+ {
+  "text": "何時ですか",
+  "reading": "なんじですか",
+  "kind": "word"
+ },
+ {
+  "text": "午前",
+  "reading": "ごぜん",
+  "kind": "word"
+ },
+ {
+  "text": "午後",
+  "reading": "ごご",
+  "kind": "word"
+ },
+ {
+  "text": "これは本です。",
+  "reading": "これは ほんです。",
+  "kind": "word"
+ },
+ {
+  "text": "私は学生です。",
+  "reading": "わたしは がくせいです。",
+  "kind": "word"
+ },
+ {
+  "text": "名前は何ですか。",
+  "reading": "なまえは なんですか。",
+  "kind": "word"
+ },
+ {
+  "text": "私の名前はアルタです。",
+  "reading": "わたしの なまえは アルタです。",
+  "kind": "word"
+ },
+ {
+  "text": "日本語が少し分かります。",
+  "reading": "にほんごが すこし わかります。",
+  "kind": "word"
+ },
+ {
+  "text": "コーヒーを飲みます。",
+  "reading": "コーヒーを のみます。",
+  "kind": "word"
+ },
+ {
+  "text": "明日東京へ行きます。",
+  "reading": "あした とうきょうへ いきます。",
+  "kind": "word"
+ },
+ {
+  "text": "これは いくらですか。",
+  "reading": "これは いくらですか。",
+  "kind": "word"
+ },
+ {
+  "text": "十一",
+  "reading": "じゅういち",
+  "kind": "word"
+ },
+ {
+  "text": "二十",
+  "reading": "にじゅう",
+  "kind": "word"
+ },
+ {
+  "text": "三十",
+  "reading": "さんじゅう",
+  "kind": "word"
+ },
+ {
+  "text": "百",
+  "reading": "ひゃく",
+  "kind": "word"
+ },
+ {
+  "text": "二百",
+  "reading": "にひゃく",
+  "kind": "word"
+ },
+ {
+  "text": "三百",
+  "reading": "さんびゃく",
+  "kind": "word"
+ },
+ {
+  "text": "千",
+  "reading": "せん",
+  "kind": "word"
+ },
+ {
+  "text": "一万",
+  "reading": "いちまん",
+  "kind": "word"
+ },
+ {
+  "text": "いくつ",
+  "reading": "いくつ",
+  "kind": "word"
+ },
+ {
+  "text": "番号",
+  "reading": "ばんごう",
+  "kind": "word"
+ },
+ {
+  "text": "円",
+  "reading": "えん",
+  "kind": "word"
+ },
+ {
+  "text": "お金",
+  "reading": "おかね",
+  "kind": "word"
+ },
+ {
+  "text": "高い",
+  "reading": "たかい",
+  "kind": "word"
+ },
+ {
+  "text": "安い",
+  "reading": "やすい",
+  "kind": "word"
+ },
+ {
+  "text": "これを ください",
+  "reading": "これを ください",
+  "kind": "word"
+ },
+ {
+  "text": "カード",
+  "reading": "カード",
+  "kind": "word"
+ },
+ {
+  "text": "現金",
+  "reading": "げんきん",
+  "kind": "word"
+ },
+ {
+  "text": "レシート",
+  "reading": "レシート",
+  "kind": "word"
+ },
+ {
+  "text": "袋",
+  "reading": "ふくろ",
+  "kind": "word"
+ },
+ {
+  "text": "大きい",
+  "reading": "おおきい",
+  "kind": "word"
+ },
+ {
+  "text": "小さい",
+  "reading": "ちいさい",
+  "kind": "word"
+ },
+ {
+  "text": "新しい",
+  "reading": "あたらしい",
+  "kind": "word"
+ },
+ {
+  "text": "古い",
+  "reading": "ふるい",
+  "kind": "word"
+ },
+ {
+  "text": "暑い",
+  "reading": "あつい",
+  "kind": "word"
+ },
+ {
+  "text": "寒い",
+  "reading": "さむい",
+  "kind": "word"
+ },
+ {
+  "text": "楽しい",
+  "reading": "たのしい",
+  "kind": "word"
+ },
+ {
+  "text": "難しい",
+  "reading": "むずかしい",
+  "kind": "word"
+ },
+ {
+  "text": "簡単",
+  "reading": "かんたん",
+  "kind": "word"
+ },
+ {
+  "text": "優しい",
+  "reading": "やさしい",
+  "kind": "word"
+ },
+ {
+  "text": "何人ですか",
+  "reading": "なんにんですか",
+  "kind": "word"
+ },
+ {
+  "text": "二人です",
+  "reading": "ふたりです",
+  "kind": "word"
+ },
+ {
+  "text": "メニュー",
+  "reading": "メニュー",
+  "kind": "word"
+ },
+ {
+  "text": "お水を下さい",
+  "reading": "おみずを ください",
+  "kind": "word"
+ },
+ {
+  "text": "これは何ですか",
+  "reading": "これは なんですか",
+  "kind": "word"
+ },
+ {
+  "text": "いただきます",
+  "reading": "いただきます",
+  "kind": "word"
+ },
+ {
+  "text": "ごちそうさまでした",
+  "reading": "ごちそうさまでした",
+  "kind": "word"
+ },
+ {
+  "text": "お勘定をお願いします",
+  "reading": "おかんじょうを おねがいします",
+  "kind": "word"
+ },
+ {
+  "text": "ベジタリアンです",
+  "reading": "ベジタリアンです",
+  "kind": "word"
+ },
+ {
+  "text": "一つ",
+  "reading": "ひとつ",
+  "kind": "example"
+ },
+ {
+  "text": "一月",
+  "reading": "いちがつ",
+  "kind": "example"
+ },
+ {
+  "text": "二つ",
+  "reading": "ふたつ",
+  "kind": "example"
+ },
+ {
+  "text": "二月",
+  "reading": "にがつ",
+  "kind": "example"
+ },
+ {
+  "text": "三つ",
+  "reading": "みっつ",
+  "kind": "example"
+ },
+ {
+  "text": "三月",
+  "reading": "さんがつ",
+  "kind": "example"
+ },
+ {
+  "text": "四つ",
+  "reading": "よっつ",
+  "kind": "example"
+ },
+ {
+  "text": "四月",
+  "reading": "しがつ",
+  "kind": "example"
+ },
+ {
+  "text": "五つ",
+  "reading": "いつつ",
+  "kind": "example"
+ },
+ {
+  "text": "五月",
+  "reading": "ごがつ",
+  "kind": "example"
+ },
+ {
+  "text": "六つ",
+  "reading": "むっつ",
+  "kind": "example"
+ },
+ {
+  "text": "六月",
+  "reading": "ろくがつ",
+  "kind": "example"
+ },
+ {
+  "text": "七つ",
+  "reading": "ななつ",
+  "kind": "example"
+ },
+ {
+  "text": "七月",
+  "reading": "しちがつ",
+  "kind": "example"
+ },
+ {
+  "text": "八つ",
+  "reading": "やっつ",
+  "kind": "example"
+ },
+ {
+  "text": "八月",
+  "reading": "はちがつ",
+  "kind": "example"
+ },
+ {
+  "text": "九つ",
+  "reading": "ここのつ",
+  "kind": "example"
+ },
+ {
+  "text": "九月",
+  "reading": "くがつ",
+  "kind": "example"
+ },
+ {
+  "text": "十月",
+  "reading": "じゅうがつ",
+  "kind": "example"
+ },
+ {
+  "text": "日曜日",
+  "reading": "にちようび",
+  "kind": "example"
+ },
+ {
+  "text": "月曜日",
+  "reading": "げつようび",
+  "kind": "example"
+ },
+ {
+  "text": "月",
+  "reading": "つき",
+  "kind": "example"
+ },
+ {
+  "text": "火曜日",
+  "reading": "かようび",
+  "kind": "example"
+ },
+ {
+  "text": "火",
+  "reading": "ひ",
+  "kind": "example"
+ },
+ {
+  "text": "水曜日",
+  "reading": "すいようび",
+  "kind": "example"
+ },
+ {
+  "text": "木曜日",
+  "reading": "もくようび",
+  "kind": "example"
+ },
+ {
+  "text": "木",
+  "reading": "き",
+  "kind": "example"
+ },
+ {
+  "text": "金曜日",
+  "reading": "きんようび",
+  "kind": "example"
+ },
+ {
+  "text": "土曜日",
+  "reading": "どようび",
+  "kind": "example"
+ },
+ {
+  "text": "土",
+  "reading": "つち",
+  "kind": "example"
+ },
+ {
+  "text": "日本人",
+  "reading": "にほんじん",
+  "kind": "example"
+ },
+ {
+  "text": "人",
+  "reading": "ひと",
+  "kind": "example"
+ },
+ {
+  "text": "口",
+  "reading": "くち",
+  "kind": "example"
+ },
+ {
+  "text": "入口",
+  "reading": "いりぐち",
+  "kind": "example"
+ },
+ {
+  "text": "目",
+  "reading": "め",
+  "kind": "example"
+ },
+ {
+  "text": "一つ目",
+  "reading": "ひとつめ",
+  "kind": "example"
+ },
+ {
+  "text": "手",
+  "reading": "て",
+  "kind": "example"
+ },
+ {
+  "text": "上手",
+  "reading": "じょうず",
+  "kind": "example"
+ },
+ {
+  "text": "耳",
+  "reading": "みみ",
+  "kind": "example"
+ },
+ {
+  "text": "足",
+  "reading": "あし",
+  "kind": "example"
+ },
+ {
+  "text": "大学",
+  "reading": "だいがく",
+  "kind": "example"
+ },
+ {
+  "text": "小学校",
+  "reading": "しょうがっこう",
+  "kind": "example"
+ },
+ {
+  "text": "上",
+  "reading": "うえ",
+  "kind": "example"
+ },
+ {
+  "text": "下",
+  "reading": "した",
+  "kind": "example"
+ },
+ {
+  "text": "地下鉄",
+  "reading": "ちかてつ",
+  "kind": "example"
+ },
+ {
+  "text": "中",
+  "reading": "なか",
+  "kind": "example"
+ },
+ {
+  "text": "中国",
+  "reading": "ちゅうごく",
+  "kind": "example"
+ },
+ {
+  "text": "山",
+  "reading": "やま",
+  "kind": "example"
+ },
+ {
+  "text": "富士山",
+  "reading": "ふじさん",
+  "kind": "example"
+ },
+ {
+  "text": "川",
+  "reading": "かわ",
+  "kind": "example"
+ },
+ {
+  "text": "学生",
+  "reading": "がくせい",
+  "kind": "example"
+ },
+ {
+  "text": "先生",
+  "reading": "せんせい",
+  "kind": "example"
+ },
+ {
+  "text": "先月",
+  "reading": "せんげつ",
+  "kind": "example"
+ },
+ {
+  "text": "今年",
+  "reading": "ことし",
+  "kind": "example"
+ },
+ {
+  "text": "一年",
+  "reading": "いちねん",
+  "kind": "example"
+ },
+ {
+  "text": "名前",
+  "reading": "なまえ",
+  "kind": "example"
+ },
+ {
+  "text": "本",
+  "reading": "ほん",
+  "kind": "example"
+ },
+ {
+  "text": "食堂",
+  "reading": "しょくどう",
+  "kind": "example"
+ },
+ {
+  "text": "飲み物",
+  "reading": "のみもの",
+  "kind": "example"
+ },
+ {
+  "text": "銀行",
+  "reading": "ぎんこう",
+  "kind": "example"
+ },
+ {
+  "text": "来年",
+  "reading": "らいねん",
+  "kind": "example"
+ },
+ {
+  "text": "花見",
+  "reading": "はなみ",
+  "kind": "example"
+ },
+ {
+  "text": "読書",
+  "reading": "どくしょ",
+  "kind": "example"
+ },
+ {
+  "text": "辞書",
+  "reading": "じしょ",
+  "kind": "example"
+ },
+ {
+  "text": "新聞",
+  "reading": "しんぶん",
+  "kind": "example"
+ },
+ {
+  "text": "電話",
+  "reading": "でんわ",
+  "kind": "example"
+ },
+ {
+  "text": "何時",
+  "reading": "なんじ",
+  "kind": "example"
+ },
+ {
+  "text": "時間",
+  "reading": "じかん",
+  "kind": "example"
+ },
+ {
+  "text": "五分",
+  "reading": "ごふん",
+  "kind": "example"
+ },
+ {
+  "text": "分かります",
+  "reading": "わかります",
+  "kind": "example"
+ },
+ {
+  "text": "三時半",
+  "reading": "さんじはん",
+  "kind": "example"
+ },
+ {
+  "text": "半分",
+  "reading": "はんぶん",
+  "kind": "example"
+ },
+ {
+  "text": "何",
+  "reading": "なに",
+  "kind": "example"
+ },
+ {
+  "text": "毎朝",
+  "reading": "まいあさ",
+  "kind": "example"
+ },
+ {
+  "text": "後で",
+  "reading": "あとで",
+  "kind": "example"
+ },
+ {
+  "text": "間",
+  "reading": "あいだ",
+  "kind": "example"
+ },
+ {
+  "text": "雨",
+  "reading": "あめ",
+  "kind": "example"
+ },
+ {
+  "text": "大雨",
+  "reading": "おおあめ",
+  "kind": "example"
+ },
+ {
+  "text": "空",
+  "reading": "そら",
+  "kind": "example"
+ },
+ {
+  "text": "花",
+  "reading": "はな",
+  "kind": "example"
+ },
+ {
+  "text": "花火",
+  "reading": "はなび",
+  "kind": "example"
+ },
+ {
+  "text": "東",
+  "reading": "ひがし",
+  "kind": "example"
+ },
+ {
+  "text": "東京",
+  "reading": "とうきょう",
+  "kind": "example"
+ },
+ {
+  "text": "西",
+  "reading": "にし",
+  "kind": "example"
+ },
+ {
+  "text": "関西",
+  "reading": "かんさい",
+  "kind": "example"
+ },
+ {
+  "text": "南",
+  "reading": "みなみ",
+  "kind": "example"
+ },
+ {
+  "text": "南口",
+  "reading": "みなみぐち",
+  "kind": "example"
+ },
+ {
+  "text": "北",
+  "reading": "きた",
+  "kind": "example"
+ },
+ {
+  "text": "北口",
+  "reading": "きたぐち",
+  "kind": "example"
+ },
+ {
+  "text": "百円",
+  "reading": "ひゃくえん",
+  "kind": "example"
+ },
+ {
+  "text": "三千",
+  "reading": "さんぜん",
+  "kind": "example"
+ },
+ {
+  "text": "万円",
+  "reading": "まんえん",
+  "kind": "example"
+ },
+ {
+  "text": "高校",
+  "reading": "こうこう",
+  "kind": "example"
+ },
+ {
+  "text": "安心",
+  "reading": "あんしん",
+  "kind": "example"
+ },
+ {
+  "text": "中古",
+  "reading": "ちゅうこ",
+  "kind": "example"
+ },
+ {
+  "text": "男",
+  "reading": "おとこ",
+  "kind": "example"
+ },
+ {
+  "text": "男の子",
+  "reading": "おとこのこ",
+  "kind": "example"
+ },
+ {
+  "text": "女",
+  "reading": "おんな",
+  "kind": "example"
+ },
+ {
+  "text": "女の子",
+  "reading": "おんなのこ",
+  "kind": "example"
+ },
+ {
+  "text": "子ども",
+  "reading": "こども",
+  "kind": "example"
+ },
+ {
+  "text": "お父さん",
+  "reading": "おとうさん",
+  "kind": "example"
+ },
+ {
+  "text": "お母さん",
+  "reading": "おかあさん",
+  "kind": "example"
+ },
+ {
+  "text": "友だち",
+  "reading": "ともだち",
+  "kind": "example"
+ },
+ {
+  "text": "友人",
+  "reading": "ゆうじん",
+  "kind": "example"
+ },
+ {
+  "text": "日本語",
+  "reading": "にほんご",
+  "kind": "example"
+ },
+ {
+  "text": "英語",
+  "reading": "えいご",
+  "kind": "example"
+ },
+ {
+  "text": "国",
+  "reading": "くに",
+  "kind": "example"
+ },
+ {
+  "text": "外国",
+  "reading": "がいこく",
+  "kind": "example"
+ }
+]

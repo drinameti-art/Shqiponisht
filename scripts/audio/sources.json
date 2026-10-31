@@ -1,0 +1,1832 @@
+[
+ {
+  "text": "あ",
+  "reading": "あ",
+  "file": "98fdfc0a7426.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "い",
+  "reading": "い",
+  "file": "3c01c77f19cd.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "う",
+  "reading": "う",
+  "file": "af2b29a995c7.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "え",
+  "reading": "え",
+  "file": "a60311a2fc88.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "お",
+  "reading": "お",
+  "file": "ac6bc7de7112.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "か",
+  "reading": "か",
+  "file": "288c9e077190.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "き",
+  "reading": "き",
+  "file": "27acc76c0055.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "く",
+  "reading": "く",
+  "file": "ac94e112183c.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "け",
+  "reading": "け",
+  "file": "d32afeb0abe6.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "こ",
+  "reading": "こ",
+  "file": "91714b00e5a3.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "さ",
+  "reading": "さ",
+  "file": "7a4faed063b6.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "し",
+  "reading": "し",
+  "file": "812f45bfcf7e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "す",
+  "reading": "す",
+  "file": "5b8252a1e93f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "せ",
+  "reading": "せ",
+  "file": "e1c730bd83c3.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "そ",
+  "reading": "そ",
+  "file": "b345d8cc8368.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "た",
+  "reading": "た",
+  "file": "cf4d17f99d10.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ち",
+  "reading": "ち",
+  "file": "e022bea2e9d6.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "つ",
+  "reading": "つ",
+  "file": "0c414c812bd8.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "て",
+  "reading": "て",
+  "file": "e2d970611589.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "と",
+  "reading": "と",
+  "file": "a986a7bc9e03.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "な",
+  "reading": "な",
+  "file": "478d2f9eb192.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "に",
+  "reading": "に",
+  "file": "de3d1ecc94b2.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぬ",
+  "reading": "ぬ",
+  "file": "ad142ed0573d.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ね",
+  "reading": "ね",
+  "file": "3a104bbe569e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "の",
+  "reading": "の",
+  "file": "56377d14d4ef.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "は",
+  "reading": "は",
+  "file": "1fa0519cfd09.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ひ",
+  "reading": "ひ",
+  "file": "469e92c9cf65.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ふ",
+  "reading": "ふ",
+  "file": "382a438fd4c5.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "へ",
+  "reading": "へ",
+  "file": "72c746d609d4.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ほ",
+  "reading": "ほ",
+  "file": "5a340fe4758d.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ま",
+  "reading": "ま",
+  "file": "400805e5a9e2.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "み",
+  "reading": "み",
+  "file": "1c5425dae8c9.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "む",
+  "reading": "む",
+  "file": "50029791cb9f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "め",
+  "reading": "め",
+  "file": "634540f05d98.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "も",
+  "reading": "も",
+  "file": "3c6945772d72.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "や",
+  "reading": "や",
+  "file": "bdab1b17397d.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ゆ",
+  "reading": "ゆ",
+  "file": "44567171f335.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "よ",
+  "reading": "よ",
+  "file": "6f46f7d4a286.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ら",
+  "reading": "ら",
+  "file": "ba7526a5c03f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "り",
+  "reading": "り",
+  "file": "71d1c63e507f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "る",
+  "reading": "る",
+  "file": "ffab9d02a311.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "れ",
+  "reading": "れ",
+  "file": "df82f999c7fb.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ろ",
+  "reading": "ろ",
+  "file": "eb766006aba2.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "わ",
+  "reading": "わ",
+  "file": "dedb707d8398.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "を",
+  "reading": "を",
+  "file": "eba95ba0c666.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ん",
+  "reading": "ん",
+  "file": "48a866bfdaf9.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "が",
+  "reading": "が",
+  "file": "a142816563b3.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぎ",
+  "reading": "ぎ",
+  "file": "9a77c2df496e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぐ",
+  "reading": "ぐ",
+  "file": "6e159a91b7ce.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "げ",
+  "reading": "げ",
+  "file": "9167af511d53.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ご",
+  "reading": "ご",
+  "file": "27a87259d93f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ざ",
+  "reading": "ざ",
+  "file": "d08b42329511.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "じ",
+  "reading": "じ",
+  "file": "41f11fe610d4.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ず",
+  "reading": "ず",
+  "file": "e77eb4831e6a.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぜ",
+  "reading": "ぜ",
+  "file": "8759dfeb913a.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぞ",
+  "reading": "ぞ",
+  "file": "bad314622d68.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "だ",
+  "reading": "だ",
+  "file": "b3d236275fac.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "で",
+  "reading": "で",
+  "file": "7350618fcec3.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ど",
+  "reading": "ど",
+  "file": "76504d613664.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ば",
+  "reading": "ば",
+  "file": "d8c158e0a2d1.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "び",
+  "reading": "び",
+  "file": "5fb5aba49978.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぶ",
+  "reading": "ぶ",
+  "file": "82b3fbb77164.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "べ",
+  "reading": "べ",
+  "file": "eefc5770b9dc.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぼ",
+  "reading": "ぼ",
+  "file": "7ebddc850724.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぱ",
+  "reading": "ぱ",
+  "file": "81223f8ee527.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぴ",
+  "reading": "ぴ",
+  "file": "749766f43a50.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぷ",
+  "reading": "ぷ",
+  "file": "224fecb16293.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぺ",
+  "reading": "ぺ",
+  "file": "bd1d8044336d.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ぽ",
+  "reading": "ぽ",
+  "file": "06b58547dc73.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "おはようございます",
+  "reading": "おはようございます",
+  "file": "5a3c5f71eeac.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "こんにちは",
+  "reading": "こんにちは",
+  "file": "20427a708c3f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "こんばんは",
+  "reading": "こんばんは",
+  "file": "eabdada4abd0.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "おやすみなさい",
+  "reading": "おやすみなさい",
+  "file": "17b912b634f3.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "さようなら",
+  "reading": "さようなら",
+  "file": "800001ba2441.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ありがとう",
+  "reading": "ありがとう",
+  "file": "42d0969029e9.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "すみません",
+  "reading": "すみません",
+  "file": "cce1862bcbd9.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "はい",
+  "reading": "はい",
+  "file": "c92b4cda8bdf.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "いいえ",
+  "reading": "いいえ",
+  "file": "f901585367d6.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "はじめまして",
+  "reading": "はじめまして",
+  "file": "75f97f586024.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "一",
+  "reading": "いち",
+  "file": "d274eee8a175.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "二",
+  "reading": "に",
+  "file": "1d5639f716b6.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "三",
+  "reading": "さん",
+  "file": "49ddb069d5b8.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "四",
+  "reading": "よん",
+  "file": "4f88740b3480.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "五",
+  "reading": "ご",
+  "file": "8f07f53d63e1.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "六",
+  "reading": "ろく",
+  "file": "3d72c724e03b.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "七",
+  "reading": "なな",
+  "file": "7db1eeb5c374.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "八",
+  "reading": "はち",
+  "file": "2142fb62fd47.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "九",
+  "reading": "きゅう",
+  "file": "27a2b9f17bea.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "十",
+  "reading": "じゅう",
+  "file": "aa107f05b677.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "家族",
+  "reading": "かぞく",
+  "file": "242e8e5c3fbc.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "母",
+  "reading": "はは",
+  "file": "78ce0b021c44.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "父",
+  "reading": "ちち",
+  "file": "0b27d61a0761.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "兄",
+  "reading": "あに",
+  "file": "1b60f62fba6e.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "姉",
+  "reading": "あね",
+  "file": "b1a3afebdb30.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "弟",
+  "reading": "おとうと",
+  "file": "276330ed9702.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "妹",
+  "reading": "いもうと",
+  "file": "28f894973975.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "友達",
+  "reading": "ともだち",
+  "file": "e4fb289f39c7.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "水",
+  "reading": "みず",
+  "file": "8ffbf192934a.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "お茶",
+  "reading": "おちゃ",
+  "file": "c3da86d447f2.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "ご飯",
+  "reading": "ごはん",
+  "file": "2f2861a3faf4.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "パン",
+  "reading": "パン",
+  "file": "7fc267f6fbea.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "魚",
+  "reading": "さかな",
+  "file": "32cac33e2772.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "肉",
+  "reading": "にく",
+  "file": "6759709d6002.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "りんご",
+  "reading": "りんご",
+  "file": "f1810d35b904.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "コーヒー",
+  "reading": "コーヒー",
+  "file": "cab9ec7ba27d.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "牛乳",
+  "reading": "ぎゅうにゅう",
+  "file": "ce72cd6b4eb0.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "犬",
+  "reading": "いぬ",
+  "file": "022dd77d5cf1.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "猫",
+  "reading": "ねこ",
+  "file": "e10bd9f09bf8.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "鳥",
+  "reading": "とり",
+  "file": "716ea3c57cbd.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "馬",
+  "reading": "うま",
+  "file": "2d808ebf1e5c.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "牛",
+  "reading": "うし",
+  "file": "bf9b3e9c32c4.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "熊",
+  "reading": "くま",
+  "file": "74512a43789a.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "猿",
+  "reading": "さる",
+  "file": "7f21f6c5a600.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "駅",
+  "reading": "えき",
+  "file": "e70b5299d05d.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "学校",
+  "reading": "がっこう",
+  "file": "08610a85a1b5.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "家",
+  "reading": "いえ",
+  "file": "7de8177ce74b.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "店",
+  "reading": "みせ",
+  "file": "22df192e24c1.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "病院",
+  "reading": "びょういん",
+  "file": "0513a0e7f2dc.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "空港",
+  "reading": "くうこう",
+  "file": "9b3bc940abc2.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "ホテル",
+  "reading": "ホテル",
+  "file": "6f0b069faec6.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "コソボ",
+  "reading": "コソボ",
+  "file": "9445a5449abd.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "アルバニア",
+  "reading": "アルバニア",
+  "file": "67202c55aab4.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "日本",
+  "reading": "にほん",
+  "file": "44da6bbcf285.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "いくらですか",
+  "reading": "いくらですか",
+  "file": "9cf278a8c8d6.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "わかりません",
+  "reading": "わかりません",
+  "file": "6dcfc9b79bdb.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "おねがいします",
+  "reading": "おねがいします",
+  "file": "eab3d932d73e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "だいじょうぶ",
+  "reading": "だいじょうぶ",
+  "file": "54640dc1d65f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "おいしい",
+  "reading": "おいしい",
+  "file": "ac15ff145286.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "トイレはどこですか",
+  "reading": "トイレはどこですか",
+  "file": "5d52bcd566e4.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "わたしはコソボじんです",
+  "reading": "わたしはコソボじんです",
+  "file": "9e7947b2e9de.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "わたしはアルバニアじんです",
+  "reading": "わたしはアルバニアじんです",
+  "file": "8e904c5ee9dd.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "食べます",
+  "reading": "たべます",
+  "file": "ff55adcf8d52.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "飲みます",
+  "reading": "のみます",
+  "file": "f0b34a586d34.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "行きます",
+  "reading": "いきます",
+  "file": "3925aaacaf2f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "来ます",
+  "reading": "きます",
+  "file": "69f6c5368a89.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "見ます",
+  "reading": "みます",
+  "file": "90ff5e801a06.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "読みます",
+  "reading": "よみます",
+  "file": "37c8c3828f59.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "書きます",
+  "reading": "かきます",
+  "file": "9a21479aa7e3.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "聞きます",
+  "reading": "ききます",
+  "file": "6d70c1f83cba.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "話します",
+  "reading": "はなします",
+  "file": "671d4d4f547f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "買います",
+  "reading": "かいます",
+  "file": "03ef1f754ac0.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "今",
+  "reading": "いま",
+  "file": "d2130d70a08e.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "今日",
+  "reading": "きょう",
+  "file": "574cd4fb795b.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "明日",
+  "reading": "あした",
+  "file": "762ffcba27ad.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "昨日",
+  "reading": "きのう",
+  "file": "b43054fed828.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "朝",
+  "reading": "あさ",
+  "file": "695aad811ab9.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "夜",
+  "reading": "よる",
+  "file": "2d8f0e9d136d.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "毎日",
+  "reading": "まいにち",
+  "file": "d63043a38863.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "何時ですか",
+  "reading": "なんじですか",
+  "file": "90c311ffc485.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "午前",
+  "reading": "ごぜん",
+  "file": "9a77de9566fb.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "午後",
+  "reading": "ごご",
+  "file": "3ad626b47ca9.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "これは本です。",
+  "reading": "これは ほんです。",
+  "file": "1012a2633b91.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "私は学生です。",
+  "reading": "わたしは がくせいです。",
+  "file": "82ed3f2dfc72.mp3",
+  "source": "voicevox (from kana)"
+ },
+ {
+  "text": "名前は何ですか。",
+  "reading": "なまえは なんですか。",
+  "file": "d82c82b6612a.mp3",
+  "source": "voicevox (from kana)"
+ },
+ {
+  "text": "私の名前はアルタです。",
+  "reading": "わたしの なまえは アルタです。",
+  "file": "07d81a0b7dac.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "日本語が少し分かります。",
+  "reading": "にほんごが すこし わかります。",
+  "file": "74fab9c19404.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "コーヒーを飲みます。",
+  "reading": "コーヒーを のみます。",
+  "file": "49e0330e44f6.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "明日東京へ行きます。",
+  "reading": "あした とうきょうへ いきます。",
+  "file": "6f8d03dbe60e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "これは いくらですか。",
+  "reading": "これは いくらですか。",
+  "file": "99d6daf6f973.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "十一",
+  "reading": "じゅういち",
+  "file": "747c8a337a8b.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "二十",
+  "reading": "にじゅう",
+  "file": "64545f0c2fba.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "三十",
+  "reading": "さんじゅう",
+  "file": "49f37c462196.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "百",
+  "reading": "ひゃく",
+  "file": "501367f95368.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "二百",
+  "reading": "にひゃく",
+  "file": "f76cbfa20182.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "三百",
+  "reading": "さんびゃく",
+  "file": "82566fcea2c2.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "千",
+  "reading": "せん",
+  "file": "b9bcd0ac15cd.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "一万",
+  "reading": "いちまん",
+  "file": "d8d358c7b278.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "いくつ",
+  "reading": "いくつ",
+  "file": "0105b5ca5d3f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "番号",
+  "reading": "ばんごう",
+  "file": "dc33c23404a8.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "円",
+  "reading": "えん",
+  "file": "c257210e5fc3.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "お金",
+  "reading": "おかね",
+  "file": "80d4796f9c8f.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "高い",
+  "reading": "たかい",
+  "file": "e9d57f21b007.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "安い",
+  "reading": "やすい",
+  "file": "33cd91ff2688.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "これを ください",
+  "reading": "これを ください",
+  "file": "44022d115495.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "カード",
+  "reading": "カード",
+  "file": "ab1110fbbc07.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "現金",
+  "reading": "げんきん",
+  "file": "e3ca5905c270.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "レシート",
+  "reading": "レシート",
+  "file": "d54e923dbb9b.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "袋",
+  "reading": "ふくろ",
+  "file": "cc98544dbc8a.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "大きい",
+  "reading": "おおきい",
+  "file": "e1ee009241f5.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "小さい",
+  "reading": "ちいさい",
+  "file": "c62dc9de7834.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "新しい",
+  "reading": "あたらしい",
+  "file": "7905abb96ea3.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "古い",
+  "reading": "ふるい",
+  "file": "ae8f14fe0b81.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "暑い",
+  "reading": "あつい",
+  "file": "2f7806f919a5.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "寒い",
+  "reading": "さむい",
+  "file": "bc0d3ddc48ec.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "楽しい",
+  "reading": "たのしい",
+  "file": "4bfcc646bf26.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "難しい",
+  "reading": "むずかしい",
+  "file": "2c5583944c56.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "簡単",
+  "reading": "かんたん",
+  "file": "08c75256e151.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "優しい",
+  "reading": "やさしい",
+  "file": "fbc81d80c9cc.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "何人ですか",
+  "reading": "なんにんですか",
+  "file": "d9c1b775dbc3.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "二人です",
+  "reading": "ふたりです",
+  "file": "a554a4a22c16.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "メニュー",
+  "reading": "メニュー",
+  "file": "8f99b5f7c588.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "お水を下さい",
+  "reading": "おみずを ください",
+  "file": "0b032f0a44ee.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "これは何ですか",
+  "reading": "これは なんですか",
+  "file": "8d7e636d901a.mp3",
+  "source": "voicevox (from kana)"
+ },
+ {
+  "text": "いただきます",
+  "reading": "いただきます",
+  "file": "25567f8581d3.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ごちそうさまでした",
+  "reading": "ごちそうさまでした",
+  "file": "11c8fca7e223.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "お勘定をお願いします",
+  "reading": "おかんじょうを おねがいします",
+  "file": "a1ccc656f02a.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "ベジタリアンです",
+  "reading": "ベジタリアンです",
+  "file": "3c9541f8fba2.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "一つ",
+  "reading": "ひとつ",
+  "file": "d28d96c108f3.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "一月",
+  "reading": "いちがつ",
+  "file": "313fd5bb330e.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "二つ",
+  "reading": "ふたつ",
+  "file": "5fcadade2558.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "二月",
+  "reading": "にがつ",
+  "file": "cd2a4bdc0cd8.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "三つ",
+  "reading": "みっつ",
+  "file": "7171cf423e66.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "三月",
+  "reading": "さんがつ",
+  "file": "14aba5f426df.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "四つ",
+  "reading": "よっつ",
+  "file": "56a0698cb900.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "四月",
+  "reading": "しがつ",
+  "file": "03ce1d5613e8.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "五つ",
+  "reading": "いつつ",
+  "file": "c664873dbc35.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "五月",
+  "reading": "ごがつ",
+  "file": "93e2b9f9f280.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "六つ",
+  "reading": "むっつ",
+  "file": "812529a34f6c.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "六月",
+  "reading": "ろくがつ",
+  "file": "8f3cddd57d47.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "七つ",
+  "reading": "ななつ",
+  "file": "0f00cd9cdf63.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "七月",
+  "reading": "しちがつ",
+  "file": "dfd42b9c455a.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "八つ",
+  "reading": "やっつ",
+  "file": "8d2549b3b312.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "八月",
+  "reading": "はちがつ",
+  "file": "384f3abedb37.mp3",
+  "source": "voicevox (from kana)"
+ },
+ {
+  "text": "九つ",
+  "reading": "ここのつ",
+  "file": "12b00051b9b1.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "九月",
+  "reading": "くがつ",
+  "file": "d5712c61aadb.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "十月",
+  "reading": "じゅうがつ",
+  "file": "5b17a0615359.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "日曜日",
+  "reading": "にちようび",
+  "file": "ed448a8b8e4d.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "月曜日",
+  "reading": "げつようび",
+  "file": "1108ea53f7ab.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "月",
+  "reading": "つき",
+  "file": "d9b59879f3b8.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "火曜日",
+  "reading": "かようび",
+  "file": "9544988aaeed.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "火",
+  "reading": "ひ",
+  "file": "efb2620838c4.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "水曜日",
+  "reading": "すいようび",
+  "file": "47fd994684ae.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "木曜日",
+  "reading": "もくようび",
+  "file": "d807e193c517.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "木",
+  "reading": "き",
+  "file": "8294db3a2006.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "金曜日",
+  "reading": "きんようび",
+  "file": "8d75edae77c9.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "土曜日",
+  "reading": "どようび",
+  "file": "eae85310dc8e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "土",
+  "reading": "つち",
+  "file": "90fbc9b1ac2e.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "日本人",
+  "reading": "にほんじん",
+  "file": "498a60e1125d.mp3",
+  "source": "voicevox (from kana)"
+ },
+ {
+  "text": "人",
+  "reading": "ひと",
+  "file": "4912771a4216.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "口",
+  "reading": "くち",
+  "file": "1e7b07e7149d.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "入口",
+  "reading": "いりぐち",
+  "file": "38e9cd1ffb95.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "目",
+  "reading": "め",
+  "file": "3a0ea34a22f0.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "一つ目",
+  "reading": "ひとつめ",
+  "file": "edb065c8a1a2.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "手",
+  "reading": "て",
+  "file": "c08a56997a21.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "上手",
+  "reading": "じょうず",
+  "file": "7d12bce4b691.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "耳",
+  "reading": "みみ",
+  "file": "8481effa10a7.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "足",
+  "reading": "あし",
+  "file": "16fdcc7e7746.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "大学",
+  "reading": "だいがく",
+  "file": "858bb23650b9.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "小学校",
+  "reading": "しょうがっこう",
+  "file": "327cdf816423.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "上",
+  "reading": "うえ",
+  "file": "b967ce841ad5.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "下",
+  "reading": "した",
+  "file": "a6caf2effb1c.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "地下鉄",
+  "reading": "ちかてつ",
+  "file": "7b72e1d41a0c.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "中",
+  "reading": "なか",
+  "file": "0869071c92c0.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "中国",
+  "reading": "ちゅうごく",
+  "file": "101806f57c32.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "山",
+  "reading": "やま",
+  "file": "0e248e5603d3.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "富士山",
+  "reading": "ふじさん",
+  "file": "bd6691181693.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "川",
+  "reading": "かわ",
+  "file": "0f6a7e280c00.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "学生",
+  "reading": "がくせい",
+  "file": "b76783d38c00.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "先生",
+  "reading": "せんせい",
+  "file": "a6e9f6d97089.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "先月",
+  "reading": "せんげつ",
+  "file": "0eae6c9a0cef.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "今年",
+  "reading": "ことし",
+  "file": "fe9ea3f07077.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "一年",
+  "reading": "いちねん",
+  "file": "3579ba66411e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "名前",
+  "reading": "なまえ",
+  "file": "d54d12f95c41.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "本",
+  "reading": "ほん",
+  "file": "d3cc0cab9c63.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "食堂",
+  "reading": "しょくどう",
+  "file": "a203225b0390.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "飲み物",
+  "reading": "のみもの",
+  "file": "4630a7dd90bb.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "銀行",
+  "reading": "ぎんこう",
+  "file": "291477e39388.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "来年",
+  "reading": "らいねん",
+  "file": "9084c9644ea3.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "花見",
+  "reading": "はなみ",
+  "file": "54fcfd2d8342.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "読書",
+  "reading": "どくしょ",
+  "file": "b9b178067a5c.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "辞書",
+  "reading": "じしょ",
+  "file": "45e061500a82.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "新聞",
+  "reading": "しんぶん",
+  "file": "1e685b43b4c4.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "電話",
+  "reading": "でんわ",
+  "file": "7177787c6e84.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "何時",
+  "reading": "なんじ",
+  "file": "fce2c4b63bca.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "時間",
+  "reading": "じかん",
+  "file": "09558b2cc685.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "五分",
+  "reading": "ごふん",
+  "file": "8090dd787fc2.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "分かります",
+  "reading": "わかります",
+  "file": "1d2520ec20a6.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "三時半",
+  "reading": "さんじはん",
+  "file": "82da0ea22676.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "半分",
+  "reading": "はんぶん",
+  "file": "a6986d6965af.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "何",
+  "reading": "なに",
+  "file": "4a9efaa77fc2.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "毎朝",
+  "reading": "まいあさ",
+  "file": "316693e2899a.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "後で",
+  "reading": "あとで",
+  "file": "b8bc3f4af5d0.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "間",
+  "reading": "あいだ",
+  "file": "835872d37309.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "雨",
+  "reading": "あめ",
+  "file": "8995b8979971.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "大雨",
+  "reading": "おおあめ",
+  "file": "89359e4ac0ab.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "空",
+  "reading": "そら",
+  "file": "82ca4a6ba635.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "花",
+  "reading": "はな",
+  "file": "9be4611e164b.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "花火",
+  "reading": "はなび",
+  "file": "0b8360d04a9f.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "東",
+  "reading": "ひがし",
+  "file": "ebaca4be57c2.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "東京",
+  "reading": "とうきょう",
+  "file": "681ee300008e.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "西",
+  "reading": "にし",
+  "file": "2f64b5a67e10.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "関西",
+  "reading": "かんさい",
+  "file": "ab8f4e7235e5.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "南",
+  "reading": "みなみ",
+  "file": "e6ac67fb746a.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "南口",
+  "reading": "みなみぐち",
+  "file": "268d6b3096cb.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "北",
+  "reading": "きた",
+  "file": "48c146223173.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "北口",
+  "reading": "きたぐち",
+  "file": "9e0b645acb8c.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "百円",
+  "reading": "ひゃくえん",
+  "file": "dd134499531a.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "三千",
+  "reading": "さんぜん",
+  "file": "3c929b62f1a5.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "万円",
+  "reading": "まんえん",
+  "file": "2c235a4cd33e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "高校",
+  "reading": "こうこう",
+  "file": "ef27a7ae8099.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "安心",
+  "reading": "あんしん",
+  "file": "64d1bc5caae2.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "中古",
+  "reading": "ちゅうこ",
+  "file": "ca08b72817d9.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "男",
+  "reading": "おとこ",
+  "file": "51625d909cf3.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "男の子",
+  "reading": "おとこのこ",
+  "file": "5641878c4e47.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "女",
+  "reading": "おんな",
+  "file": "26bc84961cad.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "女の子",
+  "reading": "おんなのこ",
+  "file": "64c62dc21287.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "子ども",
+  "reading": "こども",
+  "file": "7957f0414249.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "お父さん",
+  "reading": "おとうさん",
+  "file": "e1110589655f.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "お母さん",
+  "reading": "おかあさん",
+  "file": "f4eb2ac566a7.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "友だち",
+  "reading": "ともだち",
+  "file": "6a6f78c2e4c8.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "友人",
+  "reading": "ゆうじん",
+  "file": "4dfe8f5f2b38.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "日本語",
+  "reading": "にほんご",
+  "file": "c12140a0ffb4.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "英語",
+  "reading": "えいご",
+  "file": "9e84046cc13f.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "国",
+  "reading": "くに",
+  "file": "f4bba5643a36.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "外国",
+  "reading": "がいこく",
+  "file": "ce0a2e4feca0.mp3",
+  "source": "tofugu"
+ }
+]

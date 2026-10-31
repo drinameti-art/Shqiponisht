@@ -47,7 +47,7 @@ export default function KanjiScreen() {
                   </Text>
                   <Text style={styles.exampleMeaning}>{e.meaning}</Text>
                 </View>
-                <SpeakButton text={e.kana} tone="dark" size={36} />
+                <SpeakButton text={e.jp} tone="dark" size={36} />
               </View>
             ))}
           </View>

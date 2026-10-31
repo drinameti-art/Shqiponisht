@@ -27,7 +27,7 @@ Every screen is in Albanian, and Japanese sounds are spelled the Albanian way, s
 
 - **Shqiponisht Plus (subscription):** Niveli 2 — 14 more lessons: kana with ゛/゜, verbs (ます form), time, first sentences, numbers to 10 000, shopping, adjectives, the restaurant, and 43 more kanji. Free users see these lessons in the path with a PLUS badge and a paywall.
 
-- **Pronunciation 🔊:** speaker buttons on every kana, kanji, word, sentence and Japanese quiz prompt, using the phone's built-in Japanese voice. Tap twice quickly to hear it slower. With sounds on, the answer is read aloud after each check.
+- **Pronunciation 🔊:** speaker buttons on every kana, kanji, word, sentence and Japanese quiz prompt. All 305 items have bundled audio (1.7 MB, works offline): 130 native-speaker recordings (male, Tokyo accent) from Tofugu/WaniKani, and the rest generated with VOICEVOX in the male voice 玄野武宏. The phone's voice is only a fallback. Tap twice quickly to hear it at 0.7× speed. With sounds on, the answer is read aloud after each check.
 - **Përsëritja e ditës (spaced review):** every answer feeds a Leitner schedule (1 → 3 → 7 → 14 → 30 → 60 days). Anything missed comes back the same day. The Sot screen shows how many items are due.
 - **Daily reminder 🔔:** Profili → Kujtesa ditore, at a chosen time. Local notifications only; days already practised are skipped. (Phones only, not web.)
 - **Backup code:** Profili → Ruaj përparimin copies or shares a `SHQ1-…` code holding all progress; pasting it on another phone restores it. No server or account involved; the subscription is restored by the store instead.
@@ -96,5 +96,12 @@ assets/images/      logo, app icon, splash
 To add words, edit `src/data/lessons.ts`: give the Japanese, the romaji, the Albanian meaning and (optionally) the kanji spelling. To add kanji, edit `src/data/kanji.ts`. The Albanian spelling is generated automatically from the romaji.
 
 ## Credits
+
+**Pronunciation audio** (`assets/audio/`):
+- Native-speaker recordings by [Tofugu](https://www.tofugu.com) and [WaniKani](https://www.wanikani.com), from [japanese-vocabulary-pronunciation-audio](https://github.com/tofugu/japanese-vocabulary-pronunciation-audio), licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). We trimmed silence and normalised loudness; those clips stay under CC BY-SA 4.0. Only the male, Tokyo-accent speaker is used.
+- Synthesised clips: **VOICEVOX:玄野武宏** ([VOICEVOX](https://voicevox.hiroshiba.jp/), commercial use allowed with this credit).
+- `scripts/audio/sources.json` lists the source of every clip.
+
+To rebuild after adding words: run the VOICEVOX engine on port 50021, then `npx tsx scripts/audio/list.ts && python3 scripts/audio/build.py` (needs ffmpeg and numpy; set `TOFUGU_INDEX` to a file listing the Tofugu file names, see the script).
 
 Stroke-order data (`src/data/strokes.json`) comes from [KanjiVG](https://kanjivg.tagaini.net) © Ulrich Apel, licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). That file stays under CC BY-SA 3.0; the app credits it on the Profile screen. After adding kana or kanji, run `node scripts/build-strokes.mjs` to refresh it.

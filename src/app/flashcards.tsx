@@ -28,6 +28,7 @@ import {
 } from '@/lib/flashcards';
 import { useProgress } from '@/lib/progress-context';
 import { seededRng } from '@/lib/quiz';
+import { wordSay } from '@/lib/sayables';
 import { speakJapanese } from '@/lib/speech';
 import { C, R, S } from '@/theme';
 
@@ -140,13 +141,12 @@ function Study({ deck, direction, onExit }: { deck: Deck; direction: Direction; 
 
   const word = WORDS.get(session.queue[session.pos] ?? '');
 
-
   const turn = () => {
     const next = !flipped;
     setFlipped(next);
     flip.set(reduced ? (next ? 1 : 0) : withTiming(next ? 1 : 0, { duration: 320, easing: EASE_OUT }));
     // When the Albanian side was in front, revealing the Japanese also lets you hear it.
-    if (next && direction === 'sq' && word && progress.sound) speakJapanese(word.jp);
+    if (next && direction === 'sq' && word && progress.sound) speakJapanese(wordSay(word));
   };
 
   const answer = (knew: boolean) => {
@@ -307,7 +307,7 @@ function Study({ deck, direction, onExit }: { deck: Deck; direction: Direction; 
         </View>
 
         <View style={styles.speakRow}>
-          <SpeakButton text={word.jp} size={48} />
+          <SpeakButton text={wordSay(word)} size={48} />
         </View>
       </View>
 
