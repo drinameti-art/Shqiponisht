@@ -1,4 +1,4 @@
-import { KANA, KANA_TIPS, type Kana, type Script } from '@/data/kana';
+import { isCombined, KANA, KANA_TIPS, type Kana, type Script } from '@/data/kana';
 import { KANJI, type Kanji, type KanjiExample } from '@/data/kanji';
 import { VOCAB_LESSONS, type Lesson, type Word } from '@/data/lessons';
 
@@ -12,6 +12,8 @@ export type Question = {
   item: ItemKey;
   /** Japanese text to pronounce for this question (speaker button). */
   speak: string;
+  /** Listening question: the prompt is heard, not shown. Needs sound. */
+  listen?: boolean;
   /** Instruction shown above the prompt, in Albanian. */
   instruction: string;
   /** The thing being asked about (a kana glyph, a word, or a meaning). */
@@ -79,8 +81,9 @@ function choose<T>(
 
 function kanaExplanation(k: Kana, glyph: string): string {
   const base = `${glyph} lexohet „${k.sq}“`;
-  if (spellsDifferently(k.romaji)) return `${base} — në romaji „${k.romaji}“. ${KANA_TIPS[k.romaji] ?? ''}`.trim();
-  return `${base}. ${KANA_TIPS[k.romaji] ?? ''}`.trim();
+  if (spellsDifferently(k.romaji))
+    return `${base} — në romaji „${k.romaji}“. ${KANA_TIPS[k.romaji] ?? KANA_TIPS[k.row] ?? ''}`.trim();
+  return `${base}. ${KANA_TIPS[k.romaji] ?? KANA_TIPS[k.row] ?? ''}`.trim();
 }
 
 /** Review keys identify one learnable item: a kana glyph, a word, or a kanji. */
@@ -119,6 +122,16 @@ function kanaItemQuestions(k: Kana, script: Script, pool: Kana[], rng: Rng): Que
       ...writeQ,
       explanation: kanaExplanation(k, glyph),
     },
+    {
+      item,
+      speak: glyph,
+      listen: true,
+      instruction: 'Dëgjo: cilën shkronjë dëgjon?',
+      prompt: '',
+      promptIsJapanese: false,
+      ...choose(k, pool, (x) => ({ label: x[script] }), bySound, rng),
+      explanation: kanaExplanation(k, glyph),
+    },
   ];
 }
 
@@ -148,6 +161,22 @@ function vocabItemQuestions(w: Word, pool: Word[], rng: Rng): Question[] {
       instruction: 'Çfarë do të thotë?',
       prompt: w.jp,
       promptIsJapanese: true,
+      ...choose(
+        w,
+        pool,
+        (x) => ({ label: x.meaning }),
+        (x) => x.jp,
+        rng,
+      ),
+      explanation,
+    },
+    {
+      item,
+      speak: wordSay(w),
+      listen: true,
+      instruction: 'Dëgjo: çfarë do të thotë?',
+      prompt: '',
+      promptIsJapanese: false,
       ...choose(
         w,
         pool,
@@ -230,10 +259,28 @@ function poolWith<T>(first: readonly T[], all: readonly T[], rng: Rng): T[] {
 
 export const QUESTIONS_PER_LESSON = 10;
 
-export function buildQuiz(lesson: Lesson, rng: Rng, count = QUESTIONS_PER_LESSON): Question[] {
+export type QuizOptions = {
+  /** Include listening questions (only when the learner has sound on). Default true. */
+  listening?: boolean;
+};
+
+export function buildQuiz(
+  lesson: Lesson,
+  rng: Rng,
+  count = QUESTIONS_PER_LESSON,
+  { listening = true }: QuizOptions = {},
+): Question[] {
   let all: Question[];
   if (lesson.kind === 'kana') {
-    const pool = poolWith(lesson.kana, KANA, rng);
+    // Distractors come from kana of the same kind: single characters for basic
+    // rows, combined sounds (きゃ…) for yōon lessons, so beginners never see
+    // sounds they haven't met as wrong answers.
+    const combined = isCombined(lesson.kana[0]);
+    const pool = poolWith(
+      lesson.kana,
+      KANA.filter((k) => isCombined(k) === combined),
+      rng,
+    );
     all = lesson.kana.flatMap((k) => kanaItemQuestions(k, lesson.script, pool, rng));
   } else if (lesson.kind === 'kanji') {
     const pool = poolWith(lesson.kanji, KANJI, rng);
@@ -243,6 +290,7 @@ export function buildQuiz(lesson: Lesson, rng: Rng, count = QUESTIONS_PER_LESSON
     const pool = poolWith(lesson.words, ALL_WORDS, rng);
     all = lesson.words.flatMap((w) => vocabItemQuestions(w, pool, rng));
   }
+  if (!listening) all = all.filter((q) => !q.listen);
   return shuffle(all, rng).slice(0, count);
 }
 
@@ -250,7 +298,11 @@ export function buildQuiz(lesson: Lesson, rng: Rng, count = QUESTIONS_PER_LESSON
  * One question per review item, in the given order. Unknown keys (e.g. from
  * content that was renamed in an update) are skipped.
  */
-export function buildReviewQuiz(items: readonly string[], rng: Rng): Question[] {
+export function buildReviewQuiz(
+  items: readonly string[],
+  rng: Rng,
+  { listening = true }: QuizOptions = {},
+): Question[] {
   const examples = KANJI.flatMap((k) => k.examples);
   const out: Question[] = [];
   for (const key of items) {
@@ -268,6 +320,7 @@ export function buildReviewQuiz(items: readonly string[], rng: Rng): Question[] 
       const k = KANJI.find((x) => x.char === id);
       if (k) options = kanjiItemQuestions(k, shuffle(KANJI, rng), examples, rng);
     }
+    if (!listening) options = options.filter((q) => !q.listen);
     if (options.length) out.push(options[Math.floor(rng() * options.length)]);
   }
   return out;

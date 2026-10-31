@@ -31,6 +31,12 @@ export const KANA_TIPS: Record<string, string> = {
   ji: 'Romaji „ji“ = shqip „xhi“, si te „xhiro“.',
   ga: '゛ (dy vija) e bën tingullin të zëshëm: か ka → が ga.',
   pa: '゜ (rrethi i vogël) e kthen h-në në p: は ha → ぱ pa.',
+  kya: 'ゃ ゅ ょ të vogla bashkohen me shkronjën para tyre në një rrokje: き + ゃ = きゃ „kja“.',
+  sha: 'し + ゃ = しゃ „sha“: njësoj si në shqip.',
+  cha: 'ち + ゃ = ちゃ „ça“, si te „çaj“. ちょっと = „çotto“.',
+  nya: 'Shqipja e ka këtë tingull: „nj“ te „një“. にゃ = „nja“.',
+  rya: '„r“ e butë + „j“: りゃ „rja“, りゅ „rju“, りょ „rjo“.',
+  ja: 'じ + ゃ = じゃ „xha“; じょ = „xho“.',
 };
 
 type Row = [row: string, entries: [hira: string, kata: string, romaji: string][]];
@@ -53,7 +59,27 @@ const ROWS: Row[] = [
   ['da', [['だ', 'ダ', 'da'], ['で', 'デ', 'de'], ['ど', 'ド', 'do']]],
   ['ba', [['ば', 'バ', 'ba'], ['び', 'ビ', 'bi'], ['ぶ', 'ブ', 'bu'], ['べ', 'ベ', 'be'], ['ぼ', 'ボ', 'bo']]],
   ['pa', [['ぱ', 'パ', 'pa'], ['ぴ', 'ピ', 'pi'], ['ぷ', 'プ', 'pu'], ['ぺ', 'ペ', 'pe'], ['ぽ', 'ポ', 'po']]],
+  // Combined sounds (yōon): a kana ending in -i plus a small ゃ ゅ ょ, read as one syllable.
+  ['kya', [['きゃ', 'キャ', 'kya'], ['きゅ', 'キュ', 'kyu'], ['きょ', 'キョ', 'kyo']]],
+  ['sha', [['しゃ', 'シャ', 'sha'], ['しゅ', 'シュ', 'shu'], ['しょ', 'ショ', 'sho']]],
+  ['cha', [['ちゃ', 'チャ', 'cha'], ['ちゅ', 'チュ', 'chu'], ['ちょ', 'チョ', 'cho']]],
+  ['nya', [['にゃ', 'ニャ', 'nya'], ['にゅ', 'ニュ', 'nyu'], ['にょ', 'ニョ', 'nyo']]],
+  ['hya', [['ひゃ', 'ヒャ', 'hya'], ['ひゅ', 'ヒュ', 'hyu'], ['ひょ', 'ヒョ', 'hyo']]],
+  ['mya', [['みゃ', 'ミャ', 'mya'], ['みゅ', 'ミュ', 'myu'], ['みょ', 'ミョ', 'myo']]],
+  ['rya', [['りゃ', 'リャ', 'rya'], ['りゅ', 'リュ', 'ryu'], ['りょ', 'リョ', 'ryo']]],
+  ['gya', [['ぎゃ', 'ギャ', 'gya'], ['ぎゅ', 'ギュ', 'gyu'], ['ぎょ', 'ギョ', 'gyo']]],
+  ['ja', [['じゃ', 'ジャ', 'ja'], ['じゅ', 'ジュ', 'ju'], ['じょ', 'ジョ', 'jo']]],
+  ['bya', [['びゃ', 'ビャ', 'bya'], ['びゅ', 'ビュ', 'byu'], ['びょ', 'ビョ', 'byo']]],
+  ['pya', [['ぴゃ', 'ピャ', 'pya'], ['ぴゅ', 'ピュ', 'pyu'], ['ぴょ', 'ピョ', 'pyo']]],
 ];
+
+/** Rows of combined sounds (kana + small ゃ ゅ ょ). */
+export const YOON_ROWS = ['kya', 'sha', 'cha', 'nya', 'hya', 'mya', 'rya', 'gya', 'ja', 'bya', 'pya'];
+
+/** Combined sounds are written with two characters (e.g. きゃ). */
+export function isCombined(k: Kana): boolean {
+  return k.hiragana.length > 1;
+}
 
 /** Rows that add ゛ or ゜ to a basic row. */
 export const VOICED_ROWS = ['ga', 'za', 'da', 'ba', 'pa'];
@@ -84,6 +110,21 @@ export const KANA_GRID: (string | null)[][] = [
   ['ra', 'ri', 'ru', 're', 'ro'],
   ['wa', null, null, null, 'wo'],
   ['n', null, null, null, null],
+];
+
+/** Chart of the combined sounds: one row per consonant, columns ya / yu / yo. */
+export const YOON_GRID: string[][] = [
+  ['kya', 'kyu', 'kyo'],
+  ['sha', 'shu', 'sho'],
+  ['cha', 'chu', 'cho'],
+  ['nya', 'nyu', 'nyo'],
+  ['hya', 'hyu', 'hyo'],
+  ['mya', 'myu', 'myo'],
+  ['rya', 'ryu', 'ryo'],
+  ['gya', 'gyu', 'gyo'],
+  ['ja', 'ju', 'jo'],
+  ['bya', 'byu', 'byo'],
+  ['pya', 'pyu', 'pyo'],
 ];
 
 /** Chart of the ゛/゜ rows, laid out like KANA_GRID. */

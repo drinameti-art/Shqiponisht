@@ -3,7 +3,8 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { SpeakButton, WriteButton } from '@/components/ui';
-import { KANA_GRID, KANA_TIPS, kanaByRomaji, VOICED_GRID, type Script } from '@/data/kana';
+import { KANA_GRID, KANA_TIPS, kanaByRomaji, VOICED_GRID, YOON_GRID, type Script } from '@/data/kana';
+import { hasStrokes } from '@/lib/writing';
 import { VOCAB_LESSONS } from '@/data/lessons';
 import { spellsDifferently } from '@/lib/albanian';
 import { C, F, R, S } from '@/theme';
@@ -20,7 +21,7 @@ export default function KanaScreen() {
   const [selected, setSelected] = useState('shi');
   const k = kanaByRomaji(selected);
   const examples = examplesFor(k.hiragana, k.katakana);
-  const tip = KANA_TIPS[k.romaji];
+  const tip = KANA_TIPS[k.romaji] ?? KANA_TIPS[k.row];
 
   const renderGrid = (grid: (string | null)[][]) => (
     <View style={styles.grid}>
@@ -87,7 +88,7 @@ export default function KanaScreen() {
             </View>
           </View>
           {tip ? <Text style={styles.tip}>{tip}</Text> : null}
-          <WriteButton char={k[script]} />
+          {hasStrokes(k[script]) && <WriteButton char={k[script]} />}
           {examples.length > 0 && (
             <View style={styles.examples}>
               {examples.map((w) => (
@@ -105,6 +106,8 @@ export default function KanaScreen() {
         {renderGrid(KANA_GRID)}
         <Text style={styles.section}>Me ゛ dhe ゜</Text>
         {renderGrid(VOICED_GRID)}
+        <Text style={styles.section}>Kombinimet (ゃ ゅ ょ)</Text>
+        {renderGrid(YOON_GRID)}
         <View style={styles.legend}>
           <View style={styles.legendDot} />
           <Text style={styles.legendText}>Në shqip shkruhet ndryshe nga romaji</Text>

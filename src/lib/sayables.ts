@@ -1,6 +1,7 @@
 import { KANA } from '@/data/kana';
 import { KANJI } from '@/data/kanji';
 import { VOCAB_LESSONS } from '@/data/lessons';
+import { NOTES } from '@/data/notes';
 
 /** Something the app can pronounce: the text the speaker button passes, and its kana reading. */
 export type Sayable = { text: string; reading: string; kind: 'kana' | 'word' | 'example' };
@@ -27,5 +28,7 @@ export function allSayables(): Sayable[] {
   for (const k of KANA) add({ text: k.hiragana, reading: k.hiragana, kind: 'kana' });
   for (const w of VOCAB_LESSONS.flatMap((l) => l.words)) add({ text: wordSay(w), reading: w.jp, kind: 'word' });
   for (const e of KANJI.flatMap((k) => k.examples)) add({ text: e.jp, reading: e.kana, kind: 'example' });
+  for (const e of Object.values(NOTES).flatMap((n) => n.examples))
+    add({ text: e.jp, reading: e.kana, kind: 'example' });
   return [...out.values()];
 }

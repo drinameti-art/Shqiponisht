@@ -345,6 +345,171 @@
   "kind": "kana"
  },
  {
+  "text": "きゃ",
+  "reading": "きゃ",
+  "kind": "kana"
+ },
+ {
+  "text": "きゅ",
+  "reading": "きゅ",
+  "kind": "kana"
+ },
+ {
+  "text": "きょ",
+  "reading": "きょ",
+  "kind": "kana"
+ },
+ {
+  "text": "しゃ",
+  "reading": "しゃ",
+  "kind": "kana"
+ },
+ {
+  "text": "しゅ",
+  "reading": "しゅ",
+  "kind": "kana"
+ },
+ {
+  "text": "しょ",
+  "reading": "しょ",
+  "kind": "kana"
+ },
+ {
+  "text": "ちゃ",
+  "reading": "ちゃ",
+  "kind": "kana"
+ },
+ {
+  "text": "ちゅ",
+  "reading": "ちゅ",
+  "kind": "kana"
+ },
+ {
+  "text": "ちょ",
+  "reading": "ちょ",
+  "kind": "kana"
+ },
+ {
+  "text": "にゃ",
+  "reading": "にゃ",
+  "kind": "kana"
+ },
+ {
+  "text": "にゅ",
+  "reading": "にゅ",
+  "kind": "kana"
+ },
+ {
+  "text": "にょ",
+  "reading": "にょ",
+  "kind": "kana"
+ },
+ {
+  "text": "ひゃ",
+  "reading": "ひゃ",
+  "kind": "kana"
+ },
+ {
+  "text": "ひゅ",
+  "reading": "ひゅ",
+  "kind": "kana"
+ },
+ {
+  "text": "ひょ",
+  "reading": "ひょ",
+  "kind": "kana"
+ },
+ {
+  "text": "みゃ",
+  "reading": "みゃ",
+  "kind": "kana"
+ },
+ {
+  "text": "みゅ",
+  "reading": "みゅ",
+  "kind": "kana"
+ },
+ {
+  "text": "みょ",
+  "reading": "みょ",
+  "kind": "kana"
+ },
+ {
+  "text": "りゃ",
+  "reading": "りゃ",
+  "kind": "kana"
+ },
+ {
+  "text": "りゅ",
+  "reading": "りゅ",
+  "kind": "kana"
+ },
+ {
+  "text": "りょ",
+  "reading": "りょ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぎゃ",
+  "reading": "ぎゃ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぎゅ",
+  "reading": "ぎゅ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぎょ",
+  "reading": "ぎょ",
+  "kind": "kana"
+ },
+ {
+  "text": "じゃ",
+  "reading": "じゃ",
+  "kind": "kana"
+ },
+ {
+  "text": "じゅ",
+  "reading": "じゅ",
+  "kind": "kana"
+ },
+ {
+  "text": "じょ",
+  "reading": "じょ",
+  "kind": "kana"
+ },
+ {
+  "text": "びゃ",
+  "reading": "びゃ",
+  "kind": "kana"
+ },
+ {
+  "text": "びゅ",
+  "reading": "びゅ",
+  "kind": "kana"
+ },
+ {
+  "text": "びょ",
+  "reading": "びょ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぴゃ",
+  "reading": "ぴゃ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぴゅ",
+  "reading": "ぴゅ",
+  "kind": "kana"
+ },
+ {
+  "text": "ぴょ",
+  "reading": "ぴょ",
+  "kind": "kana"
+ },
+ {
   "text": "おはようございます",
   "reading": "おはようございます",
   "kind": "word"
@@ -562,6 +727,56 @@
  {
   "text": "猿",
   "reading": "さる",
+  "kind": "word"
+ },
+ {
+  "text": "切手",
+  "reading": "きって",
+  "kind": "word"
+ },
+ {
+  "text": "雑誌",
+  "reading": "ざっし",
+  "kind": "word"
+ },
+ {
+  "text": "一緒に",
+  "reading": "いっしょに",
+  "kind": "word"
+ },
+ {
+  "text": "ちょっと",
+  "reading": "ちょっと",
+  "kind": "word"
+ },
+ {
+  "text": "お兄さん",
+  "reading": "おにいさん",
+  "kind": "word"
+ },
+ {
+  "text": "数字",
+  "reading": "すうじ",
+  "kind": "word"
+ },
+ {
+  "text": "ケーキ",
+  "reading": "ケーキ",
+  "kind": "word"
+ },
+ {
+  "text": "ノート",
+  "reading": "ノート",
+  "kind": "word"
+ },
+ {
+  "text": "ビール",
+  "reading": "ビール",
+  "kind": "word"
+ },
+ {
+  "text": "スーパー",
+  "reading": "スーパー",
   "kind": "word"
  },
  {
@@ -1682,6 +1897,76 @@
  {
   "text": "北海道",
   "reading": "ほっかいどう",
+  "kind": "example"
+ },
+ {
+  "text": "愛",
+  "reading": "あい",
+  "kind": "example"
+ },
+ {
+  "text": "ありがとうございます",
+  "reading": "ありがとうございます",
+  "kind": "example"
+ },
+ {
+  "text": "十二",
+  "reading": "じゅうに",
+  "kind": "example"
+ },
+ {
+  "text": "三十五",
+  "reading": "さんじゅうご",
+  "kind": "example"
+ },
+ {
+  "text": "おばさん",
+  "reading": "おばさん",
+  "kind": "example"
+ },
+ {
+  "text": "おばあさん",
+  "reading": "おばあさん",
+  "kind": "example"
+ },
+ {
+  "text": "食べません",
+  "reading": "たべません",
+  "kind": "example"
+ },
+ {
+  "text": "行きません",
+  "reading": "いきません",
+  "kind": "example"
+ },
+ {
+  "text": "今三時です",
+  "reading": "いまさんじです",
+  "kind": "example"
+ },
+ {
+  "text": "これは本ですか",
+  "reading": "これはほんですか",
+  "kind": "example"
+ },
+ {
+  "text": "私の本",
+  "reading": "わたしのほん",
+  "kind": "example"
+ },
+ {
+  "text": "袋を下さい",
+  "reading": "ふくろをください",
+  "kind": "example"
+ },
+ {
+  "text": "大きい家",
+  "reading": "おおきいいえ",
+  "kind": "example"
+ },
+ {
+  "text": "赤い車",
+  "reading": "あかいくるま",
   "kind": "example"
  }
 ]

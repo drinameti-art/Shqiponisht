@@ -51,7 +51,8 @@ describe('stroke data', () => {
   it('has stroke paths for every kana and kanji, matching the stroke counts', async () => {
     const strokes = (await import('@/data/strokes.json')).default as Record<string, unknown[]>;
     const { KANA } = await import('@/data/kana');
-    for (const k of KANA) {
+    // Combined sounds (きゃ) are two characters; each character has its own strokes.
+    for (const k of KANA.filter((x) => x.hiragana.length === 1)) {
       expect(strokes[k.hiragana], k.hiragana).toBeDefined();
       expect(strokes[k.katakana], k.katakana).toBeDefined();
     }

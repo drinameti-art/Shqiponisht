@@ -1,6 +1,6 @@
 import { romajiToAlbanian } from '@/lib/albanian';
 
-import { kanaInRows, type Kana, type Script } from './kana';
+import { kanaInRows, YOON_ROWS, type Kana, type Script } from './kana';
 import { KANJI_GROUPS, kanjiInGroup, type Kanji, type KanjiGroupId } from './kanji';
 
 export type Word = {
@@ -389,6 +389,26 @@ const TRAVEL: VocabLesson = {
   ]),
 };
 
+const DOUBLE_LONG: VocabLesson = {
+  id: 'te-gjata',
+  kind: 'vocab',
+  title: 'Tingujt e dyfishtë dhe të gjatë (っ, ー)',
+  subtitle: 'きって, ざっし, ケーキ…',
+  badge: 'っ',
+  words: words([
+    ['きって', 'kitte', 'pullë postare', '切手'],
+    ['ざっし', 'zasshi', 'revistë', '雑誌'],
+    ['いっしょに', 'issho ni', 'bashkë', '一緒に'],
+    ['ちょっと', 'chotto', 'pak; një çast'],
+    ['おにいさん', 'onīsan', 'vëllai i madh (i dikujt)', 'お兄さん'],
+    ['すうじ', 'sūji', 'shifër, numër', '数字'],
+    ['ケーキ', 'kēki', 'tortë'],
+    ['ノート', 'nōto', 'fletore'],
+    ['ビール', 'bīru', 'birrë'],
+    ['スーパー', 'sūpā', 'supermarket'],
+  ]),
+};
+
 /** The learning path, in unlock order. Lessons marked `premium` need Shqiponisht Plus. */
 export const LESSONS: Lesson[] = [
   kanaLesson('hira-a', 'hiragana', ['a'], 'Hiragana: zanoret'),
@@ -403,6 +423,7 @@ export const LESSONS: Lesson[] = [
   FAMILY,
   kanaLesson('hira-ma', 'hiragana', ['ma'], 'Hiragana: M'),
   kanaLesson('hira-yrw', 'hiragana', ['ya', 'ra', 'wa'], 'Hiragana: Y, R, W'),
+  kanaLesson('hira-yoon', 'hiragana', YOON_ROWS, 'Hiragana: kombinimet (きゃ, しゅ, ちょ…)'),
   FOOD,
   kanjiLesson('java'),
   kanaLesson('kata-1', 'katakana', ['a', 'ka'], 'Katakana: A, K'),
@@ -411,6 +432,7 @@ export const LESSONS: Lesson[] = [
   kanjiLesson('trupi'),
   kanaLesson('kata-3', 'katakana', ['na', 'ha', 'ma'], 'Katakana: N, H, M'),
   kanaLesson('kata-4', 'katakana', ['ya', 'ra', 'wa'], 'Katakana: Y, R, W'),
+  DOUBLE_LONG,
   PLACES,
   kanjiLesson('natyra'),
   PHRASES,

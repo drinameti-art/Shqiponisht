@@ -36,3 +36,33 @@ describe('buildQuiz', () => {
     expect(buildQuiz(LESSONS[0], seededRng(7))).toEqual(buildQuiz(LESSONS[0], seededRng(7)));
   });
 });
+
+describe('listening questions', () => {
+  it('are offered in kana and vocabulary lessons, and left out when sound is off', () => {
+    for (const id of ['hira-a', 'pershendetjet']) {
+      const lesson = LESSONS.find((l) => l.id === id)!;
+      const all = buildQuiz(lesson, seededRng(4), 200);
+      expect(
+        all.some((q) => q.listen),
+        id,
+      ).toBe(true);
+      expect(
+        buildQuiz(lesson, seededRng(4), 200, { listening: false }).some((q) => q.listen),
+        id,
+      ).toBe(false);
+      for (const q of all.filter((x) => x.listen)) {
+        expect(q.prompt).toBe('');
+        expect(q.speak.length).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it('never offers two kana that sound the same (お and を) in one listening question', () => {
+    const lesson = LESSONS.find((l) => l.id === 'hira-yrw')!;
+    for (let seed = 1; seed <= 100; seed++) {
+      for (const q of buildQuiz(lesson, seededRng(seed), 200).filter((x) => x.listen && x.speak === 'を')) {
+        expect(q.options.map((o) => o.label)).not.toContain('お');
+      }
+    }
+  });
+});

@@ -108,6 +108,11 @@ def finish(src: Path, dst: Path) -> None:
 
 def main() -> None:
     items = json.loads((ROOT / 'scripts/audio/sayables.json').read_text('utf-8'))
+    # Fail fast instead of writing a manifest that silently drops every synthesised clip.
+    try:
+        NO_PROXY.open(ENGINE + '/version', timeout=10).read()
+    except Exception as e:  # noqa: BLE001
+        raise SystemExit(f'VOICEVOX engine is not reachable at {ENGINE} ({e}). Start it first; nothing was changed.')
     OUT.mkdir(parents=True, exist_ok=True)
     CACHE.mkdir(exist_ok=True)
 
@@ -137,9 +142,14 @@ def main() -> None:
             try:
                 source = voicevox(text, reading, wav)
                 finish(wav, dst)
-            except Exception as e:  # noqa: BLE001 - report and continue; the app falls back to the phone voice
-                print(f'  ! no audio for {text}: {e}')
-                continue
+            except Exception as e:  # noqa: BLE001
+                # Keep an existing clip rather than dropping it from the manifest.
+                if dst.exists():
+                    print(f'  ! kept previous clip for {text}: {e}')
+                    source = 'kept'
+                else:
+                    print(f'  ! no audio for {text}: {e}')
+                    continue
         manifest[text] = dst.name
         sources.append({'text': text, 'reading': reading, 'file': dst.name, 'source': source})
         print(f'{source:22} {text}')

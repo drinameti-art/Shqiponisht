@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import * as Haptics from 'expo-haptics';
 import { Redirect, router, useLocalSearchParams } from 'expo-router';
-import { useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown, FadeInUp, SlideInRight, ZoomIn } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Confetti, CountUp, EASE_OUT, Feedback } from '@/components/motion';
 import { Button, ProgressBar, SpeakButton } from '@/components/ui';
 import { lessonById } from '@/data/lessons';
+import { NOTES, type Note } from '@/data/notes';
 import { passes, PASS_RATIO } from '@/lib/progress';
 import { useProgress, type Answer } from '@/lib/progress-context';
 import { buildQuiz, buildReviewQuiz, seededRng } from '@/lib/quiz';
@@ -34,10 +35,17 @@ export default function LessonScreen() {
   // The review list is fixed when the session opens, so answering doesn't reshuffle it.
   const [reviewItems] = useState(() => (isReview ? dueItems(progress.review, today) : []));
 
+  // Listening questions need sound; decided once when the lesson opens.
+  const [listening] = useState(() => progress.sound);
   const [seed, setSeed] = useState(() => Date.now());
   const quiz = useMemo(
-    () => (isReview ? buildReviewQuiz(reviewItems, seededRng(seed)) : lesson ? buildQuiz(lesson, seededRng(seed)) : []),
-    [isReview, reviewItems, lesson, seed],
+    () =>
+      isReview
+        ? buildReviewQuiz(reviewItems, seededRng(seed), { listening })
+        : lesson
+          ? buildQuiz(lesson, seededRng(seed), undefined, { listening })
+          : [],
+    [isReview, reviewItems, lesson, seed, listening],
   );
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
@@ -47,6 +55,15 @@ export default function LessonScreen() {
   /** Bumped on every select / check, to replay the option's feedback animation. */
   const [bump, setBump] = useState(0);
   const [result, setResult] = useState<{ xp: number } | null>(null);
+  // A lesson with a grammar note opens with it; retries go straight to the questions.
+  const note = isReview ? undefined : NOTES[id];
+  const [showNote, setShowNote] = useState(() => !!note);
+
+  // A listening question plays its sound as soon as it appears.
+  const current = quiz[index];
+  useEffect(() => {
+    if (current?.listen && !result && !showNote) speakJapanese(current.speak);
+  }, [current, result, showNote]);
 
   const retry = () => {
     setSeed(Date.now());
@@ -55,6 +72,7 @@ export default function LessonScreen() {
     setChecked(false);
     setAnswers([]);
     setResult(null);
+    setShowNote(false);
   };
 
   // Plus lessons can be reached by deep link too; send those to the paywall.
@@ -127,6 +145,10 @@ export default function LessonScreen() {
     );
   }
 
+  if (showNote && note) {
+    return <NoteScreen note={note} lessonTitle={title} onStart={() => setShowNote(false)} onClose={close} />;
+  }
+
   const q = quiz[index];
   const isRight = selected === q.answer;
 
@@ -171,8 +193,15 @@ export default function LessonScreen() {
           key={index}
           entering={index === 0 ? FadeIn.duration(250) : SlideInRight.duration(260).easing(EASE_OUT)}>
           <Text style={styles.instruction}>{q.instruction}</Text>
-          <Text style={[styles.prompt, q.promptIsJapanese && styles.promptJp]}>{q.prompt}</Text>
-          {q.promptIsJapanese && (
+          {q.listen ? (
+            <View style={styles.listen}>
+              <SpeakButton text={q.speak} size={96} label="Dëgjo përsëri" />
+              <Text style={styles.listenHint}>Prek për ta dëgjuar sërish · dy herë për më ngadalë</Text>
+            </View>
+          ) : (
+            <Text style={[styles.prompt, q.promptIsJapanese && styles.promptJp]}>{q.prompt}</Text>
+          )}
+          {q.promptIsJapanese && !q.listen && (
             <View style={styles.promptSpeak}>
               <SpeakButton text={q.speak} size={44} />
             </View>
@@ -247,6 +276,54 @@ export default function LessonScreen() {
   );
 }
 
+function NoteScreen(props: { note: Note; lessonTitle: string; onStart: () => void; onClose: () => void }) {
+  const { note } = props;
+  return (
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.top}>
+        <Pressable onPress={props.onClose} accessibilityRole="button" accessibilityLabel="Mbyll mësimin" hitSlop={12}>
+          <Ionicons name="close" size={26} color={C.muted} />
+        </Pressable>
+        <Text style={styles.noteLesson} numberOfLines={1}>
+          {props.lessonTitle}
+        </Text>
+      </View>
+      <ScrollView contentContainerStyle={styles.body}>
+        <Animated.View entering={FadeInUp.duration(300).easing(EASE_OUT)}>
+          <Text style={styles.noteEyebrow}>Para se të fillosh</Text>
+          <Text style={styles.noteTitle}>{note.title}</Text>
+          <View style={styles.notePoints}>
+            {note.points.map((p) => (
+              <View key={p} style={styles.notePoint}>
+                <View style={styles.noteBullet} />
+                <Text style={styles.noteText}>{p}</Text>
+              </View>
+            ))}
+          </View>
+          {note.examples.length > 0 && (
+            <View style={styles.noteExamples}>
+              {note.examples.map((e) => (
+                <View key={e.jp} style={styles.noteExample}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.noteJp}>{e.jp}</Text>
+                    <Text style={styles.noteSq}>
+                      {e.sq} · <Text style={styles.noteMeaning}>{e.meaning}</Text>
+                    </Text>
+                  </View>
+                  <SpeakButton text={e.jp} size={38} />
+                </View>
+              ))}
+            </View>
+          )}
+        </Animated.View>
+      </ScrollView>
+      <View style={styles.footer}>
+        <Button label="Fillo ushtrimet" onPress={props.onStart} />
+      </View>
+    </SafeAreaView>
+  );
+}
+
 function Stat({ value, label }: { value: ReactNode; label: string }) {
   return (
     <View style={styles.stat}>
@@ -305,6 +382,29 @@ const styles = StyleSheet.create({
   footerOk: { backgroundColor: C.greenSoft },
   footerBad: { backgroundColor: C.redSoft },
   feedback: { gap: 4, maxWidth: 640, width: '100%', alignSelf: 'center' },
+  noteLesson: { flex: 1, fontSize: 14, fontWeight: '700', color: C.muted },
+  noteEyebrow: { fontSize: 12, fontWeight: '800', letterSpacing: 1.4, textTransform: 'uppercase', color: C.red },
+  noteTitle: { fontSize: 26, fontWeight: '800', color: C.ink, marginTop: S.xs, letterSpacing: -0.4 },
+  notePoints: { gap: S.md, marginTop: S.lg },
+  notePoint: { flexDirection: 'row', gap: S.md },
+  noteBullet: { width: 8, height: 8, borderRadius: 4, backgroundColor: C.red, marginTop: 8 },
+  noteText: { flex: 1, fontSize: 16, lineHeight: 24, color: C.ink },
+  noteExamples: { gap: S.sm, marginTop: S.xl },
+  noteExample: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: S.md,
+    backgroundColor: C.paper,
+    borderWidth: 1,
+    borderColor: C.line,
+    borderRadius: R.md,
+    padding: S.md,
+  },
+  noteJp: { fontSize: 20, fontWeight: '600', color: C.ink },
+  noteSq: { fontSize: 14, fontWeight: '700', color: C.red, marginTop: 2 },
+  noteMeaning: { fontWeight: '400', color: C.muted },
+  listen: { alignItems: 'center', gap: S.md, marginVertical: S.xl },
+  listenHint: { fontSize: 13, color: C.muted },
   promptSpeak: { alignItems: 'center', marginTop: -S.md, marginBottom: S.lg },
   feedbackHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   feedbackTitle: { fontSize: 18, fontWeight: '800' },
