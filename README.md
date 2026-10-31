@@ -18,10 +18,13 @@ Every screen is in Albanian, and Japanese sounds are spelled the Albanian way, s
 - **Mirësevini (welcome):** set your name and a daily XP goal.
 - **Sot (today):** greeting, streak, daily-goal bar and a 24-lesson path: hiragana and katakana row by row, five kanji lessons (36 kanji), plus greetings, numbers, family, food, animals, places and useful phrases.
 - **Lessons:** 10 multiple-choice questions per lesson, with an explanation in Albanian after every answer. Six correct answers pass the lesson and unlock the next one.
-- **Kana:** the full hiragana/katakana chart. Tap a kana for its Albanian reading, a pronunciation tip and example words. A red dot marks sounds Albanian spells differently from romaji.
+- **Si shkruhet (how to write):** every kana and kanji card has a "Si shkruhet" button. *Shiko rendin* animates the strokes in order with numbers; *Provo vetë* is a practice pad where you write with your finger and each stroke is checked for position, order and direction.
+- **Kana:** the full hiragana/katakana chart, including the ゛/゜ rows (が, ぱ…). Tap a kana for its Albanian reading, a pronunciation tip and example words. A red dot marks sounds Albanian spells differently from romaji.
 - **Kanji:** all 36 kanji by theme (numbers, days of the week, the body, nature and size, school and life). Tap one for its Albanian meaning, on and kun readings (with Albanian spelling), stroke count and example words.
 - **Fjalori (vocabulary):** every word from the lessons, with its usual kanji spelling, searchable in kanji, kana, romaji or Albanian (search ignores ë and ç, so "nena" finds "nëna").
 - **Profili (profile):** XP, streak, lessons passed, daily-goal setting, and a progress reset.
+
+- **Shqiponisht Plus (subscription):** Niveli 2 — 8 more lessons: kana with ゛/゜, first verbs (ます form), time words, first sentences, and 27 more kanji. Free users see these lessons in the path with a PLUS badge and a paywall.
 
 Progress is saved on the device; there's no account or server.
 
@@ -44,6 +47,23 @@ npm run lint
 npm test           # unit tests for spelling rules, quiz building and progress/streak logic
 ```
 
+## Setting up the subscription
+
+Purchases go through [RevenueCat](https://www.revenuecat.com) (`react-native-purchases`), which handles App Store and Google Play billing and receipt validation. Until the keys below are set, the paywall says subscriptions are only available in the store apps and nothing can be bought.
+
+1. In **App Store Connect** and **Google Play Console**, create two auto-renewing subscriptions in one subscription group, e.g. monthly and yearly. The prices are set there, not in the app.
+2. In **RevenueCat**, create a project with an iOS and an Android app, import those products, create an entitlement with the identifier **`plus`**, attach both products to it, and put them in the **current offering** as the *Monthly* and *Annual* packages.
+3. Put RevenueCat's public SDK keys in a `.env` file (or EAS environment variables):
+
+   ```
+   EXPO_PUBLIC_REVENUECAT_IOS_KEY=appl_...
+   EXPO_PUBLIC_REVENUECAT_ANDROID_KEY=goog_...
+   ```
+4. In-app purchases need native code, so they don't work in Expo Go. Test them with a development build (`npx eas-cli@latest build --profile development`) and store sandbox/test accounts.
+5. Before submitting, add links to your **privacy policy** and **terms of use** (App Store review requires them for subscriptions), both on the paywall and in the store listing.
+
+`EXPO_PUBLIC_DEMO_PLUS=1` shows a "Provo Plus (demo)" button on the paywall for reviewing the Plus lessons in a web preview. Never set it for store builds.
+
 ## Building for the App Store and Google Play
 
 Builds use [EAS](https://docs.expo.dev/eas/). You need a free Expo account, plus an Apple Developer account ($99/year) for iOS and a Google Play developer account ($25 once) for Android.
@@ -65,9 +85,14 @@ src/app/            screens (Expo Router: every file is a route)
   lesson/[id].tsx   the quiz
   welcome.tsx       first-run setup
 src/data/           kana chart, kanji and lesson content
-src/lib/            Albanian spelling rules, quiz builder, progress logic, storage
-tests/              Vitest unit tests for src/lib
+src/lib/            Albanian spelling, quiz builder, progress, stroke grading, subscription
+tests/              Vitest unit tests for src/lib and the data
+scripts/            build-strokes.mjs: regenerates src/data/strokes.json from KanjiVG
 assets/images/      logo, app icon, splash
 ```
 
 To add words, edit `src/data/lessons.ts`: give the Japanese, the romaji, the Albanian meaning and (optionally) the kanji spelling. To add kanji, edit `src/data/kanji.ts`. The Albanian spelling is generated automatically from the romaji.
+
+## Credits
+
+Stroke-order data (`src/data/strokes.json`) comes from [KanjiVG](https://kanjivg.tagaini.net) © Ulrich Apel, licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). That file stays under CC BY-SA 3.0; the app credits it on the Profile screen. After adding kana or kanji, run `node scripts/build-strokes.mjs` to refresh it.

@@ -1,12 +1,15 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 
-import { completeLesson, dayKey, INITIAL_PROGRESS, type Progress } from './progress';
+import { completeLesson, dayKey, hasPlus, INITIAL_PROGRESS, type Progress } from './progress';
 import { loadProgress, saveProgress } from './storage';
+import { subscription } from './subscription';
 
 type ProgressApi = {
   progress: Progress;
   ready: boolean;
   today: string;
+  /** True when the learner has Shqiponisht Plus (or the web demo of it). */
+  plus: boolean;
   update: (fn: (p: Progress) => Progress) => void;
   finishLesson: (lessonId: string, correct: number, total: number) => number;
   reset: () => void;
@@ -20,6 +23,12 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const latest = useRef(progress);
   const today = dayKey(new Date());
 
+  const commit = useCallback((next: Progress) => {
+    latest.current = next;
+    setProgress(next);
+    void saveProgress(next);
+  }, []);
+
   useEffect(() => {
     let alive = true;
     loadProgress().then((p) => {
@@ -27,17 +36,14 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       latest.current = p;
       setProgress(p);
       setReady(true);
+      void subscription.init((active) => {
+        if (latest.current.plus !== active) commit({ ...latest.current, plus: active });
+      });
     });
     return () => {
       alive = false;
     };
-  }, []);
-
-  const commit = useCallback((next: Progress) => {
-    latest.current = next;
-    setProgress(next);
-    void saveProgress(next);
-  }, []);
+  }, [commit]);
 
   const update = useCallback((fn: (p: Progress) => Progress) => commit(fn(latest.current)), [commit]);
 
@@ -50,10 +56,11 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     [commit],
   );
 
-  const reset = useCallback(() => commit({ ...INITIAL_PROGRESS }), [commit]);
+  // A reset clears learning progress but keeps the subscription status.
+  const reset = useCallback(() => commit({ ...INITIAL_PROGRESS, plus: latest.current.plus }), [commit]);
 
   const api = useMemo(
-    () => ({ progress, ready, today, update, finishLesson, reset }),
+    () => ({ progress, ready, today, plus: hasPlus(progress), update, finishLesson, reset }),
     [progress, ready, today, update, finishLesson, reset],
   );
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;

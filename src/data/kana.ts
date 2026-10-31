@@ -28,6 +28,9 @@ export const KANA_TIPS: Record<string, string> = {
   wa: 'Shqipja nuk ka „w“: lexohet „ua“, shpejt, si një rrokje.',
   wo: 'Përdoret vetëm si pjesëz gramatikore dhe lexohet „o“.',
   n: 'E vetmja bashkëtingëllore pa zanore. Para b/p/m tingëllon si „m“.',
+  ji: 'Romaji „ji“ = shqip „xhi“, si te „xhiro“.',
+  ga: '゛ (dy vija) e bën tingullin të zëshëm: か ka → が ga.',
+  pa: '゜ (rrethi i vogël) e kthen h-në në p: は ha → ぱ pa.',
 };
 
 type Row = [row: string, entries: [hira: string, kata: string, romaji: string][]];
@@ -43,7 +46,17 @@ const ROWS: Row[] = [
   ['ya', [['や', 'ヤ', 'ya'], ['ゆ', 'ユ', 'yu'], ['よ', 'ヨ', 'yo']]],
   ['ra', [['ら', 'ラ', 'ra'], ['り', 'リ', 'ri'], ['る', 'ル', 'ru'], ['れ', 'レ', 're'], ['ろ', 'ロ', 'ro']]],
   ['wa', [['わ', 'ワ', 'wa'], ['を', 'ヲ', 'wo'], ['ん', 'ン', 'n']]],
+  // Voiced (゛ dakuten) and half-voiced (゜ handakuten) rows. ぢ and づ are left
+  // out: they sound exactly like じ and ず and appear in very few words.
+  ['ga', [['が', 'ガ', 'ga'], ['ぎ', 'ギ', 'gi'], ['ぐ', 'グ', 'gu'], ['げ', 'ゲ', 'ge'], ['ご', 'ゴ', 'go']]],
+  ['za', [['ざ', 'ザ', 'za'], ['じ', 'ジ', 'ji'], ['ず', 'ズ', 'zu'], ['ぜ', 'ゼ', 'ze'], ['ぞ', 'ゾ', 'zo']]],
+  ['da', [['だ', 'ダ', 'da'], ['で', 'デ', 'de'], ['ど', 'ド', 'do']]],
+  ['ba', [['ば', 'バ', 'ba'], ['び', 'ビ', 'bi'], ['ぶ', 'ブ', 'bu'], ['べ', 'ベ', 'be'], ['ぼ', 'ボ', 'bo']]],
+  ['pa', [['ぱ', 'パ', 'pa'], ['ぴ', 'ピ', 'pi'], ['ぷ', 'プ', 'pu'], ['ぺ', 'ペ', 'pe'], ['ぽ', 'ポ', 'po']]],
 ];
+
+/** Rows that add ゛ or ゜ to a basic row. */
+export const VOICED_ROWS = ['ga', 'za', 'da', 'ba', 'pa'];
 
 export const KANA: Kana[] = ROWS.flatMap(([row, entries]) =>
   entries.map(([hiragana, katakana, romaji]) => ({
@@ -71,6 +84,15 @@ export const KANA_GRID: (string | null)[][] = [
   ['ra', 'ri', 'ru', 're', 'ro'],
   ['wa', null, null, null, 'wo'],
   ['n', null, null, null, null],
+];
+
+/** Chart of the ゛/゜ rows, laid out like KANA_GRID. */
+export const VOICED_GRID: (string | null)[][] = [
+  ['ga', 'gi', 'gu', 'ge', 'go'],
+  ['za', 'ji', 'zu', 'ze', 'zo'],
+  ['da', null, null, 'de', 'do'],
+  ['ba', 'bi', 'bu', 'be', 'bo'],
+  ['pa', 'pi', 'pu', 'pe', 'po'],
 ];
 
 const BY_ROMAJI = new Map(KANA.map((k) => [k.romaji, k]));

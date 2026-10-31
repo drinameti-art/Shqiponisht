@@ -1,3 +1,5 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
 import type { ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
 
@@ -78,7 +80,32 @@ export function Pill({ children, bg = C.goldSoft, fg = '#a8690a' }: { children: 
   );
 }
 
+/** Opens the stroke-order and writing-practice screen for a character. */
+export function WriteButton({ char }: { char: string }) {
+  return (
+    <Pressable
+      onPress={() => router.push({ pathname: '/write/[char]', params: { char } })}
+      accessibilityRole="button"
+      accessibilityLabel={`Si shkruhet ${char}`}
+      style={({ pressed }) => [styles.write, pressed && { opacity: 0.8 }]}>
+      <Ionicons name="brush" size={16} color={C.ink} />
+      <Text style={styles.writeText}>Si shkruhet</Text>
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
+  write: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    backgroundColor: C.cream,
+    borderRadius: R.pill,
+    paddingVertical: 10,
+    paddingHorizontal: S.lg,
+  },
+  writeText: { fontSize: 14.5, fontWeight: '700', color: C.ink },
   button: {
     paddingVertical: 15,
     paddingHorizontal: S.lg,
@@ -97,6 +124,13 @@ const styles = StyleSheet.create({
     marginTop: S.xl,
     marginBottom: S.md,
   },
-  pill: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingVertical: 7, paddingHorizontal: 12, borderRadius: R.pill },
+  pill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    borderRadius: R.pill,
+  },
   pillText: { fontSize: 14, fontWeight: '800' },
 });

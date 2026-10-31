@@ -14,6 +14,10 @@ export type Progress = {
   today: { day: DayKey; xp: number };
   streak: { count: number; lastDay: DayKey | null };
   lessons: Record<string, LessonRecord>;
+  /** Last known Shqiponisht Plus status from the store (kept for offline use). */
+  plus: boolean;
+  /** Plus turned on as a demo in the web preview; never set in store builds. */
+  demoPlus: boolean;
 };
 
 export const DAILY_GOALS = [10, 20, 30, 50] as const;
@@ -27,7 +31,13 @@ export const INITIAL_PROGRESS: Progress = {
   today: { day: '', xp: 0 },
   streak: { count: 0, lastDay: null },
   lessons: {},
+  plus: false,
+  demoPlus: false,
 };
+
+export function hasPlus(state: Progress): boolean {
+  return state.plus || state.demoPlus;
+}
 
 export function dayKey(date: Date): DayKey {
   const y = date.getFullYear();
@@ -108,12 +118,12 @@ function passed(record: LessonRecord | undefined): boolean {
   return !!record && passes(record.best, record.total);
 }
 
-export type LessonStatus = 'done' | 'current' | 'locked';
+export type LessonStatus = 'done' | 'current' | 'locked' | 'premium';
 
 /**
  * Lessons unlock in order: a lesson is open once the one before it has been
  * passed (best score ≥ PASS_RATIO). The first open lesson not yet passed is
- * "current".
+ * "current". Plus lessons show as "premium" until the learner has Plus.
  */
 export function lessonStatuses(state: Progress): Record<string, LessonStatus> {
   const out: Record<string, LessonStatus> = {};
@@ -121,7 +131,8 @@ export function lessonStatuses(state: Progress): Record<string, LessonStatus> {
   let currentAssigned = false;
   for (const lesson of LESSONS) {
     const done = passed(state.lessons[lesson.id]);
-    if (done) out[lesson.id] = 'done';
+    if (lesson.premium && !hasPlus(state)) out[lesson.id] = 'premium';
+    else if (done) out[lesson.id] = 'done';
     else if (unlocked && !currentAssigned) {
       out[lesson.id] = 'current';
       currentAssigned = true;

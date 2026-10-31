@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { KANA_GRID, KANA_TIPS, kanaByRomaji, type Script } from '@/data/kana';
+import { WriteButton } from '@/components/ui';
+import { KANA_GRID, KANA_TIPS, kanaByRomaji, VOICED_GRID, type Script } from '@/data/kana';
 import { VOCAB_LESSONS } from '@/data/lessons';
 import { spellsDifferently } from '@/lib/albanian';
 import { C, F, R, S } from '@/theme';
@@ -20,6 +21,33 @@ export default function KanaScreen() {
   const k = kanaByRomaji(selected);
   const examples = examplesFor(k.hiragana, k.katakana);
   const tip = KANA_TIPS[k.romaji];
+
+  const renderGrid = (grid: (string | null)[][]) => (
+    <View style={styles.grid}>
+      {grid.map((row, r) => (
+        <View key={r} style={styles.gridRow}>
+          {row.map((romaji, c) => {
+            if (!romaji) return <View key={c} style={styles.cellEmpty} />;
+            const cell = kanaByRomaji(romaji);
+            const on = romaji === selected;
+            return (
+              <Pressable
+                key={c}
+                onPress={() => setSelected(romaji)}
+                accessibilityRole="button"
+                accessibilityLabel={`${cell[script]}, ${cell.sq}`}
+                accessibilityState={{ selected: on }}
+                style={[styles.cell, on && styles.cellOn]}>
+                {spellsDifferently(romaji) && <View style={styles.dot} />}
+                <Text style={styles.cellGlyph}>{cell[script]}</Text>
+                <Text style={styles.cellReading}>{cell.sq}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      ))}
+    </View>
+  );
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -56,6 +84,7 @@ export default function KanaScreen() {
             </View>
           </View>
           {tip ? <Text style={styles.tip}>{tip}</Text> : null}
+          <WriteButton char={k[script]} />
           {examples.length > 0 && (
             <View style={styles.examples}>
               {examples.map((w) => (
@@ -70,30 +99,9 @@ export default function KanaScreen() {
           )}
         </View>
 
-        <View style={styles.grid}>
-          {KANA_GRID.map((row, r) => (
-            <View key={r} style={styles.gridRow}>
-              {row.map((romaji, c) => {
-                if (!romaji) return <View key={c} style={styles.cellEmpty} />;
-                const cell = kanaByRomaji(romaji);
-                const on = romaji === selected;
-                return (
-                  <Pressable
-                    key={c}
-                    onPress={() => setSelected(romaji)}
-                    accessibilityRole="button"
-                    accessibilityLabel={`${cell[script]}, ${cell.sq}`}
-                    accessibilityState={{ selected: on }}
-                    style={[styles.cell, on && styles.cellOn]}>
-                    {spellsDifferently(romaji) && <View style={styles.dot} />}
-                    <Text style={styles.cellGlyph}>{cell[script]}</Text>
-                    <Text style={styles.cellReading}>{cell.sq}</Text>
-                  </Pressable>
-                );
-              })}
-            </View>
-          ))}
-        </View>
+        {renderGrid(KANA_GRID)}
+        <Text style={styles.section}>Me ゛ dhe ゜</Text>
+        {renderGrid(VOICED_GRID)}
         <View style={styles.legend}>
           <View style={styles.legendDot} />
           <Text style={styles.legendText}>Në shqip shkruhet ndryshe nga romaji</Text>
@@ -149,6 +157,15 @@ const styles = StyleSheet.create({
   cellGlyph: { fontSize: 22, color: C.ink },
   cellReading: { fontSize: 11, color: C.muted, fontFamily: F.mono },
   dot: { position: 'absolute', top: 5, right: 5, width: 6, height: 6, borderRadius: 3, backgroundColor: C.red },
+  section: {
+    fontSize: 12,
+    fontWeight: '700',
+    letterSpacing: 1.4,
+    textTransform: 'uppercase',
+    color: C.muted,
+    marginTop: S.xl,
+    marginBottom: S.sm,
+  },
   legend: { flexDirection: 'row', alignItems: 'center', gap: S.sm, marginTop: S.md },
   legendDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: C.red },
   legendText: { fontSize: 12.5, color: C.muted },

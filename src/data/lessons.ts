@@ -16,7 +16,14 @@ export type Word = {
   kanji?: string;
 };
 
-type LessonBase = { id: string; title: string; subtitle: string; badge: string };
+type LessonBase = {
+  id: string;
+  title: string;
+  subtitle: string;
+  badge: string;
+  /** Part of Shqiponisht Plus (subscription). */
+  premium?: boolean;
+};
 
 export type KanaLesson = LessonBase & { kind: 'kana'; script: Script; kana: Kana[] };
 export type VocabLesson = LessonBase & { kind: 'vocab'; words: Word[] };
@@ -29,8 +36,9 @@ function words(list: [jp: string, romaji: string, meaning: string, kanji?: strin
 
 function kanjiLesson(group: KanjiGroupId): KanjiLesson {
   const kanji = kanjiInGroup(group);
-  const title = KANJI_GROUPS.find((g) => g.id === group)!.title;
+  const { title, premium } = KANJI_GROUPS.find((g) => g.id === group)!;
   return {
+    premium,
     id: `kanji-${group}`,
     kind: 'kanji',
     kanji,
@@ -40,11 +48,12 @@ function kanjiLesson(group: KanjiGroupId): KanjiLesson {
   };
 }
 
-function kanaLesson(id: string, script: Script, rows: string[], title: string): KanaLesson {
+function kanaLesson(id: string, script: Script, rows: string[], title: string, premium?: boolean): KanaLesson {
   const kana = kanaInRows(rows);
   const glyphs = kana.map((k) => k[script]);
   return {
     id,
+    premium,
     kind: 'kana',
     script,
     kana,
@@ -186,7 +195,78 @@ const PHRASES: VocabLesson = {
   ]),
 };
 
-/** The learning path, in unlock order. */
+const VERBS: VocabLesson = {
+  id: 'foljet',
+  kind: 'vocab',
+  premium: true,
+  title: 'Foljet e para',
+  subtitle: 'たべます, のみます…',
+  badge: '動',
+  words: words([
+    ['たべます', 'tabemasu', 'ha', '食べます'],
+    ['のみます', 'nomimasu', 'pi', '飲みます'],
+    ['いきます', 'ikimasu', 'shkoj', '行きます'],
+    ['きます', 'kimasu', 'vij', '来ます'],
+    ['みます', 'mimasu', 'shoh', '見ます'],
+    ['よみます', 'yomimasu', 'lexoj', '読みます'],
+    ['かきます', 'kakimasu', 'shkruaj', '書きます'],
+    ['ききます', 'kikimasu', 'dëgjoj', '聞きます'],
+    ['はなします', 'hanashimasu', 'flas', '話します'],
+    ['かいます', 'kaimasu', 'blej', '買います'],
+  ]),
+};
+
+const TIME: VocabLesson = {
+  id: 'koha',
+  kind: 'vocab',
+  premium: true,
+  title: 'Koha',
+  subtitle: 'いま, きょう, あした…',
+  badge: '時',
+  words: words([
+    ['いま', 'ima', 'tani', '今'],
+    ['きょう', 'kyō', 'sot', '今日'],
+    ['あした', 'ashita', 'nesër', '明日'],
+    ['きのう', 'kinō', 'dje', '昨日'],
+    ['あさ', 'asa', 'mëngjes', '朝'],
+    ['よる', 'yoru', 'natë', '夜'],
+    ['まいにち', 'mainichi', 'çdo ditë', '毎日'],
+    ['なんじですか', 'nanji desu ka', 'Sa është ora?', '何時ですか'],
+    ['ごぜん', 'gozen', 'paradite', '午前'],
+    ['ごご', 'gogo', 'pasdite', '午後'],
+  ]),
+};
+
+const SENTENCES: VocabLesson = {
+  id: 'fjalite',
+  kind: 'vocab',
+  premium: true,
+  title: 'Fjalitë e para',
+  subtitle: 'これは ほんです…',
+  badge: '文',
+  words: words([
+    ['これは ほんです。', 'kore wa hon desu.', 'Ky është një libër.', 'これは本です。'],
+    ['わたしは がくせいです。', 'watashi wa gakusei desu.', 'Unë jam student/e.', '私は学生です。'],
+    ['なまえは なんですか。', 'namae wa nan desu ka.', 'Si e ke emrin?', '名前は何ですか。'],
+    [
+      'わたしの なまえは アルタです。',
+      'watashi no namae wa aruta desu.',
+      'Emri im është Arta.',
+      '私の名前はアルタです。',
+    ],
+    [
+      'にほんごが すこし わかります。',
+      'nihongo ga sukoshi wakarimasu.',
+      'Kuptoj pak japonisht.',
+      '日本語が少し分かります。',
+    ],
+    ['コーヒーを のみます。', 'kōhī o nomimasu.', 'Pi kafe.', 'コーヒーを飲みます。'],
+    ['あした とうきょうへ いきます。', 'ashita tōkyō e ikimasu.', 'Nesër shkoj në Tokio.', '明日東京へ行きます。'],
+    ['これは いくらですか。', 'kore wa ikura desu ka.', 'Sa kushton kjo?'],
+  ]),
+};
+
+/** The learning path, in unlock order. Lessons marked `premium` need Shqiponisht Plus. */
 export const LESSONS: Lesson[] = [
   kanaLesson('hira-a', 'hiragana', ['a'], 'Hiragana: zanoret'),
   kanaLesson('hira-ka', 'hiragana', ['ka'], 'Hiragana: K'),
@@ -212,6 +292,15 @@ export const LESSONS: Lesson[] = [
   kanjiLesson('natyra'),
   PHRASES,
   kanjiLesson('shkolla'),
+  // Niveli 2 — Shqiponisht Plus
+  kanaLesson('hira-voiced', 'hiragana', ['ga', 'za', 'da', 'ba', 'pa'], 'Hiragana: が, ざ, ば, ぱ…', true),
+  VERBS,
+  kanjiLesson('foljet'),
+  kanaLesson('kata-voiced', 'katakana', ['ga', 'za', 'da', 'ba', 'pa'], 'Katakana: ガ, ザ, バ, パ…', true),
+  TIME,
+  kanjiLesson('koha'),
+  SENTENCES,
+  kanjiLesson('bota'),
 ];
 
 export const KANJI_LESSONS = LESSONS.filter((l): l is KanjiLesson => l.kind === 'kanji');

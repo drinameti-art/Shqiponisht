@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import { Image } from 'expo-image';
 import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button, SectionTitle } from '@/components/ui';
@@ -11,7 +11,7 @@ import { useProgress } from '@/lib/progress-context';
 import { C, R, S } from '@/theme';
 
 export default function Profile() {
-  const { progress, today, update, reset } = useProgress();
+  const { progress, today, update, reset, plus } = useProgress();
   const [confirmReset, setConfirmReset] = useState(false);
   const done = completedCount(progress);
 
@@ -68,6 +68,38 @@ export default function Profile() {
           ))}
         </View>
 
+        <SectionTitle>Shqiponisht Plus</SectionTitle>
+        <View style={styles.about}>
+          <Text style={styles.aboutText}>
+            {progress.plus
+              ? 'Plus është aktiv. Ke qasje në të gjitha mësimet e Nivelit 2.'
+              : plus
+                ? 'Plus është aktiv në modalitetin demo.'
+                : 'Niveli 2 — folje, fjali, koha dhe 27 kanji të reja — është pjesë e Plus.'}
+          </Text>
+          {progress.plus ? (
+            <Button
+              label="Menaxho abonimin"
+              variant="secondary"
+              onPress={() =>
+                void Linking.openURL(
+                  Platform.OS === 'ios'
+                    ? 'https://apps.apple.com/account/subscriptions'
+                    : 'https://play.google.com/store/account/subscriptions',
+                )
+              }
+            />
+          ) : progress.demoPlus ? (
+            <Button
+              label="Çaktivizo demon"
+              variant="secondary"
+              onPress={() => update((p) => ({ ...p, demoPlus: false }))}
+            />
+          ) : (
+            <Button label="Shiko Plus" onPress={() => router.push('/plus')} />
+          )}
+        </View>
+
         <SectionTitle>Të dhënat</SectionTitle>
         <Button
           label={confirmReset ? 'Po, fshi gjithçka' : 'Rinis përparimin'}
@@ -82,6 +114,10 @@ export default function Profile() {
         {confirmReset && (
           <Button label="Anulo" variant="ghost" onPress={() => setConfirmReset(false)} style={{ marginTop: S.sm }} />
         )}
+
+        <Text style={styles.credits}>
+          Rendi i vijave: KanjiVG © Ulrich Apel, licencë CC BY-SA 3.0 (kanjivg.tagaini.net).
+        </Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -130,4 +166,5 @@ const styles = StyleSheet.create({
   about: { backgroundColor: C.paper, borderRadius: R.md, borderWidth: 1, borderColor: C.line, padding: S.lg, gap: 6 },
   aboutText: { fontSize: 14.5, lineHeight: 21, color: C.ink, marginBottom: 4 },
   rule: { fontSize: 15, color: C.ink },
+  credits: { fontSize: 11.5, lineHeight: 16, color: C.muted, textAlign: 'center', marginTop: S.xl },
 });

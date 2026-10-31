@@ -17,14 +17,18 @@ export type Kanji = {
   group: KanjiGroupId;
 };
 
-export type KanjiGroupId = 'numrat' | 'java' | 'trupi' | 'natyra' | 'shkolla';
+export type KanjiGroupId = 'numrat' | 'java' | 'trupi' | 'natyra' | 'shkolla' | 'foljet' | 'koha' | 'bota';
 
-export const KANJI_GROUPS: { id: KanjiGroupId; title: string }[] = [
+/** `premium` groups belong to Shqiponisht Plus. */
+export const KANJI_GROUPS: { id: KanjiGroupId; title: string; premium?: true }[] = [
   { id: 'numrat', title: 'Numrat' },
   { id: 'java', title: 'Ditët e javës' },
   { id: 'trupi', title: 'Njeriu dhe trupi' },
   { id: 'natyra', title: 'Madhësia, drejtimi, natyra' },
   { id: 'shkolla', title: 'Shkolla dhe jeta' },
+  { id: 'foljet', title: 'Foljet', premium: true },
+  { id: 'koha', title: 'Koha', premium: true },
+  { id: 'bota', title: 'Bota rreth nesh', premium: true },
 ];
 
 function r(kana: string, romaji: string): Reading {
@@ -78,11 +82,44 @@ const DATA: Record<KanjiGroupId, Row[]> = {
   ],
   shkolla: [
     ['学', 'mësim; dije', r('ガク', 'gaku'), r('まな', 'mana'), 8, [ex('学生', 'がくせい', 'gakusei', 'student'), ex('学校', 'がっこう', 'gakkō', 'shkollë')]],
-    ['生', 'jetë; lindje', r('セイ', 'sei'), r('い', 'i'), 5, [ex('先生', 'せんせい', 'sensei', 'mësues'), ex('学生', 'がくせい', 'gakusei', 'student')]],
-    ['先', 'përpara; i mëparshëm', r('セン', 'sen'), r('さき', 'saki'), 6, [ex('先生', 'せんせい', 'sensei', 'mësues'), ex('先月', 'せんげつ', 'sengetsu', 'muajin e kaluar')]],
+    ['生', 'jetë', r('セイ', 'sei'), r('い', 'i'), 5, [ex('先生', 'せんせい', 'sensei', 'mësues'), ex('学生', 'がくせい', 'gakusei', 'student')]],
+    ['先', 'i mëparshëm', r('セン', 'sen'), r('さき', 'saki'), 6, [ex('先生', 'せんせい', 'sensei', 'mësues'), ex('先月', 'せんげつ', 'sengetsu', 'muajin e kaluar')]],
     ['年', 'vit', r('ネン', 'nen'), r('とし', 'toshi'), 6, [ex('今年', 'ことし', 'kotoshi', 'këtë vit'), ex('一年', 'いちねん', 'ichinen', 'një vit')]],
     ['名', 'emër', r('メイ', 'mei'), r('な', 'na'), 6, [ex('名前', 'なまえ', 'namae', 'emër')]],
     ['本', 'libër; origjinë', r('ホン', 'hon'), r('もと', 'moto'), 5, [ex('本', 'ほん', 'hon', 'libër'), ex('日本', 'にほん', 'nihon', 'Japonia')]],
+  ],
+  foljet: [
+    ['食', 'ha; ushqim', r('ショク', 'shoku'), r('た', 'ta'), 9, [ex('食べます', 'たべます', 'tabemasu', 'ha'), ex('食堂', 'しょくどう', 'shokudō', 'mensë')]],
+    ['飲', 'pi', r('イン', 'in'), r('の', 'no'), 12, [ex('飲みます', 'のみます', 'nomimasu', 'pi'), ex('飲み物', 'のみもの', 'nomimono', 'pije')]],
+    ['行', 'shkoj', r('コウ', 'kō'), r('い', 'i'), 6, [ex('行きます', 'いきます', 'ikimasu', 'shkoj'), ex('銀行', 'ぎんこう', 'ginkō', 'bankë')]],
+    ['来', 'vij', r('ライ', 'rai'), r('く', 'ku'), 7, [ex('来ます', 'きます', 'kimasu', 'vij'), ex('来年', 'らいねん', 'rainen', 'vitin e ardhshëm')]],
+    ['見', 'shoh', r('ケン', 'ken'), r('み', 'mi'), 7, [ex('見ます', 'みます', 'mimasu', 'shoh'), ex('花見', 'はなみ', 'hanami', 'soditja e luleve të qershisë')]],
+    ['読', 'lexoj', r('ドク', 'doku'), r('よ', 'yo'), 14, [ex('読みます', 'よみます', 'yomimasu', 'lexoj'), ex('読書', 'どくしょ', 'dokusho', 'leximi')]],
+    ['書', 'shkruaj', r('ショ', 'sho'), r('か', 'ka'), 10, [ex('書きます', 'かきます', 'kakimasu', 'shkruaj'), ex('辞書', 'じしょ', 'jisho', 'fjalor')]],
+    ['聞', 'dëgjoj; pyes', r('ブン', 'bun'), r('き', 'ki'), 14, [ex('聞きます', 'ききます', 'kikimasu', 'dëgjoj'), ex('新聞', 'しんぶん', 'shinbun', 'gazetë')]],
+    ['話', 'flas; bisedë', r('ワ', 'wa'), r('はな', 'hana'), 13, [ex('話します', 'はなします', 'hanashimasu', 'flas'), ex('電話', 'でんわ', 'denwa', 'telefon')]],
+    ['買', 'blej', r('バイ', 'bai'), r('か', 'ka'), 12, [ex('買います', 'かいます', 'kaimasu', 'blej')]],
+  ],
+  koha: [
+    ['時', 'kohë; orë', r('ジ', 'ji'), r('とき', 'toki'), 10, [ex('何時', 'なんじ', 'nanji', 'sa është ora?'), ex('時間', 'じかん', 'jikan', 'kohë; orë (kohëzgjatje)')]],
+    ['分', 'minutë; ndaj', r('フン', 'fun'), r('わ', 'wa'), 4, [ex('五分', 'ごふん', 'gofun', 'pesë minuta'), ex('分かります', 'わかります', 'wakarimasu', 'kuptoj')]],
+    ['半', 'gjysmë', r('ハン', 'han'), r('なか', 'naka'), 5, [ex('三時半', 'さんじはん', 'sanjihan', 'tre e gjysmë'), ex('半分', 'はんぶん', 'hanbun', 'gjysma')]],
+    ['今', 'tani', r('コン', 'kon'), r('いま', 'ima'), 4, [ex('今', 'いま', 'ima', 'tani'), ex('今日', 'きょう', 'kyō', 'sot')]],
+    ['何', 'çfarë', r('カ', 'ka'), r('なに', 'nani'), 7, [ex('何', 'なに', 'nani', 'çfarë'), ex('何時', 'なんじ', 'nanji', 'sa është ora?')]],
+    ['毎', 'çdo', r('マイ', 'mai'), r('ごと', 'goto'), 6, [ex('毎日', 'まいにち', 'mainichi', 'çdo ditë'), ex('毎朝', 'まいあさ', 'maiasa', 'çdo mëngjes')]],
+    ['午', 'mesditë', r('ゴ', 'go'), r('うま', 'uma'), 4, [ex('午前', 'ごぜん', 'gozen', 'paradite'), ex('午後', 'ごご', 'gogo', 'pasdite')]],
+    ['後', 'pas; më vonë', r('ゴ', 'go'), r('あと', 'ato'), 9, [ex('午後', 'ごご', 'gogo', 'pasdite'), ex('後で', 'あとで', 'atode', 'më vonë')]],
+    ['前', 'para; përpara', r('ゼン', 'zen'), r('まえ', 'mae'), 9, [ex('名前', 'なまえ', 'namae', 'emër'), ex('午前', 'ごぜん', 'gozen', 'paradite')]],
+    ['間', 'ndërmjet; hapësirë', r('カン', 'kan'), r('あいだ', 'aida'), 12, [ex('時間', 'じかん', 'jikan', 'kohë; orë (kohëzgjatje)'), ex('間', 'あいだ', 'aida', 'ndërmjet')]],
+  ],
+  bota: [
+    ['雨', 'shi', r('ウ', 'u'), r('あめ', 'ame'), 8, [ex('雨', 'あめ', 'ame', 'shi'), ex('大雨', 'おおあめ', 'ōame', 'rrebesh')]],
+    ['空', 'qiell', r('クウ', 'kū'), r('そら', 'sora'), 8, [ex('空', 'そら', 'sora', 'qiell'), ex('空港', 'くうこう', 'kūkō', 'aeroport')]],
+    ['花', 'lule', r('カ', 'ka'), r('はな', 'hana'), 7, [ex('花', 'はな', 'hana', 'lule'), ex('花火', 'はなび', 'hanabi', 'fishekzjarre')]],
+    ['東', 'lindje', r('トウ', 'tō'), r('ひがし', 'higashi'), 8, [ex('東', 'ひがし', 'higashi', 'lindje'), ex('東京', 'とうきょう', 'tōkyō', 'Tokio')]],
+    ['西', 'perëndim', r('セイ', 'sei'), r('にし', 'nishi'), 6, [ex('西', 'にし', 'nishi', 'perëndim'), ex('関西', 'かんさい', 'kansai', 'rajoni Kansai')]],
+    ['南', 'jug', r('ナン', 'nan'), r('みなみ', 'minami'), 9, [ex('南', 'みなみ', 'minami', 'jug'), ex('南口', 'みなみぐち', 'minamiguchi', 'dalja jugore')]],
+    ['北', 'veri', r('ホク', 'hoku'), r('きた', 'kita'), 5, [ex('北', 'きた', 'kita', 'veri'), ex('北口', 'きたぐち', 'kitaguchi', 'dalja veriore')]],
   ],
 };
 

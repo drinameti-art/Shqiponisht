@@ -81,11 +81,23 @@ function kanaExplanation(k: Kana, glyph: string): string {
 function kanaQuestions(lesson: Extract<Lesson, { kind: 'kana' }>, rng: Rng): Question[] {
   const { script } = lesson;
   // Distractors come from the lesson first, then from the whole syllabary.
-  const pool = [...lesson.kana, ...shuffle(KANA.filter((k) => !lesson.kana.includes(k)), rng)];
+  const pool = [
+    ...lesson.kana,
+    ...shuffle(
+      KANA.filter((k) => !lesson.kana.includes(k)),
+      rng,
+    ),
+  ];
   return lesson.kana.flatMap((k): Question[] => {
     const glyph = k[script];
     const bySound = (x: Kana) => x.sq;
-    const readQ = choose(k, pool, (x) => ({ label: x.sq, hint: x.sq === x.romaji ? undefined : `romaji: ${x.romaji}` }), bySound, rng);
+    const readQ = choose(
+      k,
+      pool,
+      (x) => ({ label: x.sq, hint: x.sq === x.romaji ? undefined : `romaji: ${x.romaji}` }),
+      bySound,
+      rng,
+    );
     const writeQ = choose(k, pool, (x) => ({ label: x[script] }), bySound, rng);
     return [
       {
@@ -116,14 +128,26 @@ function vocabQuestions(lesson: Extract<Lesson, { kind: 'vocab' }>, rng: Rng): Q
         instruction: 'Si thuhet në japonisht?',
         prompt: w.meaning,
         promptIsJapanese: false,
-        ...choose(w, pool, (x) => ({ label: x.jp, hint: x.sq }), (x) => x.meaning, rng),
+        ...choose(
+          w,
+          pool,
+          (x) => ({ label: x.jp, hint: x.sq }),
+          (x) => x.meaning,
+          rng,
+        ),
         explanation,
       },
       {
         instruction: 'Çfarë do të thotë?',
         prompt: w.jp,
         promptIsJapanese: true,
-        ...choose(w, pool, (x) => ({ label: x.meaning }), (x) => x.jp, rng),
+        ...choose(
+          w,
+          pool,
+          (x) => ({ label: x.meaning }),
+          (x) => x.jp,
+          rng,
+        ),
         explanation,
       },
     ];
@@ -135,7 +159,13 @@ function kanjiReadings(k: Kanji): string {
 }
 
 function kanjiQuestions(lesson: Extract<Lesson, { kind: 'kanji' }>, rng: Rng): Question[] {
-  const pool = [...lesson.kanji, ...shuffle(KANJI.filter((k) => !lesson.kanji.includes(k)), rng)];
+  const pool = [
+    ...lesson.kanji,
+    ...shuffle(
+      KANJI.filter((k) => !lesson.kanji.includes(k)),
+      rng,
+    ),
+  ];
   const examplePool: KanjiExample[] = pool.flatMap((k) => k.examples);
   return lesson.kanji.flatMap((k): Question[] => {
     const about = `${k.char} = ${k.meaning}. ${kanjiReadings(k)}.`;
@@ -144,14 +174,26 @@ function kanjiQuestions(lesson: Extract<Lesson, { kind: 'kanji' }>, rng: Rng): Q
         instruction: 'Çfarë do të thotë ky kanji?',
         prompt: k.char,
         promptIsJapanese: true,
-        ...choose(k, pool, (x) => ({ label: x.meaning }), (x) => x.meaning, rng),
+        ...choose(
+          k,
+          pool,
+          (x) => ({ label: x.meaning }),
+          (x) => x.meaning,
+          rng,
+        ),
         explanation: about,
       },
       {
         instruction: `Cili kanji do të thotë „${k.meaning}“?`,
         prompt: k.meaning,
         promptIsJapanese: false,
-        ...choose(k, pool, (x) => ({ label: x.char }), (x) => x.meaning, rng),
+        ...choose(
+          k,
+          pool,
+          (x) => ({ label: x.char }),
+          (x) => x.meaning,
+          rng,
+        ),
         explanation: about,
       },
     ];
@@ -160,7 +202,13 @@ function kanjiQuestions(lesson: Extract<Lesson, { kind: 'kanji' }>, rng: Rng): Q
       instruction: 'Si lexohet kjo fjalë?',
       prompt: word.jp,
       promptIsJapanese: true,
-      ...choose(word, examplePool, (x) => ({ label: x.sq, hint: x.kana }), (x) => x.sq, rng),
+      ...choose(
+        word,
+        examplePool,
+        (x) => ({ label: x.sq, hint: x.kana }),
+        (x) => x.sq,
+        rng,
+      ),
       explanation: `${word.jp} lexohet ${word.kana} („${word.sq}“) dhe do të thotë „${word.meaning}“.`,
     });
     return questions;

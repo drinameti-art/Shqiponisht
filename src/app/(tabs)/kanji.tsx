@@ -1,11 +1,16 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { WriteButton } from '@/components/ui';
+import { useProgress } from '@/lib/progress-context';
 import { KANJI_GROUPS, kanjiByChar, kanjiInGroup, type Reading } from '@/data/kanji';
 import { C, F, R, S } from '@/theme';
 
 export default function KanjiScreen() {
+  const { plus } = useProgress();
   const [selected, setSelected] = useState('山');
   const k = kanjiByChar(selected);
 
@@ -14,8 +19,7 @@ export default function KanjiScreen() {
       <ScrollView contentContainerStyle={styles.content}>
         <Text style={styles.title}>Kanji</Text>
         <Text style={styles.intro}>
-          Çdo kanji ka kuptim dhe zakonisht dy lexime: on (nga kinezishtja, me katakana) dhe kun (japonez, me
-          hiragana).
+          Çdo kanji ka kuptim dhe zakonisht dy lexime: on (nga kinezishtja, me katakana) dhe kun (japonez, me hiragana).
         </Text>
 
         <View style={styles.card} accessibilityLiveRegion="polite">
@@ -32,6 +36,7 @@ export default function KanjiScreen() {
             <ReadingBox label="on" reading={k.on} />
             <ReadingBox label="kun" reading={k.kun} />
           </View>
+          <WriteButton char={k.char} />
           <View style={styles.examples}>
             {k.examples.map((e) => (
               <View key={e.jp} style={styles.example}>
@@ -45,30 +50,41 @@ export default function KanjiScreen() {
           </View>
         </View>
 
-        {KANJI_GROUPS.map((g) => (
-          <View key={g.id}>
-            <Text style={styles.section}>{g.title}</Text>
-            <View style={styles.grid}>
-              {kanjiInGroup(g.id).map((x) => {
-                const on = x.char === selected;
-                return (
-                  <Pressable
-                    key={x.char}
-                    onPress={() => setSelected(x.char)}
-                    accessibilityRole="button"
-                    accessibilityLabel={`${x.char}, ${x.meaning}`}
-                    accessibilityState={{ selected: on }}
-                    style={[styles.cell, on && styles.cellOn]}>
-                    <Text style={styles.cellChar}>{x.char}</Text>
-                    <Text style={styles.cellMeaning} numberOfLines={1}>
-                      {x.meaning.split(';')[0]}
-                    </Text>
-                  </Pressable>
-                );
-              })}
+        {KANJI_GROUPS.map((g) => {
+          const locked = !!g.premium && !plus;
+          return (
+            <View key={g.id}>
+              <View style={styles.sectionRow}>
+                <Text style={styles.section}>{g.title}</Text>
+                {g.premium && (
+                  <View style={styles.plusBadge}>
+                    <Text style={styles.plusBadgeText}>PLUS</Text>
+                  </View>
+                )}
+              </View>
+              <View style={styles.grid}>
+                {kanjiInGroup(g.id).map((x) => {
+                  const on = x.char === selected;
+                  return (
+                    <Pressable
+                      key={x.char}
+                      onPress={() => (locked ? router.push('/plus') : setSelected(x.char))}
+                      accessibilityRole="button"
+                      accessibilityLabel={`${x.char}, ${locked ? 'Plus' : x.meaning}`}
+                      accessibilityState={{ selected: on }}
+                      style={[styles.cell, on && styles.cellOn, locked && styles.cellLocked]}>
+                      {locked && <Ionicons name="lock-closed" size={10} color={C.muted} style={styles.lock} />}
+                      <Text style={styles.cellChar}>{x.char}</Text>
+                      <Text style={styles.cellMeaning} numberOfLines={1}>
+                        {x.meaning.split(';')[0]}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
             </View>
-          </View>
-        ))}
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );
@@ -144,6 +160,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 2,
   },
   cellOn: { borderColor: C.red, backgroundColor: C.redSoft },
+  cellLocked: { opacity: 0.55 },
+  lock: { position: 'absolute', top: 4, right: 4 },
+  sectionRow: { flexDirection: 'row', alignItems: 'center', gap: S.sm },
+  plusBadge: {
+    backgroundColor: C.gold,
+    borderRadius: R.pill,
+    paddingVertical: 2,
+    paddingHorizontal: 7,
+    marginTop: S.md,
+  },
+  plusBadgeText: { color: C.white, fontSize: 10.5, fontWeight: '800', letterSpacing: 1 },
   cellChar: { fontSize: 24, color: C.ink },
   cellMeaning: { fontSize: 10.5, color: C.muted },
 });

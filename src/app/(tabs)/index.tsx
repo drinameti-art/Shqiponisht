@@ -16,7 +16,7 @@ function greeting(hour: number): { sq: string; jp: string } {
 }
 
 export default function Today() {
-  const { progress, today } = useProgress();
+  const { progress, today, plus } = useProgress();
   const hello = greeting(new Date().getHours());
   const streak = currentStreak(progress, today);
   const xp = xpToday(progress, today);
@@ -58,22 +58,62 @@ export default function Today() {
         <SectionTitle>
           Rruga jote · {done} / {LESSONS.length}
         </SectionTitle>
-        <View style={styles.path}>
-          <View style={styles.rail} />
-          {LESSONS.map((lesson) => (
-            <LessonRow
-              key={lesson.id}
-              title={lesson.title}
-              subtitle={lesson.subtitle}
-              badge={lesson.badge}
-              status={statuses[lesson.id]}
-              best={progress.lessons[lesson.id]}
-              onPress={() => router.push({ pathname: '/lesson/[id]', params: { id: lesson.id } })}
-            />
-          ))}
+        <LessonList lessons={FREE} statuses={statuses} records={progress.lessons} />
+
+        <View style={styles.plusHead}>
+          <SectionTitle>Niveli 2</SectionTitle>
+          <View style={[styles.plusBadge, { marginTop: S.md }]}>
+            <Text style={styles.plusBadgeText}>PLUS</Text>
+          </View>
         </View>
+        {!plus && (
+          <Pressable
+            onPress={() => router.push('/plus')}
+            accessibilityRole="button"
+            style={({ pressed }) => [styles.plusCard, pressed && { opacity: 0.85 }]}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.plusCardTitle}>Zhblloko Nivelin 2</Text>
+              <Text style={styles.plusCardText}>Folje, fjali, koha dhe {PLUS.length} mësime të tjera.</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={22} color={C.white} />
+          </Pressable>
+        )}
+        <LessonList lessons={PLUS} statuses={statuses} records={progress.lessons} />
       </ScrollView>
     </SafeAreaView>
+  );
+}
+
+const FREE = LESSONS.filter((l) => !l.premium);
+const PLUS = LESSONS.filter((l) => l.premium);
+
+function LessonList(props: {
+  lessons: typeof LESSONS;
+  statuses: Record<string, LessonStatus>;
+  records: Record<string, { best: number; total: number }>;
+}) {
+  return (
+    <View style={styles.path}>
+      <View style={styles.rail} />
+      {props.lessons.map((lesson) => {
+        const status = props.statuses[lesson.id];
+        return (
+          <LessonRow
+            key={lesson.id}
+            title={lesson.title}
+            subtitle={lesson.subtitle}
+            badge={lesson.badge}
+            status={status}
+            best={props.records[lesson.id]}
+            onPress={() =>
+              status === 'premium'
+                ? router.push('/plus')
+                : router.push({ pathname: '/lesson/[id]', params: { id: lesson.id } })
+            }
+          />
+        );
+      })}
+    </View>
   );
 }
 
@@ -86,16 +126,18 @@ function LessonRow(props: {
   onPress: () => void;
 }) {
   const { status } = props;
-  const locked = status === 'locked';
+  const locked = status === 'locked' || status === 'premium';
   return (
     <Pressable
-      disabled={locked}
+      disabled={status === 'locked'}
       onPress={props.onPress}
       accessibilityRole="button"
-      accessibilityLabel={`${props.title}${locked ? ', e kyçur' : ''}`}
+      accessibilityLabel={`${props.title}${status === 'premium' ? ', Plus' : locked ? ', e kyçur' : ''}`}
       style={({ pressed }) => [styles.row, status === 'current' && styles.rowCurrent, pressed && { opacity: 0.8 }]}>
       <View style={[styles.node, status === 'done' && styles.nodeDone, status === 'current' && styles.nodeCurrent]}>
-        {locked ? (
+        {status === 'premium' ? (
+          <Ionicons name="star" size={16} color={C.gold} />
+        ) : locked ? (
           <Ionicons name="lock-closed" size={16} color={C.muted} />
         ) : (
           <Text style={[styles.nodeText, { color: C.white }]}>{props.badge}</Text>
@@ -114,6 +156,11 @@ function LessonRow(props: {
         </View>
       )}
       {status === 'done' && <Ionicons name="refresh" size={18} color={C.muted} />}
+      {status === 'premium' && (
+        <View style={styles.plusBadge}>
+          <Text style={styles.plusBadgeText}>PLUS</Text>
+        </View>
+      )}
     </Pressable>
   );
 }
@@ -158,4 +205,18 @@ const styles = StyleSheet.create({
   rowSub: { fontSize: 13, color: C.muted, marginTop: 1 },
   go: { backgroundColor: C.red, paddingVertical: 8, paddingHorizontal: 14, borderRadius: R.pill },
   goText: { color: C.white, fontWeight: '700', fontSize: 13 },
+  plusHead: { flexDirection: 'row', alignItems: 'center', gap: S.sm },
+  plusBadge: { backgroundColor: C.gold, borderRadius: R.pill, paddingVertical: 3, paddingHorizontal: 8 },
+  plusBadgeText: { color: C.white, fontSize: 11, fontWeight: '800', letterSpacing: 1 },
+  plusCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: S.md,
+    backgroundColor: C.ink,
+    borderRadius: R.lg,
+    padding: S.lg,
+    marginBottom: S.md,
+  },
+  plusCardTitle: { color: C.white, fontSize: 17, fontWeight: '800' },
+  plusCardText: { color: 'rgba(255,255,255,0.75)', fontSize: 13.5, marginTop: 2 },
 });

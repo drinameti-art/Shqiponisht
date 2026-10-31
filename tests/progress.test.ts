@@ -58,6 +58,22 @@ describe('progress', () => {
     expect(st[LESSONS[2].id]).toBe('locked');
   });
 
+  it('keeps Plus lessons behind the subscription, then unlocks them in order', () => {
+    const firstPlus = LESSONS.findIndex((l) => l.premium);
+    expect(firstPlus).toBeGreaterThan(0);
+    let s = INITIAL_PROGRESS;
+    for (const l of LESSONS.slice(0, firstPlus)) {
+      s = completeLesson(s, { lessonId: l.id, correct: 10, total: 10 }, '2026-10-30').state;
+    }
+    const free = lessonStatuses(s);
+    expect(LESSONS.filter((l) => l.premium).every((l) => free[l.id] === 'premium')).toBe(true);
+    expect(LESSONS.filter((l) => !l.premium).every((l) => free[l.id] === 'done')).toBe(true);
+    const plus = lessonStatuses({ ...s, plus: true });
+    expect(plus[LESSONS[firstPlus].id]).toBe('current');
+    expect(plus[LESSONS[firstPlus + 1].id]).toBe('locked');
+    expect(lessonStatuses({ ...s, demoPlus: true })[LESSONS[firstPlus].id]).toBe('current');
+  });
+
   it('keeps the best score across retries', () => {
     let s = completeLesson(INITIAL_PROGRESS, { lessonId: first, correct: 9, total: 10 }, '2026-10-30').state;
     s = completeLesson(s, { lessonId: first, correct: 4, total: 10 }, '2026-10-30').state;

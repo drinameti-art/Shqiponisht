@@ -46,3 +46,15 @@ describe('kanji data', () => {
     }
   });
 });
+
+describe('stroke data', () => {
+  it('has stroke paths for every kana and kanji, matching the stroke counts', async () => {
+    const strokes = (await import('@/data/strokes.json')).default as Record<string, unknown[]>;
+    const { KANA } = await import('@/data/kana');
+    for (const k of KANA) {
+      expect(strokes[k.hiragana], k.hiragana).toBeDefined();
+      expect(strokes[k.katakana], k.katakana).toBeDefined();
+    }
+    for (const k of KANJI) expect(strokes[k.char]?.length, k.char).toBe(k.strokes);
+  });
+});

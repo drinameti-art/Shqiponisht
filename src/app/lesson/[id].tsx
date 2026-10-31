@@ -1,6 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import * as Haptics from 'expo-haptics';
-import { router, useLocalSearchParams } from 'expo-router';
+import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -24,7 +24,7 @@ const PRAISE = ['Saktë!', 'Shumë mirë!', 'Bravo!', 'すごい!', 'Perfekt!'];
 export default function LessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const lesson = lessonById(id);
-  const { finishLesson } = useProgress();
+  const { finishLesson, plus } = useProgress();
 
   const [seed, setSeed] = useState(() => Date.now());
   const quiz = useMemo(() => (lesson ? buildQuiz(lesson, seededRng(seed)) : []), [lesson, seed]);
@@ -42,6 +42,9 @@ export default function LessonScreen() {
     setCorrect(0);
     setResult(null);
   };
+
+  // Plus lessons can be reached by deep link too; send those to the paywall.
+  if (lesson?.premium && !plus) return <Redirect href="/plus" />;
 
   if (!lesson) {
     return (
