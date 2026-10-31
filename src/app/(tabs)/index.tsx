@@ -11,7 +11,7 @@ import { C, R, S } from '@/theme';
 
 function greeting(hour: number): { sq: string; jp: string } {
   if (hour < 11) return { sq: 'Mirëmëngjes', jp: 'おはよう · ohajoo' };
-  if (hour < 18) return { sq: 'Mirëdita', jp: 'こんにちは · konniçiua' };
+  if (hour < 18) return { sq: 'Përshëndetje', jp: 'こんにちは · konniçiua' };
   return { sq: 'Mirëmbrëma', jp: 'こんばんは · konbanua' };
 }
 

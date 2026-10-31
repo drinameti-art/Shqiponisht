@@ -45,7 +45,7 @@ const GREETINGS: VocabLesson = {
   badge: '挨',
   words: words([
     ['おはようございます', 'ohayō gozaimasu', 'Mirëmëngjes'],
-    ['こんにちは', 'konnichiwa', 'Mirëdita'],
+    ['こんにちは', 'konnichiwa', 'Përshëndetje'],
     ['こんばんは', 'konbanwa', 'Mirëmbrëma'],
     ['おやすみなさい', 'oyasuminasai', 'Natën e mirë'],
     ['さようなら', 'sayōnara', 'Mirupafshim'],
