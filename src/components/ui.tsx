@@ -1,8 +1,10 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { speakJapanese } from '@/lib/speech';
 
 import { EASE_OUT } from './motion';
 
@@ -89,6 +91,49 @@ export function Pill({ children, bg = C.goldSoft, fg = '#a8690a' }: { children: 
   );
 }
 
+/** Pronounces Japanese text. `tone="dark"` is for use on the dark detail cards. */
+export function SpeakButton({
+  text,
+  size = 40,
+  tone = 'light',
+  label = 'Dëgjo',
+}: {
+  text: string;
+  size?: number;
+  tone?: 'light' | 'dark';
+  label?: string;
+}) {
+  const [speaking, setSpeaking] = useState(false);
+  const dark = tone === 'dark';
+  return (
+    <Pressable
+      onPress={() => {
+        setSpeaking(true);
+        speakJapanese(text, () => setSpeaking(false));
+      }}
+      accessibilityRole="button"
+      accessibilityLabel={`${label}: ${text}`}
+      hitSlop={8}
+      style={({ pressed }) => [
+        styles.speak,
+        {
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          backgroundColor: speaking ? C.red : dark ? 'rgba(255,255,255,0.12)' : C.paper,
+          borderColor: speaking ? C.red : dark ? 'transparent' : C.line,
+        },
+        pressed && { opacity: 0.75 },
+      ]}>
+      <Ionicons
+        name={speaking ? 'volume-high' : 'volume-medium'}
+        size={size * 0.5}
+        color={speaking ? C.white : dark ? C.cream : C.ink}
+      />
+    </Pressable>
+  );
+}
+
 /** Opens the stroke-order and writing-practice screen for a character. */
 export function WriteButton({ char }: { char: string }) {
   return (
@@ -104,6 +149,7 @@ export function WriteButton({ char }: { char: string }) {
 }
 
 const styles = StyleSheet.create({
+  speak: { alignItems: 'center', justifyContent: 'center', borderWidth: 1.5 },
   write: {
     flexDirection: 'row',
     alignItems: 'center',

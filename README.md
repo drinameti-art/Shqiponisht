@@ -16,7 +16,7 @@ Every screen is in Albanian, and Japanese sounds are spelled the Albanian way, s
 ## What's in the app
 
 - **Mirësevini (welcome):** set your name and a daily XP goal.
-- **Sot (today):** greeting, streak, daily-goal bar and a 24-lesson path: hiragana and katakana row by row, five kanji lessons (36 kanji), plus greetings, numbers, family, food, animals, places and useful phrases.
+- **Sot (today):** greeting, streak, daily-goal bar and a 38-lesson path (24 free + 14 Plus): hiragana and katakana row by row, five kanji lessons (36 kanji), plus greetings, numbers, family, food, animals, places and useful phrases.
 - **Lessons:** 10 multiple-choice questions per lesson, with an explanation in Albanian after every answer. Six correct answers pass the lesson and unlock the next one.
 - **Si shkruhet (how to write):** every kana and kanji card has a "Si shkruhet" button. *Shiko rendin* animates the strokes in order with numbers; *Provo vetë* is a practice pad where you write with your finger and each stroke is checked for position, order and direction.
 - **Kana:** the full hiragana/katakana chart, including the ゛/゜ rows (が, ぱ…). Tap a kana for its Albanian reading, a pronunciation tip and example words. A red dot marks sounds Albanian spells differently from romaji.
@@ -24,8 +24,12 @@ Every screen is in Albanian, and Japanese sounds are spelled the Albanian way, s
 - **Fjalori (vocabulary):** every word from the lessons, with its usual kanji spelling, searchable in kanji, kana, romaji or Albanian (search ignores ë and ç, so "nena" finds "nëna").
 - **Profili (profile):** XP, streak, lessons passed, daily-goal setting, and a progress reset.
 
-- **Shqiponisht Plus (subscription):** Niveli 2 — 8 more lessons: kana with ゛/゜, first verbs (ます form), time words, first sentences, and 27 more kanji. Free users see these lessons in the path with a PLUS badge and a paywall.
+- **Shqiponisht Plus (subscription):** Niveli 2 — 14 more lessons: kana with ゛/゜, verbs (ます form), time, first sentences, numbers to 10 000, shopping, adjectives, the restaurant, and 43 more kanji. Free users see these lessons in the path with a PLUS badge and a paywall.
 
+- **Pronunciation 🔊:** speaker buttons on every kana, kanji, word, sentence and Japanese quiz prompt, using the phone's built-in Japanese voice. Tap twice quickly to hear it slower. With sounds on, the answer is read aloud after each check.
+- **Përsëritja e ditës (spaced review):** every answer feeds a Leitner schedule (1 → 3 → 7 → 14 → 30 → 60 days). Anything missed comes back the same day. The Sot screen shows how many items are due.
+- **Daily reminder 🔔:** Profili → Kujtesa ditore, at a chosen time. Local notifications only; days already practised are skipped. (Phones only, not web.)
+- **Backup code:** Profili → Ruaj përparimin copies or shares a `SHQ1-…` code holding all progress; pasting it on another phone restores it. No server or account involved; the subscription is restored by the store instead.
 - **Visual effects:** options pop when chosen, wrong answers shake, the feedback panel slides up, progress bars fill smoothly, the current lesson pulses, and passing a lesson or finishing a character sets off confetti while the XP counts up. Effects are reduced when the phone's *Reduce motion* setting is on.
 - **Sounds:** a chime for right answers, a soft buzz for wrong ones, a short melody when a lesson is passed, and a tick for each correct stroke. They mix with your music, follow the phone's silent switch, and can be turned off in Profili → Cilësimet. The sounds are synthesized by `scripts/make-sounds.py`, so there are no third-party recordings.
 

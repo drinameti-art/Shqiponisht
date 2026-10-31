@@ -6,13 +6,18 @@ import { Platform, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions,
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Confetti } from '@/components/motion';
-import { Button } from '@/components/ui';
+import { Button, SpeakButton } from '@/components/ui';
 import { Message, strokeMessage, useStrokeOrder, useWritingPad, type PadFeedback } from '@/components/writing';
 import { KANA } from '@/data/kana';
 import { KANJI } from '@/data/kanji';
 import { useProgress } from '@/lib/progress-context';
 import { hasStrokes } from '@/lib/writing';
 import { C, R, S } from '@/theme';
+
+/** What to pronounce for the character: the kana itself, or a kanji's first example word. */
+function sayable(char: string): string {
+  return KANJI.find((k) => k.char === char)?.examples[0].kana ?? char;
+}
 
 /** What to show under the character: its reading (kana) or meaning (kanji). */
 function describe(char: string): string {
@@ -79,6 +84,7 @@ export default function WriteScreen() {
             {describe(char)} · {order.total} {order.total === 1 ? 'vijë' : 'vija'}
           </Text>
         </View>
+        <SpeakButton text={sayable(char)} />
       </View>
 
       <View style={styles.seg} accessibilityRole="tablist">

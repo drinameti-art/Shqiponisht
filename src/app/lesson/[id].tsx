@@ -7,11 +7,13 @@ import Animated, { FadeIn, FadeInDown, FadeInUp, SlideInRight, ZoomIn } from 're
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Confetti, CountUp, EASE_OUT, Feedback } from '@/components/motion';
-import { Button, ProgressBar } from '@/components/ui';
+import { Button, ProgressBar, SpeakButton } from '@/components/ui';
 import { lessonById } from '@/data/lessons';
-import { lessonXp, passes, PASS_RATIO } from '@/lib/progress';
-import { useProgress } from '@/lib/progress-context';
-import { buildQuiz, seededRng } from '@/lib/quiz';
+import { passes, PASS_RATIO } from '@/lib/progress';
+import { useProgress, type Answer } from '@/lib/progress-context';
+import { buildQuiz, buildReviewQuiz, seededRng } from '@/lib/quiz';
+import { dueItems } from '@/lib/review';
+import { speakJapanese } from '@/lib/speech';
 import { C, R, S } from '@/theme';
 
 function feel(kind: 'ok' | 'bad') {
@@ -25,15 +27,23 @@ const PRAISE = ['Saktë!', 'Shumë mirë!', 'Bravo!', 'すごい!', 'Perfekt!'];
 
 export default function LessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const lesson = lessonById(id);
-  const { finishLesson, plus, sfx } = useProgress();
+  const { finishLesson, finishReview, plus, sfx, progress, today } = useProgress();
+  // "review" is the daily spaced-review session; anything else is a lesson id.
+  const isReview = id === 'review';
+  const lesson = isReview ? undefined : lessonById(id);
+  // The review list is fixed when the session opens, so answering doesn't reshuffle it.
+  const [reviewItems] = useState(() => (isReview ? dueItems(progress.review, today) : []));
 
   const [seed, setSeed] = useState(() => Date.now());
-  const quiz = useMemo(() => (lesson ? buildQuiz(lesson, seededRng(seed)) : []), [lesson, seed]);
+  const quiz = useMemo(
+    () => (isReview ? buildReviewQuiz(reviewItems, seededRng(seed)) : lesson ? buildQuiz(lesson, seededRng(seed)) : []),
+    [isReview, reviewItems, lesson, seed],
+  );
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [checked, setChecked] = useState(false);
-  const [correct, setCorrect] = useState(0);
+  const [answers, setAnswers] = useState<Answer[]>([]);
+  const correct = answers.filter((a) => a.correct).length;
   /** Bumped on every select / check, to replay the option's feedback animation. */
   const [bump, setBump] = useState(0);
   const [result, setResult] = useState<{ xp: number } | null>(null);
@@ -43,18 +53,20 @@ export default function LessonScreen() {
     setIndex(0);
     setSelected(null);
     setChecked(false);
-    setCorrect(0);
+    setAnswers([]);
     setResult(null);
   };
 
   // Plus lessons can be reached by deep link too; send those to the paywall.
   if (lesson?.premium && !plus) return <Redirect href="/plus" />;
 
-  if (!lesson) {
+  if ((!lesson && !isReview) || quiz.length === 0) {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
-          <Text style={styles.prompt}>Mësimi nuk u gjet.</Text>
+          <Text style={[styles.prompt, { textAlign: 'center' }]}>
+            {isReview ? 'Asgjë për të përsëritur tani. Kthehu nesër!' : 'Mësimi nuk u gjet.'}
+          </Text>
           <Button label="Kthehu" onPress={() => router.back()} style={{ marginTop: S.lg, alignSelf: 'stretch' }} />
         </View>
       </SafeAreaView>
@@ -63,9 +75,11 @@ export default function LessonScreen() {
 
   const close = () => (router.canGoBack() ? router.back() : router.replace('/'));
 
+  const title = isReview ? 'Përsëritja e ditës' : lesson!.title;
+
   if (result) {
     const total = quiz.length;
-    const ok = passes(correct, total);
+    const ok = isReview || passes(correct, total);
     const needed = Math.ceil(PASS_RATIO * total);
     return (
       <SafeAreaView style={styles.safe}>
@@ -74,12 +88,24 @@ export default function LessonScreen() {
             <Text style={styles.medalText}>{correct === total ? '満' : ok ? '良' : '頑'}</Text>
           </Animated.View>
           <Animated.Text entering={FadeInUp.delay(150).duration(300).easing(EASE_OUT)} style={styles.doneTitle}>
-            {correct === total ? 'Pa asnjë gabim!' : ok ? 'Mësimi u kalua!' : 'Edhe pak!'}
+            {correct === total
+              ? 'Pa asnjë gabim!'
+              : isReview
+                ? 'Përsëritja u krye!'
+                : ok
+                  ? 'Mësimi u kalua!'
+                  : 'Edhe pak!'}
           </Animated.Text>
           <Animated.Text
             entering={FadeInUp.delay(220).duration(300).easing(EASE_OUT)}
             style={[styles.doneSub, { textAlign: 'center' }]}>
-            {ok ? lesson.title : `Të paktën ${needed} përgjigje të sakta hapin mësimin tjetër. がんばって!`}
+            {isReview
+              ? correct === total
+                ? title
+                : 'Gabimet do të kthehen sërish sot, derisa t’i mësosh.'
+              : ok
+                ? title
+                : `Të paktën ${needed} përgjigje të sakta hapin mësimin tjetër. がんばって!`}
           </Animated.Text>
           <Animated.View entering={FadeInUp.delay(320).duration(300).easing(EASE_OUT)} style={styles.stats}>
             <Stat value={<CountUp value={result.xp} prefix="+" style={styles.statValue} />} label="XP" />
@@ -87,12 +113,14 @@ export default function LessonScreen() {
             <Stat value={`${Math.round((correct / total) * 100)}%`} label="saktësi" />
           </Animated.View>
           <Button label={ok ? 'Vazhdo' : 'Provo përsëri'} onPress={ok ? close : retry} style={styles.wide} />
-          <Button
-            label={ok ? 'Përsërit mësimin' : 'Kthehu'}
-            variant="ghost"
-            style={styles.wide}
-            onPress={ok ? retry : close}
-          />
+          {!isReview && (
+            <Button
+              label={ok ? 'Përsërit mësimin' : 'Kthehu'}
+              variant="ghost"
+              style={styles.wide}
+              onPress={ok ? retry : close}
+            />
+          )}
         </View>
         {ok && <Confetti />}
       </SafeAreaView>
@@ -107,9 +135,11 @@ export default function LessonScreen() {
       if (selected === null) return;
       setChecked(true);
       setBump((b) => b + 1);
-      if (isRight) setCorrect((c) => c + 1);
+      setAnswers((a) => [...a, { item: q.item, correct: isRight }]);
       feel(isRight ? 'ok' : 'bad');
       sfx(isRight ? 'correct' : 'wrong');
+      // Hearing the answer right after the sound effect ties the sound to the script.
+      if (progress.sound) setTimeout(() => speakJapanese(q.speak), 550);
       return;
     }
     if (index < quiz.length - 1) {
@@ -118,10 +148,10 @@ export default function LessonScreen() {
       setChecked(false);
       return;
     }
-    // `correct` already includes this question's answer (it was counted on check).
-    finishLesson(lesson.id, correct, quiz.length);
-    sfx(passes(correct, quiz.length) ? 'complete' : 'retry');
-    setResult({ xp: lessonXp(correct, quiz.length) });
+    // `answers` already includes this question's answer (it was recorded on check).
+    const xp = isReview ? finishReview(answers) : finishLesson(lesson!.id, answers);
+    sfx(isReview || passes(correct, quiz.length) ? 'complete' : 'retry');
+    setResult({ xp });
   };
 
   return (
@@ -142,6 +172,11 @@ export default function LessonScreen() {
           entering={index === 0 ? FadeIn.duration(250) : SlideInRight.duration(260).easing(EASE_OUT)}>
           <Text style={styles.instruction}>{q.instruction}</Text>
           <Text style={[styles.prompt, q.promptIsJapanese && styles.promptJp]}>{q.prompt}</Text>
+          {q.promptIsJapanese && (
+            <View style={styles.promptSpeak}>
+              <SpeakButton text={q.speak} size={44} />
+            </View>
+          )}
           <View style={styles.options}>
             {q.options.map((o, i) => {
               const state = !checked
@@ -192,9 +227,12 @@ export default function LessonScreen() {
             entering={FadeInDown.duration(220).easing(EASE_OUT)}
             style={styles.feedback}
             accessibilityLiveRegion="polite">
-            <Text style={[styles.feedbackTitle, { color: isRight ? C.greenDark : C.redDark }]}>
-              {isRight ? PRAISE[index % PRAISE.length] : 'Nuk është saktë.'}
-            </Text>
+            <View style={styles.feedbackHead}>
+              <Text style={[styles.feedbackTitle, { color: isRight ? C.greenDark : C.redDark }]}>
+                {isRight ? PRAISE[index % PRAISE.length] : 'Nuk është saktë.'}
+              </Text>
+              <SpeakButton text={q.speak} size={36} />
+            </View>
             <Text style={[styles.feedbackBody, { color: isRight ? C.greenDark : C.redDark }]}>{q.explanation}</Text>
           </Animated.View>
         )}
@@ -267,6 +305,8 @@ const styles = StyleSheet.create({
   footerOk: { backgroundColor: C.greenSoft },
   footerBad: { backgroundColor: C.redSoft },
   feedback: { gap: 4, maxWidth: 640, width: '100%', alignSelf: 'center' },
+  promptSpeak: { alignItems: 'center', marginTop: -S.md, marginBottom: S.lg },
+  feedbackHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   feedbackTitle: { fontSize: 18, fontWeight: '800' },
   feedbackBody: { fontSize: 14, lineHeight: 20 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: S.xl, gap: S.sm },

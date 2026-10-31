@@ -12,7 +12,9 @@
         "heading": "Çfarë ruhet në pajisjen tënde",
         "body": [
           "Aplikacioni nuk kërkon llogari. Emri që shkruan në fillim, përparimi në mësime, pikët XP, seria e ditëve dhe cilësimet ruhen vetëm në pajisjen tënde. Ato nuk dërgohen te ne dhe ne nuk kemi qasje në to.",
-          "Aplikacioni nuk përdor mikrofonin, kamerën, vendndodhjen apo kontaktet e tua."
+          "Aplikacioni nuk përdor mikrofonin, kamerën, vendndodhjen apo kontaktet e tua.",
+          "Shqiptimi japonez luhet me zërin e integruar të telefonit tënd. Kujtesat ditore, nëse i aktivizon, janë njoftime lokale që i planifikon vetë telefoni; asnjë e dhënë nuk dërgohet te ne për to.",
+          "Kodi i rezervimit që mund të kopjosh te Profili përmban përparimin tënd dhe emrin që ke shkruar. Ai mbetet vetëm te ti: ne nuk e marrim dhe nuk e ruajmë. Mbaje si çdo shënim personal."
         ]
       },
       {
@@ -67,7 +69,9 @@
         "heading": "What stays on your device",
         "body": [
           "The app does not require an account. The name you enter at the start, your lesson progress, XP, streak and settings are stored only on your device. They are not sent to us and we cannot access them.",
-          "The app does not use your microphone, camera, location or contacts."
+          "The app does not use your microphone, camera, location or contacts.",
+          "Japanese pronunciation is played with your phone’s built-in voice. Daily reminders, if you turn them on, are local notifications scheduled by your phone; no data is sent to us for them.",
+          "The backup code you can copy in Profile contains your progress and the name you entered. It stays with you: we never receive or store it. Keep it like any personal note."
         ]
       },
       {

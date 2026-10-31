@@ -17,7 +17,17 @@ export type Kanji = {
   group: KanjiGroupId;
 };
 
-export type KanjiGroupId = 'numrat' | 'java' | 'trupi' | 'natyra' | 'shkolla' | 'foljet' | 'koha' | 'bota';
+export type KanjiGroupId =
+  | 'numrat'
+  | 'java'
+  | 'trupi'
+  | 'natyra'
+  | 'shkolla'
+  | 'foljet'
+  | 'koha'
+  | 'bota'
+  | 'para'
+  | 'njerezit';
 
 /** `premium` groups belong to Shqiponisht Plus. */
 export const KANJI_GROUPS: { id: KanjiGroupId; title: string; premium?: true }[] = [
@@ -29,6 +39,8 @@ export const KANJI_GROUPS: { id: KanjiGroupId; title: string; premium?: true }[]
   { id: 'foljet', title: 'Foljet', premium: true },
   { id: 'koha', title: 'Koha', premium: true },
   { id: 'bota', title: 'Bota rreth nesh', premium: true },
+  { id: 'para', title: 'Paratë dhe cilësitë', premium: true },
+  { id: 'njerezit', title: 'Njerëzit dhe gjuhët', premium: true },
 ];
 
 function r(kana: string, romaji: string): Reading {
@@ -120,6 +132,26 @@ const DATA: Record<KanjiGroupId, Row[]> = {
     ['西', 'perëndim', r('セイ', 'sei'), r('にし', 'nishi'), 6, [ex('西', 'にし', 'nishi', 'perëndim'), ex('関西', 'かんさい', 'kansai', 'rajoni Kansai')]],
     ['南', 'jug', r('ナン', 'nan'), r('みなみ', 'minami'), 9, [ex('南', 'みなみ', 'minami', 'jug'), ex('南口', 'みなみぐち', 'minamiguchi', 'dalja jugore')]],
     ['北', 'veri', r('ホク', 'hoku'), r('きた', 'kita'), 5, [ex('北', 'きた', 'kita', 'veri'), ex('北口', 'きたぐち', 'kitaguchi', 'dalja veriore')]],
+  ],
+  para: [
+    ['円', 'jen; rreth', r('エン', 'en'), r('まる', 'maru'), 4, [ex('百円', 'ひゃくえん', 'hyakuen', '100 jen'), ex('円', 'えん', 'en', 'jen')]],
+    ['百', 'njëqind', r('ヒャク', 'hyaku'), r('もも', 'momo'), 6, [ex('百', 'ひゃく', 'hyaku', 'njëqind'), ex('三百', 'さんびゃく', 'sanbyaku', 'treqind')]],
+    ['千', 'një mijë', r('セン', 'sen'), r('ち', 'chi'), 3, [ex('千', 'せん', 'sen', 'një mijë'), ex('三千', 'さんぜん', 'sanzen', 'tre mijë')]],
+    ['万', 'dhjetë mijë', r('マン', 'man'), r('よろず', 'yorozu'), 3, [ex('一万', 'いちまん', 'ichiman', 'dhjetë mijë'), ex('万円', 'まんえん', "man'en", '10 000 jen')]],
+    ['高', 'i lartë; i shtrenjtë', r('コウ', 'kō'), r('たか', 'taka'), 10, [ex('高い', 'たかい', 'takai', 'i shtrenjtë; i lartë'), ex('高校', 'こうこう', 'kōkō', 'shkollë e mesme')]],
+    ['安', 'i lirë; i qetë', r('アン', 'an'), r('やす', 'yasu'), 6, [ex('安い', 'やすい', 'yasui', 'i lirë'), ex('安心', 'あんしん', 'anshin', 'qetësi, siguri')]],
+    ['新', 'i ri (gjë e re)', r('シン', 'shin'), r('あたら', 'atara'), 13, [ex('新しい', 'あたらしい', 'atarashii', 'i ri'), ex('新聞', 'しんぶん', 'shinbun', 'gazetë')]],
+    ['古', 'i vjetër (gjë e vjetër)', r('コ', 'ko'), r('ふる', 'furu'), 5, [ex('古い', 'ふるい', 'furui', 'i vjetër'), ex('中古', 'ちゅうこ', 'chūko', 'i përdorur')]],
+  ],
+  njerezit: [
+    ['男', 'burrë', r('ダン', 'dan'), r('おとこ', 'otoko'), 7, [ex('男', 'おとこ', 'otoko', 'burrë'), ex('男の子', 'おとこのこ', 'otokonoko', 'djalë')]],
+    ['女', 'grua', r('ジョ', 'jo'), r('おんな', 'onna'), 3, [ex('女', 'おんな', 'onna', 'grua'), ex('女の子', 'おんなのこ', 'onnanoko', 'vajzë')]],
+    ['子', 'fëmijë', r('シ', 'shi'), r('こ', 'ko'), 3, [ex('子ども', 'こども', 'kodomo', 'fëmijë'), ex('女の子', 'おんなのこ', 'onnanoko', 'vajzë')]],
+    ['父', 'baba', r('フ', 'fu'), r('ちち', 'chichi'), 4, [ex('父', 'ちち', 'chichi', 'babai (im)'), ex('お父さん', 'おとうさん', 'otōsan', 'babai (i dikujt)')]],
+    ['母', 'nënë', r('ボ', 'bo'), r('はは', 'haha'), 5, [ex('母', 'はは', 'haha', 'nëna (ime)'), ex('お母さん', 'おかあさん', 'okāsan', 'nëna (e dikujt)')]],
+    ['友', 'mik', r('ユウ', 'yū'), r('とも', 'tomo'), 4, [ex('友だち', 'ともだち', 'tomodachi', 'shok, shoqe'), ex('友人', 'ゆうじん', 'yūjin', 'mik (zyrtare)')]],
+    ['語', 'gjuhë; fjalë', r('ゴ', 'go'), r('かた', 'kata'), 14, [ex('日本語', 'にほんご', 'nihongo', 'japonishtja'), ex('英語', 'えいご', 'eigo', 'anglishtja')]],
+    ['国', 'vend; shtet', r('コク', 'koku'), r('くに', 'kuni'), 8, [ex('国', 'くに', 'kuni', 'vend, shtet'), ex('外国', 'がいこく', 'gaikoku', 'vend i huaj')]],
   ],
 };
 

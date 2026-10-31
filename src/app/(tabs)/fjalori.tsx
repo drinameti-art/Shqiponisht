@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import { SectionList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { SpeakButton } from '@/components/ui';
 import { VOCAB_LESSONS, type Word } from '@/data/lessons';
 import { C, F, R, S } from '@/theme';
 
@@ -62,6 +63,7 @@ export default function Vocabulary() {
               </Text>
             </View>
             <Text style={styles.meaning}>{item.meaning}</Text>
+            <SpeakButton text={item.jp} size={34} />
           </View>
         )}
         ListEmptyComponent={<Text style={styles.empty}>Asnjë fjalë nuk përputhet me „{query}“.</Text>}

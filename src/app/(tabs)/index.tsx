@@ -7,6 +7,7 @@ import { Pulse } from '@/components/motion';
 import { Pill, ProgressBar, SectionTitle } from '@/components/ui';
 import { LESSONS } from '@/data/lessons';
 import { completedCount, currentStreak, lessonStatuses, xpToday, type LessonStatus } from '@/lib/progress';
+import { dueCount } from '@/lib/review';
 import { useProgress } from '@/lib/progress-context';
 import { C, R, S } from '@/theme';
 
@@ -24,6 +25,7 @@ export default function Today() {
   const goalMet = xp >= progress.dailyGoal;
   const statuses = lessonStatuses(progress);
   const done = completedCount(progress);
+  const due = dueCount(progress.review, today);
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -55,6 +57,27 @@ export default function Today() {
               : `${streak} ${streak === 1 ? 'ditë' : 'ditë rresht'} — mos e prish serinë!`}
           </Text>
         </View>
+
+        {Object.keys(progress.review).length > 0 && (
+          <Pressable
+            onPress={() => router.push({ pathname: '/lesson/[id]', params: { id: 'review' } })}
+            disabled={due === 0}
+            accessibilityRole="button"
+            style={({ pressed }) => [styles.reviewCard, due === 0 && styles.reviewDone, pressed && { opacity: 0.85 }]}>
+            <View style={[styles.reviewIcon, due === 0 && { backgroundColor: C.green }]}>
+              <Ionicons name={due === 0 ? 'checkmark' : 'repeat'} size={22} color={C.white} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.reviewTitle}>Përsëritja e ditës</Text>
+              <Text style={styles.reviewText}>
+                {due === 0
+                  ? 'Gjithçka e përsëritur për sot. Kthehu nesër!'
+                  : `${due} ${due === 1 ? 'gjë' : 'gjëra'} për t’i përsëritur · kujtesa zgjat më shumë`}
+              </Text>
+            </View>
+            {due > 0 && <Ionicons name="chevron-forward" size={22} color={C.ink} />}
+          </Pressable>
+        )}
 
         <SectionTitle>
           Rruga jote · {done} / {LESSONS.length}
@@ -208,6 +231,28 @@ const styles = StyleSheet.create({
   rowSub: { fontSize: 13, color: C.muted, marginTop: 1 },
   go: { backgroundColor: C.red, paddingVertical: 8, paddingHorizontal: 14, borderRadius: R.pill },
   goText: { color: C.white, fontWeight: '700', fontSize: 13 },
+  reviewCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: S.md,
+    marginTop: S.md,
+    backgroundColor: C.goldSoft,
+    borderRadius: R.lg,
+    borderWidth: 1,
+    borderColor: '#f1d79a',
+    padding: S.lg,
+  },
+  reviewDone: { backgroundColor: C.greenSoft, borderColor: '#bfe3cc' },
+  reviewIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: C.gold,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  reviewTitle: { fontSize: 16, fontWeight: '800', color: C.ink },
+  reviewText: { fontSize: 13.5, color: C.muted, marginTop: 2 },
   plusHead: { flexDirection: 'row', alignItems: 'center', gap: S.sm },
   plusBadge: { backgroundColor: C.gold, borderRadius: R.pill, paddingVertical: 3, paddingHorizontal: 8 },
   plusBadgeText: { color: C.white, fontSize: 11, fontWeight: '800', letterSpacing: 1 },

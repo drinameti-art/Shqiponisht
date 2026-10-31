@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { WriteButton } from '@/components/ui';
+import { SpeakButton, WriteButton } from '@/components/ui';
 import { useProgress } from '@/lib/progress-context';
 import { KANJI_GROUPS, kanjiByChar, kanjiInGroup, type Reading } from '@/data/kanji';
 import { C, F, R, S } from '@/theme';
@@ -40,11 +40,14 @@ export default function KanjiScreen() {
           <View style={styles.examples}>
             {k.examples.map((e) => (
               <View key={e.jp} style={styles.example}>
-                <Text style={styles.exampleJp}>{e.jp}</Text>
-                <Text style={styles.exampleSub}>
-                  {e.kana} · {e.sq}
-                </Text>
-                <Text style={styles.exampleMeaning}>{e.meaning}</Text>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.exampleJp}>{e.jp}</Text>
+                  <Text style={styles.exampleSub}>
+                    {e.kana} · {e.sq}
+                  </Text>
+                  <Text style={styles.exampleMeaning}>{e.meaning}</Text>
+                </View>
+                <SpeakButton text={e.kana} tone="dark" size={36} />
               </View>
             ))}
           </View>
@@ -134,7 +137,14 @@ const styles = StyleSheet.create({
   readingSq: { fontSize: 14, fontWeight: '700', color: C.cream },
   readingRomaji: { fontSize: 12, fontWeight: '400', color: 'rgba(247,241,229,0.55)', fontFamily: F.mono },
   examples: { gap: S.sm },
-  example: { backgroundColor: 'rgba(255,255,255,0.08)', borderRadius: R.sm, padding: S.sm },
+  example: {
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    borderRadius: R.sm,
+    padding: S.sm,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: S.sm,
+  },
   exampleJp: { fontSize: 18, fontWeight: '600', color: C.cream },
   exampleSub: { fontSize: 12.5, color: 'rgba(247,241,229,0.7)', marginTop: 2 },
   exampleMeaning: { fontSize: 13.5, color: C.cream, marginTop: 2 },

@@ -49,7 +49,14 @@
           "enableBackgroundPlayback": false
         }
       ],
-      "expo-asset"
+      "expo-asset",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/notification-icon.png",
+          "color": "#e41e20"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

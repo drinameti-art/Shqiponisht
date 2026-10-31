@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { WriteButton } from '@/components/ui';
+import { SpeakButton, WriteButton } from '@/components/ui';
 import { KANA_GRID, KANA_TIPS, kanaByRomaji, VOICED_GRID, type Script } from '@/data/kana';
 import { VOCAB_LESSONS } from '@/data/lessons';
 import { spellsDifferently } from '@/lib/albanian';
@@ -76,7 +76,10 @@ export default function KanaScreen() {
               <Text style={styles.bigText}>{k[script]}</Text>
             </View>
             <View style={{ flex: 1 }}>
-              <Text style={styles.reading}>{k.sq}</Text>
+              <View style={styles.readingRow}>
+                <Text style={styles.reading}>{k.sq}</Text>
+                <SpeakButton text={k[script]} tone="dark" size={38} />
+              </View>
               <Text style={styles.romaji}>romaji: {k.romaji}</Text>
               <Text style={styles.other}>
                 {script === 'hiragana' ? 'katakana' : 'hiragana'}: {script === 'hiragana' ? k.katakana : k.hiragana}
@@ -131,6 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   bigText: { fontSize: 60, color: C.cream },
+  readingRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: S.sm },
   reading: { fontSize: 30, fontWeight: '800', color: C.cream },
   romaji: { fontSize: 13, color: 'rgba(247,241,229,0.6)', fontFamily: F.mono, marginTop: 2 },
   other: { fontSize: 13, color: 'rgba(247,241,229,0.6)', marginTop: 2 },

@@ -19,8 +19,8 @@ const PLUS_KANJI = KANJI.filter((k) => PLUS_GROUPS.has(k.group)).length;
 
 const BENEFITS: [icon: 'school' | 'language' | 'chatbubbles' | 'time', text: string][] = [
   ['school', `Niveli 2: ${PLUS_LESSONS} mësime të reja`],
-  ['language', `${PLUS_KANJI} kanji të reja — foljet, koha, drejtimet, moti`],
-  ['chatbubbles', 'Foljet e para dhe fjalitë e para në japonisht'],
+  ['language', `${PLUS_KANJI} kanji të reja: foljet, koha, paratë, njerëzit`],
+  ['chatbubbles', 'Folje, fjali, blerje dhe restoranti'],
   ['time', 'Hiragana dhe katakana të reja: が, ざ, ば, ぱ…'],
 ];
 

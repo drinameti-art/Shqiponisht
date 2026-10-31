@@ -1,5 +1,7 @@
 import { LESSONS } from '@/data/lessons';
 
+import type { Card } from './review';
+
 /** A calendar day in the learner's local time, formatted YYYY-MM-DD. */
 export type DayKey = string;
 
@@ -20,6 +22,10 @@ export type Progress = {
   demoPlus: boolean;
   /** Sound effects on or off. */
   sound: boolean;
+  /** Spaced-review cards, keyed by item (see quiz ItemKey). */
+  review: Record<string, Card>;
+  /** Daily practice reminder (local notification). */
+  reminder: { enabled: boolean; hour: number; minute: number };
 };
 
 export const DAILY_GOALS = [10, 20, 30, 50] as const;
@@ -36,6 +42,8 @@ export const INITIAL_PROGRESS: Progress = {
   plus: false,
   demoPlus: false,
   sound: true,
+  review: {},
+  reminder: { enabled: false, hour: 19, minute: 0 },
 };
 
 export function hasPlus(state: Progress): boolean {
@@ -60,8 +68,19 @@ export function lessonXp(correct: number, total: number): number {
   return correct * 2 + (total > 0 && correct === total ? 5 : 0);
 }
 
+/** Adds practice XP for today and keeps the streak going (shared by lessons and reviews). */
+function practise(state: Progress, xpEarned: number, today: DayKey): Progress {
+  let streak = state.streak;
+  if (streak.lastDay !== today) {
+    const continues = streak.lastDay === previousDay(today);
+    streak = { count: continues ? streak.count + 1 : 1, lastDay: today };
+  }
+  const todayXp = state.today.day === today ? state.today.xp : 0;
+  return { ...state, xp: state.xp + xpEarned, today: { day: today, xp: todayXp + xpEarned }, streak };
+}
+
 /**
- * Records a finished lesson. The streak grows by one on the first lesson of
+ * Records a finished lesson. The streak grows by one on the first practice of
  * a day that directly follows the last practice day, and restarts at 1 after
  * a missed day.
  */
@@ -72,22 +91,11 @@ export function completeLesson(
 ): { state: Progress; xpEarned: number } {
   const xpEarned = lessonXp(result.correct, result.total);
   const prev = state.lessons[result.lessonId];
-
-  let streak = state.streak;
-  if (streak.lastDay !== today) {
-    const continues = streak.lastDay === previousDay(today);
-    streak = { count: continues ? streak.count + 1 : 1, lastDay: today };
-  }
-
-  const todayXp = state.today.day === today ? state.today.xp : 0;
-
+  const next = practise(state, xpEarned, today);
   return {
     xpEarned,
     state: {
-      ...state,
-      xp: state.xp + xpEarned,
-      today: { day: today, xp: todayXp + xpEarned },
-      streak,
+      ...next,
       lessons: {
         ...state.lessons,
         [result.lessonId]: {
@@ -98,6 +106,12 @@ export function completeLesson(
       },
     },
   };
+}
+
+/** Records a finished review session: 1 XP per right answer, and it counts for the streak. */
+export function completeReview(state: Progress, correct: number, today: DayKey): { state: Progress; xpEarned: number } {
+  const xpEarned = correct;
+  return { xpEarned, state: practise(state, xpEarned, today) };
 }
 
 /** The streak as it should be shown today: it lapses once a whole day is missed. */
@@ -155,7 +169,7 @@ export function parseProgress(raw: string | null): Progress {
   try {
     const data = JSON.parse(raw) as Partial<Progress>;
     if (data?.version !== 1) return INITIAL_PROGRESS;
-    return { ...INITIAL_PROGRESS, ...data };
+    return { ...INITIAL_PROGRESS, ...data, reminder: { ...INITIAL_PROGRESS.reminder, ...data.reminder } };
   } catch {
     return INITIAL_PROGRESS;
   }

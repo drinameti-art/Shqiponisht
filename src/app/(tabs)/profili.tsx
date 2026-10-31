@@ -2,19 +2,66 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import { Image } from 'expo-image';
 import { useState } from 'react';
-import { Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import * as Clipboard from 'expo-clipboard';
+import { Linking, Platform, Pressable, ScrollView, Share, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button, SectionTitle } from '@/components/ui';
+import { KANJI, KANJI_GROUPS } from '@/data/kanji';
+import { decodeBackup, encodeBackup } from '@/lib/backup';
+import { REMINDER_TIMES } from '@/lib/reminder-plan';
+import { remindersSupported, requestReminderPermission } from '@/lib/reminders';
 import { LESSONS } from '@/data/lessons';
 import { completedCount, currentStreak, DAILY_GOALS } from '@/lib/progress';
 import { useProgress } from '@/lib/progress-context';
+import { learnedCount } from '@/lib/review';
 import { C, R, S } from '@/theme';
+
+const PLUS_LESSONS = LESSONS.filter((l) => l.premium).length;
+const PLUS_GROUPS = new Set(KANJI_GROUPS.filter((g) => g.premium).map((g) => g.id));
+const PLUS_KANJI = KANJI.filter((k) => PLUS_GROUPS.has(k.group)).length;
 
 export default function Profile() {
   const { progress, today, update, reset, plus } = useProgress();
   const [confirmReset, setConfirmReset] = useState(false);
   const done = completedCount(progress);
+  const [reminderNote, setReminderNote] = useState<string | null>(null);
+  const [restoreOpen, setRestoreOpen] = useState(false);
+  const [code, setCode] = useState('');
+  const [backupNote, setBackupNote] = useState<string | null>(null);
+
+  const toggleReminder = async () => {
+    if (progress.reminder.enabled) {
+      update((p) => ({ ...p, reminder: { ...p.reminder, enabled: false } }));
+      setReminderNote(null);
+      return;
+    }
+    const granted = await requestReminderPermission();
+    if (granted) {
+      update((p) => ({ ...p, reminder: { ...p.reminder, enabled: true } }));
+      setReminderNote('Kujtesa vjen vetëm në ditët kur nuk ke praktikuar ende.');
+    } else {
+      setReminderNote('Lejo njoftimet për Shqiponisht te cilësimet e telefonit, pastaj provo përsëri.');
+    }
+  };
+
+  const copyBackup = async () => {
+    await Clipboard.setStringAsync(encodeBackup(progress));
+    setBackupNote('Kodi u kopjua. Ruaje diku të sigurt (p.sh. te shënimet ose email-i yt).');
+  };
+
+  const restoreBackup = () => {
+    const restored = decodeBackup(code, { plus: progress.plus, demoPlus: progress.demoPlus });
+    if (!restored) {
+      setBackupNote('Ky kod nuk është i vlefshëm. Kontrollo që e ke ngjitur të plotë.');
+      return;
+    }
+    update(() => restored);
+    setRestoreOpen(false);
+    setCode('');
+    const n = completedCount(restored);
+    setBackupNote(`Përparimi u rikthye: ${n} ${n === 1 ? 'mësim' : 'mësime'}, ${restored.xp} XP.`);
+  };
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -31,6 +78,7 @@ export default function Profile() {
           <Stat value={String(progress.xp)} label="XP gjithsej" />
           <Stat value={String(currentStreak(progress, today))} label="ditë rresht" />
           <Stat value={`${done}/${LESSONS.length}`} label="mësime" />
+          <Stat value={String(learnedCount(progress.review))} label="të mësuara" />
         </View>
 
         <SectionTitle>Qëllimi ditor</SectionTitle>
@@ -82,6 +130,86 @@ export default function Profile() {
           </View>
         </Pressable>
 
+        {remindersSupported && (
+          <View style={[styles.setting, styles.settingStack]}>
+            <Pressable
+              onPress={toggleReminder}
+              accessibilityRole="switch"
+              accessibilityState={{ checked: progress.reminder.enabled }}
+              style={styles.settingRow}>
+              <Ionicons
+                name={progress.reminder.enabled ? 'notifications' : 'notifications-off'}
+                size={22}
+                color={C.ink}
+              />
+              <Text style={styles.settingText}>Kujtesa ditore</Text>
+              <View style={[styles.toggle, progress.reminder.enabled && styles.toggleOn]}>
+                <View style={[styles.knob, progress.reminder.enabled && styles.knobOn]} />
+              </View>
+            </Pressable>
+            {progress.reminder.enabled && (
+              <View style={styles.times}>
+                {REMINDER_TIMES.map(([h, m]) => {
+                  const on = progress.reminder.hour === h && progress.reminder.minute === m;
+                  return (
+                    <Pressable
+                      key={`${h}:${m}`}
+                      onPress={() => update((p) => ({ ...p, reminder: { ...p.reminder, hour: h, minute: m } }))}
+                      accessibilityRole="radio"
+                      accessibilityState={{ selected: on }}
+                      style={[styles.time, on && styles.timeOn]}>
+                      <Text style={[styles.timeText, on && { color: C.red }]}>
+                        {String(h).padStart(2, '0')}:{String(m).padStart(2, '0')}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
+            )}
+            {reminderNote && <Text style={styles.note}>{reminderNote}</Text>}
+          </View>
+        )}
+
+        <SectionTitle>Ruaj përparimin</SectionTitle>
+        <View style={styles.about}>
+          <Text style={styles.aboutText}>
+            Përparimi ruhet vetëm në këtë telefon. Ruaje kodin e rezervimit për ta rikthyer në një telefon tjetër ose
+            pas rinstalimit.
+          </Text>
+          <View style={styles.row}>
+            <Button label="Kopjo kodin" variant="secondary" onPress={copyBackup} style={{ flex: 1 }} />
+            {Platform.OS !== 'web' && (
+              <Button
+                label="Ndaj"
+                variant="secondary"
+                onPress={() => void Share.share({ message: encodeBackup(progress) })}
+                style={{ flex: 1 }}
+              />
+            )}
+          </View>
+          {restoreOpen ? (
+            <>
+              <TextInput
+                value={code}
+                onChangeText={(t) => {
+                  setCode(t);
+                  setBackupNote(null);
+                }}
+                placeholder="Ngjit kodin këtu (SHQ1-…)"
+                placeholderTextColor={C.muted}
+                style={styles.codeInput}
+                multiline
+                autoCapitalize="none"
+                autoCorrect={false}
+              />
+              <Button label="Rikthe përparimin" onPress={restoreBackup} disabled={!code.trim()} />
+            </>
+          ) : (
+            <Button label="Rikthe nga kodi" variant="ghost" onPress={() => setRestoreOpen(true)} />
+          )}
+          {backupNote && <Text style={styles.note}>{backupNote}</Text>}
+        </View>
+
         <SectionTitle>Shqiponisht Plus</SectionTitle>
         <View style={styles.about}>
           <Text style={styles.aboutText}>
@@ -89,7 +217,7 @@ export default function Profile() {
               ? 'Plus është aktiv. Ke qasje në të gjitha mësimet e Nivelit 2.'
               : plus
                 ? 'Plus është aktiv në modalitetin demo.'
-                : 'Niveli 2 — folje, fjali, koha dhe 27 kanji të reja — është pjesë e Plus.'}
+                : `Niveli 2 — ${PLUS_LESSONS} mësime: folje, fjali, koha, blerjet, restoranti dhe ${PLUS_KANJI} kanji të reja — është pjesë e Plus.`}
           </Text>
           {progress.plus ? (
             <Button
@@ -210,5 +338,24 @@ const styles = StyleSheet.create({
   knobOn: { transform: [{ translateX: 20 }] },
   legalLinks: { flexDirection: 'row', justifyContent: 'center', gap: S.lg, marginTop: S.xl },
   legalLink: { fontSize: 13.5, color: C.ink, textDecorationLine: 'underline' },
+  settingStack: { flexDirection: 'column', alignItems: 'stretch', gap: S.md },
+  settingRow: { flexDirection: 'row', alignItems: 'center', gap: S.md },
+  times: { flexDirection: 'row', flexWrap: 'wrap', gap: S.sm },
+  time: { borderWidth: 2, borderColor: C.line, borderRadius: R.pill, paddingVertical: 6, paddingHorizontal: 12 },
+  timeOn: { borderColor: C.red, backgroundColor: C.redSoft },
+  timeText: { fontSize: 14, fontWeight: '700', color: C.ink },
+  note: { fontSize: 13, lineHeight: 18, color: C.muted },
+  row: { flexDirection: 'row', gap: S.sm },
+  codeInput: {
+    minHeight: 70,
+    borderWidth: 2,
+    borderColor: C.line,
+    borderRadius: R.md,
+    padding: S.md,
+    fontSize: 13,
+    color: C.ink,
+    backgroundColor: C.cream,
+    textAlignVertical: 'top',
+  },
   credits: { fontSize: 11.5, lineHeight: 16, color: C.muted, textAlign: 'center', marginTop: S.xl },
 });

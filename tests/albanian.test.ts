@@ -27,3 +27,11 @@ describe('romajiToAlbanian', () => {
     expect(spellsDifferently('ka')).toBe(false);
   });
 });
+
+describe('speakable', () => {
+  it('removes the learner spacing and trailing full stop before speaking', async () => {
+    const { speakable } = await import('@/lib/speakable');
+    expect(speakable('これは ほんです。')).toBe('これはほんです');
+    expect(speakable('わたしは がくせいです。 はい。')).toBe('わたしはがくせいです、はい');
+  });
+});

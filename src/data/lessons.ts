@@ -266,6 +266,88 @@ const SENTENCES: VocabLesson = {
   ]),
 };
 
+const NUMBERS_BIG: VocabLesson = {
+  id: 'numrat-2',
+  kind: 'vocab',
+  premium: true,
+  title: 'Numrat deri në 10 000',
+  subtitle: 'じゅういち, ひゃく, せん…',
+  badge: '百',
+  words: words([
+    ['じゅういち', 'jūichi', '11 · njëmbëdhjetë', '十一'],
+    ['にじゅう', 'nijū', '20 · njëzet', '二十'],
+    ['さんじゅう', 'sanjū', '30 · tridhjetë', '三十'],
+    ['ひゃく', 'hyaku', '100 · njëqind', '百'],
+    ['にひゃく', 'nihyaku', '200 · dyqind', '二百'],
+    ['さんびゃく', 'sanbyaku', '300 · treqind', '三百'],
+    ['せん', 'sen', '1000 · një mijë', '千'],
+    ['いちまん', 'ichiman', '10 000 · dhjetë mijë', '一万'],
+    ['いくつ', 'ikutsu', 'Sa copë?'],
+    ['ばんごう', 'bangō', 'numër (telefoni, dhome…)', '番号'],
+  ]),
+};
+
+const SHOPPING: VocabLesson = {
+  id: 'blerjet',
+  kind: 'vocab',
+  premium: true,
+  title: 'Në dyqan',
+  subtitle: 'えん, たかい, やすい…',
+  badge: '円',
+  words: words([
+    ['えん', 'en', 'jen (monedha)', '円'],
+    ['おかね', 'okane', 'para', 'お金'],
+    ['たかい', 'takai', 'i shtrenjtë', '高い'],
+    ['やすい', 'yasui', 'i lirë', '安い'],
+    ['これを ください', 'kore o kudasai', 'Më jepni këtë, ju lutem.'],
+    ['カード', 'kādo', 'kartë (pagese)'],
+    ['げんきん', 'genkin', 'para në dorë', '現金'],
+    ['レシート', 'reshīto', 'faturë'],
+    ['ふくろ', 'fukuro', 'qese', '袋'],
+  ]),
+};
+
+const ADJECTIVES: VocabLesson = {
+  id: 'mbiemrat',
+  kind: 'vocab',
+  premium: true,
+  title: 'Mbiemrat',
+  subtitle: 'おおきい, あたらしい…',
+  badge: '新',
+  words: words([
+    ['おおきい', 'ōkii', 'i madh', '大きい'],
+    ['ちいさい', 'chiisai', 'i vogël', '小さい'],
+    ['あたらしい', 'atarashii', 'i ri (për gjëra)', '新しい'],
+    ['ふるい', 'furui', 'i vjetër (për gjëra)', '古い'],
+    ['あつい', 'atsui', 'nxehtë (moti)', '暑い'],
+    ['さむい', 'samui', 'ftohtë (moti)', '寒い'],
+    ['たのしい', 'tanoshii', 'argëtues, i këndshëm', '楽しい'],
+    ['むずかしい', 'muzukashii', 'i vështirë', '難しい'],
+    ['かんたん', 'kantan', 'i lehtë, i thjeshtë', '簡単'],
+    ['やさしい', 'yasashii', 'i sjellshëm, i butë', '優しい'],
+  ]),
+};
+
+const RESTAURANT: VocabLesson = {
+  id: 'restoranti',
+  kind: 'vocab',
+  premium: true,
+  title: 'Në restorant',
+  subtitle: 'メニュー, いただきます…',
+  badge: '食',
+  words: words([
+    ['なんにんですか', 'nannin desu ka', 'Sa veta jeni?', '何人ですか'],
+    ['ふたりです', 'futari desu', 'Jemi dy veta.', '二人です'],
+    ['メニュー', 'menyū', 'menu'],
+    ['おみずを ください', 'omizu o kudasai', 'Një ujë, ju lutem.', 'お水を下さい'],
+    ['これは なんですか', 'kore wa nan desu ka', 'Çfarë është kjo?', 'これは何ですか'],
+    ['いただきます', 'itadakimasu', 'Para ngrënies: „faleminderit për ushqimin“'],
+    ['ごちそうさまでした', 'gochisōsama deshita', 'Pas ngrënies: „ishte shumë e mirë“'],
+    ['おかんじょうを おねがいします', 'okanjō o onegai shimasu', 'Llogarinë, ju lutem.', 'お勘定をお願いします'],
+    ['ベジタリアンです', 'bejitarian desu', 'Jam vegjetarian/e.'],
+  ]),
+};
+
 /** The learning path, in unlock order. Lessons marked `premium` need Shqiponisht Plus. */
 export const LESSONS: Lesson[] = [
   kanaLesson('hira-a', 'hiragana', ['a'], 'Hiragana: zanoret'),
@@ -301,6 +383,12 @@ export const LESSONS: Lesson[] = [
   kanjiLesson('koha'),
   SENTENCES,
   kanjiLesson('bota'),
+  NUMBERS_BIG,
+  kanjiLesson('para'),
+  SHOPPING,
+  ADJECTIVES,
+  kanjiLesson('njerezit'),
+  RESTAURANT,
 ];
 
 export const KANJI_LESSONS = LESSONS.filter((l): l is KanjiLesson => l.kind === 'kanji');

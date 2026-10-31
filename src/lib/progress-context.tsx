@@ -1,9 +1,13 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 
-import { completeLesson, dayKey, hasPlus, INITIAL_PROGRESS, type Progress } from './progress';
+import { completeLesson, completeReview, dayKey, hasPlus, INITIAL_PROGRESS, type Progress } from './progress';
+import { syncReminders } from './reminders';
+import { recordAnswers } from './review';
 import { loadProgress, saveProgress } from './storage';
 import { playSound, type SoundName } from './sounds';
 import { subscription } from './subscription';
+
+export type Answer = { item: string; correct: boolean };
 
 type ProgressApi = {
   progress: Progress;
@@ -14,7 +18,10 @@ type ProgressApi = {
   /** Plays a sound effect, unless the learner turned sounds off. */
   sfx: (name: SoundName) => void;
   update: (fn: (p: Progress) => Progress) => void;
-  finishLesson: (lessonId: string, correct: number, total: number) => number;
+  /** Records a finished lesson and feeds every answer into spaced review. Returns XP earned. */
+  finishLesson: (lessonId: string, answers: Answer[]) => number;
+  /** Records a finished review session. Returns XP earned. */
+  finishReview: (answers: Answer[]) => number;
   reset: () => void;
 };
 
@@ -50,28 +57,51 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
   const update = useCallback((fn: (p: Progress) => Progress) => commit(fn(latest.current)), [commit]);
 
+  // Keep scheduled reminders in step with practice and settings (skips days already practised).
+  useEffect(() => {
+    if (ready) void syncReminders(progress, today);
+  }, [ready, progress, today]);
+
   const finishLesson = useCallback(
-    (lessonId: string, correct: number, total: number) => {
-      const { state, xpEarned } = completeLesson(latest.current, { lessonId, correct, total }, dayKey(new Date()));
-      commit(state);
+    (lessonId: string, answers: Answer[]) => {
+      const day = dayKey(new Date());
+      const correct = answers.filter((a) => a.correct).length;
+      const { state, xpEarned } = completeLesson(latest.current, { lessonId, correct, total: answers.length }, day);
+      commit({ ...state, review: recordAnswers(state.review, answers, day) });
       return xpEarned;
     },
     [commit],
   );
 
-  // A reset clears learning progress but keeps the subscription status.
+  const finishReview = useCallback(
+    (answers: Answer[]) => {
+      const day = dayKey(new Date());
+      const { state, xpEarned } = completeReview(latest.current, answers.filter((a) => a.correct).length, day);
+      commit({ ...state, review: recordAnswers(state.review, answers, day) });
+      return xpEarned;
+    },
+    [commit],
+  );
+
   const sfx = useCallback((name: SoundName) => {
     if (latest.current.sound) playSound(name);
   }, []);
 
+  // A reset clears learning progress but keeps the subscription and settings.
   const reset = useCallback(
-    () => commit({ ...INITIAL_PROGRESS, plus: latest.current.plus, sound: latest.current.sound }),
+    () =>
+      commit({
+        ...INITIAL_PROGRESS,
+        plus: latest.current.plus,
+        sound: latest.current.sound,
+        reminder: latest.current.reminder,
+      }),
     [commit],
   );
 
   const api = useMemo(
-    () => ({ progress, ready, today, plus: hasPlus(progress), sfx, update, finishLesson, reset }),
-    [progress, ready, today, sfx, update, finishLesson, reset],
+    () => ({ progress, ready, today, plus: hasPlus(progress), sfx, update, finishLesson, finishReview, reset }),
+    [progress, ready, today, sfx, update, finishLesson, finishReview, reset],
   );
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
 }
