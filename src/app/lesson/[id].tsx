@@ -257,12 +257,12 @@ export default function LessonScreen() {
             style={styles.feedback}
             accessibilityLiveRegion="polite">
             <View style={styles.feedbackHead}>
-              <Text style={[styles.feedbackTitle, { color: isRight ? C.greenDark : C.redDark }]}>
+              <Text style={[styles.feedbackTitle, { color: isRight ? C.greenText : C.redText }]}>
                 {isRight ? PRAISE[index % PRAISE.length] : 'Nuk është saktë.'}
               </Text>
               <SpeakButton text={q.speak} size={36} />
             </View>
-            <Text style={[styles.feedbackBody, { color: isRight ? C.greenDark : C.redDark }]}>{q.explanation}</Text>
+            <Text style={[styles.feedbackBody, { color: isRight ? C.greenText : C.redText }]}>{q.explanation}</Text>
           </Animated.View>
         )}
         <Button
@@ -335,7 +335,7 @@ function Stat({ value, label }: { value: ReactNode; label: string }) {
 
 const OPTION_STATES = StyleSheet.create({
   idle: {},
-  selected: { borderColor: '#5b8def', backgroundColor: '#eef3fe' },
+  selected: { borderColor: C.selectLine, backgroundColor: C.selectBg },
   right: { borderColor: C.green, backgroundColor: C.greenSoft },
   wrong: { borderColor: C.red, backgroundColor: C.redSoft },
 });
@@ -418,9 +418,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 6,
-    borderColor: '#f6d27a',
+    borderColor: C.goldLine,
   },
-  medalText: { fontSize: 52, fontWeight: '800', color: '#7a4b00' },
+  medalText: { fontSize: 52, fontWeight: '800', color: C.goldText },
   doneTitle: { fontSize: 26, fontWeight: '800', color: C.ink, marginTop: S.lg },
   doneSub: { fontSize: 15, color: C.muted },
   stats: { flexDirection: 'row', gap: S.sm, marginVertical: S.xl },

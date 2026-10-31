@@ -33,7 +33,7 @@ function RootStack() {
 export default function RootLayout() {
   return (
     <ProgressProvider>
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <RootStack />
     </ProgressProvider>
   );

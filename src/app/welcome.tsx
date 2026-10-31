@@ -1,17 +1,29 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { Image } from 'expo-image';
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import Animated, { FadeIn, FadeInDown, FadeInRight, ZoomIn } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EASE_OUT } from '@/components/motion';
+import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui';
 import { decodeBackup } from '@/lib/backup';
 import { DAILY_GOALS } from '@/lib/progress';
 import { useProgress } from '@/lib/progress-context';
 import { C, R, S } from '@/theme';
+
+const LOGO_WIDTH = Math.min(300, Dimensions.get('window').width * 0.66);
 
 type Step = 'cover' | 'name' | 'goal' | 'restore';
 
@@ -51,12 +63,7 @@ export default function Welcome() {
       <View style={styles.cover}>
         <SafeAreaView edges={['top']} style={styles.hero}>
           <Animated.View entering={ZoomIn.duration(600).easing(EASE_OUT)} style={styles.logoWrap}>
-            <Image
-              source={require('@/assets/images/logo-mark.png')}
-              style={styles.logo}
-              contentFit="contain"
-              accessibilityLabel="Logo e Shqiponisht: portë torii mbi hartën e Kosovës"
-            />
+            <Logo width={LOGO_WIDTH} />
           </Animated.View>
         </SafeAreaView>
         <SafeAreaView edges={['bottom']} style={styles.coverBody}>
@@ -185,7 +192,6 @@ const styles = StyleSheet.create({
   cover: { flex: 1, backgroundColor: C.cream },
   hero: { flex: 1.15, alignItems: 'center', justifyContent: 'center', paddingHorizontal: S.xl },
   logoWrap: { width: '100%', alignItems: 'center' },
-  logo: { width: '78%', maxWidth: 340, aspectRatio: 900 / 667 },
   coverBody: {
     flex: 1,
     paddingHorizontal: S.xl,
@@ -244,7 +250,7 @@ const styles = StyleSheet.create({
     color: C.ink,
   },
   codeInput: { minHeight: 110, fontSize: 14, textAlignVertical: 'top' },
-  error: { color: C.redDark, fontSize: 14, marginTop: S.sm },
+  error: { color: C.redText, fontSize: 14, marginTop: S.sm },
   goals: { gap: S.sm },
   goal: {
     flexDirection: 'row',

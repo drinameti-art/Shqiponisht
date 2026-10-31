@@ -1,5 +1,4 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -11,6 +10,7 @@ import { LESSONS } from '@/data/lessons';
 import { useProgress } from '@/lib/progress-context';
 import { subscription } from '@/lib/subscription';
 import { annualSavings, DEMO_PLUS_ALLOWED, type Plan } from '@/lib/subscription-types';
+import { Logo } from '@/components/logo';
 import { C, R, S } from '@/theme';
 
 const PLUS_LESSONS = LESSONS.filter((l) => l.premium).length;
@@ -86,7 +86,7 @@ export default function PlusScreen() {
         </Pressable>
       </View>
       <ScrollView contentContainerStyle={styles.body}>
-        <Image source={require('@/assets/images/logo-mark.png')} style={styles.mark} contentFit="contain" />
+        <Logo width={120} style={styles.mark} />
         <Text style={styles.title}>
           Shqiponisht <Text style={{ color: C.red }}>Plus</Text>
         </Text>
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: C.cream },
   top: { paddingHorizontal: S.xl, paddingTop: S.md },
   body: { padding: S.xl, paddingTop: 0, gap: S.md, maxWidth: 520, width: '100%', alignSelf: 'center' },
-  mark: { width: 120, height: 90, alignSelf: 'center' },
+  mark: { alignSelf: 'center' },
   title: { fontSize: 30, fontWeight: '800', color: C.ink, textAlign: 'center', letterSpacing: -0.5 },
   lead: { fontSize: 15.5, lineHeight: 22, color: C.muted, textAlign: 'center' },
   benefits: {
@@ -247,10 +247,10 @@ const styles = StyleSheet.create({
     padding: S.lg,
     marginTop: S.sm,
   },
-  activeText: { flex: 1, fontSize: 15, fontWeight: '600', color: C.greenDark },
+  activeText: { flex: 1, fontSize: 15, fontWeight: '600', color: C.greenText },
   unavailable: { gap: S.md, marginTop: S.sm },
   unavailableText: { fontSize: 14.5, lineHeight: 21, color: C.muted, textAlign: 'center' },
-  message: { fontSize: 14, color: C.redDark, textAlign: 'center' },
+  message: { fontSize: 14, color: C.redText, textAlign: 'center' },
   legal: { fontSize: 11.5, lineHeight: 16, color: C.muted, textAlign: 'center' },
   links: { flexDirection: 'row', justifyContent: 'center', gap: S.sm, flexWrap: 'wrap' },
   link: { fontSize: 12.5, color: C.ink, textDecorationLine: 'underline' },

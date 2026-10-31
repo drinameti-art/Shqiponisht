@@ -19,8 +19,8 @@ type ButtonProps = {
 };
 
 const VARIANTS = {
-  primary: { bg: C.red, edge: C.redDark, fg: C.white },
-  success: { bg: C.green, edge: C.greenDark, fg: C.white },
+  primary: { bg: C.red, edge: C.redEdge, fg: C.white },
+  success: { bg: C.green, edge: C.greenEdge, fg: C.white },
   secondary: { bg: C.paper, edge: C.line, fg: C.ink },
   ghost: { bg: 'transparent', edge: 'transparent', fg: C.muted },
 } as const;
@@ -83,7 +83,15 @@ export function SectionTitle({ children }: { children: ReactNode }) {
   return <Text style={styles.section}>{children}</Text>;
 }
 
-export function Pill({ children, bg = C.goldSoft, fg = '#a8690a' }: { children: ReactNode; bg?: string; fg?: string }) {
+export function Pill({
+  children,
+  bg = C.goldSoft,
+  fg = C.goldText,
+}: {
+  children: ReactNode;
+  bg?: string;
+  fg?: string;
+}) {
   return (
     <View style={[styles.pill, { backgroundColor: bg }]}>
       <Text style={[styles.pillText, { color: fg }]}>{children}</Text>
@@ -128,7 +136,7 @@ export function SpeakButton({
       <Ionicons
         name={speaking ? 'volume-high' : 'volume-medium'}
         size={size * 0.5}
-        color={speaking ? C.white : dark ? C.cream : C.ink}
+        color={speaking ? C.white : dark ? C.onPanel : C.ink}
       />
     </Pressable>
   );
@@ -169,7 +177,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: { fontSize: 16, fontWeight: '700' },
-  track: { backgroundColor: '#e9e0cf', overflow: 'hidden', alignSelf: 'stretch' },
+  track: { backgroundColor: C.track, overflow: 'hidden', alignSelf: 'stretch' },
   section: {
     fontSize: 12,
     fontWeight: '700',

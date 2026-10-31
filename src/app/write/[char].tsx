@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     maxWidth: 420,
   },
   segBtn: { flex: 1, paddingVertical: 9, borderRadius: R.pill, alignItems: 'center' },
-  segOn: { backgroundColor: C.ink },
+  segOn: { backgroundColor: C.panel },
   segText: { fontSize: 14, fontWeight: '700', color: C.muted },
   body: { padding: S.xl, gap: S.md, maxWidth: 520, width: '100%', alignSelf: 'center' },
   counter: { textAlign: 'center', fontSize: 14, fontWeight: '700', color: C.muted },

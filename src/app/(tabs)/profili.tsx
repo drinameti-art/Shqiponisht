@@ -1,6 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
-import { Image } from 'expo-image';
 import { useState } from 'react';
 import * as Clipboard from 'expo-clipboard';
 import { Linking, Platform, Pressable, ScrollView, Share, StyleSheet, Text, TextInput, View } from 'react-native';
@@ -15,7 +14,8 @@ import { LESSONS } from '@/data/lessons';
 import { completedCount, currentStreak, DAILY_GOALS } from '@/lib/progress';
 import { useProgress } from '@/lib/progress-context';
 import { learnedCount } from '@/lib/review';
-import { C, R, S } from '@/theme';
+import { Logo } from '@/components/logo';
+import { C, isDark, R, S } from '@/theme';
 
 const PLUS_LESSONS = LESSONS.filter((l) => l.premium).length;
 const PLUS_GROUPS = new Set(KANJI_GROUPS.filter((g) => g.premium).map((g) => g.id));
@@ -67,7 +67,7 @@ export default function Profile() {
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Image source={require('@/assets/images/logo-mark.png')} style={styles.mark} contentFit="contain" />
+          <Logo width={isDark ? 60 : 72} />
           <View style={{ flex: 1 }}>
             <Text style={styles.name}>{progress.name || 'Nxënës/e'}</Text>
             <Text style={styles.sub}>Mëson japonisht me Shqiponisht</Text>
@@ -292,7 +292,6 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: C.cream },
   content: { padding: S.xl, paddingBottom: S.xxl, maxWidth: 640, width: '100%', alignSelf: 'center' },
   header: { flexDirection: 'row', alignItems: 'center', gap: S.lg },
-  mark: { width: 72, height: 54 },
   name: { fontSize: 24, fontWeight: '800', color: C.ink },
   sub: { fontSize: 14, color: C.muted },
   stats: { flexDirection: 'row', gap: S.sm, marginTop: S.xl },

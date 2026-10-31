@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   seg: { flexDirection: 'row', backgroundColor: C.card, borderRadius: R.pill, padding: 3 },
   segBtn: { paddingVertical: 6, paddingHorizontal: 12, borderRadius: R.pill },
-  segOn: { backgroundColor: C.ink },
+  segOn: { backgroundColor: C.panel },
   segText: { fontSize: 13, fontWeight: '700', color: C.muted },
   body: { padding: S.xl, paddingBottom: S.xxl, maxWidth: 640, width: '100%', alignSelf: 'center' },
   title: { fontSize: 26, fontWeight: '800', color: C.ink, letterSpacing: -0.4 },

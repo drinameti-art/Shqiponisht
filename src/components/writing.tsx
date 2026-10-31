@@ -197,7 +197,7 @@ export function useWritingPad({
         <Svg width={size} height={size} viewBox={`0 0 ${BOX} ${BOX}`} pointerEvents="none">
           <Guides />
           {showGuide &&
-            strokes.map((s, i) => <Path key={`g-${i}`} d={s.d} stroke="#e9dfcd" strokeWidth={5} {...strokeProps} />)}
+            strokes.map((s, i) => <Path key={`g-${i}`} d={s.d} stroke={C.guide} strokeWidth={5} {...strokeProps} />)}
           {hint && next && (
             <Path
               d={next.d}
@@ -250,7 +250,7 @@ export const writingStyles = StyleSheet.create({
 });
 
 export function Message({ text, tone }: { text: string; tone: 'ok' | 'bad' | 'muted' }) {
-  const color = tone === 'ok' ? C.greenDark : tone === 'bad' ? C.redDark : C.muted;
+  const color = tone === 'ok' ? C.greenText : tone === 'bad' ? C.redText : C.muted;
   return (
     <Text style={[writingStyles.message, { color }]} accessibilityLiveRegion="polite">
       {text}
