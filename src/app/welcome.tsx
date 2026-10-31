@@ -1,22 +1,12 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  useWindowDimensions,
-  View,
-} from 'react-native';
-import Animated, { FadeIn, FadeInDown, FadeInRight } from 'react-native-reanimated';
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image } from 'expo-image';
+import Animated, { FadeIn, FadeInDown, FadeInRight, ZoomIn } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EASE_OUT } from '@/components/motion';
-import { Scenery } from '@/components/scenery';
 import { Button } from '@/components/ui';
 import { decodeBackup } from '@/lib/backup';
 import { DAILY_GOALS } from '@/lib/progress';
@@ -35,7 +25,6 @@ const GOALS: Record<number, { title: string; time: string }> = {
 
 export default function Welcome() {
   const { progress, update } = useProgress();
-  const { height } = useWindowDimensions();
   const [step, setStep] = useState<Step>('cover');
   const [name, setName] = useState(progress.name);
   const [goal, setGoal] = useState(progress.dailyGoal);
@@ -60,7 +49,16 @@ export default function Welcome() {
   if (step === 'cover') {
     return (
       <View style={styles.cover}>
-        <Scenery height={Math.round(height * 0.58)} />
+        <SafeAreaView edges={['top']} style={styles.hero}>
+          <Animated.View entering={ZoomIn.duration(600).easing(EASE_OUT)} style={styles.logoWrap}>
+            <Image
+              source={require('@/assets/images/logo-mark.png')}
+              style={styles.logo}
+              contentFit="contain"
+              accessibilityLabel="Logo e Shqiponisht: portë torii mbi hartën e Kosovës"
+            />
+          </Animated.View>
+        </SafeAreaView>
         <SafeAreaView edges={['bottom']} style={styles.coverBody}>
           <Animated.View entering={FadeInDown.delay(250).duration(500).easing(EASE_OUT)}>
             <Text style={styles.brand}>SHQIPONISHT</Text>
@@ -185,6 +183,9 @@ export default function Welcome() {
 
 const styles = StyleSheet.create({
   cover: { flex: 1, backgroundColor: C.cream },
+  hero: { flex: 1.15, alignItems: 'center', justifyContent: 'center', paddingHorizontal: S.xl },
+  logoWrap: { width: '100%', alignItems: 'center' },
+  logo: { width: '78%', maxWidth: 340, aspectRatio: 900 / 667 },
   coverBody: {
     flex: 1,
     paddingHorizontal: S.xl,
@@ -195,9 +196,25 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
   },
-  brand: { fontSize: 14, fontWeight: '800', letterSpacing: 3, color: C.red },
-  title: { fontSize: 34, fontWeight: '800', color: C.ink, letterSpacing: -0.8, lineHeight: 39, marginTop: S.sm },
-  lead: { fontSize: 16, lineHeight: 23, color: C.muted, marginTop: S.sm, maxWidth: 360 },
+  brand: { fontSize: 14, fontWeight: '800', letterSpacing: 3, color: C.red, textAlign: 'center' },
+  title: {
+    fontSize: 34,
+    fontWeight: '800',
+    color: C.ink,
+    letterSpacing: -0.8,
+    lineHeight: 39,
+    marginTop: S.sm,
+    textAlign: 'center',
+  },
+  lead: {
+    fontSize: 16,
+    lineHeight: 23,
+    color: C.muted,
+    marginTop: S.sm,
+    maxWidth: 340,
+    textAlign: 'center',
+    alignSelf: 'center',
+  },
   coverActions: { gap: S.lg, paddingTop: S.lg },
   secondary: { fontSize: 14, color: C.muted, textAlign: 'center' },
   secondaryStrong: { color: C.ink, fontWeight: '700', textDecorationLine: 'underline' },
