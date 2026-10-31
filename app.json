@@ -40,6 +40,14 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 220
         }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false,
+          "enableBackgroundPlayback": false
+        }
       ]
     ],
     "experiments": {

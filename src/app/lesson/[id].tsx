@@ -24,7 +24,7 @@ const PRAISE = ['Saktë!', 'Shumë mirë!', 'Bravo!', 'すごい!', 'Perfekt!'];
 export default function LessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const lesson = lessonById(id);
-  const { finishLesson, plus } = useProgress();
+  const { finishLesson, plus, sfx } = useProgress();
 
   const [seed, setSeed] = useState(() => Date.now());
   const quiz = useMemo(() => (lesson ? buildQuiz(lesson, seededRng(seed)) : []), [lesson, seed]);
@@ -81,7 +81,12 @@ export default function LessonScreen() {
             <Stat value={`${Math.round((correct / total) * 100)}%`} label="saktësi" />
           </View>
           <Button label={ok ? 'Vazhdo' : 'Provo përsëri'} onPress={ok ? close : retry} style={styles.wide} />
-          <Button label={ok ? 'Përsërit mësimin' : 'Kthehu'} variant="ghost" style={styles.wide} onPress={ok ? retry : close} />
+          <Button
+            label={ok ? 'Përsërit mësimin' : 'Kthehu'}
+            variant="ghost"
+            style={styles.wide}
+            onPress={ok ? retry : close}
+          />
         </View>
       </SafeAreaView>
     );
@@ -96,6 +101,7 @@ export default function LessonScreen() {
       setChecked(true);
       if (isRight) setCorrect((c) => c + 1);
       feel(isRight ? 'ok' : 'bad');
+      sfx(isRight ? 'correct' : 'wrong');
       return;
     }
     if (index < quiz.length - 1) {
@@ -106,6 +112,7 @@ export default function LessonScreen() {
     }
     // `correct` already includes this question's answer (it was counted on check).
     finishLesson(lesson.id, correct, quiz.length);
+    sfx(passes(correct, quiz.length) ? 'complete' : 'retry');
     setResult({ xp: lessonXp(correct, quiz.length) });
   };
 

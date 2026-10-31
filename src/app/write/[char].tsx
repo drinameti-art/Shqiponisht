@@ -9,6 +9,7 @@ import { Button } from '@/components/ui';
 import { Message, strokeMessage, useStrokeOrder, useWritingPad, type PadFeedback } from '@/components/writing';
 import { KANA } from '@/data/kana';
 import { KANJI } from '@/data/kanji';
+import { useProgress } from '@/lib/progress-context';
 import { hasStrokes } from '@/lib/writing';
 import { C, R, S } from '@/theme';
 
@@ -24,6 +25,7 @@ function describe(char: string): string {
 export default function WriteScreen() {
   const { char = '' } = useLocalSearchParams<{ char: string }>();
   const { width } = useWindowDimensions();
+  const { sfx } = useProgress();
   const size = Math.min(width - S.xl * 2, 320);
   const [mode, setMode] = useState<'watch' | 'practice'>('watch');
   const [guide, setGuide] = useState(true);
@@ -36,6 +38,9 @@ export default function WriteScreen() {
     showGuide: guide,
     onFeedback: (f) => {
       setFeedback(f);
+      if (f.kind === 'ok') sfx('stroke');
+      else if (f.kind === 'done') sfx('complete');
+      else if (f.kind === 'reversed' || f.kind === 'off') sfx('wrong');
       if (Platform.OS !== 'web' && f.kind !== 'idle') {
         void Haptics.notificationAsync(
           f.kind === 'ok' || f.kind === 'done'

@@ -26,6 +26,8 @@ Every screen is in Albanian, and Japanese sounds are spelled the Albanian way, s
 
 - **Shqiponisht Plus (subscription):** Niveli 2 — 8 more lessons: kana with ゛/゜, first verbs (ます form), time words, first sentences, and 27 more kanji. Free users see these lessons in the path with a PLUS badge and a paywall.
 
+- **Sounds:** a chime for right answers, a soft buzz for wrong ones, a short melody when a lesson is passed, and a tick for each correct stroke. They mix with your music, follow the phone's silent switch, and can be turned off in Profili → Cilësimet. The sounds are synthesized by `scripts/make-sounds.py`, so there are no third-party recordings.
+
 Progress is saved on the device; there's no account or server.
 
 ## Run it

@@ -1,3 +1,4 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import { Image } from 'expo-image';
 import { useState } from 'react';
@@ -67,6 +68,19 @@ export default function Profile() {
             </Text>
           ))}
         </View>
+
+        <SectionTitle>Cilësimet</SectionTitle>
+        <Pressable
+          onPress={() => update((p) => ({ ...p, sound: !p.sound }))}
+          accessibilityRole="switch"
+          accessibilityState={{ checked: progress.sound }}
+          style={styles.setting}>
+          <Ionicons name={progress.sound ? 'volume-high' : 'volume-mute'} size={22} color={C.ink} />
+          <Text style={styles.settingText}>Tingujt</Text>
+          <View style={[styles.toggle, progress.sound && styles.toggleOn]}>
+            <View style={[styles.knob, progress.sound && styles.knobOn]} />
+          </View>
+        </Pressable>
 
         <SectionTitle>Shqiponisht Plus</SectionTitle>
         <View style={styles.about}>
@@ -166,5 +180,20 @@ const styles = StyleSheet.create({
   about: { backgroundColor: C.paper, borderRadius: R.md, borderWidth: 1, borderColor: C.line, padding: S.lg, gap: 6 },
   aboutText: { fontSize: 14.5, lineHeight: 21, color: C.ink, marginBottom: 4 },
   rule: { fontSize: 15, color: C.ink },
+  setting: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: S.md,
+    backgroundColor: C.paper,
+    borderRadius: R.md,
+    borderWidth: 1,
+    borderColor: C.line,
+    padding: S.lg,
+  },
+  settingText: { flex: 1, fontSize: 16, fontWeight: '600', color: C.ink },
+  toggle: { width: 48, height: 28, borderRadius: 14, backgroundColor: C.line, padding: 3 },
+  toggleOn: { backgroundColor: C.green },
+  knob: { width: 22, height: 22, borderRadius: 11, backgroundColor: C.white },
+  knobOn: { transform: [{ translateX: 20 }] },
   credits: { fontSize: 11.5, lineHeight: 16, color: C.muted, textAlign: 'center', marginTop: S.xl },
 });

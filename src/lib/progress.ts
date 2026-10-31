@@ -18,6 +18,8 @@ export type Progress = {
   plus: boolean;
   /** Plus turned on as a demo in the web preview; never set in store builds. */
   demoPlus: boolean;
+  /** Sound effects on or off. */
+  sound: boolean;
 };
 
 export const DAILY_GOALS = [10, 20, 30, 50] as const;
@@ -33,6 +35,7 @@ export const INITIAL_PROGRESS: Progress = {
   lessons: {},
   plus: false,
   demoPlus: false,
+  sound: true,
 };
 
 export function hasPlus(state: Progress): boolean {

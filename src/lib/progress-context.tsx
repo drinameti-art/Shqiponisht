@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 
 import { completeLesson, dayKey, hasPlus, INITIAL_PROGRESS, type Progress } from './progress';
 import { loadProgress, saveProgress } from './storage';
+import { playSound, type SoundName } from './sounds';
 import { subscription } from './subscription';
 
 type ProgressApi = {
@@ -10,6 +11,8 @@ type ProgressApi = {
   today: string;
   /** True when the learner has Shqiponisht Plus (or the web demo of it). */
   plus: boolean;
+  /** Plays a sound effect, unless the learner turned sounds off. */
+  sfx: (name: SoundName) => void;
   update: (fn: (p: Progress) => Progress) => void;
   finishLesson: (lessonId: string, correct: number, total: number) => number;
   reset: () => void;
@@ -57,11 +60,18 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   );
 
   // A reset clears learning progress but keeps the subscription status.
-  const reset = useCallback(() => commit({ ...INITIAL_PROGRESS, plus: latest.current.plus }), [commit]);
+  const sfx = useCallback((name: SoundName) => {
+    if (latest.current.sound) playSound(name);
+  }, []);
+
+  const reset = useCallback(
+    () => commit({ ...INITIAL_PROGRESS, plus: latest.current.plus, sound: latest.current.sound }),
+    [commit],
+  );
 
   const api = useMemo(
-    () => ({ progress, ready, today, plus: hasPlus(progress), update, finishLesson, reset }),
-    [progress, ready, today, update, finishLesson, reset],
+    () => ({ progress, ready, today, plus: hasPlus(progress), sfx, update, finishLesson, reset }),
+    [progress, ready, today, sfx, update, finishLesson, reset],
   );
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
 }

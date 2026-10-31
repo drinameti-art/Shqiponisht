@@ -84,5 +84,7 @@ describe('progress', () => {
     expect(parseProgress(null)).toBe(INITIAL_PROGRESS);
     expect(parseProgress('{not json')).toBe(INITIAL_PROGRESS);
     expect(parseProgress(JSON.stringify({ version: 1, name: 'Arta', onboarded: true })).name).toBe('Arta');
+    // Saves from before the sound setting existed get sounds switched on.
+    expect(parseProgress(JSON.stringify({ version: 1, name: 'Arta' })).sound).toBe(true);
   });
 });
