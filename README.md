@@ -59,7 +59,7 @@ npm test           # unit tests for spelling rules, quiz building and progress/s
 
 Plus runs on [RevenueCat](https://www.revenuecat.com) (`react-native-purchases`) with a **€4.99/month** and a **€29.99/year** plan (7-day free trial on yearly), under the entitlement **`plus`**. Until the RevenueCat keys are set, the paywall says subscriptions are only available in the store apps and nothing can be bought.
 
-**Follow [STORE_SETUP.md](STORE_SETUP.md)**: the step-by-step checklist with every product ID, price and text to paste into App Store Connect, Google Play Console and RevenueCat, plus how to publish the privacy policy and terms.
+**Follow [STORE_SETUP.md](STORE_SETUP.md)** (and [STORE_LISTING.md](STORE_LISTING.md) for the store page texts and images): the step-by-step checklist with every product ID, price and text to paste into App Store Connect, Google Play Console and RevenueCat, plus how to publish the privacy policy and terms.
 
 - Privacy policy and terms (Albanian + English): `src/legal/*.json`, shown in the app from the Plus screen and Profili. Put your company name, country and email in `src/legal/publisher.json`.
 - `npm run legal` builds them as web pages in `docs/` for GitHub Pages; the stores need those URLs.
