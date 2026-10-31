@@ -348,6 +348,47 @@ const RESTAURANT: VocabLesson = {
   ]),
 };
 
+const COLORS: VocabLesson = {
+  id: 'ngjyrat',
+  kind: 'vocab',
+  premium: true,
+  title: 'Ngjyrat',
+  subtitle: 'あか, あお, しろ…',
+  badge: '色',
+  words: words([
+    ['いろ', 'iro', 'ngjyrë', '色'],
+    ['あか', 'aka', 'e kuqe (ngjyra)', '赤'],
+    ['あお', 'ao', 'blu (ngjyra)', '青'],
+    ['しろ', 'shiro', 'e bardhë (ngjyra)', '白'],
+    ['くろ', 'kuro', 'e zezë (ngjyra)', '黒'],
+    ['きいろ', 'kiiro', 'e verdhë (ngjyra)', '黄色'],
+    ['みどり', 'midori', 'jeshile (ngjyra)', '緑'],
+    ['ちゃいろ', 'chairo', 'kafe (ngjyra)', '茶色'],
+    ['ピンク', 'pinku', 'rozë (ngjyra)'],
+  ]),
+};
+
+const TRAVEL: VocabLesson = {
+  id: 'udhetimi',
+  kind: 'vocab',
+  premium: true,
+  title: 'Udhëtimi dhe drejtimet',
+  subtitle: 'みぎ, ひだり, でんしゃ…',
+  badge: '道',
+  words: words([
+    ['みぎ', 'migi', 'djathtas', '右'],
+    ['ひだり', 'hidari', 'majtas', '左'],
+    ['まっすぐ', 'massugu', 'drejt'],
+    ['ちかく', 'chikaku', 'afër', '近く'],
+    ['とおい', 'tōi', 'larg', '遠い'],
+    ['でぐち', 'deguchi', 'dalje', '出口'],
+    ['いりぐち', 'iriguchi', 'hyrje', '入口'],
+    ['でんしゃ', 'densha', 'tren', '電車'],
+    ['くるま', 'kuruma', 'makinë', '車'],
+    ['えきは どこですか', 'eki wa doko desu ka', 'Ku është stacioni?', '駅はどこですか'],
+  ]),
+};
+
 /** The learning path, in unlock order. Lessons marked `premium` need Shqiponisht Plus. */
 export const LESSONS: Lesson[] = [
   kanaLesson('hira-a', 'hiragana', ['a'], 'Hiragana: zanoret'),
@@ -389,6 +430,9 @@ export const LESSONS: Lesson[] = [
   ADJECTIVES,
   kanjiLesson('njerezit'),
   RESTAURANT,
+  COLORS,
+  kanjiLesson('udhetimi'),
+  TRAVEL,
 ];
 
 export const KANJI_LESSONS = LESSONS.filter((l): l is KanjiLesson => l.kind === 'kanji');

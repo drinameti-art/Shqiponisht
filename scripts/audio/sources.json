@@ -1182,6 +1182,120 @@
   "source": "voicevox"
  },
  {
+  "text": "色",
+  "reading": "いろ",
+  "file": "1391f4a4c627.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "赤",
+  "reading": "あか",
+  "file": "72776ab68f81.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "青",
+  "reading": "あお",
+  "file": "845d1da87f89.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "白",
+  "reading": "しろ",
+  "file": "4a1ae3cda4be.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "黒",
+  "reading": "くろ",
+  "file": "2c80764518ce.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "黄色",
+  "reading": "きいろ",
+  "file": "c33860af15c4.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "緑",
+  "reading": "みどり",
+  "file": "f22758bf8fa6.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "茶色",
+  "reading": "ちゃいろ",
+  "file": "35bfd6a33ced.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "ピンク",
+  "reading": "ピンク",
+  "file": "caaf2acdb25e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "右",
+  "reading": "みぎ",
+  "file": "851cdd609190.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "左",
+  "reading": "ひだり",
+  "file": "df3ee667608c.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "まっすぐ",
+  "reading": "まっすぐ",
+  "file": "3729cf98eb6d.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "近く",
+  "reading": "ちかく",
+  "file": "e958b3d03f99.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "遠い",
+  "reading": "とおい",
+  "file": "425abb3a1705.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "出口",
+  "reading": "でぐち",
+  "file": "dd877ebcea7c.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "入口",
+  "reading": "いりぐち",
+  "file": "38e9cd1ffb95.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "電車",
+  "reading": "でんしゃ",
+  "file": "bcbb5cf07fb9.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "車",
+  "reading": "くるま",
+  "file": "47782cc9bccb.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "駅はどこですか",
+  "reading": "えきは どこですか",
+  "file": "84e5eae60d6f.mp3",
+  "source": "voicevox"
+ },
+ {
   "text": "一つ",
   "reading": "ひとつ",
   "file": "d28d96c108f3.mp3",
@@ -1378,12 +1492,6 @@
   "reading": "くち",
   "file": "1e7b07e7149d.mp3",
   "source": "tofugu"
- },
- {
-  "text": "入口",
-  "reading": "いりぐち",
-  "file": "38e9cd1ffb95.mp3",
-  "source": "voicevox"
  },
  {
   "text": "目",
@@ -1828,5 +1936,89 @@
   "reading": "がいこく",
   "file": "ce0a2e4feca0.mp3",
   "source": "tofugu"
+ },
+ {
+  "text": "赤い",
+  "reading": "あかい",
+  "file": "b9e5f9eea82a.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "赤ちゃん",
+  "reading": "あかちゃん",
+  "file": "b8f146c7578d.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "青い",
+  "reading": "あおい",
+  "file": "c6ae5797b9b3.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "青空",
+  "reading": "あおぞら",
+  "file": "38078099eea6.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "白い",
+  "reading": "しろい",
+  "file": "65edac1ca41f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "白鳥",
+  "reading": "はくちょう",
+  "file": "91c0c6b70368.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "黒い",
+  "reading": "くろい",
+  "file": "751140ea5b18.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "黒板",
+  "reading": "こくばん",
+  "file": "22d51c5c701b.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "右手",
+  "reading": "みぎて",
+  "file": "01a67595ac5b.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "左手",
+  "reading": "ひだりて",
+  "file": "679cb7928d1a.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "出ます",
+  "reading": "でます",
+  "file": "e8b4cf221f7e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "入ります",
+  "reading": "はいります",
+  "file": "aec99d97c474.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "道",
+  "reading": "みち",
+  "file": "a33670427c5d.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "北海道",
+  "reading": "ほっかいどう",
+  "file": "7753b8303974.mp3",
+  "source": "voicevox"
  }
 ]

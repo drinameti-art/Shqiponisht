@@ -27,7 +27,8 @@ export type KanjiGroupId =
   | 'koha'
   | 'bota'
   | 'para'
-  | 'njerezit';
+  | 'njerezit'
+  | 'udhetimi';
 
 /** `premium` groups belong to Shqiponisht Plus. */
 export const KANJI_GROUPS: { id: KanjiGroupId; title: string; premium?: true }[] = [
@@ -41,6 +42,7 @@ export const KANJI_GROUPS: { id: KanjiGroupId; title: string; premium?: true }[]
   { id: 'bota', title: 'Bota rreth nesh', premium: true },
   { id: 'para', title: 'Paratë dhe cilësitë', premium: true },
   { id: 'njerezit', title: 'Njerëzit dhe gjuhët', premium: true },
+  { id: 'udhetimi', title: 'Ngjyrat dhe udhëtimi', premium: true },
 ];
 
 function r(kana: string, romaji: string): Reading {
@@ -152,6 +154,18 @@ const DATA: Record<KanjiGroupId, Row[]> = {
     ['友', 'mik', r('ユウ', 'yū'), r('とも', 'tomo'), 4, [ex('友だち', 'ともだち', 'tomodachi', 'shok, shoqe'), ex('友人', 'ゆうじん', 'yūjin', 'mik (zyrtare)')]],
     ['語', 'gjuhë; fjalë', r('ゴ', 'go'), r('かた', 'kata'), 14, [ex('日本語', 'にほんご', 'nihongo', 'japonishtja'), ex('英語', 'えいご', 'eigo', 'anglishtja')]],
     ['国', 'vend; shtet', r('コク', 'koku'), r('くに', 'kuni'), 8, [ex('国', 'くに', 'kuni', 'vend, shtet'), ex('外国', 'がいこく', 'gaikoku', 'vend i huaj')]],
+  ],
+  udhetimi: [
+    ['赤', 'e kuqe', r('セキ', 'seki'), r('あか', 'aka'), 7, [ex('赤い', 'あかい', 'akai', 'i kuq'), ex('赤ちゃん', 'あかちゃん', 'akachan', 'foshnjë')]],
+    ['青', 'blu, e kaltër', r('セイ', 'sei'), r('あお', 'ao'), 8, [ex('青い', 'あおい', 'aoi', 'blu, i kaltër'), ex('青空', 'あおぞら', 'aozora', 'qiell i kaltër')]],
+    ['白', 'e bardhë', r('ハク', 'haku'), r('しろ', 'shiro'), 5, [ex('白い', 'しろい', 'shiroi', 'i bardhë'), ex('白鳥', 'はくちょう', 'hakuchō', 'mjellmë')]],
+    ['黒', 'e zezë', r('コク', 'koku'), r('くろ', 'kuro'), 11, [ex('黒い', 'くろい', 'kuroi', 'i zi'), ex('黒板', 'こくばん', 'kokuban', 'dërrasë e zezë')]],
+    ['右', 'djathtas', r('ウ', 'u'), r('みぎ', 'migi'), 5, [ex('右', 'みぎ', 'migi', 'djathtas'), ex('右手', 'みぎて', 'migite', 'dora e djathtë')]],
+    ['左', 'majtas', r('サ', 'sa'), r('ひだり', 'hidari'), 5, [ex('左', 'ひだり', 'hidari', 'majtas'), ex('左手', 'ひだりて', 'hidarite', 'dora e majtë')]],
+    ['出', 'dal', r('シュツ', 'shutsu'), r('で', 'de'), 5, [ex('出口', 'でぐち', 'deguchi', 'dalje'), ex('出ます', 'でます', 'demasu', 'dal')]],
+    ['入', 'hyj', r('ニュウ', 'nyū'), r('い', 'i'), 2, [ex('入口', 'いりぐち', 'iriguchi', 'hyrje'), ex('入ります', 'はいります', 'hairimasu', 'hyj')]],
+    ['車', 'makinë', r('シャ', 'sha'), r('くるま', 'kuruma'), 7, [ex('車', 'くるま', 'kuruma', 'makinë'), ex('電車', 'でんしゃ', 'densha', 'tren')]],
+    ['道', 'rrugë', r('ドウ', 'dō'), r('みち', 'michi'), 12, [ex('道', 'みち', 'michi', 'rrugë'), ex('北海道', 'ほっかいどう', 'hokkaidō', 'Hokkaido')]],
   ],
 };
 

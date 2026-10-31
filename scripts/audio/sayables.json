@@ -985,6 +985,101 @@
   "kind": "word"
  },
  {
+  "text": "色",
+  "reading": "いろ",
+  "kind": "word"
+ },
+ {
+  "text": "赤",
+  "reading": "あか",
+  "kind": "word"
+ },
+ {
+  "text": "青",
+  "reading": "あお",
+  "kind": "word"
+ },
+ {
+  "text": "白",
+  "reading": "しろ",
+  "kind": "word"
+ },
+ {
+  "text": "黒",
+  "reading": "くろ",
+  "kind": "word"
+ },
+ {
+  "text": "黄色",
+  "reading": "きいろ",
+  "kind": "word"
+ },
+ {
+  "text": "緑",
+  "reading": "みどり",
+  "kind": "word"
+ },
+ {
+  "text": "茶色",
+  "reading": "ちゃいろ",
+  "kind": "word"
+ },
+ {
+  "text": "ピンク",
+  "reading": "ピンク",
+  "kind": "word"
+ },
+ {
+  "text": "右",
+  "reading": "みぎ",
+  "kind": "word"
+ },
+ {
+  "text": "左",
+  "reading": "ひだり",
+  "kind": "word"
+ },
+ {
+  "text": "まっすぐ",
+  "reading": "まっすぐ",
+  "kind": "word"
+ },
+ {
+  "text": "近く",
+  "reading": "ちかく",
+  "kind": "word"
+ },
+ {
+  "text": "遠い",
+  "reading": "とおい",
+  "kind": "word"
+ },
+ {
+  "text": "出口",
+  "reading": "でぐち",
+  "kind": "word"
+ },
+ {
+  "text": "入口",
+  "reading": "いりぐち",
+  "kind": "word"
+ },
+ {
+  "text": "電車",
+  "reading": "でんしゃ",
+  "kind": "word"
+ },
+ {
+  "text": "車",
+  "reading": "くるま",
+  "kind": "word"
+ },
+ {
+  "text": "駅はどこですか",
+  "reading": "えきは どこですか",
+  "kind": "word"
+ },
+ {
   "text": "一つ",
   "reading": "ひとつ",
   "kind": "example"
@@ -1147,11 +1242,6 @@
  {
   "text": "口",
   "reading": "くち",
-  "kind": "example"
- },
- {
-  "text": "入口",
-  "reading": "いりぐち",
   "kind": "example"
  },
  {
@@ -1522,6 +1612,76 @@
  {
   "text": "外国",
   "reading": "がいこく",
+  "kind": "example"
+ },
+ {
+  "text": "赤い",
+  "reading": "あかい",
+  "kind": "example"
+ },
+ {
+  "text": "赤ちゃん",
+  "reading": "あかちゃん",
+  "kind": "example"
+ },
+ {
+  "text": "青い",
+  "reading": "あおい",
+  "kind": "example"
+ },
+ {
+  "text": "青空",
+  "reading": "あおぞら",
+  "kind": "example"
+ },
+ {
+  "text": "白い",
+  "reading": "しろい",
+  "kind": "example"
+ },
+ {
+  "text": "白鳥",
+  "reading": "はくちょう",
+  "kind": "example"
+ },
+ {
+  "text": "黒い",
+  "reading": "くろい",
+  "kind": "example"
+ },
+ {
+  "text": "黒板",
+  "reading": "こくばん",
+  "kind": "example"
+ },
+ {
+  "text": "右手",
+  "reading": "みぎて",
+  "kind": "example"
+ },
+ {
+  "text": "左手",
+  "reading": "ひだりて",
+  "kind": "example"
+ },
+ {
+  "text": "出ます",
+  "reading": "でます",
+  "kind": "example"
+ },
+ {
+  "text": "入ります",
+  "reading": "はいります",
+  "kind": "example"
+ },
+ {
+  "text": "道",
+  "reading": "みち",
+  "kind": "example"
+ },
+ {
+  "text": "北海道",
+  "reading": "ほっかいどう",
   "kind": "example"
  }
 ]
