@@ -14,11 +14,11 @@ export type Kana = {
 
 /** Pronunciation tips (in Albanian) for kana whose sound needs a note. */
 export const KANA_TIPS: Record<string, string> = {
-  u: 'Thuhet pa i rrumbullakosur buzët — më e lehtë se „u“ shqipe.',
+  u: 'Thuhet pa i rrumbullakosur buzët, më lehtë se „u“ në shqip.',
   shi: 'Lexohet njësoj si „shi“ në shqip.',
   chi: 'Në romaji shkruhet „chi“, por në shqip lexohet „çi“ — si te „çaj“.',
   tsu: 'Në romaji „tsu“; në shqip „cu“ — si te „cung“.',
-  fu: 'Mes „f“ dhe „h“: fryj lehtë pa i prekur dhëmbët me buzë.',
+  fu: 'Tingull mes „f“ dhe „h“: nxirr ajër lehtë, pa i prekur dhëmbët me buzë.',
   su: '„u“ shpesh nuk dëgjohet: です (desu) tingëllon „des“.',
   ra: '„r“ japoneze është e butë, si „r“ e vetme shqipe te „ara“.',
   ri: '„r“ e butë me një goditje, si te „ari“ — jo „rr“.',

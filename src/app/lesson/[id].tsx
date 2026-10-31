@@ -152,7 +152,7 @@ export default function LessonScreen() {
         {checked && (
           <View style={styles.feedback} accessibilityLiveRegion="polite">
             <Text style={[styles.feedbackTitle, { color: isRight ? C.greenDark : C.redDark }]}>
-              {isRight ? PRAISE[index % PRAISE.length] : 'Jo tamam.'}
+              {isRight ? PRAISE[index % PRAISE.length] : 'Nuk është saktë.'}
             </Text>
             <Text style={[styles.feedbackBody, { color: isRight ? C.greenDark : C.redDark }]}>{q.explanation}</Text>
           </View>

@@ -9,7 +9,7 @@ import { DAILY_GOALS } from '@/lib/progress';
 import { useProgress } from '@/lib/progress-context';
 import { C, R, S } from '@/theme';
 
-const GOAL_LABELS: Record<number, string> = { 10: 'Lehtë', 20: 'Normal', 30: 'Seriozisht', 50: 'Intensiv' };
+const GOAL_LABELS: Record<number, string> = { 10: 'Lehtë', 20: 'Normal', 30: 'Serioz', 50: 'Intensiv' };
 
 export default function Welcome() {
   const { progress, update } = useProgress();
