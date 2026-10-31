@@ -1554,6 +1554,246 @@
   "source": "voicevox"
  },
  {
+  "text": "天気",
+  "reading": "てんき",
+  "file": "77f5c58130a9.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "晴れ",
+  "reading": "はれ",
+  "file": "0324f8ecbb96.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "曇り",
+  "reading": "くもり",
+  "file": "283112eb7d8b.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "雨",
+  "reading": "あめ",
+  "file": "8995b8979971.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "雪",
+  "reading": "ゆき",
+  "file": "7d742a7f9f36.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "風",
+  "reading": "かぜ",
+  "file": "0b703039737f.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "春",
+  "reading": "はる",
+  "file": "3e450648252d.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "夏",
+  "reading": "なつ",
+  "file": "ce0a21de8541.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "秋",
+  "reading": "あき",
+  "file": "8d8f4aeca850.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "冬",
+  "reading": "ふゆ",
+  "file": "d5ca75a91f1a.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "体",
+  "reading": "からだ",
+  "file": "d37fc6a5eb9e.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "頭",
+  "reading": "あたま",
+  "file": "e349ae133850.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "おなか",
+  "reading": "おなか",
+  "file": "a3a37e953808.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "歯",
+  "reading": "は",
+  "file": "c0cb98246cdd.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "痛い",
+  "reading": "いたい",
+  "file": "2d7d31a9ab4e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "風邪をひきました",
+  "reading": "かぜ を ひきました",
+  "file": "65d2efedf4ea.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "病気",
+  "reading": "びょうき",
+  "file": "9fd003a72958.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "薬",
+  "reading": "くすり",
+  "file": "c98fb0141cc4.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "医者",
+  "reading": "いしゃ",
+  "file": "cfb25a13c72a.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "大丈夫ですか",
+  "reading": "だいじょうぶですか",
+  "file": "e0f9ccbfacec.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "寝ます",
+  "reading": "ねます",
+  "file": "7a885fb05559.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "起きます",
+  "reading": "おきます",
+  "file": "6700aaaad969.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "働きます",
+  "reading": "はたらきます",
+  "file": "de8d47e08338.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "勉強します",
+  "reading": "べんきょうします",
+  "file": "9d706c3c44b7.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "遊びます",
+  "reading": "あそびます",
+  "file": "18ea162cf7f2.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "待ちます",
+  "reading": "まちます",
+  "file": "ead997349c1b.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "作ります",
+  "reading": "つくります",
+  "file": "46761087d102.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "帰ります",
+  "reading": "かえります",
+  "file": "cbbdbacbff84.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "泳ぎます",
+  "reading": "およぎます",
+  "file": "b81a159a7d33.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "歌います",
+  "reading": "うたいます",
+  "file": "1cfc6afa3dd0.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "何",
+  "reading": "なに",
+  "file": "4a9efaa77fc2.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "誰",
+  "reading": "だれ",
+  "file": "ad603e38da3b.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "どこ",
+  "reading": "どこ",
+  "file": "27b6a68a3360.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "いつ",
+  "reading": "いつ",
+  "file": "2d6221baa73f.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "どうして",
+  "reading": "どうして",
+  "file": "0dfa61bfb6d7.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "どれ",
+  "reading": "どれ",
+  "file": "793b833d8a25.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "どう",
+  "reading": "どう",
+  "file": "95f7d9ec06d8.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "どのくらい",
+  "reading": "どのくらい",
+  "file": "c1bbdbfa4b46.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "誰ですか",
+  "reading": "だれですか",
+  "file": "75593eca265e.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "いつですか",
+  "reading": "いつですか",
+  "file": "b36cfc0d49d2.mp3",
+  "source": "voicevox"
+ },
+ {
   "text": "一つ",
   "reading": "ひとつ",
   "file": "d28d96c108f3.mp3",
@@ -1980,12 +2220,6 @@
   "source": "tofugu"
  },
  {
-  "text": "何",
-  "reading": "なに",
-  "file": "4a9efaa77fc2.mp3",
-  "source": "tofugu"
- },
- {
   "text": "毎朝",
   "reading": "まいあさ",
   "file": "316693e2899a.mp3",
@@ -2001,12 +2235,6 @@
   "text": "間",
   "reading": "あいだ",
   "file": "835872d37309.mp3",
-  "source": "tofugu"
- },
- {
-  "text": "雨",
-  "reading": "あめ",
-  "file": "8995b8979971.mp3",
   "source": "tofugu"
  },
  {
@@ -2278,6 +2506,60 @@
   "reading": "ほっかいどう",
   "file": "7753b8303974.mp3",
   "source": "voicevox"
+ },
+ {
+  "text": "春休み",
+  "reading": "はるやすみ",
+  "file": "e266c482e39b.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "夏休み",
+  "reading": "なつやすみ",
+  "file": "a5e487dc05dc.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "秋田",
+  "reading": "あきた",
+  "file": "49daad54c1e9.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "冬休み",
+  "reading": "ふゆやすみ",
+  "file": "1d773007ebc9.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "大雪",
+  "reading": "おおゆき",
+  "file": "7c72f54bf838.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "台風",
+  "reading": "たいふう",
+  "file": "785e422c5e41.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "休み",
+  "reading": "やすみ",
+  "file": "d6ca110fffb9.mp3",
+  "source": "tofugu"
+ },
+ {
+  "text": "休みます",
+  "reading": "やすみます",
+  "file": "7fe182422fcd.mp3",
+  "source": "voicevox"
+ },
+ {
+  "text": "体育",
+  "reading": "たいいく",
+  "file": "82d0f5fd4e27.mp3",
+  "source": "tofugu"
  },
  {
   "text": "愛",

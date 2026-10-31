@@ -1295,6 +1295,206 @@
   "kind": "word"
  },
  {
+  "text": "天気",
+  "reading": "てんき",
+  "kind": "word"
+ },
+ {
+  "text": "晴れ",
+  "reading": "はれ",
+  "kind": "word"
+ },
+ {
+  "text": "曇り",
+  "reading": "くもり",
+  "kind": "word"
+ },
+ {
+  "text": "雨",
+  "reading": "あめ",
+  "kind": "word"
+ },
+ {
+  "text": "雪",
+  "reading": "ゆき",
+  "kind": "word"
+ },
+ {
+  "text": "風",
+  "reading": "かぜ",
+  "kind": "word"
+ },
+ {
+  "text": "春",
+  "reading": "はる",
+  "kind": "word"
+ },
+ {
+  "text": "夏",
+  "reading": "なつ",
+  "kind": "word"
+ },
+ {
+  "text": "秋",
+  "reading": "あき",
+  "kind": "word"
+ },
+ {
+  "text": "冬",
+  "reading": "ふゆ",
+  "kind": "word"
+ },
+ {
+  "text": "体",
+  "reading": "からだ",
+  "kind": "word"
+ },
+ {
+  "text": "頭",
+  "reading": "あたま",
+  "kind": "word"
+ },
+ {
+  "text": "おなか",
+  "reading": "おなか",
+  "kind": "word"
+ },
+ {
+  "text": "歯",
+  "reading": "は",
+  "kind": "word"
+ },
+ {
+  "text": "痛い",
+  "reading": "いたい",
+  "kind": "word"
+ },
+ {
+  "text": "風邪をひきました",
+  "reading": "かぜ を ひきました",
+  "kind": "word"
+ },
+ {
+  "text": "病気",
+  "reading": "びょうき",
+  "kind": "word"
+ },
+ {
+  "text": "薬",
+  "reading": "くすり",
+  "kind": "word"
+ },
+ {
+  "text": "医者",
+  "reading": "いしゃ",
+  "kind": "word"
+ },
+ {
+  "text": "大丈夫ですか",
+  "reading": "だいじょうぶですか",
+  "kind": "word"
+ },
+ {
+  "text": "寝ます",
+  "reading": "ねます",
+  "kind": "word"
+ },
+ {
+  "text": "起きます",
+  "reading": "おきます",
+  "kind": "word"
+ },
+ {
+  "text": "働きます",
+  "reading": "はたらきます",
+  "kind": "word"
+ },
+ {
+  "text": "勉強します",
+  "reading": "べんきょうします",
+  "kind": "word"
+ },
+ {
+  "text": "遊びます",
+  "reading": "あそびます",
+  "kind": "word"
+ },
+ {
+  "text": "待ちます",
+  "reading": "まちます",
+  "kind": "word"
+ },
+ {
+  "text": "作ります",
+  "reading": "つくります",
+  "kind": "word"
+ },
+ {
+  "text": "帰ります",
+  "reading": "かえります",
+  "kind": "word"
+ },
+ {
+  "text": "泳ぎます",
+  "reading": "およぎます",
+  "kind": "word"
+ },
+ {
+  "text": "歌います",
+  "reading": "うたいます",
+  "kind": "word"
+ },
+ {
+  "text": "何",
+  "reading": "なに",
+  "kind": "word"
+ },
+ {
+  "text": "誰",
+  "reading": "だれ",
+  "kind": "word"
+ },
+ {
+  "text": "どこ",
+  "reading": "どこ",
+  "kind": "word"
+ },
+ {
+  "text": "いつ",
+  "reading": "いつ",
+  "kind": "word"
+ },
+ {
+  "text": "どうして",
+  "reading": "どうして",
+  "kind": "word"
+ },
+ {
+  "text": "どれ",
+  "reading": "どれ",
+  "kind": "word"
+ },
+ {
+  "text": "どう",
+  "reading": "どう",
+  "kind": "word"
+ },
+ {
+  "text": "どのくらい",
+  "reading": "どのくらい",
+  "kind": "word"
+ },
+ {
+  "text": "誰ですか",
+  "reading": "だれですか",
+  "kind": "word"
+ },
+ {
+  "text": "いつですか",
+  "reading": "いつですか",
+  "kind": "word"
+ },
+ {
   "text": "一つ",
   "reading": "ひとつ",
   "kind": "example"
@@ -1650,11 +1850,6 @@
   "kind": "example"
  },
  {
-  "text": "何",
-  "reading": "なに",
-  "kind": "example"
- },
- {
   "text": "毎朝",
   "reading": "まいあさ",
   "kind": "example"
@@ -1667,11 +1862,6 @@
  {
   "text": "間",
   "reading": "あいだ",
-  "kind": "example"
- },
- {
-  "text": "雨",
-  "reading": "あめ",
   "kind": "example"
  },
  {
@@ -1897,6 +2087,51 @@
  {
   "text": "北海道",
   "reading": "ほっかいどう",
+  "kind": "example"
+ },
+ {
+  "text": "春休み",
+  "reading": "はるやすみ",
+  "kind": "example"
+ },
+ {
+  "text": "夏休み",
+  "reading": "なつやすみ",
+  "kind": "example"
+ },
+ {
+  "text": "秋田",
+  "reading": "あきた",
+  "kind": "example"
+ },
+ {
+  "text": "冬休み",
+  "reading": "ふゆやすみ",
+  "kind": "example"
+ },
+ {
+  "text": "大雪",
+  "reading": "おおゆき",
+  "kind": "example"
+ },
+ {
+  "text": "台風",
+  "reading": "たいふう",
+  "kind": "example"
+ },
+ {
+  "text": "休み",
+  "reading": "やすみ",
+  "kind": "example"
+ },
+ {
+  "text": "休みます",
+  "reading": "やすみます",
+  "kind": "example"
+ },
+ {
+  "text": "体育",
+  "reading": "たいいく",
   "kind": "example"
  },
  {

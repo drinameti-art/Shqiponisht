@@ -409,6 +409,90 @@ const DOUBLE_LONG: VocabLesson = {
   ]),
 };
 
+const WEATHER: VocabLesson = {
+  id: 'moti',
+  kind: 'vocab',
+  premium: true,
+  title: 'Moti dhe stinët',
+  subtitle: 'てんき, はれ, ゆき…',
+  badge: '天',
+  words: words([
+    ['てんき', 'tenki', 'moti', '天気'],
+    ['はれ', 'hare', 'kohë e kthjellët', '晴れ'],
+    ['くもり', 'kumori', 'kohë e vrenjtur', '曇り'],
+    ['あめ', 'ame', 'shi (reshje)', '雨'],
+    ['ゆき', 'yuki', 'borë', '雪'],
+    ['かぜ', 'kaze', 'erë', '風'],
+    ['はる', 'haru', 'pranverë', '春'],
+    ['なつ', 'natsu', 'verë', '夏'],
+    ['あき', 'aki', 'vjeshtë', '秋'],
+    ['ふゆ', 'fuyu', 'dimër', '冬'],
+  ]),
+};
+
+const HEALTH: VocabLesson = {
+  id: 'shendeti',
+  kind: 'vocab',
+  premium: true,
+  title: 'Shëndeti dhe trupi',
+  subtitle: 'あたま, いたい, くすり…',
+  badge: '体',
+  words: words([
+    ['からだ', 'karada', 'trupi', '体'],
+    ['あたま', 'atama', 'koka', '頭'],
+    ['おなか', 'onaka', 'barku'],
+    ['は', 'ha', 'dhëmbi', '歯'],
+    ['いたい', 'itai', 'më dhemb', '痛い'],
+    ['かぜ を ひきました', 'kaze o hikimashita', 'Jam ftohur.', '風邪をひきました'],
+    ['びょうき', 'byōki', 'sëmundje; i sëmurë', '病気'],
+    ['くすり', 'kusuri', 'ilaç', '薬'],
+    ['いしゃ', 'isha', 'mjek', '医者'],
+    ['だいじょうぶですか', 'daijōbu desu ka', 'A je mirë?', '大丈夫ですか'],
+  ]),
+};
+
+const VERBS_2: VocabLesson = {
+  id: 'foljet-2',
+  kind: 'vocab',
+  premium: true,
+  title: 'Foljet e përditshme',
+  subtitle: 'ねます, おきます, はたらきます…',
+  badge: '寝',
+  words: words([
+    ['ねます', 'nemasu', 'fle', '寝ます'],
+    ['おきます', 'okimasu', 'zgjohem', '起きます'],
+    ['はたらきます', 'hatarakimasu', 'punoj', '働きます'],
+    ['べんきょうします', 'benkyō shimasu', 'studioj', '勉強します'],
+    ['あそびます', 'asobimasu', 'luaj', '遊びます'],
+    ['まちます', 'machimasu', 'pres', '待ちます'],
+    ['つくります', 'tsukurimasu', 'bëj, gatuaj', '作ります'],
+    ['かえります', 'kaerimasu', 'kthehem (në shtëpi)', '帰ります'],
+    ['およぎます', 'oyogimasu', 'notoj', '泳ぎます'],
+    ['うたいます', 'utaimasu', 'këndoj', '歌います'],
+  ]),
+};
+
+const QUESTIONS: VocabLesson = {
+  id: 'pyetjet',
+  kind: 'vocab',
+  premium: true,
+  title: 'Fjalët pyetëse',
+  subtitle: 'なに, だれ, どこ, いつ…',
+  badge: '何',
+  words: words([
+    ['なに', 'nani', 'çfarë', '何'],
+    ['だれ', 'dare', 'kush', '誰'],
+    ['どこ', 'doko', 'ku'],
+    ['いつ', 'itsu', 'kur'],
+    ['どうして', 'dōshite', 'pse'],
+    ['どれ', 'dore', 'cili (prej shumë sendeve)'],
+    ['どう', 'dō', 'si'],
+    ['どのくらい', 'dono kurai', 'sa (kohë, gjatësi)'],
+    ['だれですか', 'dare desu ka', 'Kush është?', '誰ですか'],
+    ['いつですか', 'itsu desu ka', 'Kur është?'],
+  ]),
+};
+
 /** The learning path, in unlock order. Lessons marked `premium` need Shqiponisht Plus. */
 export const LESSONS: Lesson[] = [
   kanaLesson('hira-a', 'hiragana', ['a'], 'Hiragana: zanoret'),
@@ -455,6 +539,11 @@ export const LESSONS: Lesson[] = [
   COLORS,
   kanjiLesson('udhetimi'),
   TRAVEL,
+  WEATHER,
+  HEALTH,
+  kanjiLesson('stinet'),
+  VERBS_2,
+  QUESTIONS,
 ];
 
 export const KANJI_LESSONS = LESSONS.filter((l): l is KanjiLesson => l.kind === 'kanji');

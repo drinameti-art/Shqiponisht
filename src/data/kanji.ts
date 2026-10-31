@@ -28,7 +28,8 @@ export type KanjiGroupId =
   | 'bota'
   | 'para'
   | 'njerezit'
-  | 'udhetimi';
+  | 'udhetimi'
+  | 'stinet';
 
 /** `premium` groups belong to Shqiponisht Plus. */
 export const KANJI_GROUPS: { id: KanjiGroupId; title: string; premium?: true }[] = [
@@ -43,6 +44,7 @@ export const KANJI_GROUPS: { id: KanjiGroupId; title: string; premium?: true }[]
   { id: 'para', title: 'Paratë dhe cilësitë', premium: true },
   { id: 'njerezit', title: 'Njerëzit dhe gjuhët', premium: true },
   { id: 'udhetimi', title: 'Ngjyrat dhe udhëtimi', premium: true },
+  { id: 'stinet', title: 'Stinët, moti dhe trupi', premium: true },
 ];
 
 function r(kana: string, romaji: string): Reading {
@@ -166,6 +168,16 @@ const DATA: Record<KanjiGroupId, Row[]> = {
     ['入', 'hyj', r('ニュウ', 'nyū'), r('い', 'i'), 2, [ex('入口', 'いりぐち', 'iriguchi', 'hyrje'), ex('入ります', 'はいります', 'hairimasu', 'hyj')]],
     ['車', 'makinë', r('シャ', 'sha'), r('くるま', 'kuruma'), 7, [ex('車', 'くるま', 'kuruma', 'makinë'), ex('電車', 'でんしゃ', 'densha', 'tren')]],
     ['道', 'rrugë', r('ドウ', 'dō'), r('みち', 'michi'), 12, [ex('道', 'みち', 'michi', 'rrugë'), ex('北海道', 'ほっかいどう', 'hokkaidō', 'Hokkaido')]],
+  ],
+  stinet: [
+    ['春', 'pranverë', r('シュン', 'shun'), r('はる', 'haru'), 9, [ex('春', 'はる', 'haru', 'pranverë'), ex('春休み', 'はるやすみ', 'haruyasumi', 'pushimet e pranverës')]],
+    ['夏', 'verë', r('カ', 'ka'), r('なつ', 'natsu'), 10, [ex('夏', 'なつ', 'natsu', 'verë'), ex('夏休み', 'なつやすみ', 'natsuyasumi', 'pushimet verore')]],
+    ['秋', 'vjeshtë', r('シュウ', 'shū'), r('あき', 'aki'), 9, [ex('秋', 'あき', 'aki', 'vjeshtë'), ex('秋田', 'あきた', 'akita', 'Akita (qytet)')]],
+    ['冬', 'dimër', r('トウ', 'tō'), r('ふゆ', 'fuyu'), 5, [ex('冬', 'ふゆ', 'fuyu', 'dimër'), ex('冬休み', 'ふゆやすみ', 'fuyuyasumi', 'pushimet dimërore')]],
+    ['雪', 'borë', r('セツ', 'setsu'), r('ゆき', 'yuki'), 11, [ex('雪', 'ゆき', 'yuki', 'borë'), ex('大雪', 'おおゆき', 'ōyuki', 'stuhi bore')]],
+    ['風', 'erë', r('フウ', 'fū'), r('かぜ', 'kaze'), 9, [ex('風', 'かぜ', 'kaze', 'erë'), ex('台風', 'たいふう', 'taifū', 'tajfun')]],
+    ['休', 'pushoj', r('キュウ', 'kyū'), r('やす', 'yasu'), 6, [ex('休み', 'やすみ', 'yasumi', 'pushim'), ex('休みます', 'やすみます', 'yasumimasu', 'pushoj')]],
+    ['体', 'trup', r('タイ', 'tai'), r('からだ', 'karada'), 7, [ex('体', 'からだ', 'karada', 'trup'), ex('体育', 'たいいく', 'taiiku', 'edukim fizik')]],
   ],
 };
 
