@@ -510,6 +510,516 @@
   "kind": "kana"
  },
  {
+  "text": "ア",
+  "reading": "ア",
+  "kind": "kana"
+ },
+ {
+  "text": "イ",
+  "reading": "イ",
+  "kind": "kana"
+ },
+ {
+  "text": "ウ",
+  "reading": "ウ",
+  "kind": "kana"
+ },
+ {
+  "text": "エ",
+  "reading": "エ",
+  "kind": "kana"
+ },
+ {
+  "text": "オ",
+  "reading": "オ",
+  "kind": "kana"
+ },
+ {
+  "text": "カ",
+  "reading": "カ",
+  "kind": "kana"
+ },
+ {
+  "text": "キ",
+  "reading": "キ",
+  "kind": "kana"
+ },
+ {
+  "text": "ク",
+  "reading": "ク",
+  "kind": "kana"
+ },
+ {
+  "text": "ケ",
+  "reading": "ケ",
+  "kind": "kana"
+ },
+ {
+  "text": "コ",
+  "reading": "コ",
+  "kind": "kana"
+ },
+ {
+  "text": "サ",
+  "reading": "サ",
+  "kind": "kana"
+ },
+ {
+  "text": "シ",
+  "reading": "シ",
+  "kind": "kana"
+ },
+ {
+  "text": "ス",
+  "reading": "ス",
+  "kind": "kana"
+ },
+ {
+  "text": "セ",
+  "reading": "セ",
+  "kind": "kana"
+ },
+ {
+  "text": "ソ",
+  "reading": "ソ",
+  "kind": "kana"
+ },
+ {
+  "text": "タ",
+  "reading": "タ",
+  "kind": "kana"
+ },
+ {
+  "text": "チ",
+  "reading": "チ",
+  "kind": "kana"
+ },
+ {
+  "text": "ツ",
+  "reading": "ツ",
+  "kind": "kana"
+ },
+ {
+  "text": "テ",
+  "reading": "テ",
+  "kind": "kana"
+ },
+ {
+  "text": "ト",
+  "reading": "ト",
+  "kind": "kana"
+ },
+ {
+  "text": "ナ",
+  "reading": "ナ",
+  "kind": "kana"
+ },
+ {
+  "text": "ニ",
+  "reading": "ニ",
+  "kind": "kana"
+ },
+ {
+  "text": "ヌ",
+  "reading": "ヌ",
+  "kind": "kana"
+ },
+ {
+  "text": "ネ",
+  "reading": "ネ",
+  "kind": "kana"
+ },
+ {
+  "text": "ノ",
+  "reading": "ノ",
+  "kind": "kana"
+ },
+ {
+  "text": "ハ",
+  "reading": "ハ",
+  "kind": "kana"
+ },
+ {
+  "text": "ヒ",
+  "reading": "ヒ",
+  "kind": "kana"
+ },
+ {
+  "text": "フ",
+  "reading": "フ",
+  "kind": "kana"
+ },
+ {
+  "text": "ヘ",
+  "reading": "ヘ",
+  "kind": "kana"
+ },
+ {
+  "text": "ホ",
+  "reading": "ホ",
+  "kind": "kana"
+ },
+ {
+  "text": "マ",
+  "reading": "マ",
+  "kind": "kana"
+ },
+ {
+  "text": "ミ",
+  "reading": "ミ",
+  "kind": "kana"
+ },
+ {
+  "text": "ム",
+  "reading": "ム",
+  "kind": "kana"
+ },
+ {
+  "text": "メ",
+  "reading": "メ",
+  "kind": "kana"
+ },
+ {
+  "text": "モ",
+  "reading": "モ",
+  "kind": "kana"
+ },
+ {
+  "text": "ヤ",
+  "reading": "ヤ",
+  "kind": "kana"
+ },
+ {
+  "text": "ユ",
+  "reading": "ユ",
+  "kind": "kana"
+ },
+ {
+  "text": "ヨ",
+  "reading": "ヨ",
+  "kind": "kana"
+ },
+ {
+  "text": "ラ",
+  "reading": "ラ",
+  "kind": "kana"
+ },
+ {
+  "text": "リ",
+  "reading": "リ",
+  "kind": "kana"
+ },
+ {
+  "text": "ル",
+  "reading": "ル",
+  "kind": "kana"
+ },
+ {
+  "text": "レ",
+  "reading": "レ",
+  "kind": "kana"
+ },
+ {
+  "text": "ロ",
+  "reading": "ロ",
+  "kind": "kana"
+ },
+ {
+  "text": "ワ",
+  "reading": "ワ",
+  "kind": "kana"
+ },
+ {
+  "text": "ヲ",
+  "reading": "ヲ",
+  "kind": "kana"
+ },
+ {
+  "text": "ン",
+  "reading": "ン",
+  "kind": "kana"
+ },
+ {
+  "text": "ガ",
+  "reading": "ガ",
+  "kind": "kana"
+ },
+ {
+  "text": "ギ",
+  "reading": "ギ",
+  "kind": "kana"
+ },
+ {
+  "text": "グ",
+  "reading": "グ",
+  "kind": "kana"
+ },
+ {
+  "text": "ゲ",
+  "reading": "ゲ",
+  "kind": "kana"
+ },
+ {
+  "text": "ゴ",
+  "reading": "ゴ",
+  "kind": "kana"
+ },
+ {
+  "text": "ザ",
+  "reading": "ザ",
+  "kind": "kana"
+ },
+ {
+  "text": "ジ",
+  "reading": "ジ",
+  "kind": "kana"
+ },
+ {
+  "text": "ズ",
+  "reading": "ズ",
+  "kind": "kana"
+ },
+ {
+  "text": "ゼ",
+  "reading": "ゼ",
+  "kind": "kana"
+ },
+ {
+  "text": "ゾ",
+  "reading": "ゾ",
+  "kind": "kana"
+ },
+ {
+  "text": "ダ",
+  "reading": "ダ",
+  "kind": "kana"
+ },
+ {
+  "text": "デ",
+  "reading": "デ",
+  "kind": "kana"
+ },
+ {
+  "text": "ド",
+  "reading": "ド",
+  "kind": "kana"
+ },
+ {
+  "text": "バ",
+  "reading": "バ",
+  "kind": "kana"
+ },
+ {
+  "text": "ビ",
+  "reading": "ビ",
+  "kind": "kana"
+ },
+ {
+  "text": "ブ",
+  "reading": "ブ",
+  "kind": "kana"
+ },
+ {
+  "text": "ベ",
+  "reading": "ベ",
+  "kind": "kana"
+ },
+ {
+  "text": "ボ",
+  "reading": "ボ",
+  "kind": "kana"
+ },
+ {
+  "text": "パ",
+  "reading": "パ",
+  "kind": "kana"
+ },
+ {
+  "text": "ピ",
+  "reading": "ピ",
+  "kind": "kana"
+ },
+ {
+  "text": "プ",
+  "reading": "プ",
+  "kind": "kana"
+ },
+ {
+  "text": "ペ",
+  "reading": "ペ",
+  "kind": "kana"
+ },
+ {
+  "text": "ポ",
+  "reading": "ポ",
+  "kind": "kana"
+ },
+ {
+  "text": "キャ",
+  "reading": "キャ",
+  "kind": "kana"
+ },
+ {
+  "text": "キュ",
+  "reading": "キュ",
+  "kind": "kana"
+ },
+ {
+  "text": "キョ",
+  "reading": "キョ",
+  "kind": "kana"
+ },
+ {
+  "text": "シャ",
+  "reading": "シャ",
+  "kind": "kana"
+ },
+ {
+  "text": "シュ",
+  "reading": "シュ",
+  "kind": "kana"
+ },
+ {
+  "text": "ショ",
+  "reading": "ショ",
+  "kind": "kana"
+ },
+ {
+  "text": "チャ",
+  "reading": "チャ",
+  "kind": "kana"
+ },
+ {
+  "text": "チュ",
+  "reading": "チュ",
+  "kind": "kana"
+ },
+ {
+  "text": "チョ",
+  "reading": "チョ",
+  "kind": "kana"
+ },
+ {
+  "text": "ニャ",
+  "reading": "ニャ",
+  "kind": "kana"
+ },
+ {
+  "text": "ニュ",
+  "reading": "ニュ",
+  "kind": "kana"
+ },
+ {
+  "text": "ニョ",
+  "reading": "ニョ",
+  "kind": "kana"
+ },
+ {
+  "text": "ヒャ",
+  "reading": "ヒャ",
+  "kind": "kana"
+ },
+ {
+  "text": "ヒュ",
+  "reading": "ヒュ",
+  "kind": "kana"
+ },
+ {
+  "text": "ヒョ",
+  "reading": "ヒョ",
+  "kind": "kana"
+ },
+ {
+  "text": "ミャ",
+  "reading": "ミャ",
+  "kind": "kana"
+ },
+ {
+  "text": "ミュ",
+  "reading": "ミュ",
+  "kind": "kana"
+ },
+ {
+  "text": "ミョ",
+  "reading": "ミョ",
+  "kind": "kana"
+ },
+ {
+  "text": "リャ",
+  "reading": "リャ",
+  "kind": "kana"
+ },
+ {
+  "text": "リュ",
+  "reading": "リュ",
+  "kind": "kana"
+ },
+ {
+  "text": "リョ",
+  "reading": "リョ",
+  "kind": "kana"
+ },
+ {
+  "text": "ギャ",
+  "reading": "ギャ",
+  "kind": "kana"
+ },
+ {
+  "text": "ギュ",
+  "reading": "ギュ",
+  "kind": "kana"
+ },
+ {
+  "text": "ギョ",
+  "reading": "ギョ",
+  "kind": "kana"
+ },
+ {
+  "text": "ジャ",
+  "reading": "ジャ",
+  "kind": "kana"
+ },
+ {
+  "text": "ジュ",
+  "reading": "ジュ",
+  "kind": "kana"
+ },
+ {
+  "text": "ジョ",
+  "reading": "ジョ",
+  "kind": "kana"
+ },
+ {
+  "text": "ビャ",
+  "reading": "ビャ",
+  "kind": "kana"
+ },
+ {
+  "text": "ビュ",
+  "reading": "ビュ",
+  "kind": "kana"
+ },
+ {
+  "text": "ビョ",
+  "reading": "ビョ",
+  "kind": "kana"
+ },
+ {
+  "text": "ピャ",
+  "reading": "ピャ",
+  "kind": "kana"
+ },
+ {
+  "text": "ピュ",
+  "reading": "ピュ",
+  "kind": "kana"
+ },
+ {
+  "text": "ピョ",
+  "reading": "ピョ",
+  "kind": "kana"
+ },
+ {
   "text": "おはようございます",
   "reading": "おはようございます",
   "kind": "word"

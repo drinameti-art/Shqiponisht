@@ -27,14 +27,14 @@ function getPlayer(): AudioPlayer {
   return player;
 }
 
-/** True when the text has a bundled recording (native speaker or VOICEVOX). */
+/** True when the text has a bundled recording (native speaker or neural voice). */
 export function hasRecording(text: string): boolean {
   return clipFor(text) !== undefined;
 }
 
 /**
  * Says Japanese text. Plays the bundled recording when there is one — a
- * native Tokyo-accent speaker (Tofugu/WaniKani) or VOICEVOX:玄野武宏 — and
+ * native Tokyo-accent speaker (Tofugu/WaniKani) or a neural voice (Style-Bert-VITS2 / Kokoro) — and
  * otherwise falls back to the phone's built-in Japanese voice. Tapping the
  * same text again within 4 seconds plays it more slowly.
  */

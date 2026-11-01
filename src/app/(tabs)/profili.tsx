@@ -384,7 +384,8 @@ export default function Profile() {
 
         <Text style={styles.credits}>
           Rendi i vijave: KanjiVG © Ulrich Apel, licencë CC BY-SA 3.0 (kanjivg.tagaini.net).{'\n'}Shqiptimi: regjistrime
-          nga Tofugu dhe WaniKani, CC BY-SA 4.0 (të shkurtuara dhe të niveluara); zëri i sintetizuar: VOICEVOX:玄野武宏.
+          nga Tofugu dhe WaniKani, CC BY-SA 4.0 (të shkurtuara dhe të niveluara); zërat e sintetizuar: Style-Bert-VITS2
+          me korpusin JVNV (CC BY-SA 4.0) dhe Kokoro (Apache-2.0).
         </Text>
         <BrandFooter />
       </ScrollView>

@@ -79,7 +79,7 @@ Payment is charged to your Apple ID account at confirmation of purchase. The sub
 Terms of Use: [your terms.html URL]
 Privacy Policy: [your privacy.html URL]
 
-Pronunciation: recordings by Tofugu and WaniKani (CC BY-SA 4.0) and VOICEVOX:玄野武宏. Stroke order: KanjiVG (CC BY-SA 3.0).
+Pronunciation: recordings by Tofugu and WaniKani (CC BY-SA 4.0), Style-Bert-VITS2 with the JVNV corpus (CC BY-SA 4.0) and Kokoro (Apache-2.0). Stroke order: KanjiVG (CC BY-SA 3.0).
 ```
 
 **Other App Store fields**
@@ -146,7 +146,7 @@ Pa reklama, pa gjurmim. Krijo një llogari falas dhe vazhdo nga çdo telefon, os
 SHQIPONISHT PLUS
 26 mësimet e para janë falas. Shqiponisht Plus hap Nivelin 2: 22 mësime dhe 61 kanji të tjera — folje, koha, fjali, numrat deri në 10 000, blerjet, mbiemrat, ngjyrat, restoranti, udhëtimi, moti dhe stinët, shëndeti dhe fjalët pyetëse. Mujor ose vjetor, me 7 ditë provë falas te plani vjetor. Abonimi rinovohet automatikisht; mund ta anulosh kur të duash te Google Play.
 
-Shqiptimi: regjistrime nga Tofugu dhe WaniKani (CC BY-SA 4.0) dhe VOICEVOX:玄野武宏. Rendi i vijave: KanjiVG (CC BY-SA 3.0).
+Shqiptimi: regjistrime nga Tofugu dhe WaniKani (CC BY-SA 4.0), Style-Bert-VITS2 me korpusin JVNV (CC BY-SA 4.0) dhe Kokoro (Apache-2.0). Rendi i vijave: KanjiVG (CC BY-SA 3.0).
 ```
 
 **Full description — English translation**

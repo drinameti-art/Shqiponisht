@@ -47,7 +47,7 @@
         "heading": "Pronësia intelektuale",
         "body": [
           "Aplikacioni, logoja dhe përmbajtja janë pronë e {{COMPANY}}. Të dhënat e rendit të vijave vijnë nga KanjiVG © Ulrich Apel dhe përdoren sipas licencës Creative Commons BY-SA 3.0.",
-          "Regjistrimet e shqiptimit japonez vijnë pjesërisht nga Tofugu dhe WaniKani (github.com/tofugu/japanese-vocabulary-pronunciation-audio), sipas licencës Creative Commons BY-SA 4.0; ne i kemi shkurtuar dhe niveluar. Pjesa tjetër është sintetizuar me VOICEVOX, zëri VOICEVOX:玄野武宏."
+          "Regjistrimet e shqiptimit japonez vijnë pjesërisht nga Tofugu dhe WaniKani (github.com/tofugu/japanese-vocabulary-pronunciation-audio), sipas licencës Creative Commons BY-SA 4.0; ne i kemi shkurtuar dhe niveluar. Pjesa tjetër është sintetizuar me Style-Bert-VITS2, me modelet e korpusit JVNV (CC BY-SA 4.0), dhe me Kokoro (Apache-2.0)."
         ]
       },
       {
@@ -118,7 +118,7 @@
         "heading": "Intellectual property",
         "body": [
           "The app, logo and content are the property of {{COMPANY}}. Stroke-order data comes from KanjiVG © Ulrich Apel and is used under the Creative Commons BY-SA 3.0 licence.",
-          "Japanese pronunciation recordings come in part from Tofugu and WaniKani (github.com/tofugu/japanese-vocabulary-pronunciation-audio) under the Creative Commons BY-SA 4.0 licence; we trimmed and loudness-matched them. The rest was synthesised with VOICEVOX, voice VOICEVOX:玄野武宏."
+          "Japanese pronunciation recordings come in part from Tofugu and WaniKani (github.com/tofugu/japanese-vocabulary-pronunciation-audio) under the Creative Commons BY-SA 4.0 licence; we trimmed and loudness-matched them. The rest was synthesised with Style-Bert-VITS2 using models trained on the JVNV corpus (CC BY-SA 4.0), and with Kokoro (Apache-2.0)."
         ]
       },
       {

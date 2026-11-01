@@ -44,3 +44,4 @@ example
 /android
 .audio-cache/
 .tmp-voice/
+__pycache__/

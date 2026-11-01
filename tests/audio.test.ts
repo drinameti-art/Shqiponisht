@@ -33,13 +33,15 @@ describe('bundled pronunciation audio', () => {
       for (const q of buildQuiz(lesson, seededRng(5), 200))
         expect(find(q.speak), `${lesson.id}: ${q.speak}`).toBeDefined();
     }
-    expect(find('ア')).toBe(find('あ'));
+    // Katakana has its own voice (D), distinct from hiragana (C).
+    expect(find('ア')).toBeDefined();
+    expect(find('ア')).not.toBe(find('あ'));
     expect(find('みず')).toBe(find('水'));
   });
 
   it('credits each clip to a source', () => {
     const sources = JSON.parse(readFileSync(join(root, 'scripts/audio/sources.json'), 'utf8')) as { source: string }[];
     expect(sources).toHaveLength(Object.keys(clips).length);
-    expect(new Set(sources.map((s) => s.source.split(' ')[0]))).toEqual(new Set(['tofugu', 'voicevox']));
+    expect(new Set(sources.map((s) => s.source.split(' ')[0]))).toEqual(new Set(['tofugu', 'style-bert-vits2', 'kokoro']));
   });
 });
