@@ -66,8 +66,8 @@ const T = {
   letters: 3420, // + 55 ms per letter
   jp: 4240, // + 95 ms per character
   tagline: 4980,
-  sunGrow: [5700, 6020],
-  sunShrink: [6080, 6480],
+  sunGrow: [6100, 6370], // from the centre of the map until the screen is red
+  sunShrink: [6570, 6900], // after a short hold, into a dot in the middle of the screen
 } as const;
 const END = T.sunShrink[1];
 
@@ -289,11 +289,22 @@ export function LogoIntro() {
   };
 
   // The cream backdrop and the logo vanish while the sun covers the screen, so it shrinks onto the app.
-  const backdrop = useAnimatedStyle(() => ({ opacity: clock.get() < (T.sunGrow[1] + T.sunShrink[0]) / 2 ? 1 : 0 }));
+  // While the screen is fully red, the backdrop and logo go and the sun moves to the screen centre,
+  // so it shrinks into a dot in the middle, as in the reel, and reveals the app.
+  const covered = (T.sunGrow[1] + T.sunShrink[0]) / 2;
+  const backdrop = useAnimatedStyle(() => ({ opacity: clock.get() < covered ? 1 : 0 }));
+  const toCentre = { x: width / 2 - sunAt.x, y: height / 2 - sunAt.y };
   const sun = useAnimatedStyle(() => {
     const grow = seg(clock.get(), T.sunGrow[0], T.sunGrow[1]);
     const shrink = seg(clock.get(), T.sunShrink[0], T.sunShrink[1]);
-    return { transform: [{ scale: grow * (1 - shrink) }] };
+    const moved = clock.get() >= covered;
+    return {
+      transform: [
+        { translateX: moved ? toCentre.x : 0 },
+        { translateY: moved ? toCentre.y : 0 },
+        { scale: grow * (1 - shrink) },
+      ],
+    };
   });
   const tagline = useAnimatedStyle(() => ({
     opacity: seg(clock.get(), T.tagline, T.tagline + 400),
