@@ -167,6 +167,8 @@ describe('Supabase errors', () => {
     );
     expect(supabaseErrorCode({ name: 'AuthRetryableFetchError', message: 'Failed to fetch' })).toBe('offline');
     expect(supabaseErrorCode({ code: 'same_password' })).toBe('same-password');
+    expect(supabaseErrorCode({ code: 'email_address_invalid' })).toBe('email-invalid');
+    expect(supabaseErrorCode({ code: 'email_address_not_authorized' })).toBe('signup-unavailable');
     expect(supabaseErrorCode({ code: 'something_new' })).toBe('unknown');
   });
 });

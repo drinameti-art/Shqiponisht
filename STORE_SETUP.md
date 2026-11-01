@@ -11,7 +11,7 @@ When you're done, `npm run check:release` must print ✓ before you make a store
 
 ## Before you start (one-time)
 
-- [ ] **Accounts:** set up Supabase as described in [`supabase/README.md`](supabase/README.md) and put its URL and anon key in `.env` / EAS environment variables.
+- [ ] **Accounts:** the Supabase project exists and is connected (see [`supabase/README.md`](supabase/README.md)); finish the four dashboard steps listed there — above all the **email sender**, without which nobody outside your team can sign up.
 
 - [ ] **Apple Developer Program** membership ($99/year) and **Google Play Console** account ($25 once), in the company's name.
 - [ ] **Apple:** App Store Connect → *Business* → sign the **Paid Apps Agreement** and fill in banking and tax. Subscriptions will not load until this shows *Active*.
