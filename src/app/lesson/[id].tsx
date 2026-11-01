@@ -3,7 +3,7 @@ import * as Haptics from 'expo-haptics';
 import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeIn, FadeInDown, FadeInUp, SlideInRight, ZoomIn } from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Confetti, CountUp, EASE_OUT, Feedback } from '@/components/motion';
@@ -113,7 +113,7 @@ export default function LessonScreen() {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
-          <Animated.View entering={ZoomIn.springify().damping(11)} style={styles.medal}>
+          <Animated.View entering={FadeInUp.duration(520).easing(EASE_OUT)} style={styles.medal}>
             <Text style={styles.medalText}>{result.placed ? '進' : '始'}</Text>
           </Animated.View>
           <Animated.Text entering={FadeInUp.delay(150).duration(300).easing(EASE_OUT)} style={styles.doneTitle}>
@@ -145,7 +145,7 @@ export default function LessonScreen() {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
-          <Animated.View entering={ZoomIn.springify().damping(11)} style={styles.medal}>
+          <Animated.View entering={FadeInUp.duration(520).easing(EASE_OUT)} style={styles.medal}>
             <Text style={styles.medalText}>{correct === total ? '満' : ok ? '良' : '頑'}</Text>
           </Animated.View>
           <Animated.Text entering={FadeInUp.delay(150).duration(300).easing(EASE_OUT)} style={styles.doneTitle}>
@@ -273,9 +273,8 @@ export default function LessonScreen() {
       </View>
 
       <ScrollView contentContainerStyle={styles.body}>
-        <Animated.View
-          key={index}
-          entering={index === 0 ? FadeIn.duration(250) : SlideInRight.duration(260).easing(EASE_OUT)}>
+        {/* One idea per screen: each question fades in with a small upward slide (docs/BRAND.md §5). */}
+        <Reveal key={index} distance={12}>
           <Text style={styles.instruction}>{q.instruction}</Text>
           {q.listen ? (
             <View style={styles.listen}>
@@ -331,7 +330,7 @@ export default function LessonScreen() {
               );
             })}
           </View>
-        </Animated.View>
+        </Reveal>
       </ScrollView>
 
       <View style={[styles.footer, checked && (isRight ? styles.footerOk : styles.footerBad)]}>
@@ -447,7 +446,7 @@ const styles = StyleSheet.create({
     borderWidth: 6,
     borderColor: C.goldLine,
   },
-  medalText: { fontSize: 52, fontFamily: F.jp, color: C.goldText },
+  medalText: { fontSize: 52, fontFamily: F.jp, color: C.white },
   doneTitle: { fontSize: 26, fontFamily: F.bold, color: C.ink, marginTop: S.lg },
   doneSub: { fontFamily: F.regular, fontSize: 15, color: C.muted },
   stats: { flexDirection: 'row', gap: S.sm, marginVertical: S.xl },

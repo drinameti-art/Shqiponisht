@@ -10,6 +10,8 @@ import { LESSONS } from '@/data/lessons';
 import { useProgress } from '@/lib/progress-context';
 import { subscription } from '@/lib/subscription';
 import { annualSavings, DEMO_PLUS_ALLOWED, type Plan } from '@/lib/subscription-types';
+import { BrandHeader } from '@/components/brand';
+import { InkText, Reveal, step as at } from '@/components/brand-motion';
 import { Logo } from '@/components/logo';
 import { C, F, R, S } from '@/theme';
 
@@ -84,22 +86,27 @@ export default function PlusScreen() {
         <Pressable onPress={close} accessibilityRole="button" accessibilityLabel="Mbyll" hitSlop={12}>
           <Ionicons name="close" size={26} color={C.muted} />
         </Pressable>
+        <BrandHeader label="PLUS" style={{ flex: 1 }} />
       </View>
       <ScrollView contentContainerStyle={styles.body}>
-        <Logo width={120} style={styles.mark} />
-        <Text style={styles.title}>
+        <Reveal>
+          <Logo width={120} style={styles.mark} />
+        </Reveal>
+        <InkText delay={at(1)} style={styles.title}>
           Shqiponisht <Text style={{ color: C.red }}>Plus</Text>
-        </Text>
-        <Text style={styles.lead}>Vazhdo pas bazave: folje, fjali, koha dhe më shumë kanji.</Text>
+        </InkText>
+        <InkText delay={at(2)} color={C.muted} style={styles.lead}>
+          Vazhdo pas bazave: folje, fjali, koha dhe më shumë kanji.
+        </InkText>
 
         <View style={styles.benefits}>
-          {BENEFITS.map(([icon, text]) => (
-            <View key={text} style={styles.benefit}>
+          {BENEFITS.map(([icon, text], i) => (
+            <Reveal key={text} delay={at(3 + i)} style={styles.benefit}>
               <View style={styles.benefitIcon}>
                 <Ionicons name={icon} size={18} color={C.red} />
               </View>
               <Text style={styles.benefitText}>{text}</Text>
-            </View>
+            </Reveal>
           ))}
         </View>
 
@@ -200,8 +207,8 @@ export default function PlusScreen() {
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: C.cream },
-  top: { paddingHorizontal: S.xl, paddingTop: S.md },
-  body: { padding: S.xl, paddingTop: 0, gap: S.md, maxWidth: 520, width: '100%', alignSelf: 'center' },
+  top: { flexDirection: 'row', alignItems: 'center', gap: S.lg, paddingHorizontal: S.xl, paddingTop: S.md },
+  body: { padding: S.xl, paddingTop: S.xl, gap: S.md, maxWidth: 520, width: '100%', alignSelf: 'center' },
   mark: { alignSelf: 'center' },
   title: { fontSize: 30, fontFamily: F.bold, color: C.ink, textAlign: 'center', letterSpacing: -0.5 },
   lead: { fontFamily: F.regular, fontSize: 15.5, lineHeight: 22, color: C.muted, textAlign: 'center' },

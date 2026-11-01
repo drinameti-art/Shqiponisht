@@ -3,13 +3,13 @@ import { router } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View, type GestureResponderEvent } from 'react-native';
 import Animated, {
+  FadeInUp,
   interpolate,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
   withSpring,
   withTiming,
-  ZoomIn,
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -220,7 +220,7 @@ function Study({ deck, direction, onExit }: { deck: Deck; direction: Direction; 
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
-          <Animated.View entering={ZoomIn.springify().damping(11)} style={styles.medal}>
+          <Animated.View entering={FadeInUp.duration(520).easing(EASE_OUT)} style={styles.medal}>
             <Text style={styles.medalText}>{perfect ? '満' : '覚'}</Text>
           </Animated.View>
           <Text style={styles.doneTitle}>{perfect ? 'I dije të gjitha!' : 'Paketa u përfundua!'}</Text>
@@ -428,7 +428,7 @@ const styles = StyleSheet.create({
     borderWidth: 6,
     borderColor: C.goldLine,
   },
-  medalText: { fontSize: 52, fontFamily: F.jp, color: C.goldText },
+  medalText: { fontSize: 52, fontFamily: F.jp, color: C.white },
   doneTitle: { fontSize: 26, fontFamily: F.bold, color: C.ink, marginTop: S.lg },
   doneSub: { fontFamily: F.regular, fontSize: 15, color: C.muted },
   doneNote: { fontFamily: F.regular, fontSize: 14, lineHeight: 20, color: C.muted, textAlign: 'center', maxWidth: 360 },

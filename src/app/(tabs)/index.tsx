@@ -11,6 +11,7 @@ import { offerPlacement } from '@/lib/placement';
 import { dueCount } from '@/lib/review';
 import { useProgress } from '@/lib/progress-context';
 import { BrandFooter, BrandHeader } from '@/components/brand';
+import { InkText, Reveal, STEP_MS } from '@/components/brand-motion';
 import { C, F, R, S } from '@/theme';
 
 function greeting(hour: number): { sq: string; jp: string } {
@@ -35,14 +36,16 @@ export default function Today() {
         <BrandHeader label="SOT" style={{ marginBottom: S.lg }} />
         <View style={styles.header}>
           <View style={{ flex: 1 }}>
-            <Text style={styles.jp}>{hello.jp}</Text>
-            <Text style={styles.hello} numberOfLines={1}>
+            <InkText color={C.muted} style={styles.jp}>
+              {hello.jp}
+            </InkText>
+            <InkText delay={STEP_MS} style={styles.hello} numberOfLines={1}>
               {hello.sq}
               {progress.name ? `, ${progress.name}` : ''}
-            </Text>
+            </InkText>
           </View>
           <Pill>
-            <Ionicons name="flame" size={15} color={streak > 0 ? '#e0850b' : C.muted} /> {streak}
+            <Ionicons name="flame" size={15} color={streak > 0 ? C.red : C.muted} /> {streak}
           </Pill>
         </View>
 
@@ -112,7 +115,7 @@ export default function Today() {
         <SectionTitle>
           Rruga jote · {done} / {LESSONS.length}
         </SectionTitle>
-        <LessonList lessons={FREE} statuses={statuses} records={progress.lessons} />
+        <LessonList lessons={FREE} statuses={statuses} records={progress.lessons} revealFrom={2 * STEP_MS} />
 
         <View style={styles.plusHead}>
           <SectionTitle>Niveli 2</SectionTitle>
@@ -132,7 +135,7 @@ export default function Today() {
             <Ionicons name="chevron-forward" size={22} color={C.white} />
           </Pressable>
         )}
-        <LessonList lessons={PLUS} statuses={statuses} records={progress.lessons} />
+        <LessonList lessons={PLUS} statuses={statuses} records={progress.lessons} revealFrom={900} />
         <BrandFooter />
       </ScrollView>
     </SafeAreaView>
@@ -146,26 +149,29 @@ function LessonList(props: {
   lessons: typeof LESSONS;
   statuses: Record<string, LessonStatus>;
   records: Record<string, { best: number; total: number; completions: number }>;
+  revealFrom: number;
 }) {
   return (
     <View style={styles.path}>
       <View style={styles.rail} />
-      {props.lessons.map((lesson) => {
+      {props.lessons.map((lesson, i) => {
         const status = props.statuses[lesson.id];
         return (
-          <LessonRow
-            key={lesson.id}
-            title={lesson.title}
-            subtitle={lesson.subtitle}
-            badge={lesson.badge}
-            status={status}
-            best={props.records[lesson.id]}
-            onPress={() =>
-              status === 'premium'
-                ? router.push('/plus')
-                : router.push({ pathname: '/lesson/[id]', params: { id: lesson.id } })
-            }
-          />
+          // The path appears one lesson at a time, top to bottom (only the first screenful waits).
+          <Reveal key={lesson.id} delay={props.revealFrom + Math.min(i, 9) * 70}>
+            <LessonRow
+              title={lesson.title}
+              subtitle={lesson.subtitle}
+              badge={lesson.badge}
+              status={status}
+              best={props.records[lesson.id]}
+              onPress={() =>
+                status === 'premium'
+                  ? router.push('/plus')
+                  : router.push({ pathname: '/lesson/[id]', params: { id: lesson.id } })
+              }
+            />
+          </Reveal>
         );
       })}
     </View>

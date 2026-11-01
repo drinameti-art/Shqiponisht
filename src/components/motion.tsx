@@ -120,7 +120,8 @@ export function CountUp({
   );
 }
 
-const CONFETTI_COLORS = [C.red, C.ink, C.gold, '#ff8a8c', C.green, '#f7f1e5'];
+/** Brand confetti: red, ink, warm grey and cream (docs/BRAND.md §1). */
+const CONFETTI_COLORS = [C.red, C.ink, C.line, C.red, '#F8F0E4'];
 
 type PieceSpec = {
   x: number;
