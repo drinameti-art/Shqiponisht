@@ -3,7 +3,6 @@ import { Pressable, StyleSheet, useWindowDimensions, View, type LayoutChangeEven
 import Animated, {
   Easing,
   interpolateColor,
-  useAnimatedProps,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -30,10 +29,6 @@ import {
 import { C, F, isDark, R } from '@/theme';
 
 import { BRAND_JP } from './brand';
-
-const AnimatedRect = Animated.createAnimatedComponent(Rect);
-const AnimatedPath = Animated.createAnimatedComponent(Path);
-const AnimatedG = Animated.createAnimatedComponent(G);
 
 const { width: VW, height: VH } = LOGO_VIEWBOX;
 const RED = '#E42020';
@@ -114,108 +109,203 @@ const TILES = (() => {
   return tiles;
 })();
 
-function Tile({ clock, tile }: { clock: SharedValue<number>; tile: (typeof TILES)[number] }) {
-  const props = useAnimatedProps(() => {
+/**
+ * Everything that moves in the intro is a plain Animated.View (opacity, translate, rotate,
+ * a clipped height) holding a static SVG. Animating SVG transforms or clip rectangles directly
+ * works in browsers but is unreliable on Android, so the SVG itself never animates here.
+ */
+type Box = { width: number; height: number; k: number };
+
+/** A static SVG of some logo parts, in logo coordinates, at full logo size. */
+function Parts({ box, children }: { box: Box; children: React.ReactNode }) {
+  return (
+    <Svg width={box.width} height={box.height} viewBox={`0 0 ${VW} ${VH}`}>
+      {children}
+    </Svg>
+  );
+}
+
+/** A full-size layer whose style is animated. */
+function Layer({ style, box, children }: { style: object; box: Box; children: React.ReactNode }) {
+  return (
+    <Animated.View pointerEvents="none" style={[styles.layer, { width: box.width, height: box.height }, style]}>
+      <Parts box={box}>{children}</Parts>
+    </Animated.View>
+  );
+}
+
+/** Reveals its parts upward from logo y = `fromY` (pillars growing from their feet). */
+function GrowUp({
+  clock,
+  box,
+  fromY,
+  at,
+  children,
+}: {
+  clock: SharedValue<number>;
+  box: Box;
+  fromY: number;
+  at: readonly [number, number];
+  children: React.ReactNode;
+}) {
+  const style = useAnimatedStyle(() => ({ height: fromY * box.k * seg(clock.get(), at[0], at[1]) }));
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={[styles.clip, { top: undefined, bottom: box.height - fromY * box.k, width: box.width }, style]}>
+      <View style={{ position: 'absolute', left: 0, bottom: -(box.height - fromY * box.k) }}>
+        <Parts box={box}>{children}</Parts>
+      </View>
+    </Animated.View>
+  );
+}
+
+/** Reveals its parts downward from logo y = `fromY` (the centre post dropping from the beam). */
+function GrowDown({
+  clock,
+  box,
+  fromY,
+  length,
+  at,
+  children,
+}: {
+  clock: SharedValue<number>;
+  box: Box;
+  fromY: number;
+  length: number;
+  at: readonly [number, number];
+  children: React.ReactNode;
+}) {
+  const style = useAnimatedStyle(() => ({ height: length * box.k * seg(clock.get(), at[0], at[1]) }));
+  return (
+    <Animated.View pointerEvents="none" style={[styles.clip, { top: fromY * box.k, width: box.width }, style]}>
+      <View style={{ position: 'absolute', top: -fromY * box.k, left: 0 }}>
+        <Parts box={box}>{children}</Parts>
+      </View>
+    </Animated.View>
+  );
+}
+
+function Tile({ clock, box, tile }: { clock: SharedValue<number>; box: Box; tile: (typeof TILES)[number] }) {
+  const style = useAnimatedStyle(() => {
     const t = seg(clock.get(), T.map + tile.delay, T.map + tile.delay + 620);
     const k = 1 - t;
     return {
       opacity: Math.min(1, t * 3),
-      transform: `translate(${tile.dx * k} ${tile.dy * k}) rotate(${tile.rot * k} ${tile.cx} ${tile.cy})`,
+      transform: [
+        { translateX: tile.dx * k * box.k },
+        { translateY: tile.dy * k * box.k },
+        { rotate: `${tile.rot * k}deg` },
+      ],
     };
   });
   return (
-    <AnimatedG animatedProps={props}>
+    <Layer box={box} style={[{ transformOrigin: [tile.cx * box.k, tile.cy * box.k, 0] }, style]}>
+      <Defs>
+        <ClipPath id={tile.id}>
+          <Rect x={tile.x} y={tile.y} width={tile.w} height={tile.h} />
+        </ClipPath>
+      </Defs>
       <G clipPath={`url(#${tile.id})`}>
         <Path d={KOSOVO} fill={INK} fillRule="evenodd" />
       </G>
-    </AnimatedG>
+    </Layer>
   );
 }
 
-function Star({ clock, d, index }: { clock: SharedValue<number>; d: string; index: number }) {
-  const props = useAnimatedProps(() => ({
-    opacity: seg(clock.get(), T.stars + index * 70, T.stars + index * 70 + 220),
-  }));
-  return <AnimatedPath d={d} fill={CREAM} animatedProps={props} />;
+function Fade({
+  clock,
+  box,
+  at,
+  children,
+}: {
+  clock: SharedValue<number>;
+  box: Box;
+  at: readonly [number, number];
+  children: React.ReactNode;
+}) {
+  const style = useAnimatedStyle(() => ({ opacity: seg(clock.get(), at[0], at[1]) }));
+  return (
+    <Layer box={box} style={style}>
+      {children}
+    </Layer>
+  );
+}
+
+/** Slides in from (dx, dy) logo units away while fading in. */
+function Slide({
+  clock,
+  box,
+  at,
+  dx = 0,
+  dy = 0,
+  children,
+}: {
+  clock: SharedValue<number>;
+  box: Box;
+  at: readonly [number, number];
+  dx?: number;
+  dy?: number;
+  children: React.ReactNode;
+}) {
+  const style = useAnimatedStyle(() => {
+    const t = seg(clock.get(), at[0], at[1]);
+    return {
+      opacity: Math.min(1, t * 3),
+      transform: [{ translateX: (1 - t) * dx * box.k }, { translateY: (1 - t) * dy * box.k }],
+    };
+  });
+  return (
+    <Layer box={box} style={style}>
+      {children}
+    </Layer>
+  );
 }
 
 /** The logo being built on the shared clock. */
 function AnimatedMark({ clock, width }: { clock: SharedValue<number>; width: number }) {
-  const growLeft = useAnimatedProps(() => {
-    const h = (FOOT_Y + 40) * seg(clock.get(), T.leftPillar[0], T.leftPillar[1]);
-    return { y: FOOT_Y + 40 - h, height: h };
-  });
-  const growRight = useAnimatedProps(() => {
-    const h = (FOOT_Y + 40) * seg(clock.get(), T.rightPillar[0], T.rightPillar[1]);
-    return { y: FOOT_Y + 40 - h, height: h };
-  });
-  const leftFoot = useAnimatedProps(() => ({ opacity: seg(clock.get(), T.leftPillar[0], T.leftPillar[0] + 120) }));
-  const rightFoot = useAnimatedProps(() => ({ opacity: seg(clock.get(), T.rightPillar[0], T.rightPillar[0] + 120) }));
-  const tie = useAnimatedProps(() => {
-    const t = seg(clock.get(), T.tie[0], T.tie[1]);
-    return { opacity: Math.min(1, t * 4), transform: `translate(${(1 - t) * 520} 0)` };
-  });
-  const beam = useAnimatedProps(() => {
-    const t = seg(clock.get(), T.beam[0], T.beam[1]);
-    return { opacity: Math.min(1, t * 4), transform: `translate(${(1 - t) * -520} 0)` };
-  });
-  const post = useAnimatedProps(() => ({ height: 80 * seg(clock.get(), T.post[0], T.post[1]) }));
-  const top = useAnimatedProps(() => {
-    const t = seg(clock.get(), T.top[0], T.top[1]);
-    return { opacity: Math.min(1, t * 3), transform: `translate(0 ${(1 - t) * -160})` };
-  });
-
+  const box: Box = { width, height: (width * VH) / VW, k: width / VW };
+  const starAt = (i: number) => [T.stars + i * 70, T.stars + i * 70 + 220] as const;
   return (
-    <Svg width={width} height={(width * VH) / VW} viewBox={`0 0 ${VW} ${VH}`} style={{ overflow: 'visible' }}>
-      <Defs>
-        <ClipPath id="growLeft">
-          <AnimatedRect x={0} width={VW} animatedProps={growLeft} />
-        </ClipPath>
-        <ClipPath id="growRight">
-          <AnimatedRect x={0} width={VW} animatedProps={growRight} />
-        </ClipPath>
-        <ClipPath id="post">
-          <AnimatedRect x={0} y={BEAM_Y} width={VW} animatedProps={post} />
-        </ClipPath>
-        {TILES.map((t) => (
-          <ClipPath key={t.id} id={t.id}>
-            <Rect x={t.x} y={t.y} width={t.w} height={t.h} />
-          </ClipPath>
-        ))}
-      </Defs>
-
-      <AnimatedPath d={FEET[0]} fill={INK} animatedProps={leftFoot} />
-      <AnimatedPath d={FEET[1] ?? FEET[0]} fill={INK} animatedProps={rightFoot} />
-      <G clipPath="url(#growLeft)">
+    <View style={{ width: box.width, height: box.height }}>
+      <Fade clock={clock} box={box} at={[T.leftPillar[0], T.leftPillar[0] + 120]}>
+        <Path d={FEET[0]} fill={INK} />
+      </Fade>
+      <Fade clock={clock} box={box} at={[T.rightPillar[0], T.rightPillar[0] + 120]}>
+        <Path d={FEET[1] ?? FEET[0]} fill={INK} />
+      </Fade>
+      <GrowUp clock={clock} box={box} fromY={FOOT_Y} at={T.leftPillar}>
         <Path d={LEFT_PILLAR} fill={RED} />
-      </G>
-      <G clipPath="url(#growRight)">
+      </GrowUp>
+      <GrowUp clock={clock} box={box} fromY={FOOT_Y} at={T.rightPillar}>
         <Path d={RIGHT_PILLAR} fill={RED} />
-      </G>
-      <AnimatedG animatedProps={tie}>
+      </GrowUp>
+      <Slide clock={clock} box={box} at={T.tie} dx={520}>
         <Path d={TIE} fill={RED} />
-      </AnimatedG>
-      <G clipPath="url(#post)">
+      </Slide>
+      <GrowDown clock={clock} box={box} fromY={BEAM_Y} length={80} at={T.post}>
         <Path d={POST} fill={RED} />
-      </G>
-      <AnimatedG animatedProps={beam}>
+      </GrowDown>
+      <Slide clock={clock} box={box} at={T.beam} dx={-520}>
         {PLAQUES.map((d) => (
           <Path key={d} d={d} fill={CREAM} />
         ))}
         <Path d={BEAM_SOLID} fill={INK} />
-      </AnimatedG>
+      </Slide>
       {STARS.map((d, i) => (
-        <Star key={d} clock={clock} d={d} index={i} />
+        <Fade key={d} clock={clock} box={box} at={starAt(i)}>
+          <Path d={d} fill={CREAM} />
+        </Fade>
       ))}
-      <AnimatedG animatedProps={top}>
+      <Slide clock={clock} box={box} at={T.top} dy={-160}>
         {TOP_BEAM.map((d) => (
           <Path key={d} d={d} fill={RED} />
         ))}
-      </AnimatedG>
+      </Slide>
       {TILES.map((t) => (
-        <Tile key={t.id} clock={clock} tile={t} />
+        <Tile key={t.id} clock={clock} box={box} tile={t} />
       ))}
-    </Svg>
+    </View>
   );
 }
 
@@ -355,6 +445,8 @@ export function LogoIntro() {
 }
 
 const styles = StyleSheet.create({
+  layer: { position: 'absolute', top: 0, left: 0 },
+  clip: { position: 'absolute', left: 0, overflow: 'hidden' },
   overlay: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 100 },
   fill: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 },
   backdrop: { backgroundColor: C.cream },
