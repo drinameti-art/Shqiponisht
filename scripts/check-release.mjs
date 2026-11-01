@@ -37,6 +37,9 @@ if (!/^https:\/\/.+\.supabase\.co\/?$/.test(env.EXPO_PUBLIC_SUPABASE_URL ?? '') 
     'EXPO_PUBLIC_SUPABASE_URL / EXPO_PUBLIC_SUPABASE_ANON_KEY are missing: without them accounts stay on the device (see supabase/README.md)',
   );
 }
+if (env.EXPO_PUBLIC_REVENUECAT_TEST_KEY) {
+  problems.push('EXPO_PUBLIC_REVENUECAT_TEST_KEY is set: remove it for store builds (Test Store purchases are simulated)');
+}
 if (env.EXPO_PUBLIC_DEMO_PLUS === '1') {
   problems.push('EXPO_PUBLIC_DEMO_PLUS=1 is set: remove it, it lets anyone unlock Plus for free');
 }

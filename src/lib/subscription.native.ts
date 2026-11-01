@@ -3,11 +3,17 @@ import Purchases, { PACKAGE_TYPE, type CustomerInfo, type PurchasesPackage } fro
 
 import { ENTITLEMENT, trialDays, type Plan, type SubscriptionService } from './subscription-types';
 
-/** Public RevenueCat SDK keys (safe to ship in the app). Set them in .env or EAS environment variables. */
-const API_KEY = Platform.select({
-  ios: process.env.EXPO_PUBLIC_REVENUECAT_IOS_KEY,
-  android: process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY,
-});
+/**
+ * Public RevenueCat SDK keys (safe to ship in the app). Set them in .env or EAS environment variables.
+ * Until the App Store / Google Play apps exist, development builds use RevenueCat's Test Store key,
+ * which simulates purchases without charging anyone. Store builds must use the real keys
+ * (scripts/check-release.mjs refuses the test key).
+ */
+const API_KEY =
+  Platform.select({
+    ios: process.env.EXPO_PUBLIC_REVENUECAT_IOS_KEY,
+    android: process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY,
+  }) || process.env.EXPO_PUBLIC_REVENUECAT_TEST_KEY;
 
 const hasPlus = (info: CustomerInfo) => ENTITLEMENT in info.entitlements.active;
 

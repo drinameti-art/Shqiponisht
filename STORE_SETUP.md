@@ -69,14 +69,16 @@ When you're done, `npm run check:release` must print ✓ before you make a store
 
 [app.revenuecat.com](https://app.revenuecat.com) (free until your app earns $2,500/month).
 
-1. **Create project** `Shqiponisht`.
+**Already done:** the project `Shqiponisht` exists with the entitlement **`plus`**, a current offering **`plus`** (packages `$rc_annual` first, `$rc_monthly`), and a **Test Store** with `shqiponisht_plus_monthly` (€4.99) and `shqiponisht_plus_annual` (€29.99) for simulated purchases in development builds (its key `test_…` is in `.env.example` and the development/preview profiles of `eas.json`). What's left is adding the real stores:
+
+1. ~~Create project `Shqiponisht`~~ (done).
 2. **Add App Store app:** bundle ID `com.shqiponisht.app` → upload the In-App Purchase key `.p8` with its Key ID and Issuer ID.
 3. **Add Play Store app:** package `com.shqiponisht.app` → upload the service-account JSON.
 4. **Products:** *Product catalog → Products → Import* (or add by ID):
    - App Store: `shqiponisht_plus_monthly`, `shqiponisht_plus_annual`
    - Play Store: `shqiponisht_plus_monthly:monthly`, `shqiponisht_plus_annual:annual`
-5. **Entitlement:** *Entitlements → New* → identifier **`plus`** → attach all four products.
-6. **Offering:** *Offerings → New* → identifier `default` → mark it **Current** → add packages:
+5. **Entitlement:** open the existing **`plus`** entitlement → attach the four new store products.
+6. **Offering:** open the existing current offering **`plus`** → add the store products to its packages:
    - **Monthly** (`$rc_monthly`): `shqiponisht_plus_monthly` (App Store) + `shqiponisht_plus_monthly:monthly` (Play)
    - **Annual** (`$rc_annual`): `shqiponisht_plus_annual` (App Store) + `shqiponisht_plus_annual:annual` (Play)
 7. **API keys:** *Project settings → API keys* → copy the public **Apple** key (`appl_…`) and **Google** key (`goog_…`), then either:
