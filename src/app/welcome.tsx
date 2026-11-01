@@ -54,7 +54,7 @@ export default function Welcome() {
   const [codeError, setCodeError] = useState(false);
 
   const finish = () => {
-    update((p) => ({ ...p, onboarded: true, name: name.trim() || p.name, dailyGoal: goal }));
+    update((p) => ({ ...p, onboarded: true, name: name.trim() || p.name, dailyGoal: goal, level: level ?? p.level }));
     router.replace('/');
   };
 

@@ -49,7 +49,8 @@ export function Field({
   );
 }
 
-function PasswordField(props: {
+export function PasswordField(props: {
+  label?: string;
   value: string;
   onChangeText: (t: string) => void;
   error?: string | null;
@@ -58,7 +59,7 @@ function PasswordField(props: {
   const [shown, setShown] = useState(false);
   return (
     <Field
-      label="Fjalëkalimi"
+      label={props.label ?? 'Fjalëkalimi'}
       value={props.value}
       onChangeText={props.onChangeText}
       error={props.error}
@@ -85,10 +86,15 @@ function PasswordField(props: {
 type Availability = { username: string; available: boolean | null };
 
 /** Checks a username with the server, a moment after the learner stops typing. */
-function useUsernameAvailability(raw: string): 'idle' | 'checking' | 'free' | 'taken' | 'unknown' {
+export function useUsernameAvailability(
+  raw: string,
+  /** The learner's own current username, which counts as available. */
+  current?: string,
+): 'idle' | 'checking' | 'free' | 'taken' | 'unknown' | 'same' {
   const { usernameAvailable } = useAccount();
   const username = normalizeUsername(raw);
-  const valid = !usernameProblem(raw);
+  const same = !!current && username === current;
+  const valid = !usernameProblem(raw) && !same;
   const [result, setResult] = useState<Availability | null>(null);
 
   useEffect(() => {
@@ -106,16 +112,26 @@ function useUsernameAvailability(raw: string): 'idle' | 'checking' | 'free' | 't
     };
   }, [username, valid, usernameAvailable]);
 
+  if (same) return 'same';
   if (!valid || !username) return 'idle';
   if (result?.username !== username) return 'checking';
   return result.available === null ? 'unknown' : result.available ? 'free' : 'taken';
 }
 
 /** Age-range chips. */
-export function AgePicker({ value, onChange }: { value: AgeRange | null; onChange: (a: AgeRange) => void }) {
+export function AgePicker({
+  value,
+  onChange,
+  adultsOnly,
+}: {
+  value: AgeRange | null;
+  onChange: (a: AgeRange) => void;
+  /** Hide "Under 16" (account holders are 16+). */
+  adultsOnly?: boolean;
+}) {
   return (
     <View style={styles.chips}>
-      {AGE_RANGES.map((a) => {
+      {AGE_RANGES.filter((a) => !adultsOnly || a.id !== 'under16').map((a) => {
         const on = a.id === value;
         return (
           <Pressable

@@ -4,9 +4,10 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Pulse } from '@/components/motion';
-import { Pill, ProgressBar, SectionTitle } from '@/components/ui';
+import { Button, Pill, ProgressBar, SectionTitle } from '@/components/ui';
 import { LESSONS } from '@/data/lessons';
 import { completedCount, currentStreak, lessonStatuses, xpToday, type LessonStatus } from '@/lib/progress';
+import { offerPlacement } from '@/lib/placement';
 import { dueCount } from '@/lib/review';
 import { useProgress } from '@/lib/progress-context';
 import { C, R, S } from '@/theme';
@@ -18,7 +19,7 @@ function greeting(hour: number): { sq: string; jp: string } {
 }
 
 export default function Today() {
-  const { progress, today, plus } = useProgress();
+  const { progress, today, plus, update } = useProgress();
   const hello = greeting(new Date().getHours());
   const streak = currentStreak(progress, today);
   const xp = xpToday(progress, today);
@@ -57,6 +58,33 @@ export default function Today() {
               : `${streak} ${streak === 1 ? 'ditë' : 'ditë rresht'} — mos e prish serinë!`}
           </Text>
         </View>
+
+        {offerPlacement(progress) && (
+          <View style={styles.placeCard}>
+            <View style={styles.placeHead}>
+              <View style={[styles.reviewIcon, { backgroundColor: C.red }]}>
+                <Ionicons name="rocket-outline" size={20} color={C.white} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.reviewTitle}>E di tashmë pak japonisht?</Text>
+                <Text style={styles.reviewText}>
+                  Bëj testin e nivelit (rreth 3 minuta) dhe kapërce mësimet që i di.
+                </Text>
+              </View>
+            </View>
+            <View style={styles.placeActions}>
+              <Button
+                label="Bëj testin"
+                onPress={() => router.push({ pathname: '/lesson/[id]', params: { id: 'placement' } })}
+              />
+              <Button
+                label="Jo, faleminderit"
+                variant="ghost"
+                onPress={() => update((p) => ({ ...p, placementDone: true }))}
+              />
+            </View>
+          </View>
+        )}
 
         {Object.keys(progress.review).length > 0 && (
           <Pressable
@@ -114,7 +142,7 @@ const PLUS = LESSONS.filter((l) => l.premium);
 function LessonList(props: {
   lessons: typeof LESSONS;
   statuses: Record<string, LessonStatus>;
-  records: Record<string, { best: number; total: number }>;
+  records: Record<string, { best: number; total: number; completions: number }>;
 }) {
   return (
     <View style={styles.path}>
@@ -146,7 +174,7 @@ function LessonRow(props: {
   subtitle: string;
   badge: string;
   status: LessonStatus;
-  best?: { best: number; total: number };
+  best?: { best: number; total: number; completions: number };
   onPress: () => void;
 }) {
   const { status } = props;
@@ -173,7 +201,11 @@ function LessonRow(props: {
         <Text style={styles.rowTitle}>{props.title}</Text>
         <Text style={styles.rowSub} numberOfLines={1}>
           {props.subtitle}
-          {props.best ? `  ·  më e mira ${props.best.best}/${props.best.total}` : ''}
+          {props.best
+            ? props.best.completions === 0
+              ? '  ·  kaluar me testin'
+              : `  ·  më e mira ${props.best.best}/${props.best.total}`
+            : ''}
         </Text>
       </View>
       {status === 'current' && (
@@ -243,6 +275,17 @@ const styles = StyleSheet.create({
     padding: S.lg,
   },
   reviewDone: { backgroundColor: C.greenSoft, borderColor: C.greenLine },
+  placeCard: {
+    marginTop: S.md,
+    backgroundColor: C.redSoft,
+    borderRadius: R.lg,
+    borderWidth: 1,
+    borderColor: C.line,
+    padding: S.lg,
+    gap: S.md,
+  },
+  placeHead: { flexDirection: 'row', alignItems: 'center', gap: S.md },
+  placeActions: { gap: S.xs },
   reviewIcon: {
     width: 40,
     height: 40,

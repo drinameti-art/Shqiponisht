@@ -91,6 +91,12 @@ export function createDemoBackend(storage: KeyValue): AccountBackend {
       await write(db);
       emit(null);
     },
+    async changePassword(newPassword) {
+      const { db, user } = await me();
+      if (user.password === newPassword) throw new AccountError('same-password');
+      user.password = newPassword;
+      await write(db);
+    },
     async resetPassword() {
       // Nothing to send in the demo.
     },

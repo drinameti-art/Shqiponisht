@@ -1,5 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 
+import type { Lesson } from '@/data/lessons';
+
+import { applyPlacement, placedLessons, stagesPassed } from './placement';
 import { completeLesson, completeReview, dayKey, hasPlus, INITIAL_PROGRESS, type Progress } from './progress';
 import { syncReminders } from './reminders';
 import { recordAnswers } from './review';
@@ -22,6 +25,8 @@ type ProgressApi = {
   finishLesson: (lessonId: string, answers: Answer[]) => number;
   /** Records a finished review session. Returns XP earned. */
   finishReview: (answers: Answer[]) => number;
+  /** Records the placement test: unlocks the lessons of every stage passed. */
+  finishPlacement: (answers: Answer[], stageOf: number[]) => { xp: number; placed: Lesson[] };
   reset: () => void;
 };
 
@@ -83,6 +88,22 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     [commit],
   );
 
+  const finishPlacement = useCallback(
+    (answers: Answer[], stageOf: number[]) => {
+      const day = dayKey(new Date());
+      const placed = placedLessons(
+        stagesPassed(
+          answers.map((a) => a.correct),
+          stageOf,
+        ),
+      );
+      const { state, xpEarned } = completeReview(latest.current, answers.filter((a) => a.correct).length, day);
+      commit({ ...applyPlacement(state, placed), review: recordAnswers(state.review, answers, day) });
+      return { xp: xpEarned, placed };
+    },
+    [commit],
+  );
+
   const sfx = useCallback((name: SoundName) => {
     if (latest.current.sound) playSound(name);
   }, []);
@@ -100,8 +121,19 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   );
 
   const api = useMemo(
-    () => ({ progress, ready, today, plus: hasPlus(progress), sfx, update, finishLesson, finishReview, reset }),
-    [progress, ready, today, sfx, update, finishLesson, finishReview, reset],
+    () => ({
+      progress,
+      ready,
+      today,
+      plus: hasPlus(progress),
+      sfx,
+      update,
+      finishLesson,
+      finishReview,
+      finishPlacement,
+      reset,
+    }),
+    [progress, ready, today, sfx, update, finishLesson, finishReview, finishPlacement, reset],
   );
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
 }

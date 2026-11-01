@@ -20,6 +20,8 @@ export interface AccountBackend {
   signUp(input: { email: string; password: string; profile: Profile }): Promise<SignUpResult>;
   signIn(email: string, password: string): Promise<Session>;
   signOut(): Promise<void>;
+  /** Sets a new password for the signed-in user. */
+  changePassword(newPassword: string): Promise<void>;
   /** Sends a password-reset email. */
   resetPassword(email: string): Promise<void>;
   loadProfile(): Promise<Profile | null>;

@@ -93,6 +93,14 @@ export default function Profile() {
             <Text style={styles.name}>{progress.name || 'Nxënës/e'}</Text>
             <Text style={styles.sub}>{profile ? `@${profile.username}` : 'Mëson japonisht me Shqiponisht'}</Text>
           </View>
+          <Pressable
+            onPress={() => router.push('/edit-profile')}
+            accessibilityRole="button"
+            accessibilityLabel="Ndrysho profilin"
+            hitSlop={8}
+            style={styles.editBtn}>
+            <Ionicons name="create-outline" size={20} color={C.ink} />
+          </Pressable>
         </View>
 
         <View style={styles.stats}>
@@ -388,6 +396,16 @@ const styles = StyleSheet.create({
   content: { padding: S.xl, paddingBottom: S.xxl, maxWidth: 640, width: '100%', alignSelf: 'center' },
   header: { flexDirection: 'row', alignItems: 'center', gap: S.lg },
   name: { fontSize: 24, fontWeight: '800', color: C.ink },
+  editBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: C.paper,
+    borderWidth: 1,
+    borderColor: C.line,
+  },
   accountCard: {
     flexDirection: 'row',
     gap: S.md,

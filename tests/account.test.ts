@@ -131,6 +131,20 @@ describe('demo account backend', () => {
     await expect(b.signIn('a@x.com', 'wrong')).rejects.toMatchObject({ code: 'wrong-credentials' });
   });
 
+  it('updates the profile and password', async () => {
+    const b = createDemoBackend(memory());
+    await b.signUp({ email: 'a@x.com', password: 'secret123', profile: ARTA });
+    await b.signUp({ email: 'b@x.com', password: 'secret123', profile: { ...ARTA, username: 'besa' } });
+    // Signed in as besa now; taking arta's username is refused.
+    await expect(b.saveProfile({ ...ARTA, username: 'ARTA.K' })).rejects.toMatchObject({ code: 'username-taken' });
+    await b.saveProfile({ ...ARTA, username: 'besa.k', level: 'kana' });
+    expect(await b.loadProfile()).toMatchObject({ username: 'besa.k', level: 'kana' });
+    await expect(b.changePassword('secret123')).rejects.toMatchObject({ code: 'same-password' });
+    await b.changePassword('newsecret9');
+    await b.signOut();
+    await b.signIn('b@x.com', 'newsecret9');
+  });
+
   it('deletes the account and its data', async () => {
     const store = memory();
     const b = createDemoBackend(store);
@@ -152,6 +166,7 @@ describe('Supabase errors', () => {
       'username-taken',
     );
     expect(supabaseErrorCode({ name: 'AuthRetryableFetchError', message: 'Failed to fetch' })).toBe('offline');
+    expect(supabaseErrorCode({ code: 'same_password' })).toBe('same-password');
     expect(supabaseErrorCode({ code: 'something_new' })).toBe('unknown');
   });
 });

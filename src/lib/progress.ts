@@ -26,6 +26,10 @@ export type Progress = {
   review: Record<string, Card>;
   /** Daily practice reminder (local notification). */
   reminder: { enabled: boolean; hour: number; minute: number };
+  /** How much Japanese the learner said they knew at the start (see LEVELS); null if not asked. */
+  level: string | null;
+  /** The placement test was taken or declined, so it is no longer offered on Sot. */
+  placementDone: boolean;
 };
 
 export const DAILY_GOALS = [10, 20, 30, 50] as const;
@@ -44,6 +48,8 @@ export const INITIAL_PROGRESS: Progress = {
   sound: true,
   review: {},
   reminder: { enabled: false, hour: 19, minute: 0 },
+  level: null,
+  placementDone: false,
 };
 
 export function hasPlus(state: Progress): boolean {

@@ -553,3 +553,9 @@ export const VOCAB_LESSONS = LESSONS.filter((l): l is VocabLesson => l.kind === 
 export function lessonById(id: string): Lesson | undefined {
   return LESSONS.find((l) => l.id === id);
 }
+
+/** The lesson that follows `id` on the path, if any. */
+export function lessonAfter(id: string): Lesson | undefined {
+  const i = LESSONS.findIndex((l) => l.id === id);
+  return i >= 0 ? LESSONS[i + 1] : undefined;
+}

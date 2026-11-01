@@ -86,6 +86,10 @@ export function createSupabaseBackend(url: string, anonKey: string, storage: Key
       const { error } = await sb.auth.signOut();
       if (error) fail(error);
     },
+    async changePassword(newPassword) {
+      const { error } = await sb.auth.updateUser({ password: newPassword });
+      if (error) fail(error);
+    },
     async resetPassword(email) {
       const { error } = await sb.auth.resetPasswordForEmail(email.trim());
       if (error) fail(error);

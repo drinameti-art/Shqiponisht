@@ -27,6 +27,7 @@ function RootStack() {
       <Stack.Screen name="plus" options={{ presentation: 'modal' }} />
       <Stack.Screen name="legal/[doc]" options={{ presentation: 'modal' }} />
       <Stack.Screen name="account" options={{ presentation: 'modal' }} />
+      <Stack.Screen name="edit-profile" options={{ presentation: 'modal' }} />
       <Stack.Screen name="flashcards" options={{ presentation: 'fullScreenModal', gestureEnabled: false }} />
     </Stack>
   );

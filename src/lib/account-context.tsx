@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 
 import { accounts } from './account';
 import type { SignUpResult } from './account-backend';
-import { mergeProgress, toSynced, type Profile, type Session } from './account-types';
+import { mergeProgress, normalizeUsername, toSynced, type Profile, type Session } from './account-types';
 import { useProgress } from './progress-context';
 
 export type SyncState = 'idle' | 'saving' | 'saved' | 'error';
@@ -19,6 +19,9 @@ type AccountApi = {
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
+  /** Saves profile changes (name, username, age range, level) to the account. */
+  updateProfile: (profile: Profile) => Promise<void>;
+  changePassword: (newPassword: string) => Promise<void>;
   deleteAccount: () => Promise<void>;
 };
 
@@ -63,6 +66,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
           ...mergeProgress(local, remote),
           onboarded: true,
           name: local.name || p?.name || remote?.name || '',
+          level: local.level ?? p?.level ?? null,
         }));
         pulled.current = s.userId;
         setPulledFor(s.userId);
@@ -127,6 +131,11 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     await adopt(null);
   }, [adopt]);
 
+  const updateProfile = useCallback(async (next: Profile) => {
+    await accounts.saveProfile(next);
+    setProfile({ ...next, username: normalizeUsername(next.username) });
+  }, []);
+
   const deleteAccount = useCallback(async () => {
     await accounts.deleteAccount();
     await adopt(null);
@@ -145,8 +154,10 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       signOut,
       resetPassword: (e) => accounts.resetPassword(e),
       deleteAccount,
+      updateProfile,
+      changePassword: (pw) => accounts.changePassword(pw),
     }),
-    [ready, session, profile, sync, signUp, signIn, signOut, deleteAccount],
+    [ready, session, profile, sync, signUp, signIn, signOut, deleteAccount, updateProfile],
   );
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
 }

@@ -68,6 +68,8 @@ export type AccountErrorCode =
   | 'email-not-confirmed'
   | 'weak-password'
   | 'rate-limited'
+  | 'same-password'
+  | 'reauth-needed'
   | 'offline'
   | 'unknown';
 
@@ -87,6 +89,8 @@ export const ACCOUNT_ERRORS: Record<AccountErrorCode, string> = {
   'email-not-confirmed': 'Konfirmo email-in tënd fillimisht: kemi dërguar një lidhje.',
   'weak-password': 'Ky fjalëkalim është shumë i dobët. Provo një më të gjatë.',
   'rate-limited': 'Shumë përpjekje. Prit pak minuta dhe provo përsëri.',
+  'same-password': 'Fjalëkalimi i ri duhet të jetë ndryshe nga ai i vjetri.',
+  'reauth-needed': 'Për siguri, dil nga llogaria, hyr përsëri dhe provo sërish.',
   offline: 'Nuk ka lidhje me internetin. Provo përsëri.',
   unknown: 'Diçka shkoi keq. Provo përsëri pak më vonë.',
 };
@@ -105,6 +109,10 @@ export function supabaseErrorCode(e: { code?: string; name?: string; message?: s
       return 'email-not-confirmed';
     case 'weak_password':
       return 'weak-password';
+    case 'same_password':
+      return 'same-password';
+    case 'reauthentication_needed':
+      return 'reauth-needed';
     case 'over_request_rate_limit':
     case 'over_email_send_rate_limit':
       return 'rate-limited';

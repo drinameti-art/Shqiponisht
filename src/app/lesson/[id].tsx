@@ -8,8 +8,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Confetti, CountUp, EASE_OUT, Feedback } from '@/components/motion';
 import { Button, ProgressBar, SpeakButton } from '@/components/ui';
-import { lessonById } from '@/data/lessons';
+import { lessonAfter, lessonById } from '@/data/lessons';
 import { NOTES, type Note } from '@/data/notes';
+import { buildPlacement, placementFinished } from '@/lib/placement';
 import { passes, PASS_RATIO } from '@/lib/progress';
 import { useProgress, type Answer } from '@/lib/progress-context';
 import { buildQuiz, buildReviewQuiz, seededRng } from '@/lib/quiz';
@@ -28,24 +29,28 @@ const PRAISE = ['Saktë!', 'Shumë mirë!', 'Bravo!', 'すごい!', 'Perfekt!'];
 
 export default function LessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { finishLesson, finishReview, plus, sfx, progress, today } = useProgress();
-  // "review" is the daily spaced-review session; anything else is a lesson id.
+  const { finishLesson, finishReview, finishPlacement, plus, sfx, progress, today } = useProgress();
+  // "review" is the daily spaced-review session, "placement" the level test; anything else is a lesson id.
   const isReview = id === 'review';
-  const lesson = isReview ? undefined : lessonById(id);
+  const isPlacement = id === 'placement';
+  const lesson = isReview || isPlacement ? undefined : lessonById(id);
   // The review list is fixed when the session opens, so answering doesn't reshuffle it.
   const [reviewItems] = useState(() => (isReview ? dueItems(progress.review, today) : []));
 
   // Listening questions need sound; decided once when the lesson opens.
   const [listening] = useState(() => progress.sound);
   const [seed, setSeed] = useState(() => Date.now());
+  const placement = useMemo(() => (isPlacement ? buildPlacement(seededRng(seed)) : null), [isPlacement, seed]);
   const quiz = useMemo(
     () =>
-      isReview
-        ? buildReviewQuiz(reviewItems, seededRng(seed), { listening })
-        : lesson
-          ? buildQuiz(lesson, seededRng(seed), undefined, { listening })
-          : [],
-    [isReview, reviewItems, lesson, seed, listening],
+      placement
+        ? placement.questions
+        : isReview
+          ? buildReviewQuiz(reviewItems, seededRng(seed), { listening })
+          : lesson
+            ? buildQuiz(lesson, seededRng(seed), undefined, { listening })
+            : [],
+    [placement, isReview, reviewItems, lesson, seed, listening],
   );
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
@@ -54,9 +59,9 @@ export default function LessonScreen() {
   const correct = answers.filter((a) => a.correct).length;
   /** Bumped on every select / check, to replay the option's feedback animation. */
   const [bump, setBump] = useState(0);
-  const [result, setResult] = useState<{ xp: number } | null>(null);
+  const [result, setResult] = useState<{ xp: number; placed?: string } | null>(null);
   // A lesson with a grammar note opens with it; retries go straight to the questions.
-  const note = isReview ? undefined : NOTES[id];
+  const note = isReview || isPlacement ? undefined : NOTES[id];
   const [showNote, setShowNote] = useState(() => !!note);
 
   // A listening question plays its sound as soon as it appears.
@@ -78,7 +83,7 @@ export default function LessonScreen() {
   // Plus lessons can be reached by deep link too; send those to the paywall.
   if (lesson?.premium && !plus) return <Redirect href="/plus" />;
 
-  if ((!lesson && !isReview) || quiz.length === 0) {
+  if ((!lesson && !isReview && !isPlacement) || quiz.length === 0) {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
@@ -93,7 +98,37 @@ export default function LessonScreen() {
 
   const close = () => (router.canGoBack() ? router.back() : router.replace('/'));
 
-  const title = isReview ? 'Përsëritja e ditës' : lesson!.title;
+  const title = isPlacement ? 'Testi i nivelit' : isReview ? 'Përsëritja e ditës' : lesson!.title;
+
+  if (result && isPlacement) {
+    const answered = answers.length;
+    return (
+      <SafeAreaView style={styles.safe}>
+        <View style={styles.center}>
+          <Animated.View entering={ZoomIn.springify().damping(11)} style={styles.medal}>
+            <Text style={styles.medalText}>{result.placed ? '進' : '始'}</Text>
+          </Animated.View>
+          <Animated.Text entering={FadeInUp.delay(150).duration(300).easing(EASE_OUT)} style={styles.doneTitle}>
+            {result.placed ? 'Bravo, e di mirë!' : 'Fillojmë nga fillimi'}
+          </Animated.Text>
+          <Animated.Text
+            entering={FadeInUp.delay(220).duration(300).easing(EASE_OUT)}
+            style={[styles.doneSub, { textAlign: 'center' }]}>
+            {result.placed
+              ? `Mësimet që i di tashmë u shënuan si të kaluara. Vazhdon nga „${result.placed}“.`
+              : 'Mësimet e para shkojnë shpejt kur di pak japonisht. がんばって!'}
+          </Animated.Text>
+          <Animated.View entering={FadeInUp.delay(320).duration(300).easing(EASE_OUT)} style={styles.stats}>
+            <Stat value={<CountUp value={result.xp} prefix="+" style={styles.statValue} />} label="XP" />
+            <Stat value={`${correct}/${answered}`} label="saktë" />
+            <Stat value={`${Math.round((correct / Math.max(1, answered)) * 100)}%`} label="saktësi" />
+          </Animated.View>
+          <Button label="Vazhdo" onPress={close} style={styles.wide} />
+        </View>
+        {!!result.placed && <Confetti />}
+      </SafeAreaView>
+    );
+  }
 
   if (result) {
     const total = quiz.length;
@@ -152,6 +187,30 @@ export default function LessonScreen() {
   const q = quiz[index];
   const isRight = selected === q.answer;
 
+  const finish = (all: Answer[]) => {
+    if (isPlacement && placement) {
+      const { xp, placed } = finishPlacement(all, placement.stageOf);
+      // The first lesson after the placed ones is where the learner continues.
+      const next = placed.length ? lessonAfter(placed[placed.length - 1].id) : undefined;
+      sfx(placed.length ? 'complete' : 'retry');
+      setResult({ xp, placed: placed.length ? (next?.title ?? placed[placed.length - 1].title) : undefined });
+      return;
+    }
+    // `answers` already includes this question's answer (it was recorded on check).
+    const xp = isReview ? finishReview(all) : finishLesson(lesson!.id, all);
+    sfx(isReview || passes(correct, quiz.length) ? 'complete' : 'retry');
+    setResult({ xp });
+  };
+
+  /** Placement only: shows the answer without guessing, and counts it as wrong. */
+  const dontKnow = () => {
+    setSelected(null);
+    setChecked(true);
+    setBump((b) => b + 1);
+    setAnswers((a) => [...a, { item: q.item, correct: false }]);
+    feel('bad');
+  };
+
   const onAction = () => {
     if (!checked) {
       if (selected === null) return;
@@ -164,16 +223,19 @@ export default function LessonScreen() {
       if (progress.sound) setTimeout(() => speakJapanese(q.speak), 550);
       return;
     }
-    if (index < quiz.length - 1) {
+    const stop =
+      placement !== null &&
+      placementFinished(
+        answers.map((a) => a.correct),
+        placement.stageOf,
+      );
+    if (index < quiz.length - 1 && !stop) {
       setIndex(index + 1);
       setSelected(null);
       setChecked(false);
       return;
     }
-    // `answers` already includes this question's answer (it was recorded on check).
-    const xp = isReview ? finishReview(answers) : finishLesson(lesson!.id, answers);
-    sfx(isReview || passes(correct, quiz.length) ? 'complete' : 'retry');
-    setResult({ xp });
+    finish(answers);
   };
 
   return (
@@ -258,7 +320,11 @@ export default function LessonScreen() {
             accessibilityLiveRegion="polite">
             <View style={styles.feedbackHead}>
               <Text style={[styles.feedbackTitle, { color: isRight ? C.greenText : C.redText }]}>
-                {isRight ? PRAISE[index % PRAISE.length] : 'Nuk është saktë.'}
+                {isRight
+                  ? PRAISE[index % PRAISE.length]
+                  : selected === null
+                    ? 'Kjo është përgjigjja:'
+                    : 'Nuk është saktë.'}
               </Text>
               <SpeakButton text={q.speak} size={36} />
             </View>
@@ -271,6 +337,9 @@ export default function LessonScreen() {
           disabled={!checked && selected === null}
           onPress={onAction}
         />
+        {isPlacement && !checked && (
+          <Button label="Nuk e di" variant="ghost" onPress={dontKnow} style={{ marginTop: S.xs }} />
+        )}
       </View>
     </SafeAreaView>
   );
