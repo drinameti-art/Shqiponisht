@@ -12,6 +12,8 @@ import { REMINDER_TIMES } from '@/lib/reminder-plan';
 import { remindersSupported, requestReminderPermission } from '@/lib/reminders';
 import { LESSONS } from '@/data/lessons';
 import { completedCount, currentStreak, DAILY_GOALS } from '@/lib/progress';
+import { useAccount } from '@/lib/account-context';
+import { accountErrorMessage } from '@/lib/account-types';
 import { useProgress } from '@/lib/progress-context';
 import { learnedCount } from '@/lib/review';
 import { Logo } from '@/components/logo';
@@ -23,6 +25,11 @@ const PLUS_KANJI = KANJI.filter((k) => PLUS_GROUPS.has(k.group)).length;
 
 export default function Profile() {
   const { progress, today, update, reset, plus } = useProgress();
+  const account = useAccount();
+  const { session, profile } = account;
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [accountNote, setAccountNote] = useState<string | null>(null);
+  const [accountBusy, setAccountBusy] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
   const done = completedCount(progress);
   const [reminderNote, setReminderNote] = useState<string | null>(null);
@@ -42,6 +49,20 @@ export default function Profile() {
       setReminderNote('Kujtesa vjen vetëm në ditët kur nuk ke praktikuar ende.');
     } else {
       setReminderNote('Lejo njoftimet për Shqiponisht te cilësimet e telefonit, pastaj provo përsëri.');
+    }
+  };
+
+  const runAccount = async (action: () => Promise<void>, done: string) => {
+    setAccountBusy(true);
+    setAccountNote(null);
+    try {
+      await action();
+      setAccountNote(done);
+      setConfirmDelete(false);
+    } catch (e) {
+      setAccountNote(accountErrorMessage(e));
+    } finally {
+      setAccountBusy(false);
     }
   };
 
@@ -70,7 +91,7 @@ export default function Profile() {
           <Logo width={isDark ? 60 : 72} />
           <View style={{ flex: 1 }}>
             <Text style={styles.name}>{progress.name || 'Nxënës/e'}</Text>
-            <Text style={styles.sub}>Mëson japonisht me Shqiponisht</Text>
+            <Text style={styles.sub}>{profile ? `@${profile.username}` : 'Mëson japonisht me Shqiponisht'}</Text>
           </View>
         </View>
 
@@ -80,6 +101,29 @@ export default function Profile() {
           <Stat value={`${done}/${LESSONS.length}`} label="mësime" />
           <Stat value={String(learnedCount(progress.review))} label="të mësuara" />
         </View>
+
+        {!session && account.ready && (
+          <View style={styles.accountCard}>
+            <Ionicons name="cloud-upload-outline" size={26} color={C.red} />
+            <View style={{ flex: 1 }}>
+              <Text style={styles.accountTitle}>Ruaje përparimin në llogari</Text>
+              <Text style={styles.accountText}>Krijo llogari dhe vazhdo nga çdo telefon, pa humbur asgjë.</Text>
+              <View style={[styles.row, { marginTop: S.md }]}>
+                <Button
+                  label="Krijo llogari"
+                  onPress={() => router.push({ pathname: '/account', params: { mode: 'signup' } })}
+                  style={{ flex: 1 }}
+                />
+                <Button
+                  label="Hyr"
+                  variant="secondary"
+                  onPress={() => router.push({ pathname: '/account', params: { mode: 'login' } })}
+                  style={{ flex: 1 }}
+                />
+              </View>
+            </View>
+          </View>
+        )}
 
         <SectionTitle>Qëllimi ditor</SectionTitle>
         <View style={styles.goals}>
@@ -170,11 +214,62 @@ export default function Profile() {
           </View>
         )}
 
-        <SectionTitle>Ruaj përparimin</SectionTitle>
+        {session && (
+          <>
+            <SectionTitle>Llogaria</SectionTitle>
+            <View style={styles.about}>
+              {profile && (
+                <Text style={styles.aboutText}>
+                  <Text style={{ fontWeight: '800', color: C.ink }}>@{profile.username}</Text>
+                  {profile.name ? ` · ${profile.name}` : ''}
+                </Text>
+              )}
+              <Text style={styles.aboutText}>{session.email}</Text>
+              <Text style={styles.syncText}>
+                <Ionicons
+                  name={account.sync === 'error' ? 'cloud-offline-outline' : 'cloud-done-outline'}
+                  size={14}
+                  color={account.sync === 'error' ? C.redText : C.greenText}
+                />{' '}
+                {account.sync === 'error'
+                  ? 'Nuk u ruajt në llogari tani. Do të provojmë sërish kur të ketë internet.'
+                  : account.sync === 'saving'
+                    ? 'Po ruhet në llogari…'
+                    : 'Përparimi ruhet në llogarinë tënde.'}
+              </Text>
+              <Button
+                label="Dil nga llogaria"
+                variant="secondary"
+                disabled={accountBusy}
+                onPress={() => runAccount(account.signOut, 'Dole nga llogaria. Përparimi mbetet edhe në këtë telefon.')}
+              />
+              {confirmDelete ? (
+                <>
+                  <Text style={styles.warn}>
+                    Llogaria dhe gjithçka e ruajtur në të fshihen përgjithmonë. Përparimi në këtë telefon mbetet. Kjo
+                    nuk e anulon abonimin Plus: atë e menaxhon te App Store ose Google Play.
+                  </Text>
+                  <Button
+                    label={accountBusy ? 'Po fshihet…' : 'Po, fshije llogarinë'}
+                    disabled={accountBusy}
+                    onPress={() => runAccount(account.deleteAccount, 'Llogaria u fshi.')}
+                  />
+                  <Button label="Anulo" variant="ghost" onPress={() => setConfirmDelete(false)} />
+                </>
+              ) : (
+                <Button label="Fshi llogarinë" variant="ghost" onPress={() => setConfirmDelete(true)} />
+              )}
+            </View>
+          </>
+        )}
+        {accountNote && <Text style={styles.note}>{accountNote}</Text>}
+
+        <SectionTitle>Kodi i rezervimit</SectionTitle>
         <View style={styles.about}>
           <Text style={styles.aboutText}>
-            Përparimi ruhet vetëm në këtë telefon. Ruaje kodin e rezervimit për ta rikthyer në një telefon tjetër ose
-            pas rinstalimit.
+            {session
+              ? 'Pa internet? Kodi i rezervimit e rikthen përparimin edhe pa llogari.'
+              : 'Pa llogari, përparimi ruhet vetëm në këtë telefon. Ruaje kodin e rezervimit për ta rikthyer në një telefon tjetër ose pas rinstalimit.'}
           </Text>
           <View style={styles.row}>
             <Button label="Kopjo kodin" variant="secondary" onPress={copyBackup} style={{ flex: 1 }} />
@@ -293,6 +388,20 @@ const styles = StyleSheet.create({
   content: { padding: S.xl, paddingBottom: S.xxl, maxWidth: 640, width: '100%', alignSelf: 'center' },
   header: { flexDirection: 'row', alignItems: 'center', gap: S.lg },
   name: { fontSize: 24, fontWeight: '800', color: C.ink },
+  accountCard: {
+    flexDirection: 'row',
+    gap: S.md,
+    marginTop: S.xl,
+    padding: S.lg,
+    borderRadius: R.lg,
+    backgroundColor: C.redSoft,
+    borderWidth: 1,
+    borderColor: C.line,
+  },
+  accountTitle: { fontSize: 17, fontWeight: '800', color: C.ink },
+  accountText: { fontSize: 14, lineHeight: 20, color: C.muted, marginTop: 2 },
+  syncText: { fontSize: 13.5, lineHeight: 19, color: C.muted },
+  warn: { fontSize: 14, lineHeight: 20, color: C.redText },
   sub: { fontSize: 14, color: C.muted },
   stats: { flexDirection: 'row', gap: S.sm, marginTop: S.xl },
   stat: {

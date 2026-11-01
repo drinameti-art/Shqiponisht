@@ -11,6 +11,8 @@ When you're done, `npm run check:release` must print ✓ before you make a store
 
 ## Before you start (one-time)
 
+- [ ] **Accounts:** set up Supabase as described in [`supabase/README.md`](supabase/README.md) and put its URL and anon key in `.env` / EAS environment variables.
+
 - [ ] **Apple Developer Program** membership ($99/year) and **Google Play Console** account ($25 once), in the company's name.
 - [ ] **Apple:** App Store Connect → *Business* → sign the **Paid Apps Agreement** and fill in banking and tax. Subscriptions will not load until this shows *Active*.
 - [ ] **Google:** Play Console → *Setup → Payments profile* → link a merchant account.
@@ -94,9 +96,20 @@ The texts are in `src/legal/privacy.json` and `src/legal/terms.json`, in Albania
 2. **Build the web pages:** `npm run legal` writes `docs/index.html`, `docs/privacy.html` and `docs/terms.html`.
 3. **Host them:** push the repo to GitHub → *Settings → Pages → Deploy from a branch → `main` / `docs`*. Your links become `https://<user>.github.io/shqiponisht/privacy.html` and `…/terms.html`.
 4. Paste those URLs into **App Store Connect** (*App Privacy → Privacy Policy URL*; terms in the description or *License Agreement*) and **Play Console** (*Policy → App content → Privacy policy*).
-5. **Privacy questionnaires** (match what the policy says: no account, no ads, no analytics, progress stays on the device; only purchase data goes through RevenueCat):
-   - App Store *App Privacy*: declare **Purchases → Purchase History**, used for **App Functionality**, **not** used for tracking. Check RevenueCat's "Apple App Privacy" guide for anything it adds for your SDK version.
-   - Play *Data safety*: declare **Financial info → Purchase history**, collected, not shared for advertising, encrypted in transit; data can't be deleted in-app but on request by email.
+5. **Privacy questionnaires** (match what the policy says: optional account on Supabase, no ads, no analytics; purchase data goes through RevenueCat):
+   - App Store *App Privacy* — all items **Linked to the user**, used only for **App Functionality**, **not** used for tracking:
+     - **Contact Info → Email Address**
+     - **Contact Info → Name**
+     - **Identifiers → User ID** (the username and account ID)
+     - **User Content → Other User Content** (lesson progress)
+     - **Purchases → Purchase History** (RevenueCat; check its "Apple App Privacy" guide for your SDK version)
+     - Age range and level: **Other Data → Other Data Types**
+   - Play *Data safety*: data is **collected**, **not shared**, **encrypted in transit**, and **users can request deletion** (in the app: Profili → Llogaria → Fshi llogarinë). Declare, each *optional* and for *App functionality* + *Account management*:
+     - **Personal info → Email address, Name, User IDs, Other info** (age range, level)
+     - **App activity → Other user-generated content** (progress)
+     - **Financial info → Purchase history** (RevenueCat)
+   - Play *Account deletion*: the app lets users delete their account in-app. Play also asks for a **web link** where people can request deletion without the app: use your support page (`docs/index.html`) and say there that they can email `[EMAIL]` from the account's address.
+   - Apple review notes: mention that the account is optional ("Vazhdo pa llogari" on the last sign-up step) and that accounts can be deleted in Profili → Llogaria → Fshi llogarinë.
 
 I wrote these texts carefully, but they are not legal advice. Have them checked by a lawyer or your accountant before launch, especially the governing-law section.
 

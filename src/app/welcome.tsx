@@ -16,8 +16,11 @@ import Animated, { FadeIn, FadeInDown, FadeInRight, ZoomIn } from 'react-native-
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EASE_OUT } from '@/components/motion';
+import { AgePicker, Field, LevelPicker, LogInForm, SignUpForm } from '@/components/account-forms';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui';
+import { useAccount } from '@/lib/account-context';
+import { canHaveAccount, type AgeRange, type Level } from '@/lib/account-types';
 import { decodeBackup } from '@/lib/backup';
 import { DAILY_GOALS } from '@/lib/progress';
 import { useProgress } from '@/lib/progress-context';
@@ -25,7 +28,9 @@ import { C, R, S } from '@/theme';
 
 const LOGO_WIDTH = Math.min(300, Dimensions.get('window').width * 0.66);
 
-type Step = 'cover' | 'name' | 'goal' | 'restore';
+type Step = 'cover' | 'about' | 'goal' | 'account' | 'young' | 'verify' | 'login' | 'restore';
+
+const FLOW: Step[] = ['about', 'goal', 'account'];
 
 /** Daily goals as learners think about them: minutes first, XP second. */
 const GOALS: Record<number, { title: string; time: string }> = {
@@ -37,14 +42,19 @@ const GOALS: Record<number, { title: string; time: string }> = {
 
 export default function Welcome() {
   const { progress, update } = useProgress();
+  const { kind } = useAccount();
   const [step, setStep] = useState<Step>('cover');
   const [name, setName] = useState(progress.name);
+  const [age, setAge] = useState<AgeRange | null>(null);
+  const [level, setLevel] = useState<Level | null>(null);
   const [goal, setGoal] = useState(progress.dailyGoal);
+  const [aboutTouched, setAboutTouched] = useState(false);
+  const [verifyEmail, setVerifyEmail] = useState('');
   const [code, setCode] = useState('');
   const [codeError, setCodeError] = useState(false);
 
   const finish = () => {
-    update((p) => ({ ...p, onboarded: true, name: name.trim(), dailyGoal: goal }));
+    update((p) => ({ ...p, onboarded: true, name: name.trim() || p.name, dailyGoal: goal }));
     router.replace('/');
   };
 
@@ -56,6 +66,11 @@ export default function Welcome() {
     }
     update(() => restored);
     router.replace('/');
+  };
+
+  const continueAbout = () => {
+    setAboutTouched(true);
+    if (name.trim() && age && level) setStep('goal');
   };
 
   if (step === 'cover') {
@@ -73,10 +88,10 @@ export default function Welcome() {
             <Text style={styles.lead}>Pak minuta në ditë: shkronja, fjalë dhe zë i vërtetë japonez.</Text>
           </Animated.View>
           <Animated.View entering={FadeIn.delay(600).duration(400)} style={styles.coverActions}>
-            <Button label="Fillo" onPress={() => setStep('name')} />
-            <Pressable onPress={() => setStep('restore')} accessibilityRole="button" hitSlop={8}>
+            <Button label="Fillo" onPress={() => setStep('about')} />
+            <Pressable onPress={() => setStep('login')} accessibilityRole="button" hitSlop={8}>
               <Text style={styles.secondary}>
-                Ke një kod rezervimi? <Text style={styles.secondaryStrong}>Rikthe përparimin</Text>
+                Ke llogari? <Text style={styles.secondaryStrong}>Hyr</Text>
               </Text>
             </Pressable>
           </Animated.View>
@@ -85,45 +100,56 @@ export default function Welcome() {
     );
   }
 
-  const back = () => setStep(step === 'goal' ? 'name' : 'cover');
+  const back = () => {
+    const prev: Partial<Record<Step, Step>> = { goal: 'about', account: 'goal', young: 'goal', restore: 'login' };
+    setStep(prev[step] ?? 'cover');
+  };
+  const flowIndex = FLOW.indexOf(step === 'young' ? 'account' : step);
 
   return (
     <SafeAreaView style={styles.safe}>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={styles.top}>
-          <Pressable onPress={back} accessibilityRole="button" accessibilityLabel="Kthehu" hitSlop={12}>
-            <Ionicons name="chevron-back" size={26} color={C.muted} />
-          </Pressable>
-          {step !== 'restore' && (
+          {step !== 'verify' ? (
+            <Pressable onPress={back} accessibilityRole="button" accessibilityLabel="Kthehu" hitSlop={12}>
+              <Ionicons name="chevron-back" size={26} color={C.muted} />
+            </Pressable>
+          ) : (
+            <View style={{ width: 26 }} />
+          )}
+          {flowIndex >= 0 && (
             <View style={styles.dots}>
-              <View style={[styles.dot, styles.dotOn]} />
-              <View style={[styles.dot, step === 'goal' && styles.dotOn]} />
+              {FLOW.map((s, i) => (
+                <View key={s} style={[styles.dot, i <= flowIndex && styles.dotOn]} />
+              ))}
             </View>
           )}
           <View style={{ width: 26 }} />
         </View>
 
         <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled">
-          {step === 'name' && (
-            <Animated.View key="name" entering={FadeInRight.duration(260).easing(EASE_OUT)} style={styles.stepBox}>
-              <Text style={styles.stepTitle}>Si të quajmë?</Text>
-              <Text style={styles.stepLead}>Emri shfaqet vetëm në telefonin tënd.</Text>
-              <TextInput
+          {step === 'about' && (
+            <Animated.View key="about" entering={FadeInRight.duration(260).easing(EASE_OUT)} style={styles.stepBox}>
+              <Text style={styles.stepTitle}>Na trego pak për veten</Text>
+              <Text style={styles.stepLead}>Kështu e përshtatim aplikacionin për ty.</Text>
+              <Field
+                label="Emri"
                 value={name}
                 onChangeText={setName}
                 placeholder="Emri yt"
-                placeholderTextColor={C.muted}
-                style={styles.input}
                 autoCapitalize="words"
-                autoFocus
-                returnKeyType="next"
-                onSubmitEditing={() => setStep('goal')}
+                autoComplete="given-name"
+                textContentType="givenName"
                 maxLength={30}
+                error={aboutTouched && !name.trim() ? 'Shkruaj emrin tënd.' : null}
               />
-              <Button label="Vazhdo" onPress={() => setStep('goal')} style={{ marginTop: S.xl }} />
-              {!name.trim() && (
-                <Text style={[styles.secondary, { marginTop: S.md }]}>Mund ta lësh bosh dhe ta shtosh më vonë.</Text>
-              )}
+              <Text style={styles.label}>Mosha</Text>
+              <AgePicker value={age} onChange={setAge} />
+              {aboutTouched && !age && <Text style={styles.error}>Zgjidh moshën.</Text>}
+              <Text style={[styles.label, { marginTop: S.lg }]}>Sa japonisht di?</Text>
+              <LevelPicker value={level} onChange={setLevel} />
+              {aboutTouched && !level && <Text style={styles.error}>Zgjidh nivelin tënd.</Text>}
+              <Button label="Vazhdo" onPress={continueAbout} style={{ marginTop: S.xl }} />
             </Animated.View>
           )}
 
@@ -153,7 +179,73 @@ export default function Welcome() {
                   );
                 })}
               </View>
-              <Button label="Le të fillojmë!" onPress={finish} style={{ marginTop: S.xl }} />
+              <Button
+                label="Vazhdo"
+                onPress={() => setStep(canHaveAccount(age) ? 'account' : 'young')}
+                style={{ marginTop: S.xl }}
+              />
+            </Animated.View>
+          )}
+
+          {step === 'account' && age && level && (
+            <Animated.View key="account" entering={FadeInRight.duration(260).easing(EASE_OUT)} style={styles.stepBox}>
+              <Text style={styles.stepTitle}>Krijo llogarinë tënde</Text>
+              <Text style={styles.stepLead}>Përparimi ruhet në llogari, që ta vazhdosh në çdo telefon.</Text>
+              <SignUpForm
+                about={{ name: name.trim(), ageRange: age, level }}
+                onDone={(result, email) => {
+                  if (result.status === 'signed-in') finish();
+                  else {
+                    setVerifyEmail(email);
+                    setStep('verify');
+                  }
+                }}
+              />
+              <Pressable onPress={finish} accessibilityRole="button" hitSlop={8} style={styles.skip}>
+                <Text style={styles.secondary}>
+                  <Text style={styles.secondaryStrong}>Vazhdo pa llogari</Text> · përparimi mbetet vetëm në këtë telefon
+                </Text>
+              </Pressable>
+              {kind === 'demo' && <Text style={styles.demo}>Version demo: llogaritë ruhen vetëm në këtë pajisje.</Text>}
+            </Animated.View>
+          )}
+
+          {step === 'young' && (
+            <Animated.View key="young" entering={FadeInRight.duration(260).easing(EASE_OUT)} style={styles.stepBox}>
+              <Text style={styles.stepTitle}>Gati për të filluar!</Text>
+              <Text style={styles.stepLead}>
+                Llogaritë online janë për moshën 16 vjeç e lart, ndaj përparimi yt ruhet vetëm në këtë telefon. Të
+                gjitha mësimet funksionojnë njësoj.
+              </Text>
+              <Text style={styles.stepLead}>
+                Për ta kaluar në një telefon tjetër, përdor kodin e rezervimit te Profili.
+              </Text>
+              <Button label="Le të fillojmë!" onPress={finish} />
+            </Animated.View>
+          )}
+
+          {step === 'verify' && (
+            <Animated.View key="verify" entering={FadeInRight.duration(260).easing(EASE_OUT)} style={styles.stepBox}>
+              <Ionicons name="mail-unread-outline" size={48} color={C.red} />
+              <Text style={[styles.stepTitle, { marginTop: S.md }]}>Konfirmo email-in</Text>
+              <Text style={styles.stepLead}>
+                Të dërguam një lidhje te <Text style={{ fontWeight: '800', color: C.ink }}>{verifyEmail}</Text>. Hape
+                për ta aktivizuar llogarinë, pastaj hyr nga Profili. Ndërkohë mund të fillosh mësimet.
+              </Text>
+              <Button label="Le të fillojmë!" onPress={finish} />
+            </Animated.View>
+          )}
+
+          {step === 'login' && (
+            <Animated.View key="login" entering={FadeInRight.duration(260).easing(EASE_OUT)} style={styles.stepBox}>
+              <Text style={styles.stepTitle}>Mirë se u ktheve!</Text>
+              <Text style={styles.stepLead}>Hyr në llogari dhe vazhdo nga ku e le.</Text>
+              <LogInForm onDone={() => router.replace('/')} />
+              <Pressable onPress={() => setStep('restore')} accessibilityRole="button" hitSlop={8} style={styles.skip}>
+                <Text style={styles.secondary}>
+                  Pa llogari? <Text style={styles.secondaryStrong}>Rikthe me kod rezervimi</Text>
+                </Text>
+              </Pressable>
             </Animated.View>
           )}
 
@@ -251,6 +343,9 @@ const styles = StyleSheet.create({
   },
   codeInput: { minHeight: 110, fontSize: 14, textAlignVertical: 'top' },
   error: { color: C.redText, fontSize: 14, marginTop: S.sm },
+  label: { fontSize: 14, fontWeight: '800', color: C.ink, marginBottom: S.sm },
+  skip: { marginTop: S.xl, alignItems: 'center' },
+  demo: { fontSize: 12.5, color: C.muted, textAlign: 'center', marginTop: S.md, fontStyle: 'italic' },
   goals: { gap: S.sm },
   goal: {
     flexDirection: 'row',

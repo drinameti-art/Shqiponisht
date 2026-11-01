@@ -3,6 +3,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 
+import { AccountProvider } from '@/lib/account-context';
 import { ProgressProvider, useProgress } from '@/lib/progress-context';
 import { C } from '@/theme';
 
@@ -25,6 +26,7 @@ function RootStack() {
       <Stack.Screen name="write/[char]" options={{ presentation: 'modal' }} />
       <Stack.Screen name="plus" options={{ presentation: 'modal' }} />
       <Stack.Screen name="legal/[doc]" options={{ presentation: 'modal' }} />
+      <Stack.Screen name="account" options={{ presentation: 'modal' }} />
       <Stack.Screen name="flashcards" options={{ presentation: 'fullScreenModal', gestureEnabled: false }} />
     </Stack>
   );
@@ -33,8 +35,10 @@ function RootStack() {
 export default function RootLayout() {
   return (
     <ProgressProvider>
-      <StatusBar style="auto" />
-      <RootStack />
+      <AccountProvider>
+        <StatusBar style="auto" />
+        <RootStack />
+      </AccountProvider>
     </ProgressProvider>
   );
 }

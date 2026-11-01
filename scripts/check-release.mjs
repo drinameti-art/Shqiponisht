@@ -32,14 +32,20 @@ if (!env.EXPO_PUBLIC_REVENUECAT_IOS_KEY?.startsWith('appl_')) {
 if (!env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY?.startsWith('goog_')) {
   problems.push('EXPO_PUBLIC_REVENUECAT_ANDROID_KEY is missing (RevenueCat → Project → API keys, starts with goog_)');
 }
+if (!/^https:\/\/.+\.supabase\.co\/?$/.test(env.EXPO_PUBLIC_SUPABASE_URL ?? '') || !env.EXPO_PUBLIC_SUPABASE_ANON_KEY) {
+  problems.push(
+    'EXPO_PUBLIC_SUPABASE_URL / EXPO_PUBLIC_SUPABASE_ANON_KEY are missing: without them accounts stay on the device (see supabase/README.md)',
+  );
+}
 if (env.EXPO_PUBLIC_DEMO_PLUS === '1') {
   problems.push('EXPO_PUBLIC_DEMO_PLUS=1 is set: remove it, it lets anyone unlock Plus for free');
 }
-if (!existsSync(join(root, 'docs/privacy.html'))) problems.push('Run `npm run legal` to build docs/privacy.html and docs/terms.html');
+if (!existsSync(join(root, 'docs/privacy.html')))
+  problems.push('Run `npm run legal` to build docs/privacy.html and docs/terms.html');
 
 if (problems.length) {
   console.error('Not ready for a store build:\n' + problems.map((p) => `  ✗ ${p}`).join('\n'));
   console.error('\nKeys set as EAS environment variables (not in .env) count only when exported in this shell.');
   process.exit(1);
 }
-console.log('✓ Ready: publisher details, RevenueCat keys and legal pages are in place.');
+console.log('✓ Ready: publisher details, RevenueCat and Supabase keys, and legal pages are in place.');

@@ -68,8 +68,8 @@ STAY MOTIVATED
 • Sounds, animations and confetti when you pass a lesson
 • Light and dark mode
 
-PRIVATE BY DESIGN
-No account, no ads, no tracking. Your progress stays on your phone, and you can move it to a new phone with a backup code.
+YOUR PROGRESS, EVERYWHERE
+No ads, no tracking. Create a free account to keep your progress on every phone, or use the app without one: then your progress stays on your phone and moves with a backup code.
 
 SHQIPONISHT PLUS
 The first 26 lessons are free. Shqiponisht Plus unlocks Level 2: 22 more lessons and 61 more kanji — verbs, time, sentences, numbers to 10,000, shopping, adjectives, colours, the restaurant, travel, weather and seasons, health and question words. Monthly or yearly, with a 7-day free trial on the yearly plan.
@@ -95,7 +95,7 @@ Pronunciation: recordings by Tofugu and WaniKani (CC BY-SA 4.0) and VOICEVOX:玄
 | Copyright | `2026 Shqiponisht` |
 | Age rating | **4+**: answer *None* to every content question; *No* to unrestricted web access, user-generated content, gambling, contests; the app has no ads and doesn't collect data from children |
 | App Privacy | as in `STORE_SETUP.md` → Step 3: only *Purchases → Purchase History*, for App Functionality, not used for tracking |
-| Sign-in required for review | No |
+| Sign-in required for review | No (the account is optional); you can still give Apple a demo account so they can test sync |
 | Review notes | the note in `STORE_SETUP.md` → Step 1a.4 (how to find the subscription in an Albanian-language app) |
 
 ---
@@ -140,8 +140,8 @@ QËNDRO I MOTIVUAR
 • Tinguj, animacione dhe konfeti kur kalon një mësim
 • Pamje e çelët dhe e errët
 
-PRIVATËSI E PLOTË
-Pa llogari, pa reklama, pa gjurmim. Përparimi mbetet në telefonin tënd dhe mund ta kalosh në një telefon të ri me një kod rezervimi.
+PËRPARIMI YT, KUDO
+Pa reklama, pa gjurmim. Krijo një llogari falas dhe vazhdo nga çdo telefon, ose përdore pa llogari: atëherë përparimi mbetet në telefonin tënd dhe e kalon me një kod rezervimi.
 
 SHQIPONISHT PLUS
 26 mësimet e para janë falas. Shqiponisht Plus hap Nivelin 2: 22 mësime dhe 61 kanji të tjera — folje, koha, fjali, numrat deri në 10 000, blerjet, mbiemrat, ngjyrat, restoranti, udhëtimi, moti dhe stinët, shëndeti dhe fjalët pyetëse. Mujor ose vjetor, me 7 ditë provë falas te plani vjetor. Abonimi rinovohet automatikisht; mund ta anulosh kur të duash te Google Play.
@@ -163,7 +163,7 @@ Use the App Store description above, replacing its subscription paragraph with: 
 | Website | your hosted `docs/index.html` |
 | Privacy policy | your hosted `docs/privacy.html` |
 | Ads | **No**, the app contains no ads |
-| App access | All functionality available without special access (Plus is a normal subscription) |
+| App access | All functionality available without special access (the account is optional; Plus is a normal subscription) |
 | Content rating (IARC) | Category *Reference, News, or Educational*; answer *No* to violence, sexuality, language, controlled substances, gambling, user interaction and sharing location → expect **Everyone / PEGI 3** |
 | Target audience | 13+ (avoids the extra rules for apps aimed at children; the app is still suitable for everyone) |
 | Data safety | as in `STORE_SETUP.md` → Step 3 |

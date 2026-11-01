@@ -9,12 +9,21 @@
         ]
       },
       {
+        "heading": "Llogaria (opsionale)",
+        "body": [
+          "Mund ta përdorësh aplikacionin pa llogari. Nëse krijon një llogari, ruajmë: email-in, fjalëkalimin (vetëm si hash i enkriptuar, ne nuk e shohim), emrin e përdoruesit, emrin, grupmoshën dhe nivelin që zgjedh, si dhe përparimin në mësime (XP, seria e ditëve, mësimet e kaluara dhe kartat e përsëritjes). I përdorim vetëm për të të identifikuar dhe për ta ruajtur e sinkronizuar përparimin mes pajisjeve.",
+          "Llogaritë ruhen nga Supabase, Inc. në emrin tonë, në serverë në Bashkimin Evropian (Frankfurt, Gjermani). Komunikimi është i enkriptuar dhe secili përdorues sheh vetëm të dhënat e veta. Politika e privatësisë së Supabase: https://supabase.com/privacy",
+          "Përdorim email-in vetëm për llogarinë: konfirmimin e saj dhe ndryshimin e fjalëkalimit. Nuk dërgojmë reklama.",
+          "Llogaritë janë vetëm për moshën 16 vjeç e lart. Më të vegjlit e përdorin aplikacionin pa llogari dhe asnjë e dhënë e tyre nuk vjen te ne."
+        ]
+      },
+      {
         "heading": "Çfarë ruhet në pajisjen tënde",
         "body": [
-          "Aplikacioni nuk kërkon llogari. Emri që shkruan në fillim, përparimi në mësime, pikët XP, seria e ditëve dhe cilësimet ruhen vetëm në pajisjen tënde. Ato nuk dërgohen te ne dhe ne nuk kemi qasje në to.",
+          "Pa llogari, emri që shkruan, përparimi dhe cilësimet ruhen vetëm në pajisjen tënde. Ato nuk dërgohen te ne. Mosha dhe niveli që zgjedh në fillim përdoren vetëm për llogarinë dhe nuk ruhen nëse nuk krijon llogari.",
           "Aplikacioni nuk përdor mikrofonin, kamerën, vendndodhjen apo kontaktet e tua.",
-          "Shqiptimi japonez luhet me zërin e integruar të telefonit tënd. Kujtesat ditore, nëse i aktivizon, janë njoftime lokale që i planifikon vetë telefoni; asnjë e dhënë nuk dërgohet te ne për to.",
-          "Kodi i rezervimit që mund të kopjosh te Profili përmban përparimin tënd dhe emrin që ke shkruar. Ai mbetet vetëm te ti: ne nuk e marrim dhe nuk e ruajmë. Mbaje si çdo shënim personal."
+          "Shqiptimi japonez është i përfshirë në aplikacion. Kujtesat ditore, nëse i aktivizon, janë njoftime lokale që i planifikon vetë telefoni; asnjë e dhënë nuk dërgohet te ne për to.",
+          "Kodi i rezervimit që mund të kopjosh te Profili përmban përparimin tënd dhe emrin që ke shkruar. Ai mbetet vetëm te ti: ne nuk e marrim dhe nuk e ruajmë."
         ]
       },
       {
@@ -33,19 +42,20 @@
       {
         "heading": "Sa kohë ruhen të dhënat",
         "body": [
+          "Të dhënat e llogarisë ruhen derisa ta fshish llogarinë. Mund ta fshish kur të duash te Profili → Llogaria → „Fshi llogarinë“: llogaria, profili dhe përparimi i ruajtur fshihen menjëherë dhe përgjithmonë. Kopjet rezervë teknike të Supabase fshihen brenda 7 ditësh.",
           "Të dhënat në pajisje mbeten derisa ta fshish aplikacionin ose të zgjedhësh „Rinis përparimin“ te Profili. Të dhënat e blerjeve ruhen nga RevenueCat për aq kohë sa nevojitet për abonimin dhe për detyrimet ligjore e kontabël."
         ]
       },
       {
         "heading": "Të drejtat e tua",
         "body": [
-          "Ke të drejtë të kërkosh qasje, korrigjim ose fshirje të të dhënave që lidhen me blerjet e tua, si dhe të kundërshtosh përpunimin e tyre. Na shkruaj në {{EMAIL}}. Ke gjithashtu të drejtë të ankohesh pranë autoritetit për mbrojtjen e të dhënave personale në vendin tënd."
+          "Ke të drejtë të kërkosh qasje, korrigjim, transferim ose fshirje të të dhënave të tua, si dhe të kundërshtosh përpunimin e tyre. Llogarinë mund ta fshish vetë në aplikacion; për çdo kërkesë tjetër na shkruaj në {{EMAIL}}. Ke gjithashtu të drejtë të ankohesh pranë autoritetit për mbrojtjen e të dhënave personale në vendin tënd."
         ]
       },
       {
         "heading": "Fëmijët",
         "body": [
-          "Aplikacioni nuk mbledh me dashje të dhëna personale nga fëmijët. Blerjet brenda aplikacionit kontrollohen nga cilësimet e prindërve në App Store dhe Google Play. Nëse je prind dhe ke pyetje, na shkruaj në {{EMAIL}}."
+          "Llogaritë online janë vetëm për moshën 16 vjeç e lart; aplikacioni nuk krijon llogari për ata që zgjedhin „Nën 16“ dhe nuk mbledh me dashje të dhëna personale nga fëmijët. Blerjet brenda aplikacionit kontrollohen nga cilësimet e prindërve në App Store dhe Google Play. Nëse je prind dhe ke pyetje, na shkruaj në {{EMAIL}}."
         ]
       },
       {
@@ -66,12 +76,21 @@
         ]
       },
       {
+        "heading": "Your account (optional)",
+        "body": [
+          "You can use the app without an account. If you create one, we store: your email, your password (only as an encrypted hash, which we cannot read), your username, name, the age range and level you choose, and your lesson progress (XP, streak, completed lessons and review cards). We use them only to identify you and to save and sync your progress between devices.",
+          "Accounts are hosted by Supabase, Inc. on our behalf, on servers in the European Union (Frankfurt, Germany). Connections are encrypted and each user can only access their own data. Supabase’s privacy policy: https://supabase.com/privacy",
+          "We use your email only for your account: confirming it and resetting your password. We do not send marketing emails.",
+          "Accounts are for people aged 16 and over. Younger learners use the app without an account, and none of their data reaches us."
+        ]
+      },
+      {
         "heading": "What stays on your device",
         "body": [
-          "The app does not require an account. The name you enter at the start, your lesson progress, XP, streak and settings are stored only on your device. They are not sent to us and we cannot access them.",
+          "Without an account, your name, progress and settings are stored only on your device and are not sent to us. The age range and level you choose at the start are only used for an account and are not kept if you don’t create one.",
           "The app does not use your microphone, camera, location or contacts.",
-          "Japanese pronunciation is played with your phone’s built-in voice. Daily reminders, if you turn them on, are local notifications scheduled by your phone; no data is sent to us for them.",
-          "The backup code you can copy in Profile contains your progress and the name you entered. It stays with you: we never receive or store it. Keep it like any personal note."
+          "Japanese pronunciation is bundled with the app. Daily reminders, if you turn them on, are local notifications scheduled by your phone; no data is sent to us for them.",
+          "The backup code you can copy in Profile contains your progress and the name you entered. It stays with you: we never receive or store it."
         ]
       },
       {
@@ -90,19 +109,20 @@
       {
         "heading": "How long data is kept",
         "body": [
+          "Account data is kept until you delete your account. You can do this at any time in Profile → Llogaria (Account) → “Fshi llogarinë” (Delete account): your account, profile and saved progress are deleted immediately and permanently. Supabase’s technical backups are erased within 7 days.",
           "Data on your device remains until you delete the app or choose “Rinis përparimin” (Reset progress) in Profile. Purchase records are kept by RevenueCat for as long as needed for the subscription and for legal and accounting obligations."
         ]
       },
       {
         "heading": "Your rights",
         "body": [
-          "You may request access to, correction or deletion of data relating to your purchases, and object to its processing. Write to us at {{EMAIL}}. You also have the right to complain to the data-protection authority in your country."
+          "You may request access to, correction, transfer or deletion of your data, and object to its processing. You can delete your account yourself in the app; for any other request write to us at {{EMAIL}}. You also have the right to complain to the data-protection authority in your country."
         ]
       },
       {
         "heading": "Children",
         "body": [
-          "The app does not knowingly collect personal data from children. In-app purchases are controlled by parental settings in the App Store and Google Play. If you are a parent with questions, write to us at {{EMAIL}}."
+          "Online accounts are only for people aged 16 and over; the app does not create accounts for anyone who chooses “Under 16” and does not knowingly collect personal data from children. In-app purchases are controlled by parental settings in the App Store and Google Play. If you are a parent with questions, write to us at {{EMAIL}}."
         ]
       },
       {
