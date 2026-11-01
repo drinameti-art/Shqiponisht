@@ -6,7 +6,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { SpeakButton, WriteButton } from '@/components/ui';
 import { useProgress } from '@/lib/progress-context';
-import { KANJI_GROUPS, kanjiByChar, kanjiInGroup, type Reading } from '@/data/kanji';
+import { KANJI_GROUPS, kanjiByChar, kanjiInGroup } from '@/data/kanji';
+import { BrandFooter, BrandHeader, ReadingPill, WordRow } from '@/components/brand';
+import { BrushKanji, DrawPath, InkText, Reveal, step as at } from '@/components/brand-motion';
+import { DRAWINGS } from '@/data/drawings';
 import { C, F, R, S } from '@/theme';
 
 export default function KanjiScreen() {
@@ -17,38 +20,55 @@ export default function KanjiScreen() {
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
+        <BrandHeader label="KANJI" style={{ marginBottom: S.lg }} />
         <Text style={styles.title}>Kanji</Text>
         <Text style={styles.intro}>
           Çdo kanji ka kuptim dhe zakonisht dy lexime: on (nga kinezishtja, me katakana) dhe kun (japonez, me hiragana).
         </Text>
 
-        <View style={styles.card} accessibilityLiveRegion="polite">
+        {/* key: picking another kanji replays the sequence (docs/BRAND.md §5). */}
+        <View key={k.char} style={styles.card} accessibilityLiveRegion="polite">
           <View style={styles.cardTop}>
-            <View style={styles.big}>
-              <Text style={styles.bigText}>{k.char}</Text>
-            </View>
+            <BrushKanji
+              char={k.char}
+              size={128}
+              color={C.ink}
+              fallback={<Text style={styles.bigText}>{k.char}</Text>}
+            />
             <View style={{ flex: 1 }}>
-              <Text style={styles.meaning}>{k.meaning}</Text>
-              <Text style={styles.strokes}>{k.strokes} vija</Text>
+              <InkText delay={at(1)} style={styles.meaning}>
+                {k.meaning}
+              </InkText>
+              <InkText delay={at(2)} color={C.muted} style={styles.strokes}>
+                {k.strokes} vija
+              </InkText>
             </View>
           </View>
-          <View style={styles.readings}>
-            <ReadingBox label="on" reading={k.on} />
-            <ReadingBox label="kun" reading={k.kun} />
-          </View>
-          <WriteButton char={k.char} />
+          {DRAWINGS[k.char] && (
+            <Reveal delay={at(3)} style={styles.drawing}>
+              <DrawPath drawing={DRAWINGS[k.char]} size={104} delay={at(3) + 200} />
+              <Text style={styles.drawingNote}>{k.char} lindi si vizatim</Text>
+            </Reveal>
+          )}
+          <Reveal delay={at(3)} style={styles.readings}>
+            <ReadingPill kind="jp" kana={k.kun.kana} romaji={k.kun.sq} />
+            <ReadingPill kind="cn" kana={k.on.kana} romaji={k.on.sq} />
+          </Reveal>
+          <Reveal delay={at(4)}>
+            <WriteButton char={k.char} />
+          </Reveal>
           <View style={styles.examples}>
-            {k.examples.map((e) => (
-              <View key={e.jp} style={styles.example}>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.exampleJp}>{e.jp}</Text>
-                  <Text style={styles.exampleSub}>
-                    {e.kana} · {e.sq}
-                  </Text>
-                  <Text style={styles.exampleMeaning}>{e.meaning}</Text>
-                </View>
-                <SpeakButton text={e.jp} tone="dark" size={36} />
-              </View>
+            {k.examples.map((e, i) => (
+              <Reveal key={e.jp} delay={at(5 + i)}>
+                <WordRow
+                  jp={e.jp}
+                  highlight={k.char}
+                  romaji={e.sq}
+                  meaning={e.meaning}
+                  note={e.kana}
+                  right={<SpeakButton text={e.jp} size={36} />}
+                />
+              </Reveal>
             ))}
           </View>
         </View>
@@ -88,69 +108,37 @@ export default function KanjiScreen() {
             </View>
           );
         })}
+        <BrandFooter />
       </ScrollView>
     </SafeAreaView>
-  );
-}
-
-function ReadingBox({ label, reading }: { label: string; reading: Reading }) {
-  return (
-    <View style={styles.reading}>
-      <Text style={styles.readingLabel}>{label}</Text>
-      <Text style={styles.readingKana}>{reading.kana}</Text>
-      <Text style={styles.readingSq}>
-        {reading.sq}
-        {reading.sq !== reading.romaji ? <Text style={styles.readingRomaji}>{`  ${reading.romaji}`}</Text> : null}
-      </Text>
-    </View>
   );
 }
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: C.cream },
   content: { padding: S.xl, paddingBottom: S.xxl, maxWidth: 640, width: '100%', alignSelf: 'center' },
-  title: { fontSize: 28, fontWeight: '800', color: C.ink, letterSpacing: -0.5 },
-  intro: { fontSize: 14, lineHeight: 20, color: C.muted, marginTop: S.xs },
-  card: { backgroundColor: C.panel, borderRadius: R.lg, padding: S.lg, marginTop: S.lg, gap: S.md },
+  title: { fontSize: 28, fontFamily: F.bold, color: C.ink, letterSpacing: -0.5 },
+  intro: { fontFamily: F.regular, fontSize: 14, lineHeight: 20, color: C.muted, marginTop: S.xs },
+  card: {
+    backgroundColor: C.paper,
+    borderWidth: 1.5,
+    borderColor: C.line,
+    borderRadius: R.lg,
+    padding: S.lg,
+    marginTop: S.lg,
+    gap: S.md,
+  },
   cardTop: { flexDirection: 'row', gap: S.lg, alignItems: 'center' },
-  big: {
-    width: 104,
-    height: 104,
-    borderRadius: R.md,
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bigText: { fontSize: 68, color: C.onPanel },
-  meaning: { fontSize: 26, fontWeight: '800', color: C.onPanel },
-  strokes: { fontSize: 13, color: 'rgba(247,241,229,0.6)', marginTop: 4 },
-  readings: { flexDirection: 'row', gap: S.sm },
-  reading: { flex: 1, backgroundColor: 'rgba(255,255,255,0.08)', borderRadius: R.sm, padding: S.sm },
-  readingLabel: {
-    fontSize: 11,
-    fontWeight: '700',
-    letterSpacing: 1.2,
-    textTransform: 'uppercase',
-    color: '#ff8a8c',
-  },
-  readingKana: { fontSize: 18, color: C.onPanel, marginTop: 2 },
-  readingSq: { fontSize: 14, fontWeight: '700', color: C.onPanel },
-  readingRomaji: { fontSize: 12, fontWeight: '400', color: 'rgba(247,241,229,0.55)', fontFamily: F.mono },
+  bigText: { fontFamily: F.jp, fontSize: 68, color: C.ink },
+  meaning: { fontSize: 24, fontFamily: F.bold, color: C.ink, lineHeight: 30 },
+  strokes: { fontFamily: F.regular, fontSize: 13, color: C.muted, marginTop: 4 },
+  drawing: { alignItems: 'center' },
+  drawingNote: { fontFamily: F.italic, fontSize: 12.5, color: C.muted },
+  readings: { flexDirection: 'row', gap: S.lg, flexWrap: 'wrap' },
   examples: { gap: S.sm },
-  example: {
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    borderRadius: R.sm,
-    padding: S.sm,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: S.sm,
-  },
-  exampleJp: { fontSize: 18, fontWeight: '600', color: C.onPanel },
-  exampleSub: { fontSize: 12.5, color: 'rgba(247,241,229,0.7)', marginTop: 2 },
-  exampleMeaning: { fontSize: 13.5, color: C.onPanel, marginTop: 2 },
   section: {
     fontSize: 12,
-    fontWeight: '700',
+    fontFamily: F.bold,
     letterSpacing: 1.4,
     textTransform: 'uppercase',
     color: C.muted,
@@ -180,7 +168,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 7,
     marginTop: S.md,
   },
-  plusBadgeText: { color: C.white, fontSize: 10.5, fontWeight: '800', letterSpacing: 1 },
-  cellChar: { fontSize: 24, color: C.ink },
-  cellMeaning: { fontSize: 10.5, color: C.muted },
+  plusBadgeText: { color: C.white, fontSize: 10.5, fontFamily: F.bold, letterSpacing: 1 },
+  cellChar: { fontFamily: F.jp, fontSize: 24, color: C.ink },
+  cellMeaning: { fontFamily: F.regular, fontSize: 10.5, color: C.muted },
 });

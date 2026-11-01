@@ -9,7 +9,7 @@ import { Button } from '@/components/ui';
 import { useAccount } from '@/lib/account-context';
 import { canHaveAccount, type AgeRange, type Level } from '@/lib/account-types';
 import { useProgress } from '@/lib/progress-context';
-import { C, R, S } from '@/theme';
+import { C, F, R, S } from '@/theme';
 
 type Mode = 'signup' | 'login';
 
@@ -40,7 +40,7 @@ export default function AccountScreen() {
               <Ionicons name="mail-unread-outline" size={48} color={C.red} />
               <Text style={[styles.title, { marginTop: S.md }]}>Konfirmo email-in</Text>
               <Text style={styles.lead}>
-                Të dërguam një lidhje te <Text style={{ fontWeight: '800', color: C.ink }}>{verifyEmail}</Text>. Hape
+                Të dërguam një lidhje te <Text style={{ fontFamily: F.bold, color: C.ink }}>{verifyEmail}</Text>. Hape
                 për ta aktivizuar llogarinë, pastaj kthehu këtu dhe hyr.
               </Text>
               <Button
@@ -123,14 +123,14 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: C.cream },
   top: { paddingHorizontal: S.xl, paddingTop: S.md, alignItems: 'flex-start' },
   body: { padding: S.xl, paddingTop: S.md, maxWidth: 520, width: '100%', alignSelf: 'center' },
-  title: { fontSize: 28, fontWeight: '800', color: C.ink, letterSpacing: -0.5 },
-  lead: { fontSize: 15.5, lineHeight: 22, color: C.muted, marginTop: S.sm, marginBottom: S.xl },
+  title: { fontSize: 28, fontFamily: F.bold, color: C.ink, letterSpacing: -0.5 },
+  lead: { fontFamily: F.regular, fontSize: 15.5, lineHeight: 22, color: C.muted, marginTop: S.sm, marginBottom: S.xl },
   seg: { flexDirection: 'row', backgroundColor: C.card, borderRadius: R.pill, padding: 4, marginBottom: S.xl },
   segItem: { flex: 1, paddingVertical: 10, borderRadius: R.pill, alignItems: 'center' },
   segOn: { backgroundColor: C.panel },
-  segText: { fontSize: 15, fontWeight: '800', color: C.muted },
-  label: { fontSize: 14, fontWeight: '800', color: C.ink, marginBottom: S.sm },
-  young: { fontSize: 15, lineHeight: 22, color: C.ink, marginTop: S.lg },
-  hint: { fontSize: 14, color: C.muted, textAlign: 'center' },
-  demo: { fontSize: 12.5, color: C.muted, textAlign: 'center', marginTop: S.lg, fontStyle: 'italic' },
+  segText: { fontSize: 15, fontFamily: F.bold, color: C.muted },
+  label: { fontSize: 14, fontFamily: F.bold, color: C.ink, marginBottom: S.sm },
+  young: { fontFamily: F.regular, fontSize: 15, lineHeight: 22, color: C.ink, marginTop: S.lg },
+  hint: { fontFamily: F.regular, fontSize: 14, color: C.muted, textAlign: 'center' },
+  demo: { fontFamily: F.italic, fontSize: 12.5, color: C.muted, textAlign: 'center', marginTop: S.lg },
 });

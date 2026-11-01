@@ -17,7 +17,7 @@ import {
   type Level,
 } from '@/lib/account-types';
 import { useProgress } from '@/lib/progress-context';
-import { C, S } from '@/theme';
+import { C, F, S } from '@/theme';
 
 const isLevel = (v: string | null | undefined): v is Level => LEVELS.some((l) => l.id === v);
 
@@ -212,10 +212,10 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: C.cream },
   top: { paddingHorizontal: S.xl, paddingTop: S.md, alignItems: 'flex-start' },
   body: { padding: S.xl, paddingTop: S.md, paddingBottom: S.xxl, maxWidth: 520, width: '100%', alignSelf: 'center' },
-  title: { fontSize: 28, fontWeight: '800', color: C.ink, letterSpacing: -0.5, marginBottom: S.xl },
-  label: { fontSize: 14, fontWeight: '800', color: C.ink, marginBottom: S.sm },
-  at: { paddingLeft: S.lg, marginRight: -S.md, fontSize: 17, fontWeight: '700', color: C.muted },
-  error: { fontSize: 14.5, lineHeight: 20, color: C.redText, marginTop: S.md },
-  ok: { fontSize: 14.5, lineHeight: 20, color: C.greenText, marginTop: S.md },
-  hint: { fontSize: 13, lineHeight: 18, color: C.muted, marginTop: S.sm, textAlign: 'center' },
+  title: { fontSize: 28, fontFamily: F.bold, color: C.ink, letterSpacing: -0.5, marginBottom: S.xl },
+  label: { fontSize: 14, fontFamily: F.bold, color: C.ink, marginBottom: S.sm },
+  at: { paddingLeft: S.lg, marginRight: -S.md, fontSize: 17, fontFamily: F.bold, color: C.muted },
+  error: { fontFamily: F.regular, fontSize: 14.5, lineHeight: 20, color: C.redText, marginTop: S.md },
+  ok: { fontFamily: F.regular, fontSize: 14.5, lineHeight: 20, color: C.greenText, marginTop: S.md },
+  hint: { fontFamily: F.regular, fontSize: 13, lineHeight: 18, color: C.muted, marginTop: S.sm, textAlign: 'center' },
 });

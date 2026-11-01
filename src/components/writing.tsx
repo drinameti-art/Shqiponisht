@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, type GestureResponderEvent } from 'react-native
 import Svg, { Circle, G, Line, Path, Text as SvgText } from 'react-native-svg';
 
 import { BOX, gradeStroke, pointsToPath, strokesFor, type Point, type StrokeGrade } from '@/lib/writing';
-import { C, R } from '@/theme';
+import { C, F, R } from '@/theme';
 
 const INK = C.ink;
 const ACTIVE = C.red;
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
 });
 
 export const writingStyles = StyleSheet.create({
-  message: { fontSize: 14.5, lineHeight: 20, textAlign: 'center', minHeight: 40 },
+  message: { fontFamily: F.regular, fontSize: 14.5, lineHeight: 20, textAlign: 'center', minHeight: 40 },
 });
 
 export function Message({ text, tone }: { text: string; tone: 'ok' | 'bad' | 'muted' }) {

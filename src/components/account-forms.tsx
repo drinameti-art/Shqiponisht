@@ -16,7 +16,7 @@ import {
   type AgeRange,
   type Level,
 } from '@/lib/account-types';
-import { C, R, S } from '@/theme';
+import { C, F, R, S } from '@/theme';
 
 import { Button } from './ui';
 
@@ -340,7 +340,7 @@ export function LogInForm({ onDone }: { onDone: () => void }) {
 
 const styles = StyleSheet.create({
   field: { marginBottom: S.lg },
-  label: { fontSize: 14, fontWeight: '800', color: C.ink, marginBottom: 6 },
+  label: { fontSize: 14, fontFamily: F.bold, color: C.ink, marginBottom: 6 },
   inputWrap: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -354,18 +354,19 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: S.lg,
     paddingVertical: 13,
+    fontFamily: F.regular,
     fontSize: 17,
     color: C.ink,
     minWidth: 0,
     outlineWidth: 0,
   },
   eye: { paddingHorizontal: S.md },
-  at: { paddingLeft: S.lg, marginRight: -S.md, fontSize: 17, fontWeight: '700', color: C.muted },
-  hint: { fontSize: 13, lineHeight: 18, color: C.muted, marginTop: 6 },
-  error: { fontSize: 13.5, lineHeight: 18, color: C.redText, marginTop: 6 },
-  formError: { marginTop: 0, marginBottom: S.sm, fontSize: 14.5 },
+  at: { paddingLeft: S.lg, marginRight: -S.md, fontSize: 17, fontFamily: F.bold, color: C.muted },
+  hint: { fontFamily: F.regular, fontSize: 13, lineHeight: 18, color: C.muted, marginTop: 6 },
+  error: { fontFamily: F.regular, fontSize: 13.5, lineHeight: 18, color: C.redText, marginTop: 6 },
+  formError: { marginTop: 0, marginBottom: S.sm, fontFamily: F.regular, fontSize: 14.5 },
   forgot: { alignSelf: 'flex-start', marginTop: -S.sm, marginBottom: S.md },
-  link: { color: C.red, fontWeight: '700' },
+  link: { color: C.red, fontFamily: F.bold },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: S.sm },
   chip: {
     paddingHorizontal: S.lg,
@@ -376,7 +377,7 @@ const styles = StyleSheet.create({
     backgroundColor: C.paper,
   },
   chipOn: { borderColor: C.red, backgroundColor: C.redSoft },
-  chipText: { fontSize: 15, fontWeight: '800', color: C.ink },
+  chipText: { fontSize: 15, fontFamily: F.bold, color: C.ink },
   option: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -397,7 +398,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   radioDot: { width: 10, height: 10, borderRadius: 5, backgroundColor: C.red },
-  optionTitle: { fontSize: 16, fontWeight: '800', color: C.ink },
-  optionDetail: { fontSize: 13.5, color: C.muted, marginTop: 1 },
-  terms: { fontSize: 13, lineHeight: 19, color: C.muted, textAlign: 'center', marginTop: S.md },
+  optionTitle: { fontSize: 16, fontFamily: F.bold, color: C.ink },
+  optionDetail: { fontFamily: F.regular, fontSize: 13.5, color: C.muted, marginTop: 1 },
+  terms: { fontFamily: F.regular, fontSize: 13, lineHeight: 19, color: C.muted, textAlign: 'center', marginTop: S.md },
 });

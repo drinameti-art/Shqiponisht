@@ -12,7 +12,7 @@ import { KANA } from '@/data/kana';
 import { KANJI } from '@/data/kanji';
 import { useProgress } from '@/lib/progress-context';
 import { hasStrokes } from '@/lib/writing';
-import { C, R, S } from '@/theme';
+import { C, F, R, S } from '@/theme';
 
 /** What to pronounce for the character: the kana itself, or a kanji's first example word. */
 function sayable(char: string): string {
@@ -170,8 +170,8 @@ function RoundButton(props: {
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: C.cream },
   top: { flexDirection: 'row', alignItems: 'center', gap: S.md, paddingHorizontal: S.xl, paddingTop: S.md },
-  title: { fontSize: 22, fontWeight: '800', color: C.ink },
-  sub: { fontSize: 14, color: C.muted },
+  title: { fontSize: 22, fontFamily: F.bold, color: C.ink },
+  sub: { fontFamily: F.regular, fontSize: 14, color: C.muted },
   seg: {
     flexDirection: 'row',
     backgroundColor: C.card,
@@ -184,9 +184,9 @@ const styles = StyleSheet.create({
   },
   segBtn: { flex: 1, paddingVertical: 9, borderRadius: R.pill, alignItems: 'center' },
   segOn: { backgroundColor: C.panel },
-  segText: { fontSize: 14, fontWeight: '700', color: C.muted },
+  segText: { fontSize: 14, fontFamily: F.bold, color: C.muted },
   body: { padding: S.xl, gap: S.md, maxWidth: 520, width: '100%', alignSelf: 'center' },
-  counter: { textAlign: 'center', fontSize: 14, fontWeight: '700', color: C.muted },
+  counter: { textAlign: 'center', fontSize: 14, fontFamily: F.bold, color: C.muted },
   controls: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: S.xl },
   round: {
     borderWidth: 2,
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  tip: { fontSize: 13.5, lineHeight: 19, color: C.muted, textAlign: 'center' },
+  tip: { fontFamily: F.regular, fontSize: 13.5, lineHeight: 19, color: C.muted, textAlign: 'center' },
   row: { flexDirection: 'row', gap: S.sm },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: S.xl },
 });

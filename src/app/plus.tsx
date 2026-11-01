@@ -11,7 +11,7 @@ import { useProgress } from '@/lib/progress-context';
 import { subscription } from '@/lib/subscription';
 import { annualSavings, DEMO_PLUS_ALLOWED, type Plan } from '@/lib/subscription-types';
 import { Logo } from '@/components/logo';
-import { C, R, S } from '@/theme';
+import { C, F, R, S } from '@/theme';
 
 const PLUS_LESSONS = LESSONS.filter((l) => l.premium).length;
 const PLUS_GROUPS = new Set(KANJI_GROUPS.filter((g) => g.premium).map((g) => g.id));
@@ -203,8 +203,8 @@ const styles = StyleSheet.create({
   top: { paddingHorizontal: S.xl, paddingTop: S.md },
   body: { padding: S.xl, paddingTop: 0, gap: S.md, maxWidth: 520, width: '100%', alignSelf: 'center' },
   mark: { alignSelf: 'center' },
-  title: { fontSize: 30, fontWeight: '800', color: C.ink, textAlign: 'center', letterSpacing: -0.5 },
-  lead: { fontSize: 15.5, lineHeight: 22, color: C.muted, textAlign: 'center' },
+  title: { fontSize: 30, fontFamily: F.bold, color: C.ink, textAlign: 'center', letterSpacing: -0.5 },
+  lead: { fontFamily: F.regular, fontSize: 15.5, lineHeight: 22, color: C.muted, textAlign: 'center' },
   benefits: {
     backgroundColor: C.paper,
     borderRadius: R.lg,
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  benefitText: { flex: 1, fontSize: 15, color: C.ink, lineHeight: 20 },
+  benefitText: { flex: 1, fontFamily: F.regular, fontSize: 15, color: C.ink, lineHeight: 20 },
   plans: { flexDirection: 'row', gap: S.sm, marginTop: S.sm },
   plan: {
     flex: 1,
@@ -235,9 +235,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   planOn: { borderColor: C.red, backgroundColor: C.redSoft },
-  planName: { fontSize: 13, fontWeight: '700', color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
-  planPrice: { fontSize: 22, fontWeight: '800', color: C.ink, marginTop: 4 },
-  planPer: { fontSize: 12.5, color: C.muted },
+  planName: { fontSize: 13, fontFamily: F.bold, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
+  planPrice: { fontSize: 22, fontFamily: F.bold, color: C.ink, marginTop: 4 },
+  planPer: { fontFamily: F.regular, fontSize: 12.5, color: C.muted },
   active: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -247,13 +247,13 @@ const styles = StyleSheet.create({
     padding: S.lg,
     marginTop: S.sm,
   },
-  activeText: { flex: 1, fontSize: 15, fontWeight: '600', color: C.greenText },
+  activeText: { flex: 1, fontSize: 15, fontFamily: F.semibold, color: C.greenText },
   unavailable: { gap: S.md, marginTop: S.sm },
-  unavailableText: { fontSize: 14.5, lineHeight: 21, color: C.muted, textAlign: 'center' },
-  message: { fontSize: 14, color: C.redText, textAlign: 'center' },
-  legal: { fontSize: 11.5, lineHeight: 16, color: C.muted, textAlign: 'center' },
+  unavailableText: { fontFamily: F.regular, fontSize: 14.5, lineHeight: 21, color: C.muted, textAlign: 'center' },
+  message: { fontFamily: F.regular, fontSize: 14, color: C.redText, textAlign: 'center' },
+  legal: { fontFamily: F.regular, fontSize: 11.5, lineHeight: 16, color: C.muted, textAlign: 'center' },
   links: { flexDirection: 'row', justifyContent: 'center', gap: S.sm, flexWrap: 'wrap' },
-  link: { fontSize: 12.5, color: C.ink, textDecorationLine: 'underline' },
+  link: { fontFamily: F.regular, fontSize: 12.5, color: C.ink, textDecorationLine: 'underline' },
   saveBadge: {
     position: 'absolute',
     top: -11,
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     paddingHorizontal: 8,
   },
-  saveText: { color: C.white, fontSize: 11, fontWeight: '800' },
-  trial: { fontSize: 12, fontWeight: '700', color: C.green, marginTop: 4 },
-  trialNote: { fontSize: 12.5, color: C.muted, textAlign: 'center' },
+  saveText: { color: C.white, fontSize: 11, fontFamily: F.bold },
+  trial: { fontSize: 12, fontFamily: F.bold, color: C.green, marginTop: 4 },
+  trialNote: { fontFamily: F.regular, fontSize: 12.5, color: C.muted, textAlign: 'center' },
 });

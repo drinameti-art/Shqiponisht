@@ -8,7 +8,7 @@ import { speakJapanese } from '@/lib/speech';
 
 import { EASE_OUT } from './motion';
 
-import { C, R, S } from '@/theme';
+import { C, F, R, S } from '@/theme';
 
 type ButtonProps = {
   label: string;
@@ -21,11 +21,11 @@ type ButtonProps = {
 const VARIANTS = {
   primary: { bg: C.red, edge: C.redEdge, fg: C.white },
   success: { bg: C.green, edge: C.greenEdge, fg: C.white },
-  secondary: { bg: C.paper, edge: C.line, fg: C.ink },
-  ghost: { bg: 'transparent', edge: 'transparent', fg: C.muted },
+  secondary: { bg: C.paper, edge: C.card, fg: C.ink },
+  ghost: { bg: 'transparent', edge: C.card, fg: C.muted },
 } as const;
 
-/** Chunky pill button with a pressed-down edge, used for every primary action. */
+/** The brand CTA: a flat pill (red by default) that presses in slightly. */
 export function Button({ label, onPress, variant = 'primary', disabled, style }: ButtonProps) {
   const v = VARIANTS[variant];
   return (
@@ -37,12 +37,10 @@ export function Button({ label, onPress, variant = 'primary', disabled, style }:
       style={({ pressed }) => [
         styles.button,
         {
-          backgroundColor: v.bg,
-          borderBottomColor: v.edge,
-          borderColor: variant === 'secondary' ? C.line : v.bg,
+          backgroundColor: pressed && !disabled && variant !== 'ghost' ? v.edge : v.bg,
+          borderColor: variant === 'secondary' ? C.line : 'transparent',
           opacity: disabled ? 0.45 : 1,
-          transform: [{ translateY: pressed && !disabled ? 2 : 0 }],
-          borderBottomWidth: pressed || variant === 'ghost' ? 2 : 4,
+          transform: [{ scale: pressed && !disabled ? 0.98 : 1 }],
         },
         style,
       ]}>
@@ -168,19 +166,19 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: S.lg,
   },
-  writeText: { fontSize: 14.5, fontWeight: '700', color: C.ink },
+  writeText: { fontSize: 14.5, fontFamily: F.bold, color: C.ink },
   button: {
     paddingVertical: 15,
-    paddingHorizontal: S.lg,
-    borderRadius: R.md,
-    borderWidth: 2,
+    paddingHorizontal: S.xl,
+    borderRadius: R.pill,
+    borderWidth: 1.5,
     alignItems: 'center',
   },
-  buttonText: { fontSize: 16, fontWeight: '700' },
+  buttonText: { fontSize: 16, fontFamily: F.semibold, letterSpacing: 0.2 },
   track: { backgroundColor: C.track, overflow: 'hidden', alignSelf: 'stretch' },
   section: {
     fontSize: 12,
-    fontWeight: '700',
+    fontFamily: F.bold,
     letterSpacing: 1.4,
     textTransform: 'uppercase',
     color: C.muted,
@@ -195,5 +193,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: R.pill,
   },
-  pillText: { fontSize: 14, fontWeight: '800' },
+  pillText: { fontSize: 14, fontFamily: F.bold },
 });

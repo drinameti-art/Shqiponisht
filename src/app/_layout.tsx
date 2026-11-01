@@ -1,3 +1,13 @@
+import {
+  Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+} from '@expo-google-fonts/poppins';
+import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
@@ -11,12 +21,24 @@ void SplashScreen.preventAutoHideAsync();
 
 function RootStack() {
   const { ready } = useProgress();
+  // Brand fonts (docs/BRAND.md). If they fail to load, the app still starts with system fonts.
+  const [fontsLoaded, fontError] = useFonts({
+    Poppins_400Regular,
+    Poppins_400Regular_Italic,
+    Poppins_500Medium,
+    Poppins_500Medium_Italic,
+    Poppins_600SemiBold,
+    Poppins_600SemiBold_Italic,
+    Poppins_700Bold,
+    NotoSansJP_700Bold: require('@/assets/fonts/NotoSansJP-Bold.ttf'),
+  });
+  const show = ready && (fontsLoaded || !!fontError);
 
   useEffect(() => {
-    if (ready) void SplashScreen.hideAsync();
-  }, [ready]);
+    if (show) void SplashScreen.hideAsync();
+  }, [show]);
 
-  if (!ready) return null;
+  if (!show) return null;
 
   return (
     <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: C.cream } }}>

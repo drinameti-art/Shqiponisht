@@ -5,7 +5,7 @@ import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-na
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { legalDoc, type LegalDocId, type LegalLang } from '@/lib/legal';
-import { C, R, S } from '@/theme';
+import { C, F, R, S } from '@/theme';
 
 const URL = /(https?:\/\/[^\s]+|[\w.+-]+@[\w-]+\.[\w.]+)/g;
 
@@ -91,12 +91,12 @@ const styles = StyleSheet.create({
   seg: { flexDirection: 'row', backgroundColor: C.card, borderRadius: R.pill, padding: 3 },
   segBtn: { paddingVertical: 6, paddingHorizontal: 12, borderRadius: R.pill },
   segOn: { backgroundColor: C.panel },
-  segText: { fontSize: 13, fontWeight: '700', color: C.muted },
+  segText: { fontSize: 13, fontFamily: F.bold, color: C.muted },
   body: { padding: S.xl, paddingBottom: S.xxl, maxWidth: 640, width: '100%', alignSelf: 'center' },
-  title: { fontSize: 26, fontWeight: '800', color: C.ink, letterSpacing: -0.4 },
-  updated: { fontSize: 13, color: C.muted, marginTop: 4 },
+  title: { fontSize: 26, fontFamily: F.bold, color: C.ink, letterSpacing: -0.4 },
+  updated: { fontFamily: F.regular, fontSize: 13, color: C.muted, marginTop: 4 },
   section: { marginTop: S.xl, gap: S.sm },
-  h: { fontSize: 17, fontWeight: '800', color: C.ink },
-  p: { fontSize: 15, lineHeight: 22, color: C.ink },
+  h: { fontSize: 17, fontFamily: F.bold, color: C.ink },
+  p: { fontFamily: F.regular, fontSize: 15, lineHeight: 22, color: C.ink },
   link: { color: C.red, textDecorationLine: 'underline' },
 });

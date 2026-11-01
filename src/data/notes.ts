@@ -2,8 +2,8 @@ import { romajiToAlbanian } from '@/lib/albanian';
 
 export type NoteExample = { jp: string; kana: string; romaji: string; sq: string; meaning: string };
 
-/** A short explanation shown before a lesson starts, in Albanian. */
-export type Note = { title: string; points: string[]; examples: NoteExample[] };
+/** A short explanation shown before a lesson starts, in Albanian. `drawings` are kanji that draw their picture. */
+export type Note = { title: string; points: string[]; examples: NoteExample[]; drawings?: string[] };
 
 function ex(jp: string, kana: string, romaji: string, meaning: string): NoteExample {
   return { jp, kana, romaji, sq: romajiToAlbanian(romaji), meaning };
@@ -130,6 +130,15 @@ export const NOTES: Record<string, Note> = {
       ex('大きい家', 'おおきいいえ', 'ōkii ie', 'shtëpi e madhe'),
       ex('赤い車', 'あかいくるま', 'akai kuruma', 'makinë e kuqe'),
     ],
+  },
+  'kanji-bota': {
+    title: 'Kanji që lindën si vizatime',
+    points: [
+      'Shumë kanji kanë qenë fillimisht vizatime: 雨 është një re me pika shiu, 花 një lule.',
+      'Kur e di vizatimin, kanji mbahet mend shumë më lehtë.',
+    ],
+    examples: [ex('雨', 'あめ', 'ame', 'shi'), ex('花', 'はな', 'hana', 'lule')],
+    drawings: ['雨', '花'],
   },
   restoranti: {
     title: 'Në tryezë',

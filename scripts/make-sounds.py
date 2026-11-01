@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Synthesizes the app's sound effects into assets/sounds/*.wav.
 
-All sounds are generated from sine waves here, so there are no third-party
+All sounds are generated here (piano-like tones in G major, a felt-tip noise), so there are no third-party
 recordings or licenses involved. Run: python3 scripts/make-sounds.py
 """
 import math
@@ -26,6 +26,40 @@ def tone(freq, dur, vol=0.5, decay=6.0, harmonics=((1, 1.0), (2, 0.25), (3, 0.08
         env = attack * math.exp(-decay * t / dur)
         s = sum(a * math.sin(h * phase) for h, a in harmonics)
         out.append(vol * env * s / sum(a for _, a in harmonics))
+    return out
+
+
+def piano(freq, dur, vol=0.45):
+    """A soft piano-like note: felt-hammer attack, partials that fade faster the higher they are."""
+    n = int(RATE * dur)
+    out = []
+    partials = [(k, 1.0 / k ** 1.4, 2.5 + 1.8 * k) for k in range(1, 7)]
+    norm = sum(a for _, a, _ in partials)
+    for i in range(n):
+        t = i / RATE
+        attack = min(1.0, t / 0.012)
+        s = 0.0
+        for k, a, d in partials:
+            fk = freq * k * (1 + 0.0004 * k * k)  # slight string inharmonicity
+            s += a * math.exp(-d * t) * math.sin(2 * math.pi * fk * t)
+        out.append(vol * attack * s / norm)
+    return out
+
+
+def felt_tip(dur=0.11, vol=0.22, seed=7):
+    """A gentle felt-tip stroke on paper: soft band-limited noise that swells and fades."""
+    import random
+    rnd = random.Random(seed)
+    n = int(RATE * dur)
+    out, lp, hp_prev, hp = [], 0.0, 0.0, 0.0
+    for i in range(n):
+        x = rnd.uniform(-1, 1)
+        lp += 0.18 * (x - lp)           # low-pass: takes the hiss off
+        hp = 0.92 * (hp + lp - hp_prev)  # high-pass: removes the rumble
+        hp_prev = lp
+        t = i / n
+        env = math.sin(math.pi * t) ** 1.5
+        out.append(vol * env * hp * 3)
     return out
 
 
@@ -61,20 +95,21 @@ def write(name, samples):
         w.writeframes(bytes(data))
 
 
-# Correct answer: a bright rising two-note chime (E6 → A6).
-write("correct", mix((0, tone(1318.5, 0.16, 0.45, 5)), (0.09, tone(1760.0, 0.38, 0.5, 5))))
+# All musical sounds are soft piano notes in G major (docs/BRAND.md §6).
+G4, B4, D5, G5 = 392.0, 493.88, 587.33, 783.99
 
-# Wrong answer: a soft, low falling "bum-bum" — noticeable but not harsh.
-soft = ((1, 1.0), (2, 0.15))
-write("wrong", mix((0, tone(233.1, 0.16, 0.6, 4, soft, glide=-0.06)), (0.15, tone(196.0, 0.3, 0.6, 4, soft, glide=-0.08))))
+# Correct answer: a light rising fourth, D5 -> G5.
+write("correct", mix((0, piano(D5, 0.5, 0.42)), (0.1, piano(G5, 0.9, 0.48))))
 
-# Lesson finished: an ascending C-major arpeggio with a held top note.
-notes = [523.25, 659.25, 783.99, 1046.5]
-write("complete", mix(*[(i * 0.11, tone(f, 0.6 if i == 3 else 0.3, 0.42, 4)) for i, f in enumerate(notes)]))
+# Wrong answer: a soft, low falling pair (A3 -> G3), noticeable but not harsh.
+write("wrong", mix((0, piano(220.0, 0.45, 0.5)), (0.16, piano(196.0, 0.7, 0.5))))
 
-# A correct stroke while writing: a short, quiet wooden tick.
-write("stroke", tone(880.0, 0.07, 0.35, 9, ((1, 1.0), (3, 0.3))))
+# Lesson finished: a G-major arpeggio, G4 B4 D5 G5, with the top note held.
+write("complete", mix(*[(i * 0.12, piano(f, 1.4 if i == 3 else 0.6, 0.42)) for i, f in enumerate([G4, B4, D5, G5])]))
 
-# Lesson failed: a gentle descending pair, encouraging rather than punishing.
-write("retry", mix((0, tone(659.25, 0.22, 0.4, 5)), (0.14, tone(523.25, 0.4, 0.4, 5))))
+# A correct stroke while writing: a gentle felt-tip on paper.
+write("stroke", felt_tip())
+
+# Lesson failed: a calm descending pair, B4 -> G4, encouraging rather than punishing.
+write("retry", mix((0, piano(B4, 0.5, 0.4)), (0.16, piano(G4, 1.0, 0.4))))
 print("Wrote", ", ".join(sorted(p.name for p in OUT.glob("*.wav"))))

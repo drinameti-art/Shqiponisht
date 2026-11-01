@@ -4,7 +4,7 @@ import type { ComponentProps } from 'react';
 import type { ColorValue } from 'react-native';
 
 import { useProgress } from '@/lib/progress-context';
-import { C } from '@/theme';
+import { C, F } from '@/theme';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -26,7 +26,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: C.red,
         tabBarInactiveTintColor: C.muted,
         tabBarStyle: { backgroundColor: C.paper, borderTopColor: C.line },
-        tabBarLabelStyle: { fontWeight: '600' },
+        tabBarLabelStyle: { fontFamily: F.semibold },
         sceneStyle: { backgroundColor: C.cream },
       }}>
       <Tabs.Screen name="index" options={{ title: 'Sot', tabBarIcon: icon('home-outline', 'home') }} />

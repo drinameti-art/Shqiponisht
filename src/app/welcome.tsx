@@ -12,11 +12,13 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import Animated, { FadeIn, FadeInDown, FadeInRight, ZoomIn } from 'react-native-reanimated';
+import Animated, { FadeInRight } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EASE_OUT } from '@/components/motion';
 import { AgePicker, Field, LevelPicker, LogInForm, SignUpForm } from '@/components/account-forms';
+import { BrandHeader } from '@/components/brand';
+import { InkText, Reveal, step as at } from '@/components/brand-motion';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui';
 import { useAccount } from '@/lib/account-context';
@@ -24,7 +26,7 @@ import { canHaveAccount, type AgeRange, type Level } from '@/lib/account-types';
 import { decodeBackup } from '@/lib/backup';
 import { DAILY_GOALS } from '@/lib/progress';
 import { useProgress } from '@/lib/progress-context';
-import { C, R, S } from '@/theme';
+import { C, F, R, S } from '@/theme';
 
 const LOGO_WIDTH = Math.min(300, Dimensions.get('window').width * 0.66);
 
@@ -74,27 +76,34 @@ export default function Welcome() {
   };
 
   if (step === 'cover') {
+    // One element at a time, as in the reels: header, logo, title, line, button (docs/BRAND.md §5).
     return (
       <View style={styles.cover}>
         <SafeAreaView edges={['top']} style={styles.hero}>
-          <Animated.View entering={ZoomIn.duration(600).easing(EASE_OUT)} style={styles.logoWrap}>
-            <Logo width={LOGO_WIDTH} />
-          </Animated.View>
+          <Reveal style={styles.coverHeader}>
+            <BrandHeader label="JAPONISHT" />
+          </Reveal>
+          <Reveal delay={at(1)} distance={14} style={styles.logoWrap}>
+            <Logo width={LOGO_WIDTH} wordmark />
+          </Reveal>
         </SafeAreaView>
         <SafeAreaView edges={['bottom']} style={styles.coverBody}>
-          <Animated.View entering={FadeInDown.delay(250).duration(500).easing(EASE_OUT)}>
-            <Text style={styles.brand}>SHQIPONISHT</Text>
-            <Text style={styles.title}>Mëso japonisht në shqip</Text>
-            <Text style={styles.lead}>Pak minuta në ditë: shkronja, fjalë dhe zë i vërtetë japonez.</Text>
-          </Animated.View>
-          <Animated.View entering={FadeIn.delay(600).duration(400)} style={styles.coverActions}>
+          <View>
+            <InkText delay={at(3)} style={styles.title}>
+              Mëso japonisht në shqip
+            </InkText>
+            <InkText delay={at(4)} color={C.muted} style={styles.lead}>
+              Pak minuta në ditë: shkronja, fjalë dhe zë i vërtetë japonez.
+            </InkText>
+          </View>
+          <Reveal delay={at(6)} style={styles.coverActions}>
             <Button label="Fillo" onPress={() => setStep('about')} />
             <Pressable onPress={() => setStep('login')} accessibilityRole="button" hitSlop={8}>
               <Text style={styles.secondary}>
                 Ke llogari? <Text style={styles.secondaryStrong}>Hyr</Text>
               </Text>
             </Pressable>
-          </Animated.View>
+          </Reveal>
         </SafeAreaView>
       </View>
     );
@@ -229,7 +238,7 @@ export default function Welcome() {
               <Ionicons name="mail-unread-outline" size={48} color={C.red} />
               <Text style={[styles.stepTitle, { marginTop: S.md }]}>Konfirmo email-in</Text>
               <Text style={styles.stepLead}>
-                Të dërguam një lidhje te <Text style={{ fontWeight: '800', color: C.ink }}>{verifyEmail}</Text>. Hape
+                Të dërguam një lidhje te <Text style={{ fontFamily: F.bold, color: C.ink }}>{verifyEmail}</Text>. Hape
                 për ta aktivizuar llogarinë, pastaj hyr nga Profili. Ndërkohë mund të fillosh mësimet.
               </Text>
               <Button label="Le të fillojmë!" onPress={finish} />
@@ -283,6 +292,7 @@ export default function Welcome() {
 const styles = StyleSheet.create({
   cover: { flex: 1, backgroundColor: C.cream },
   hero: { flex: 1.15, alignItems: 'center', justifyContent: 'center', paddingHorizontal: S.xl },
+  coverHeader: { position: 'absolute', top: S.lg, left: S.xl, right: S.xl, marginTop: S.xxl },
   logoWrap: { width: '100%', alignItems: 'center' },
   coverBody: {
     flex: 1,
@@ -294,10 +304,10 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
   },
-  brand: { fontSize: 14, fontWeight: '800', letterSpacing: 3, color: C.red, textAlign: 'center' },
+  brand: { fontSize: 14, fontFamily: F.bold, letterSpacing: 3, color: C.red, textAlign: 'center' },
   title: {
     fontSize: 34,
-    fontWeight: '800',
+    fontFamily: F.bold,
     color: C.ink,
     letterSpacing: -0.8,
     lineHeight: 39,
@@ -305,6 +315,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   lead: {
+    fontFamily: F.regular,
     fontSize: 16,
     lineHeight: 23,
     color: C.muted,
@@ -314,8 +325,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   coverActions: { gap: S.lg, paddingTop: S.lg },
-  secondary: { fontSize: 14, color: C.muted, textAlign: 'center' },
-  secondaryStrong: { color: C.ink, fontWeight: '700', textDecorationLine: 'underline' },
+  secondary: { fontFamily: F.regular, fontSize: 14, color: C.muted, textAlign: 'center' },
+  secondaryStrong: { color: C.ink, fontFamily: F.bold, textDecorationLine: 'underline' },
   safe: { flex: 1, backgroundColor: C.cream },
   top: {
     flexDirection: 'row',
@@ -329,8 +340,15 @@ const styles = StyleSheet.create({
   dotOn: { backgroundColor: C.red },
   body: { padding: S.xl, maxWidth: 520, width: '100%', alignSelf: 'center' },
   stepBox: { marginTop: S.lg },
-  stepTitle: { fontSize: 28, fontWeight: '800', color: C.ink, letterSpacing: -0.5, lineHeight: 33 },
-  stepLead: { fontSize: 15.5, lineHeight: 22, color: C.muted, marginTop: S.sm, marginBottom: S.xl },
+  stepTitle: { fontSize: 28, fontFamily: F.bold, color: C.ink, letterSpacing: -0.5, lineHeight: 33 },
+  stepLead: {
+    fontFamily: F.regular,
+    fontSize: 15.5,
+    lineHeight: 22,
+    color: C.muted,
+    marginTop: S.sm,
+    marginBottom: S.xl,
+  },
   input: {
     backgroundColor: C.paper,
     borderWidth: 2,
@@ -338,14 +356,15 @@ const styles = StyleSheet.create({
     borderRadius: R.md,
     paddingHorizontal: S.lg,
     paddingVertical: 14,
+    fontFamily: F.regular,
     fontSize: 17,
     color: C.ink,
   },
-  codeInput: { minHeight: 110, fontSize: 14, textAlignVertical: 'top' },
-  error: { color: C.redText, fontSize: 14, marginTop: S.sm },
-  label: { fontSize: 14, fontWeight: '800', color: C.ink, marginBottom: S.sm },
+  codeInput: { minHeight: 110, fontFamily: F.regular, fontSize: 14, textAlignVertical: 'top' },
+  error: { color: C.redText, fontFamily: F.regular, fontSize: 14, marginTop: S.sm },
+  label: { fontSize: 14, fontFamily: F.bold, color: C.ink, marginBottom: S.sm },
   skip: { marginTop: S.xl, alignItems: 'center' },
-  demo: { fontSize: 12.5, color: C.muted, textAlign: 'center', marginTop: S.md, fontStyle: 'italic' },
+  demo: { fontFamily: F.italic, fontSize: 12.5, color: C.muted, textAlign: 'center', marginTop: S.md },
   goals: { gap: S.sm },
   goal: {
     flexDirection: 'row',
@@ -369,7 +388,7 @@ const styles = StyleSheet.create({
   },
   radioOn: { borderColor: C.red },
   radioDot: { width: 10, height: 10, borderRadius: 5, backgroundColor: C.red },
-  goalTitle: { fontSize: 16, fontWeight: '800', color: C.ink },
-  goalTime: { fontSize: 13.5, color: C.muted, marginTop: 1 },
-  goalXp: { fontSize: 14, fontWeight: '800', color: C.muted },
+  goalTitle: { fontSize: 16, fontFamily: F.bold, color: C.ink },
+  goalTime: { fontFamily: F.regular, fontSize: 13.5, color: C.muted, marginTop: 1 },
+  goalXp: { fontSize: 14, fontFamily: F.bold, color: C.muted },
 });

@@ -10,7 +10,8 @@ import { completedCount, currentStreak, lessonStatuses, xpToday, type LessonStat
 import { offerPlacement } from '@/lib/placement';
 import { dueCount } from '@/lib/review';
 import { useProgress } from '@/lib/progress-context';
-import { C, R, S } from '@/theme';
+import { BrandFooter, BrandHeader } from '@/components/brand';
+import { C, F, R, S } from '@/theme';
 
 function greeting(hour: number): { sq: string; jp: string } {
   if (hour < 11) return { sq: 'Mirëmëngjes', jp: 'おはよう · ohajoo' };
@@ -31,6 +32,7 @@ export default function Today() {
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
+        <BrandHeader label="SOT" style={{ marginBottom: S.lg }} />
         <View style={styles.header}>
           <View style={{ flex: 1 }}>
             <Text style={styles.jp}>{hello.jp}</Text>
@@ -131,6 +133,7 @@ export default function Today() {
           </Pressable>
         )}
         <LessonList lessons={PLUS} statuses={statuses} records={progress.lessons} />
+        <BrandFooter />
       </ScrollView>
     </SafeAreaView>
   );
@@ -227,8 +230,8 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: C.cream },
   content: { padding: S.xl, paddingBottom: S.xxl, maxWidth: 640, width: '100%', alignSelf: 'center' },
   header: { flexDirection: 'row', alignItems: 'center', gap: S.md },
-  jp: { fontSize: 13, color: C.muted, marginBottom: 2 },
-  hello: { fontSize: 26, fontWeight: '800', color: C.ink, letterSpacing: -0.5 },
+  jp: { fontFamily: F.jp, fontSize: 13, color: C.muted, marginBottom: 2 },
+  hello: { fontSize: 26, fontFamily: F.bold, color: C.ink, letterSpacing: -0.5 },
   goalCard: {
     marginTop: S.lg,
     backgroundColor: C.paper,
@@ -239,9 +242,9 @@ const styles = StyleSheet.create({
     gap: S.md,
   },
   goalTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
-  goalTitle: { fontSize: 16, fontWeight: '700', color: C.ink },
-  goalNums: { fontSize: 14, fontWeight: '700', color: C.muted },
-  goalHint: { fontSize: 13, color: C.muted },
+  goalTitle: { fontSize: 16, fontFamily: F.bold, color: C.ink },
+  goalNums: { fontSize: 14, fontFamily: F.bold, color: C.muted },
+  goalHint: { fontFamily: F.regular, fontSize: 13, color: C.muted },
   path: { gap: S.sm, position: 'relative' },
   rail: { position: 'absolute', left: 27, top: 24, bottom: 24, width: 2, backgroundColor: C.line },
   row: { flexDirection: 'row', alignItems: 'center', gap: S.md, padding: S.sm, borderRadius: R.lg },
@@ -258,11 +261,11 @@ const styles = StyleSheet.create({
   },
   nodeDone: { backgroundColor: C.green, borderColor: C.green },
   nodeCurrent: { backgroundColor: C.red, borderColor: C.red },
-  nodeText: { fontSize: 17, fontWeight: '700', color: C.muted },
-  rowTitle: { fontSize: 15, fontWeight: '700', color: C.ink },
-  rowSub: { fontSize: 13, color: C.muted, marginTop: 1 },
+  nodeText: { fontSize: 17, fontFamily: F.jp, color: C.muted },
+  rowTitle: { fontSize: 15, fontFamily: F.bold, color: C.ink },
+  rowSub: { fontFamily: F.regular, fontSize: 13, color: C.muted, marginTop: 1 },
   go: { backgroundColor: C.red, paddingVertical: 8, paddingHorizontal: 14, borderRadius: R.pill },
-  goText: { color: C.white, fontWeight: '700', fontSize: 13 },
+  goText: { color: C.white, fontFamily: F.bold, fontSize: 13 },
   reviewCard: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -294,11 +297,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  reviewTitle: { fontSize: 16, fontWeight: '800', color: C.ink },
-  reviewText: { fontSize: 13.5, color: C.muted, marginTop: 2 },
+  reviewTitle: { fontSize: 16, fontFamily: F.bold, color: C.ink },
+  reviewText: { fontFamily: F.regular, fontSize: 13.5, color: C.muted, marginTop: 2 },
   plusHead: { flexDirection: 'row', alignItems: 'center', gap: S.sm },
   plusBadge: { backgroundColor: C.gold, borderRadius: R.pill, paddingVertical: 3, paddingHorizontal: 8 },
-  plusBadgeText: { color: C.white, fontSize: 11, fontWeight: '800', letterSpacing: 1 },
+  plusBadgeText: { color: C.white, fontSize: 11, fontFamily: F.bold, letterSpacing: 1 },
   plusCard: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -308,6 +311,6 @@ const styles = StyleSheet.create({
     padding: S.lg,
     marginBottom: S.md,
   },
-  plusCardTitle: { color: C.white, fontSize: 17, fontWeight: '800' },
-  plusCardText: { color: 'rgba(255,255,255,0.75)', fontSize: 13.5, marginTop: 2 },
+  plusCardTitle: { color: C.white, fontSize: 17, fontFamily: F.bold },
+  plusCardText: { color: 'rgba(255,255,255,0.75)', fontFamily: F.regular, fontSize: 13.5, marginTop: 2 },
 });

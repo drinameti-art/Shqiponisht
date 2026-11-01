@@ -30,7 +30,7 @@ import { useProgress } from '@/lib/progress-context';
 import { seededRng } from '@/lib/quiz';
 import { wordSay } from '@/lib/sayables';
 import { speakJapanese } from '@/lib/speech';
-import { C, R, S } from '@/theme';
+import { C, F, R, S } from '@/theme';
 
 const WORDS = new Map<string, Word>(VOCAB_LESSONS.flatMap((l) => l.words).map((w) => [w.jp, w]));
 const SWIPE = 90;
@@ -337,13 +337,13 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
   },
-  topTitle: { flex: 1, textAlign: 'center', fontSize: 17, fontWeight: '800', color: C.ink },
-  count: { fontSize: 13, fontWeight: '700', color: C.muted, minWidth: 24, textAlign: 'right' },
+  topTitle: { flex: 1, textAlign: 'center', fontSize: 17, fontFamily: F.bold, color: C.ink },
+  count: { fontSize: 13, fontFamily: F.bold, color: C.muted, minWidth: 24, textAlign: 'right' },
   body: { padding: S.xl, paddingBottom: S.xxl, gap: S.sm, maxWidth: 640, width: '100%', alignSelf: 'center' },
-  lead: { fontSize: 15, lineHeight: 21, color: C.muted },
+  lead: { fontFamily: F.regular, fontSize: 15, lineHeight: 21, color: C.muted },
   section: {
     fontSize: 12,
-    fontWeight: '700',
+    fontFamily: F.bold,
     letterSpacing: 1.4,
     textTransform: 'uppercase',
     color: C.muted,
@@ -353,7 +353,7 @@ const styles = StyleSheet.create({
   seg: { flexDirection: 'row', backgroundColor: C.card, borderRadius: R.pill, padding: 3 },
   segBtn: { flex: 1, paddingVertical: 9, borderRadius: R.pill, alignItems: 'center' },
   segOn: { backgroundColor: C.panel },
-  segText: { fontSize: 13.5, fontWeight: '700', color: C.muted },
+  segText: { fontSize: 13.5, fontFamily: F.bold, color: C.muted },
   deck: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -373,10 +373,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  deckTitle: { fontSize: 15.5, fontWeight: '700', color: C.ink },
-  deckSub: { fontSize: 13, color: C.muted, marginTop: 1 },
+  deckTitle: { fontSize: 15.5, fontFamily: F.bold, color: C.ink },
+  deckSub: { fontFamily: F.regular, fontSize: 13, color: C.muted, marginTop: 1 },
   plusBadge: { backgroundColor: C.gold, borderRadius: R.pill, paddingVertical: 3, paddingHorizontal: 8 },
-  plusBadgeText: { color: C.white, fontSize: 11, fontWeight: '800', letterSpacing: 1 },
+  plusBadgeText: { color: C.white, fontSize: 11, fontFamily: F.bold, letterSpacing: 1 },
   stage: { flex: 1, justifyContent: 'center', paddingHorizontal: S.xl },
   cardArea: { height: 330, maxWidth: 420, width: '100%', alignSelf: 'center' },
   card: {
@@ -397,17 +397,17 @@ const styles = StyleSheet.create({
     gap: S.sm,
   },
   cardBack: { backgroundColor: C.cardBack, borderColor: C.red },
-  side: { position: 'absolute', top: S.lg, fontSize: 11, fontWeight: '800', letterSpacing: 1.6, color: C.muted },
-  cardJp: { fontSize: 46, fontWeight: '600', color: C.ink, textAlign: 'center' },
-  cardKana: { fontSize: 18, color: C.muted },
-  cardMeaning: { fontSize: 28, fontWeight: '800', color: C.ink, textAlign: 'center' },
-  reading: { fontSize: 17, fontWeight: '700', color: C.red, marginTop: S.sm },
-  romaji: { fontSize: 13, fontWeight: '400', color: C.muted },
-  tap: { position: 'absolute', bottom: S.lg, fontSize: 12.5, color: C.muted },
+  side: { position: 'absolute', top: S.lg, fontSize: 11, fontFamily: F.bold, letterSpacing: 1.6, color: C.muted },
+  cardJp: { fontSize: 46, fontFamily: F.jp, color: C.ink, textAlign: 'center' },
+  cardKana: { fontFamily: F.jp, fontSize: 18, color: C.muted },
+  cardMeaning: { fontSize: 28, fontFamily: F.bold, color: C.ink, textAlign: 'center' },
+  reading: { fontSize: 17, fontFamily: F.bold, color: C.red, marginTop: S.sm },
+  romaji: { fontSize: 13, fontFamily: F.regular, color: C.muted },
+  tap: { position: 'absolute', bottom: S.lg, fontFamily: F.regular, fontSize: 12.5, color: C.muted },
   hint: { position: 'absolute', top: '12%', zIndex: 2 },
   hintLeft: { left: S.xl },
   hintRight: { right: S.xl },
-  hintText: { fontSize: 15, fontWeight: '800' },
+  hintText: { fontSize: 15, fontFamily: F.bold },
   speakRow: { alignItems: 'center', marginTop: S.lg },
   actions: {
     flexDirection: 'row',
@@ -428,10 +428,10 @@ const styles = StyleSheet.create({
     borderWidth: 6,
     borderColor: C.goldLine,
   },
-  medalText: { fontSize: 52, fontWeight: '800', color: C.goldText },
-  doneTitle: { fontSize: 26, fontWeight: '800', color: C.ink, marginTop: S.lg },
-  doneSub: { fontSize: 15, color: C.muted },
-  doneNote: { fontSize: 14, lineHeight: 20, color: C.muted, textAlign: 'center', maxWidth: 360 },
+  medalText: { fontSize: 52, fontFamily: F.jp, color: C.goldText },
+  doneTitle: { fontSize: 26, fontFamily: F.bold, color: C.ink, marginTop: S.lg },
+  doneSub: { fontFamily: F.regular, fontSize: 15, color: C.muted },
+  doneNote: { fontFamily: F.regular, fontSize: 14, lineHeight: 20, color: C.muted, textAlign: 'center', maxWidth: 360 },
   stats: { flexDirection: 'row', gap: S.sm, marginVertical: S.lg },
   stat: {
     backgroundColor: C.paper,
@@ -443,7 +443,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     minWidth: 110,
   },
-  statValue: { fontSize: 20, fontWeight: '800', color: C.ink },
-  statLabel: { fontSize: 12, color: C.muted },
+  statValue: { fontSize: 20, fontFamily: F.bold, color: C.ink },
+  statLabel: { fontFamily: F.regular, fontSize: 12, color: C.muted },
   wide: { alignSelf: 'stretch', maxWidth: 520, width: '100%' },
 });

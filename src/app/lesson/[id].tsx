@@ -7,16 +7,19 @@ import Animated, { FadeIn, FadeInDown, FadeInUp, SlideInRight, ZoomIn } from 're
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Confetti, CountUp, EASE_OUT, Feedback } from '@/components/motion';
+import { Toast } from '@/components/brand';
+import { Reveal } from '@/components/brand-motion';
+import { KanaIntro, NoteIntro } from '@/components/lesson-intro';
 import { Button, ProgressBar, SpeakButton } from '@/components/ui';
-import { lessonAfter, lessonById } from '@/data/lessons';
-import { NOTES, type Note } from '@/data/notes';
+import { lessonAfter, lessonById, LESSONS } from '@/data/lessons';
+import { NOTES } from '@/data/notes';
 import { buildPlacement, placementFinished } from '@/lib/placement';
 import { passes, PASS_RATIO } from '@/lib/progress';
 import { useProgress, type Answer } from '@/lib/progress-context';
 import { buildQuiz, buildReviewQuiz, seededRng } from '@/lib/quiz';
 import { dueItems } from '@/lib/review';
 import { speakJapanese } from '@/lib/speech';
-import { C, R, S } from '@/theme';
+import { C, F, R, S } from '@/theme';
 
 function feel(kind: 'ok' | 'bad') {
   if (Platform.OS === 'web') return;
@@ -63,6 +66,10 @@ export default function LessonScreen() {
   // A lesson with a grammar note opens with it; retries go straight to the questions.
   const note = isReview || isPlacement ? undefined : NOTES[id];
   const [showNote, setShowNote] = useState(() => !!note);
+  // Kana lessons without a note open with the reel-style row introduction (docs/BRAND.md §5).
+  const [showIntro, setShowIntro] = useState(() => !note && lesson?.kind === 'kana');
+  /** "PJESA n": the lesson's place on the path. */
+  const part = lesson ? LESSONS.findIndex((l) => l.id === lesson.id) + 1 : 0;
 
   // A listening question plays its sound as soon as it appears.
   const current = quiz[index];
@@ -78,6 +85,7 @@ export default function LessonScreen() {
     setAnswers([]);
     setResult(null);
     setShowNote(false);
+    setShowIntro(false);
   };
 
   // Plus lessons can be reached by deep link too; send those to the paywall.
@@ -165,6 +173,15 @@ export default function LessonScreen() {
             <Stat value={`${correct}/${total}`} label="saktë" />
             <Stat value={`${Math.round((correct / total) * 100)}%`} label="saktësi" />
           </Animated.View>
+          <Reveal delay={520} style={styles.toastWrap}>
+            <Toast>
+              {isReview
+                ? 'Kujtesa po forcohet, ditë pas dite.'
+                : ok
+                  ? 'Mësimi tjetër të pret!'
+                  : 'Edhe një herë dhe e ke!'}
+            </Toast>
+          </Reveal>
           <Button label={ok ? 'Vazhdo' : 'Provo përsëri'} onPress={ok ? close : retry} style={styles.wide} />
           {!isReview && (
             <Button
@@ -181,7 +198,12 @@ export default function LessonScreen() {
   }
 
   if (showNote && note) {
-    return <NoteScreen note={note} lessonTitle={title} onStart={() => setShowNote(false)} onClose={close} />;
+    return <NoteIntro note={note} part={part} lessonTitle={title} onStart={() => setShowNote(false)} onClose={close} />;
+  }
+  if (showIntro && lesson?.kind === 'kana') {
+    return (
+      <KanaIntro lesson={lesson} part={part} lessonTitle={title} onStart={() => setShowIntro(false)} onClose={close} />
+    );
   }
 
   const q = quiz[index];
@@ -302,7 +324,7 @@ export default function LessonScreen() {
                     accessibilityRole="radio"
                     accessibilityState={{ selected: selected === i, disabled: checked }}
                     style={[styles.option, OPTION_STATES[state]]}>
-                    <Text style={styles.optionLabel}>{o.label}</Text>
+                    <Text style={[styles.optionLabel, JAPANESE.test(o.label) && styles.optionJp]}>{o.label}</Text>
                     {o.hint ? <Text style={styles.optionHint}>{o.hint}</Text> : null}
                   </Pressable>
                 </Feedback>
@@ -345,54 +367,6 @@ export default function LessonScreen() {
   );
 }
 
-function NoteScreen(props: { note: Note; lessonTitle: string; onStart: () => void; onClose: () => void }) {
-  const { note } = props;
-  return (
-    <SafeAreaView style={styles.safe}>
-      <View style={styles.top}>
-        <Pressable onPress={props.onClose} accessibilityRole="button" accessibilityLabel="Mbyll mësimin" hitSlop={12}>
-          <Ionicons name="close" size={26} color={C.muted} />
-        </Pressable>
-        <Text style={styles.noteLesson} numberOfLines={1}>
-          {props.lessonTitle}
-        </Text>
-      </View>
-      <ScrollView contentContainerStyle={styles.body}>
-        <Animated.View entering={FadeInUp.duration(300).easing(EASE_OUT)}>
-          <Text style={styles.noteEyebrow}>Para se të fillosh</Text>
-          <Text style={styles.noteTitle}>{note.title}</Text>
-          <View style={styles.notePoints}>
-            {note.points.map((p) => (
-              <View key={p} style={styles.notePoint}>
-                <View style={styles.noteBullet} />
-                <Text style={styles.noteText}>{p}</Text>
-              </View>
-            ))}
-          </View>
-          {note.examples.length > 0 && (
-            <View style={styles.noteExamples}>
-              {note.examples.map((e) => (
-                <View key={e.jp} style={styles.noteExample}>
-                  <View style={{ flex: 1 }}>
-                    <Text style={styles.noteJp}>{e.jp}</Text>
-                    <Text style={styles.noteSq}>
-                      {e.sq} · <Text style={styles.noteMeaning}>{e.meaning}</Text>
-                    </Text>
-                  </View>
-                  <SpeakButton text={e.jp} size={38} />
-                </View>
-              ))}
-            </View>
-          )}
-        </Animated.View>
-      </ScrollView>
-      <View style={styles.footer}>
-        <Button label="Fillo ushtrimet" onPress={props.onStart} />
-      </View>
-    </SafeAreaView>
-  );
-}
-
 function Stat({ value, label }: { value: ReactNode; label: string }) {
   return (
     <View style={styles.stat}>
@@ -409,7 +383,12 @@ const OPTION_STATES = StyleSheet.create({
   wrong: { borderColor: C.red, backgroundColor: C.redSoft },
 });
 
+/** Kana or kanji in a string: those options use the Japanese font. */
+const JAPANESE = /[\u3040-\u30ff\u3400-\u9fff]/;
+
 const styles = StyleSheet.create({
+  optionJp: { fontFamily: F.jp, fontSize: 24 },
+  toastWrap: { marginBottom: S.lg },
   safe: { flex: 1, backgroundColor: C.cream },
   top: {
     flexDirection: 'row',
@@ -421,11 +400,11 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
   },
-  count: { fontSize: 13, fontWeight: '700', color: C.muted, minWidth: 36, textAlign: 'right' },
+  count: { fontSize: 13, fontFamily: F.bold, color: C.muted, minWidth: 36, textAlign: 'right' },
   body: { padding: S.xl, maxWidth: 640, width: '100%', alignSelf: 'center' },
-  instruction: { fontSize: 13, fontWeight: '700', letterSpacing: 1, textTransform: 'uppercase', color: C.muted },
-  prompt: { fontSize: 26, fontWeight: '800', color: C.ink, marginTop: S.md, marginBottom: S.xl, letterSpacing: -0.3 },
-  promptJp: { fontSize: 56, fontWeight: '600', letterSpacing: 0, textAlign: 'center', marginVertical: S.xl },
+  instruction: { fontSize: 13, fontFamily: F.bold, letterSpacing: 1, textTransform: 'uppercase', color: C.muted },
+  prompt: { fontSize: 26, fontFamily: F.bold, color: C.ink, marginTop: S.md, marginBottom: S.xl, letterSpacing: -0.3 },
+  promptJp: { fontSize: 56, fontFamily: F.jp, letterSpacing: 0, textAlign: 'center', marginVertical: S.xl },
   options: { flexDirection: 'row', flexWrap: 'wrap', gap: S.md },
   optionWrap: { flexGrow: 1, flexBasis: '45%' },
   option: {
@@ -439,8 +418,8 @@ const styles = StyleSheet.create({
     borderRadius: R.md,
     padding: S.md,
   },
-  optionLabel: { fontSize: 21, fontWeight: '700', color: C.ink },
-  optionHint: { fontSize: 12.5, color: C.muted, marginTop: 4 },
+  optionLabel: { fontSize: 21, fontFamily: F.bold, color: C.ink },
+  optionHint: { fontFamily: F.regular, fontSize: 12.5, color: C.muted, marginTop: 4 },
   footer: {
     padding: S.xl,
     paddingTop: S.lg,
@@ -451,33 +430,12 @@ const styles = StyleSheet.create({
   footerOk: { backgroundColor: C.greenSoft },
   footerBad: { backgroundColor: C.redSoft },
   feedback: { gap: 4, maxWidth: 640, width: '100%', alignSelf: 'center' },
-  noteLesson: { flex: 1, fontSize: 14, fontWeight: '700', color: C.muted },
-  noteEyebrow: { fontSize: 12, fontWeight: '800', letterSpacing: 1.4, textTransform: 'uppercase', color: C.red },
-  noteTitle: { fontSize: 26, fontWeight: '800', color: C.ink, marginTop: S.xs, letterSpacing: -0.4 },
-  notePoints: { gap: S.md, marginTop: S.lg },
-  notePoint: { flexDirection: 'row', gap: S.md },
-  noteBullet: { width: 8, height: 8, borderRadius: 4, backgroundColor: C.red, marginTop: 8 },
-  noteText: { flex: 1, fontSize: 16, lineHeight: 24, color: C.ink },
-  noteExamples: { gap: S.sm, marginTop: S.xl },
-  noteExample: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: S.md,
-    backgroundColor: C.paper,
-    borderWidth: 1,
-    borderColor: C.line,
-    borderRadius: R.md,
-    padding: S.md,
-  },
-  noteJp: { fontSize: 20, fontWeight: '600', color: C.ink },
-  noteSq: { fontSize: 14, fontWeight: '700', color: C.red, marginTop: 2 },
-  noteMeaning: { fontWeight: '400', color: C.muted },
   listen: { alignItems: 'center', gap: S.md, marginVertical: S.xl },
-  listenHint: { fontSize: 13, color: C.muted },
+  listenHint: { fontFamily: F.regular, fontSize: 13, color: C.muted },
   promptSpeak: { alignItems: 'center', marginTop: -S.md, marginBottom: S.lg },
   feedbackHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  feedbackTitle: { fontSize: 18, fontWeight: '800' },
-  feedbackBody: { fontSize: 14, lineHeight: 20 },
+  feedbackTitle: { fontSize: 18, fontFamily: F.bold },
+  feedbackBody: { fontFamily: F.regular, fontSize: 14, lineHeight: 20 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: S.xl, gap: S.sm },
   medal: {
     width: 120,
@@ -489,9 +447,9 @@ const styles = StyleSheet.create({
     borderWidth: 6,
     borderColor: C.goldLine,
   },
-  medalText: { fontSize: 52, fontWeight: '800', color: C.goldText },
-  doneTitle: { fontSize: 26, fontWeight: '800', color: C.ink, marginTop: S.lg },
-  doneSub: { fontSize: 15, color: C.muted },
+  medalText: { fontSize: 52, fontFamily: F.jp, color: C.goldText },
+  doneTitle: { fontSize: 26, fontFamily: F.bold, color: C.ink, marginTop: S.lg },
+  doneSub: { fontFamily: F.regular, fontSize: 15, color: C.muted },
   stats: { flexDirection: 'row', gap: S.sm, marginVertical: S.xl },
   stat: {
     backgroundColor: C.paper,
@@ -503,7 +461,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     minWidth: 86,
   },
-  statValue: { fontSize: 20, fontWeight: '800', color: C.ink },
-  statLabel: { fontSize: 12, color: C.muted },
+  statValue: { fontSize: 20, fontFamily: F.bold, color: C.ink },
+  statLabel: { fontFamily: F.regular, fontSize: 12, color: C.muted },
   wide: { alignSelf: 'stretch', maxWidth: 520, width: '100%' },
 });

@@ -17,7 +17,8 @@ import { accountErrorMessage } from '@/lib/account-types';
 import { useProgress } from '@/lib/progress-context';
 import { learnedCount } from '@/lib/review';
 import { Logo } from '@/components/logo';
-import { C, isDark, R, S } from '@/theme';
+import { BrandFooter, BrandHeader, INSTAGRAM_URL } from '@/components/brand';
+import { C, F, isDark, R, S } from '@/theme';
 
 const PLUS_LESSONS = LESSONS.filter((l) => l.premium).length;
 const PLUS_GROUPS = new Set(KANJI_GROUPS.filter((g) => g.premium).map((g) => g.id));
@@ -87,6 +88,7 @@ export default function Profile() {
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
+        <BrandHeader label="PROFILI" style={{ marginBottom: S.lg }} />
         <View style={styles.header}>
           <Logo width={isDark ? 60 : 72} />
           <View style={{ flex: 1 }}>
@@ -164,7 +166,7 @@ export default function Profile() {
             ['ō', 'oo'],
           ].map(([a, b]) => (
             <Text key={a} style={styles.rule}>
-              {a} → <Text style={{ color: C.red, fontWeight: '800' }}>{b}</Text>
+              {a} → <Text style={{ color: C.red, fontFamily: F.bold }}>{b}</Text>
             </Text>
           ))}
         </View>
@@ -228,7 +230,7 @@ export default function Profile() {
             <View style={styles.about}>
               {profile && (
                 <Text style={styles.aboutText}>
-                  <Text style={{ fontWeight: '800', color: C.ink }}>@{profile.username}</Text>
+                  <Text style={{ fontFamily: F.bold, color: C.ink }}>@{profile.username}</Text>
                   {profile.name ? ` · ${profile.name}` : ''}
                 </Text>
               )}
@@ -360,6 +362,13 @@ export default function Profile() {
           <Button label="Anulo" variant="ghost" onPress={() => setConfirmReset(false)} style={{ marginTop: S.sm }} />
         )}
 
+        {/* End screen, as in the reels: logo + SHQIPONISHT + NDIQ PËR MË SHUMË (docs/BRAND.md §5). */}
+        <View style={styles.endCard}>
+          <Logo width={120} wordmark />
+          <Text style={styles.endText}>Më shumë japonisht çdo ditë në Instagram.</Text>
+          <Button label="NDIQ PËR MË SHUMË" onPress={() => void Linking.openURL(INSTAGRAM_URL)} style={styles.endBtn} />
+        </View>
+
         <View style={styles.legalLinks}>
           <Text
             style={styles.legalLink}
@@ -377,6 +386,7 @@ export default function Profile() {
           Rendi i vijave: KanjiVG © Ulrich Apel, licencë CC BY-SA 3.0 (kanjivg.tagaini.net).{'\n'}Shqiptimi: regjistrime
           nga Tofugu dhe WaniKani, CC BY-SA 4.0 (të shkurtuara dhe të niveluara); zëri i sintetizuar: VOICEVOX:玄野武宏.
         </Text>
+        <BrandFooter />
       </ScrollView>
     </SafeAreaView>
   );
@@ -395,7 +405,19 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: C.cream },
   content: { padding: S.xl, paddingBottom: S.xxl, maxWidth: 640, width: '100%', alignSelf: 'center' },
   header: { flexDirection: 'row', alignItems: 'center', gap: S.lg },
-  name: { fontSize: 24, fontWeight: '800', color: C.ink },
+  name: { fontSize: 24, fontFamily: F.bold, color: C.ink },
+  endCard: {
+    alignItems: 'center',
+    gap: S.md,
+    marginTop: S.xxl,
+    paddingVertical: S.xl,
+    paddingHorizontal: S.lg,
+    borderWidth: 1.5,
+    borderColor: C.line,
+    borderRadius: R.lg,
+  },
+  endText: { fontFamily: F.regular, fontSize: 14, color: C.muted, textAlign: 'center' },
+  endBtn: { alignSelf: 'stretch' },
   editBtn: {
     width: 40,
     height: 40,
@@ -416,11 +438,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: C.line,
   },
-  accountTitle: { fontSize: 17, fontWeight: '800', color: C.ink },
-  accountText: { fontSize: 14, lineHeight: 20, color: C.muted, marginTop: 2 },
-  syncText: { fontSize: 13.5, lineHeight: 19, color: C.muted },
-  warn: { fontSize: 14, lineHeight: 20, color: C.redText },
-  sub: { fontSize: 14, color: C.muted },
+  accountTitle: { fontSize: 17, fontFamily: F.bold, color: C.ink },
+  accountText: { fontFamily: F.regular, fontSize: 14, lineHeight: 20, color: C.muted, marginTop: 2 },
+  syncText: { fontFamily: F.regular, fontSize: 13.5, lineHeight: 19, color: C.muted },
+  warn: { fontFamily: F.regular, fontSize: 14, lineHeight: 20, color: C.redText },
+  sub: { fontFamily: F.regular, fontSize: 14, color: C.muted },
   stats: { flexDirection: 'row', gap: S.sm, marginTop: S.xl },
   stat: {
     flex: 1,
@@ -431,8 +453,8 @@ const styles = StyleSheet.create({
     padding: S.md,
     alignItems: 'center',
   },
-  statValue: { fontSize: 22, fontWeight: '800', color: C.ink },
-  statLabel: { fontSize: 12, color: C.muted, marginTop: 2 },
+  statValue: { fontSize: 22, fontFamily: F.bold, color: C.ink },
+  statLabel: { fontFamily: F.regular, fontSize: 12, color: C.muted, marginTop: 2 },
   goals: { flexDirection: 'row', gap: S.sm },
   goal: {
     flex: 1,
@@ -444,10 +466,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   goalOn: { borderColor: C.red, backgroundColor: C.redSoft },
-  goalText: { fontSize: 15, fontWeight: '800', color: C.ink },
+  goalText: { fontSize: 15, fontFamily: F.bold, color: C.ink },
   about: { backgroundColor: C.paper, borderRadius: R.md, borderWidth: 1, borderColor: C.line, padding: S.lg, gap: 6 },
-  aboutText: { fontSize: 14.5, lineHeight: 21, color: C.ink, marginBottom: 4 },
-  rule: { fontSize: 15, color: C.ink },
+  aboutText: { fontFamily: F.regular, fontSize: 14.5, lineHeight: 21, color: C.ink, marginBottom: 4 },
+  rule: { fontFamily: F.regular, fontSize: 15, color: C.ink },
   setting: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -458,20 +480,20 @@ const styles = StyleSheet.create({
     borderColor: C.line,
     padding: S.lg,
   },
-  settingText: { flex: 1, fontSize: 16, fontWeight: '600', color: C.ink },
+  settingText: { flex: 1, fontSize: 16, fontFamily: F.semibold, color: C.ink },
   toggle: { width: 48, height: 28, borderRadius: 14, backgroundColor: C.line, padding: 3 },
   toggleOn: { backgroundColor: C.green },
   knob: { width: 22, height: 22, borderRadius: 11, backgroundColor: C.white },
   knobOn: { transform: [{ translateX: 20 }] },
   legalLinks: { flexDirection: 'row', justifyContent: 'center', gap: S.lg, marginTop: S.xl },
-  legalLink: { fontSize: 13.5, color: C.ink, textDecorationLine: 'underline' },
+  legalLink: { fontFamily: F.regular, fontSize: 13.5, color: C.ink, textDecorationLine: 'underline' },
   settingStack: { flexDirection: 'column', alignItems: 'stretch', gap: S.md },
   settingRow: { flexDirection: 'row', alignItems: 'center', gap: S.md },
   times: { flexDirection: 'row', flexWrap: 'wrap', gap: S.sm },
   time: { borderWidth: 2, borderColor: C.line, borderRadius: R.pill, paddingVertical: 6, paddingHorizontal: 12 },
   timeOn: { borderColor: C.red, backgroundColor: C.redSoft },
-  timeText: { fontSize: 14, fontWeight: '700', color: C.ink },
-  note: { fontSize: 13, lineHeight: 18, color: C.muted },
+  timeText: { fontSize: 14, fontFamily: F.bold, color: C.ink },
+  note: { fontFamily: F.regular, fontSize: 13, lineHeight: 18, color: C.muted },
   row: { flexDirection: 'row', gap: S.sm },
   codeInput: {
     minHeight: 70,
@@ -479,10 +501,18 @@ const styles = StyleSheet.create({
     borderColor: C.line,
     borderRadius: R.md,
     padding: S.md,
+    fontFamily: F.regular,
     fontSize: 13,
     color: C.ink,
     backgroundColor: C.cream,
     textAlignVertical: 'top',
   },
-  credits: { fontSize: 11.5, lineHeight: 16, color: C.muted, textAlign: 'center', marginTop: S.xl },
+  credits: {
+    fontFamily: F.regular,
+    fontSize: 11.5,
+    lineHeight: 16,
+    color: C.muted,
+    textAlign: 'center',
+    marginTop: S.xl,
+  },
 });

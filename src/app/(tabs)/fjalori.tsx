@@ -7,7 +7,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { SpeakButton } from '@/components/ui';
 import { VOCAB_LESSONS, type Word } from '@/data/lessons';
 import { wordSay } from '@/lib/sayables';
-import { C, F, R, S } from '@/theme';
+import { BrandFooter, BrandHeader } from '@/components/brand';
+import { C, F, R, ROMAJI, S } from '@/theme';
 
 /** Lowercases and strips Albanian diacritics so „ç“ matches „c“ and „ë“ matches „e“. */
 function fold(text: string): string {
@@ -31,6 +32,7 @@ export default function Vocabulary() {
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.head}>
+        <BrandHeader label="FJALORI" style={{ marginBottom: S.lg }} />
         <View style={styles.titleRow}>
           <Text style={styles.title}>Fjalori</Text>
           <Pressable
@@ -60,6 +62,7 @@ export default function Vocabulary() {
         keyExtractor={(w) => w.jp}
         contentContainerStyle={styles.list}
         stickySectionHeadersEnabled={false}
+        ListFooterComponent={<BrandFooter />}
         renderSectionHeader={({ section }) => <Text style={styles.section}>{section.title}</Text>}
         renderItem={({ item }) => (
           <View style={styles.row}>
@@ -96,8 +99,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 14,
   },
-  cardsText: { color: C.white, fontSize: 14.5, fontWeight: '800' },
-  title: { fontSize: 28, fontWeight: '800', color: C.ink, letterSpacing: -0.5 },
+  cardsText: { color: C.white, fontSize: 14.5, fontFamily: F.bold },
+  title: { fontSize: 28, fontFamily: F.bold, color: C.ink, letterSpacing: -0.5 },
   search: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -109,11 +112,11 @@ const styles = StyleSheet.create({
     borderRadius: R.md,
     paddingHorizontal: S.md,
   },
-  input: { flex: 1, paddingVertical: 11, fontSize: 16, color: C.ink },
+  input: { flex: 1, paddingVertical: 11, fontFamily: F.regular, fontSize: 16, color: C.ink },
   list: { paddingHorizontal: S.xl, paddingBottom: S.xxl, maxWidth: 640, width: '100%', alignSelf: 'center' },
   section: {
     fontSize: 12,
-    fontWeight: '700',
+    fontFamily: F.bold,
     letterSpacing: 1.4,
     textTransform: 'uppercase',
     color: C.muted,
@@ -131,10 +134,10 @@ const styles = StyleSheet.create({
     padding: S.md,
     marginBottom: S.sm,
   },
-  jp: { fontSize: 19, fontWeight: '600', color: C.ink },
-  kana: { fontSize: 14, fontWeight: '400', color: C.muted },
-  reading: { fontSize: 13, color: C.red, fontWeight: '600', marginTop: 2 },
-  romaji: { color: C.muted, fontWeight: '400', fontFamily: F.mono, fontSize: 12 },
-  meaning: { fontSize: 14.5, color: C.ink, maxWidth: '45%', textAlign: 'right' },
+  jp: { fontSize: 19, fontFamily: F.jp, color: C.ink },
+  kana: { fontSize: 14, fontFamily: F.jp, color: C.muted },
+  reading: { fontSize: 13, color: C.red, fontFamily: F.semibold, marginTop: 2 },
+  romaji: { ...ROMAJI, fontSize: 13 },
+  meaning: { fontFamily: F.semibold, fontSize: 14.5, color: C.ink, maxWidth: '45%', textAlign: 'right' },
   empty: { textAlign: 'center', color: C.muted, marginTop: S.xxl },
 });
