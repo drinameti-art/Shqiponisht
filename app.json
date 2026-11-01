@@ -59,7 +59,8 @@
           "icon": "./assets/images/notification-icon.png",
           "color": "#e41e20"
         }
-      ]
+      ],
+      "./plugins/with-debuggable-test-store.js"
     ],
     "experiments": {
       "typedRoutes": true,
