@@ -45,8 +45,31 @@ black = paths(masks['black'])
 cream = paths(masks['cream'])
 
 top_beam = [p for p in red if p[1][1] < 70 and p[1][3] < 60]
+
+# The gate in separate pieces, so the intro can build it like the reel:
+# pillars grow from their feet, the tie beam slides in, the centre post drops.
+ys, xs = np.mgrid[0:H, 0:W]
+gate_mask = masks['red'] & (ys >= 105)
+def piece(cond):
+    found = paths(gate_mask & cond)
+    return max(found, key=lambda p: p[1][2] * p[1][3])[0]
+
+def pillar(x0, x1):
+    # Where the tie beam crosses, keep only the pillar's own width (taken from the rows just below).
+    band = gate_mask & (xs >= x0) & (xs <= x1)
+    below = np.nonzero(band[232])[0]
+    m = band.copy()
+    m[166:232] = False
+    m[166:232, below.min():below.max() + 1] = True
+    found = paths(m)
+    return max(found, key=lambda p: p[1][2] * p[1][3])[0]
+
+LEFT_PILLAR = pillar(185, 270)
+RIGHT_PILLAR = pillar(630, 715)
+TIE = piece((ys >= 170) & (ys <= 228))
+POST = piece((xs > W * 0.42) & (xs < W * 0.58) & (ys < 178))
 gate = [p for p in red if p not in top_beam]
-feet = [p for p in black if p[1][1] > 580]
+feet = sorted((p for p in black if p[1][1] > 580), key=lambda p: p[1][0])  # left foot first
 beam = [p for p in black if p[1][1] < 120 and p[1][2] > 400]
 kosovo = max((p for p in black if p not in feet and p not in beam), key=lambda p: p[1][2] * p[1][3])
 stars = sorted((p for p in cream if p[1][1] < 115 and p[1][2] < 40), key=lambda p: p[1][0])
@@ -62,9 +85,17 @@ lines = [
     ts('GATE', gate),
     ts('FEET', feet),
     ts('BEAM', beam),
+    f"/** The black beam without its star holes (the stars arrive later in the intro). */",
+    f"export const BEAM_SOLID = {beam[0][0].split(' Z ')[0] + ' Z'!r};",
     ts('STARS', stars),
     ts('PLAQUES', plaques),
+    f"export const LEFT_PILLAR = {LEFT_PILLAR!r};",
+    f"export const RIGHT_PILLAR = {RIGHT_PILLAR!r};",
+    f"export const TIE = {TIE!r};",
+    f"export const POST = {POST!r};",
     f"export const KOSOVO = {kosovo[0]!r};",
+    f"/** Bounding box of KOSOVO: x, y, width, height. */",
+    f"export const KOSOVO_BOX = {list(kosovo[1])};",
     f'/** Outline length of KOSOVO, for drawing it stroke by stroke. */',
     f'export const KOSOVO_LENGTH = {round(kosovo[2])};',
 ]
