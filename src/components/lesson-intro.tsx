@@ -2,15 +2,15 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { DRAWINGS } from '@/data/drawings';
+import { DRAWINGS, drawingFor, type Drawing } from '@/data/drawings';
 import { KANA, type Kana } from '@/data/kana';
-import type { KanaLesson } from '@/data/lessons';
+import type { KanaLesson, KanjiLesson, VocabLesson } from '@/data/lessons';
 import type { Note } from '@/data/notes';
 import { spellsDifferently } from '@/lib/albanian';
 import { C, F, S } from '@/theme';
 
 import { BrandHeader, ConsonantCircle, PillBadge, Toast, WordRow } from './brand';
-import { Arrow, DrawPath, InkText, Reveal, step as at } from './brand-motion';
+import { Arrow, DrawingIcon, DrawPath, InkText, Reveal, step as at } from './brand-motion';
 import { Button, SpeakButton } from './ui';
 
 type IntroProps = { part: number; lessonTitle: string; onStart: () => void; onClose: () => void };
@@ -171,6 +171,100 @@ export function KanaIntro({ lesson, part, onStart, onClose }: IntroProps & { les
   );
 }
 
+type IntroItem = {
+  key: string;
+  jp: string;
+  highlight?: string;
+  romaji: string;
+  meaning: string;
+  note?: string;
+  drawing?: Drawing;
+};
+
+/** What a word or kanji lesson teaches, with its picture when it has one. */
+function introItems(lesson: VocabLesson | KanjiLesson): IntroItem[] {
+  if (lesson.kind === 'kanji') {
+    return lesson.kanji.map((k) => ({
+      key: k.char,
+      jp: k.char,
+      highlight: k.char,
+      romaji: k.kun.sq || k.on.sq,
+      meaning: k.meaning.split(';')[0],
+      note: `${k.kun.kana} · ${k.on.kana}`,
+      drawing: drawingFor(k.char),
+    }));
+  }
+  return lesson.words.map((w) => ({
+    key: w.jp,
+    jp: w.kanji ?? w.jp,
+    romaji: w.sq,
+    meaning: w.meaning,
+    note: w.kanji ? w.jp : undefined,
+    drawing: drawingFor(w.kanji, w.jp),
+  }));
+}
+
+/** Gap between words in the intro: slower for pictures, which draw themselves. */
+const ITEM_MS = 360;
+
+/**
+ * Opens a word or kanji lesson like a reel: PJESA badge → title → each word
+ * in turn, its picture drawing itself next to the word (key kanji in red,
+ * red italic reading, bold meaning) → start (docs/BRAND.md §5).
+ */
+export function WordsIntro({ lesson, part, onStart, onClose }: IntroProps & { lesson: VocabLesson | KanjiLesson }) {
+  const items = introItems(lesson);
+  const start = at(2);
+  return (
+    <Frame
+      onClose={onClose}
+      footer={
+        <Reveal delay={start + items.length * ITEM_MS}>
+          <Button label="Fillo ushtrimet" onPress={onStart} />
+        </Reveal>
+      }>
+      <Reveal>
+        <PillBadge>PJESA {part}</PillBadge>
+      </Reveal>
+      <InkText delay={at(1)} style={styles.title}>
+        {lesson.title}
+      </InkText>
+      <View style={styles.examples}>
+        {items.map((it, i) => (
+          <Reveal key={it.key} delay={start + i * ITEM_MS}>
+            <View style={styles.wordCard}>
+              <View style={styles.picture}>
+                {it.drawing ? (
+                  <DrawPath drawing={it.drawing} size={64} delay={start + i * ITEM_MS + 120} />
+                ) : (
+                  <Text style={styles.pictureGlyph} numberOfLines={1} adjustsFontSizeToFit>
+                    {it.jp}
+                  </Text>
+                )}
+              </View>
+              <WordRow
+                jp={it.jp}
+                highlight={it.highlight}
+                romaji={it.romaji}
+                meaning={it.meaning}
+                note={it.note}
+                right={<SpeakButton text={it.jp} size={36} />}
+                style={styles.wordRowFlat}
+              />
+            </View>
+          </Reveal>
+        ))}
+      </View>
+    </Frame>
+  );
+}
+
+/** A small still picture for lists (Fjalori, flashcards), if the word has one. */
+export function WordPicture({ kanji, jp, size = 40 }: { kanji?: string; jp: string; size?: number }) {
+  const drawing = drawingFor(kanji, jp);
+  return drawing ? <DrawingIcon drawing={drawing} size={size} /> : null;
+}
+
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: C.cream },
   top: { flexDirection: 'row', alignItems: 'center', gap: S.lg, paddingHorizontal: S.xl, paddingTop: S.md },
@@ -196,4 +290,17 @@ const styles = StyleSheet.create({
   bullet: { width: 8, height: 8, borderRadius: 4, backgroundColor: C.red, marginTop: 9 },
   pointText: { flex: 1, fontFamily: F.regular, fontSize: 16, lineHeight: 24, color: C.ink },
   examples: { gap: S.sm },
+  wordCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: S.sm,
+    backgroundColor: C.paper,
+    borderWidth: 1.5,
+    borderColor: C.line,
+    borderRadius: 14,
+    paddingLeft: S.sm,
+  },
+  picture: { width: 68, height: 68, alignItems: 'center', justifyContent: 'center' },
+  pictureGlyph: { fontFamily: F.jp, fontSize: 34, color: C.faint },
+  wordRowFlat: { flex: 1, borderWidth: 0, backgroundColor: 'transparent', paddingLeft: 0 },
 });

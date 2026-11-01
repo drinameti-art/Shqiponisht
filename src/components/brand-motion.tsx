@@ -129,6 +129,7 @@ function AnimatedStroke({
   progress,
   color,
   width,
+  fill,
 }: {
   d: string;
   len: number;
@@ -136,10 +137,12 @@ function AnimatedStroke({
   progress: SharedValue<number>;
   color: string;
   width: number;
+  /** Optional fill that fades in as the outline closes (colour drops, coins). */
+  fill?: string;
 }) {
   const props = useAnimatedProps(() => {
     const local = Math.min(1, Math.max(0, progress.get() - index));
-    return { strokeDashoffset: len * (1 - local) };
+    return { strokeDashoffset: len * (1 - local), fillOpacity: Math.max(0, (local - 0.6) / 0.4) };
   });
   return (
     <AnimatedPath
@@ -148,7 +151,7 @@ function AnimatedStroke({
       strokeWidth={width}
       strokeLinecap="round"
       strokeLinejoin="round"
-      fill="none"
+      fill={fill ?? 'none'}
       strokeDasharray={`${len} ${len}`}
       animatedProps={props}
     />
@@ -247,6 +250,26 @@ export function DrawPath({
           progress={progress}
           color={p.accent ? C.red : C.ink}
           width={2.6}
+          fill={p.fill}
+        />
+      ))}
+    </Svg>
+  );
+}
+
+/** The same drawing, still (for lists, where many animations at once would be wasteful). */
+export function DrawingIcon({ drawing, size = 40 }: { drawing: Drawing; size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100" accessibilityElementsHidden>
+      {drawing.paths.map((p, i) => (
+        <Path
+          key={i}
+          d={p.d}
+          stroke={p.accent ? C.red : C.ink}
+          strokeWidth={size < 60 ? 4.5 : 3}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill={p.fill ?? 'none'}
         />
       ))}
     </Svg>

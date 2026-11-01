@@ -35,6 +35,8 @@ Every screen is in Albanian, and Japanese sounds are spelled the Albanian way, s
 - **Visual effects:** options pop when chosen, wrong answers shake, the feedback panel slides up, progress bars fill smoothly, the current lesson pulses, and passing a lesson or finishing a character sets off confetti while the XP counts up. Effects are reduced when the phone's *Reduce motion* setting is on.
 - **Sounds:** a chime for right answers, a soft buzz for wrong ones, a short melody when a lesson is passed, and a tick for each correct stroke. They mix with your music, follow the phone's silent switch, and can be turned off in Profili → Cilësimet. The sounds are synthesized by `scripts/make-sounds.py`, so there are no third-party recordings.
 
+- **Logo intro:** each time the app opens, the Shqiponisht logo builds itself (gate, stars, map of Kosovo, wordmark) and fades into the app; tap to skip, off with Reduce motion.
+- **Pictures:** about 80 line drawings for words and kanji you can see (nature, body, animals, food, places, colours…). They draw themselves in the word/kanji lesson intros and after each answer, and appear in Fjalori, on flashcards and in the Kanji tab.
 - **Dark mode:** follows the phone's light/dark setting (applied when the app opens).
 
 Progress is always saved on the device too, so the app works offline; with an account it is also synced to Supabase.

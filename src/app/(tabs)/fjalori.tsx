@@ -8,6 +8,7 @@ import { SpeakButton } from '@/components/ui';
 import { VOCAB_LESSONS, type Word } from '@/data/lessons';
 import { wordSay } from '@/lib/sayables';
 import { BrandFooter, BrandHeader } from '@/components/brand';
+import { WordPicture } from '@/components/lesson-intro';
 import { C, F, R, ROMAJI, S } from '@/theme';
 
 /** Lowercases and strips Albanian diacritics so „ç“ matches „c“ and „ë“ matches „e“. */
@@ -66,6 +67,7 @@ export default function Vocabulary() {
         renderSectionHeader={({ section }) => <Text style={styles.section}>{section.title}</Text>}
         renderItem={({ item }) => (
           <View style={styles.row}>
+            <WordPicture kanji={item.kanji} jp={item.jp} size={36} />
             <View style={{ flex: 1 }}>
               <Text style={styles.jp}>
                 {item.kanji ?? item.jp}

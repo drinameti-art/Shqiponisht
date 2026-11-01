@@ -8,8 +8,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Confetti, CountUp, EASE_OUT, Feedback } from '@/components/motion';
 import { Toast } from '@/components/brand';
-import { Reveal } from '@/components/brand-motion';
-import { KanaIntro, NoteIntro } from '@/components/lesson-intro';
+import { DrawPath, Reveal } from '@/components/brand-motion';
+import { KanaIntro, NoteIntro, WordsIntro } from '@/components/lesson-intro';
+import { drawingForItem } from '@/lib/visuals';
 import { Button, ProgressBar, SpeakButton } from '@/components/ui';
 import { lessonAfter, lessonById, LESSONS } from '@/data/lessons';
 import { NOTES } from '@/data/notes';
@@ -66,8 +67,8 @@ export default function LessonScreen() {
   // A lesson with a grammar note opens with it; retries go straight to the questions.
   const note = isReview || isPlacement ? undefined : NOTES[id];
   const [showNote, setShowNote] = useState(() => !!note);
-  // Kana lessons without a note open with the reel-style row introduction (docs/BRAND.md §5).
-  const [showIntro, setShowIntro] = useState(() => !note && lesson?.kind === 'kana');
+  // Lessons without a note open with a reel-style introduction: the kana row, or the words with their pictures (docs/BRAND.md §5).
+  const [showIntro, setShowIntro] = useState(() => !note && !!lesson);
   /** "PJESA n": the lesson's place on the path. */
   const part = lesson ? LESSONS.findIndex((l) => l.id === lesson.id) + 1 : 0;
 
@@ -200,6 +201,11 @@ export default function LessonScreen() {
   if (showNote && note) {
     return <NoteIntro note={note} part={part} lessonTitle={title} onStart={() => setShowNote(false)} onClose={close} />;
   }
+  if (showIntro && lesson && lesson.kind !== 'kana') {
+    return (
+      <WordsIntro lesson={lesson} part={part} lessonTitle={title} onStart={() => setShowIntro(false)} onClose={close} />
+    );
+  }
   if (showIntro && lesson?.kind === 'kana') {
     return (
       <KanaIntro lesson={lesson} part={part} lessonTitle={title} onStart={() => setShowIntro(false)} onClose={close} />
@@ -207,6 +213,8 @@ export default function LessonScreen() {
   }
 
   const q = quiz[index];
+  /** The picture of this question's word or kanji, drawn in the feedback once answered. */
+  const drawing = drawingForItem(q.item);
   const isRight = selected === q.answer;
 
   const finish = (all: Answer[]) => {
@@ -349,7 +357,12 @@ export default function LessonScreen() {
               </Text>
               <SpeakButton text={q.speak} size={36} />
             </View>
-            <Text style={[styles.feedbackBody, { color: isRight ? C.greenText : C.redText }]}>{q.explanation}</Text>
+            <View style={styles.feedbackRow}>
+              <Text style={[styles.feedbackBody, styles.feedbackText, { color: isRight ? C.greenText : C.redText }]}>
+                {q.explanation}
+              </Text>
+              {drawing && <DrawPath key={index} drawing={drawing} size={56} delay={150} />}
+            </View>
           </Animated.View>
         )}
         <Button
@@ -386,6 +399,8 @@ const OPTION_STATES = StyleSheet.create({
 const JAPANESE = /[\u3040-\u30ff\u3400-\u9fff]/;
 
 const styles = StyleSheet.create({
+  feedbackRow: { flexDirection: 'row', alignItems: 'center', gap: S.md },
+  feedbackText: { flex: 1 },
   optionJp: { fontFamily: F.jp, fontSize: 24 },
   toastWrap: { marginBottom: S.lg },
   safe: { flex: 1, backgroundColor: C.cream },

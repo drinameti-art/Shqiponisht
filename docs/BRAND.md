@@ -48,7 +48,9 @@ Calm, slow, one idea per screen: big kanji and few words.
 - Arrows (→) appear between steps.
 - End screen: torii logo + `SHQIPONISHT` + red button `NDIQ PËR MË SHUMË`.
 
-In the app: animations use `react-native-reanimated`, run at 60 fps on the UI thread, use the ease-out curve `cubic-bezier(0.23, 1, 0.32, 1)`, and are skipped when the phone's *Reduce motion* setting is on (everything appears at once, in its final colors).
+In the app, the logo plays this intro each time the app opens: the gate rises from its feet, the black beam opens and its stars appear one by one, the map of Kosovo is outlined and filled, then SHQIPONISHT and シュチッポン語 settle in (`src/components/logo-intro.tsx`; tap to skip). Words and kanji that name something you can see have a line drawing (`src/data/drawings.ts`) that draws itself in lesson intros and answer feedback, and appears still in Fjalori and on flashcards.
+
+Animations use `react-native-reanimated`, run at 60 fps on the UI thread, use the ease-out curve `cubic-bezier(0.23, 1, 0.32, 1)`, and are skipped when the phone's *Reduce motion* setting is on (everything appears at once, in its final colors).
 
 ## 6. Sound (optional)
 

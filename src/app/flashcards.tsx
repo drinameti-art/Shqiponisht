@@ -13,6 +13,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { WordPicture } from '@/components/lesson-intro';
 import { Confetti, CountUp, EASE_OUT } from '@/components/motion';
 import { Button, ProgressBar, SpeakButton } from '@/components/ui';
 import { VOCAB_LESSONS, type Word } from '@/data/lessons';
@@ -260,7 +261,13 @@ function Study({ deck, direction, onExit }: { deck: Deck; direction: Direction; 
       {word.kanji && <Text style={styles.cardKana}>{word.jp}</Text>}
     </>
   );
-  const albanian = <Text style={styles.cardMeaning}>{word.meaning}</Text>;
+  const albanian = (
+    <>
+      {/* The picture belongs to the meaning, so it never gives away the Japanese side. */}
+      <WordPicture kanji={word.kanji} jp={word.jp} size={72} />
+      <Text style={styles.cardMeaning}>{word.meaning}</Text>
+    </>
+  );
 
   return (
     <SafeAreaView style={styles.safe}>

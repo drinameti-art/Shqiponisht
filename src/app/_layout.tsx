@@ -12,6 +12,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 
+import { LogoIntro } from '@/components/logo-intro';
 import { AccountProvider } from '@/lib/account-context';
 import { ProgressProvider, useProgress } from '@/lib/progress-context';
 import { C } from '@/theme';
@@ -54,12 +55,19 @@ function RootStack() {
   );
 }
 
+/** The logo intro plays over the first screen once fonts and progress are loaded (the splash is plain cream). */
+function IntroWhenReady() {
+  const { ready } = useProgress();
+  return ready ? <LogoIntro /> : null;
+}
+
 export default function RootLayout() {
   return (
     <ProgressProvider>
       <AccountProvider>
         <StatusBar style="auto" />
         <RootStack />
+        <IntroWhenReady />
       </AccountProvider>
     </ProgressProvider>
   );
