@@ -159,7 +159,7 @@ Use the App Store description above, replacing its subscription paragraph with: 
 | --- | --- |
 | App category | Education |
 | Tags | Language learning, Education |
-| Contact email | `[EMAIL]` (same as `src/legal/publisher.json`) |
+| Contact email | `shqiponisht@gmail.com` (same as `src/legal/publisher.json`) |
 | Website | your hosted `docs/index.html` |
 | Privacy policy | your hosted `docs/privacy.html` |
 | Ads | **No**, the app contains no ads |

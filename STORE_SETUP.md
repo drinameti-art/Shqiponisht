@@ -108,7 +108,7 @@ The texts are in `src/legal/privacy.json` and `src/legal/terms.json`, in Albania
      - **Personal info → Email address, Name, User IDs, Other info** (age range, level)
      - **App activity → Other user-generated content** (progress)
      - **Financial info → Purchase history** (RevenueCat)
-   - Play *Account deletion*: the app lets users delete their account in-app. Play also asks for a **web link** where people can request deletion without the app: use your support page (`docs/index.html`) and say there that they can email `[EMAIL]` from the account's address.
+   - Play *Account deletion*: the app lets users delete their account in-app. Play also asks for a **web link** where people can request deletion without the app: use `https://<user>.github.io/shqiponisht/index.html#delete-account` (the page explains in-app deletion and deletion by email to `shqiponisht@gmail.com`).
    - Apple review notes: mention that the account is optional ("Vazhdo pa llogari" on the last sign-up step) and that accounts can be deleted in Profili → Llogaria → Fshi llogarinë.
 
 I wrote these texts carefully, but they are not legal advice. Have them checked by a lawyer or your accountant before launch, especially the governing-law section.

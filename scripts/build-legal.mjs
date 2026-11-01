@@ -59,7 +59,15 @@ const index = `<!doctype html>
 <body><main><h1>Shqiponisht</h1><p>Mëso japonisht në shqip · Learn Japanese in Albanian</p>
 <ul><li><a href="privacy.html">Politika e privatësisë · Privacy Policy</a></li>
 <li><a href="terms.html">Kushtet e përdorimit · Terms of Use</a></li></ul>
-<p>Kontakt · Contact: ${linkify(publisher.email)}</p></main></body></html>
+<p>Kontakt · Contact: ${linkify(publisher.email)}</p>
+<h2 id="delete-account">Fshi llogarinë · Delete your account</h2>
+<p><strong>Në aplikacion:</strong> hap Shqiponisht → Profili → Llogaria → „Fshi llogarinë“ → „Po, fshije llogarinë“.
+Llogaria, emri i përdoruesit, profili dhe përparimi i ruajtur fshihen menjëherë dhe përgjithmonë; kopjet rezervë teknike fshihen brenda 7 ditësh.</p>
+<p><strong>Pa aplikacionin:</strong> na shkruaj në ${linkify(publisher.email)} nga adresa e email-it të llogarisë, me temë „Fshi llogarinë“. E fshijmë brenda 30 ditësh dhe të njoftojmë.</p>
+<div class="lang"><p><strong>In the app:</strong> open Shqiponisht → Profili → Llogaria → “Fshi llogarinë” (Delete account) → confirm.
+Your account, username, profile and saved progress are deleted immediately and permanently; technical backups are erased within 7 days.</p>
+<p><strong>Without the app:</strong> email ${linkify(publisher.email)} from the address of your account with the subject “Delete my account”. We delete it within 30 days and confirm by email.</p></div>
+</main></body></html>
 `;
 
 mkdirSync(join(root, 'docs'), { recursive: true });
