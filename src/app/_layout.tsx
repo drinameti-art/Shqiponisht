@@ -1,12 +1,11 @@
-import {
-  Poppins_400Regular,
-  Poppins_400Regular_Italic,
-  Poppins_500Medium,
-  Poppins_500Medium_Italic,
-  Poppins_600SemiBold,
-  Poppins_600SemiBold_Italic,
-  Poppins_700Bold,
-} from '@expo-google-fonts/poppins';
+// Per-weight imports, so only the seven weights the app uses are bundled.
+import { Poppins_400Regular } from '@expo-google-fonts/poppins/400Regular';
+import { Poppins_400Regular_Italic } from '@expo-google-fonts/poppins/400Regular_Italic';
+import { Poppins_500Medium } from '@expo-google-fonts/poppins/500Medium';
+import { Poppins_500Medium_Italic } from '@expo-google-fonts/poppins/500Medium_Italic';
+import { Poppins_600SemiBold } from '@expo-google-fonts/poppins/600SemiBold';
+import { Poppins_600SemiBold_Italic } from '@expo-google-fonts/poppins/600SemiBold_Italic';
+import { Poppins_700Bold } from '@expo-google-fonts/poppins/700Bold';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
